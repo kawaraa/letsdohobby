@@ -1,0 +1,102 @@
+.edit-avatar.container {
+  margin: 0;
+  padding: 0 0 10px 0;
+  text-align: center;
+}
+#edit-avatar-wrapper {
+  overflow: hidden;
+  position: relative;
+  margin: 20px auto;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px 0 var(--font-color);
+}
+#edit-avatar-img {
+  display: block;
+  position: absolute;
+  cursor: move;
+}
+label[for="upload-avatar"] {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  padding: 8px 0;
+  font-size: var(--p-font-size);
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--font-color);
+  background: var(--pink-color);
+  cursor: pointer;
+}
+#upload-avatar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.edit-avatar.zoom {
+  position: absolute;
+  right: 15px;
+  height: 30px;
+  width: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 0.9;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.edit-avatar.zoom.in {
+  top: 40%;
+}
+.edit-avatar.zoom.out {
+  top: 50%;
+}
+.edit-avatar.zoom:hover {
+  background: var(--bg-white-color);
+}
+.avatar-input {
+  position: absolute;
+  left: 145px;
+  bottom: 10px;
+  width: 60px;
+  background: none;
+  font-size: 1px;
+  cursor: pointer;
+}
+.edit-avatar.btn {
+  margin: 0 5px;
+  padding: 2px 5px;
+  background: var(--blue-color);
+  color: var(--bg-white-color);
+  font-size: var(--p-font-size);
+  border: none;
+  border-radius: 5px;
+}
+.edit-avatar.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+.edit-avatar.loading-spinner-icon.svg {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin: 45% auto;
+}
+.edit-avatar.progress {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

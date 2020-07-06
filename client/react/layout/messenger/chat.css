@@ -1,0 +1,68 @@
+.chat-list.item {
+  display: block;
+  margin: 5px 0;
+  padding: 10px 15px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.chat-list.item:hover {
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 0px var(--font-color);
+}
+.chat.name {
+  display: inline-block;
+  width: 75%;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+.chat.members {
+  display: inline-block;
+  width: 25%;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+.chat.members-counter {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: var(--p-font-size);
+  font-weight: var(--p-font-weight);
+}
+.chat.member.svg {
+  width: 15px;
+}
+.chat.member.svg-stroke {
+  fill: var(--font-light-color);
+  stroke-width: 0;
+}
+.chat.date {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: var(--blue-color);
+}
+.chat.messages {
+  display: inline-block;
+  width: 100%;
+  margin: 3px 0 0 0;
+  padding: 0;
+  text-align: right;
+  font-size: 13px;
+}
+.chat.unseen-counter {
+  display: inline-block;
+  height: 20px;
+  min-width: 20px;
+  margin: 0;
+  padding: 0;
+  font-size: var(--p-font-size);
+  font-weight: var(--p-font-weight);
+  color: var(--white-color);
+  text-align: center;
+  background: var(--pink-color);
+  border-radius: 50%;
+}

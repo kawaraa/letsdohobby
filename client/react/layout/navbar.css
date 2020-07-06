@@ -1,0 +1,99 @@
+/* =============== Desktop styles =============== */
+.navbar.outer-container {
+  position: fixed;
+  top: 0;
+  margin: 0;
+  background: var(--white-color);
+  z-index: 10;
+}
+.navbar.container {
+  display: flex;
+  padding: 10px 5px;
+}
+/* === Brand Logo styles === */
+.logo.wrapper {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+.logo.item {
+  font-size: 34px;
+  font-weight: bolder;
+}
+.logo.l {
+  color: #6aa84f;
+}
+.logo.d {
+  color: #7b95e0;
+}
+.logo.h {
+  color: #585757;
+}
+.navbar.status {
+  margin: 0 0 0 5px;
+  font-size: 14px;
+  color: var(--font-light-color);
+  font-weight: bold;
+}
+.navbar.status.online {
+  color: var(--green-color);
+}
+/* === Icons styles === */
+.navbar.icons {
+  flex: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.nav-icon.wrapper {
+  position: relative;
+  width: 60px;
+  height: 40px;
+  margin: auto 0;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+.nav-icon.wrapper.home-link {
+  padding: 5px 10px;
+}
+.nav-icon.wrapper.my-items-link {
+  padding: 6px 10px;
+}
+.nav-icon.wrapper:hover {
+  background: var(--bg-white-color);
+}
+.nav-svg-icon {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.nav-svg-layer,
+.nav-svg-stroke {
+  stroke: var(--font-color);
+  stroke-width: 25px;
+  fill: none;
+}
+
+/* === Avatar and Options drop list styles === */
+.navbar.options {
+  position: relative;
+  width: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============== Tablet styles =============== */
+@media only screen and (max-width: 1170px) {
+  p {
+    font-size: 16px;
+  }
+}
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  body {
+    display: none;
+  }
+}

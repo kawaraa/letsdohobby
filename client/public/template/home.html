@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="/style/style-variables.css" />
+    <link rel="stylesheet" type="text/css" href="/style/homepage.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <title>LetsDoHobby</title>
+  </head>
+
+  <body>
+    <div class="navbar outer-container">
+      <nav class="navbar container no-line" title="navigation bar" tabindex="0">
+        <a href="/" class="logo-link" class="no-line">
+          <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
+        <form class="login-form no-line" title="" tabindex="0">
+          <div id="login-error"></div>
+          <input type="text" name="username" placeholder="Email or Phone" class="no-line" />
+          <input type="password" name="psw" placeholder="Password" class="no-line" />
+          <button type="submit" class="no-line" title="" tabindex="0">Login</button>
+        </form>
+      </nav>
+    </div>
+    <div id="loading-screen-wrapper">
+      <svg viewBox="0 0 100 100" id="loading-screen-svg">
+        <rect x="25.6405" y="55" width="30" height="30" rx="3" ry="3" id="rect-1">
+          <animate attributeName="x" dur="2s" repeatCount="indefinite"
+            keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="15;55;55;55;55;15;15;15;15"
+            begin="-1.8333333333333333s"></animate>
+          <animate attributeName="y" dur="2s" repeatCount="indefinite"
+            keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="15;55;55;55;55;15;15;15;15"
+            begin="-1.3333333333333333s"></animate>
+        </rect>
+        <rect x="55" y="15" width="30" height="30" rx="3" ry="3" id="rect-2">
+          <animate attributeName="x" dur="2s" repeatCount="indefinite"
+            keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="15;55;55;55;55;15;15;15;15"
+            begin="-1.1666666666666667s"></animate>
+          <animate attributeName="y" dur="2s" repeatCount="indefinite"
+            keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="15;55;55;55;55;15;15;15;15"
+            begin="-0.6666666666666666s"></animate>
+        </rect>
+        <rect x="15" y="15" width="30" height="30" rx="3" ry="3" id="rect-3">
+          <animate attributeName="x" dur="2s" repeatCount="indefinite"
+            keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="15;55;55;55;55;15;15;15;15"
+            begin="-0.5s"></animate>
+          <animate attributeName="y" dur="2s" repeatCount="indefinite"
+            keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="15;55;55;55;55;15;15;15;15"
+            begin="0s"></animate>
+        </rect>
+      </svg>
+    </div>
+    <div class="outer-container">
+      <section id="intro-section" class="container no-line" title="Intro" tabindex="0">
+        <article class="intro article no-line" title="Intro article" tabindex="0">
+          <h1 class="intro question-1">What is LetsDoHobby?</h1>
+          <div class="intro img-wrapper">
+            <img class="intro img" src="/image/questioning-2.jpg" alt="questioning">
+          </div>
+          <p class="intro question-2"><strong class="intro or">Or</strong>Do I even need it?</p>
+          <div class="intro learn-more">
+            <p class="intro learn-more-p">Let's find out and get to know LetsDoHobby</p>
+            <a href="#learn-more" title="Find out what Lets Do Hobby is" class="intro arrow-down">
+              <svg viewBox="0 0 400 400" class="arrow-down svg">
+                <g class="arrow-down svg-layer">
+                  <path d="m51.74999,194.3146l145.83247,154.6854l151.41754,-156" />
+                  <line stroke-linejoin="bevel" stroke-width="99" x1="199.75" x2="199.75" y1="52.5"
+                    y2="345.5" />
+                </g>
+              </svg>
+            </a>
+          </div>
+        </article>
+        <form class="signup-form no-line" title="" tabindex="0">
+          <h1 class="signup-form-heading">Enjoy your hobbies and meet people with similar hobbies anywhere
+            anytime</h1>
+          <div id="signup-error"></div>
+          <div class="signup-field">
+            <input type="text" name="firstName" placeholder="First Name" class="signup-input name" />
+            <input type="text" name="lastName" placeholder="Last Name" class="signup-input name" />
+          </div>
+          <div class="inputs-container">
+            <input type="text" name="username" placeholder="Email Address or Mobile Number"
+              class="signup-input" />
+            <input type="password" name="psw" placeholder="new password" class="signup-input" />
+            <input type="password" name="pswConfirm" placeholder="Confirm password" class="signup-input" />
+          </div>
+          <label for="birthday">Birthday</label>
+          <div class="signup-field">
+            <select aria-label="Day" name="birthdayDay" id="birthday" class="birthday-select" title="Day">
+              <option value="01" selected="1">01</option>
+            </select>
+            <select aria-label="Month" name="birthdayMonth" class="birthday-select" title="Month">
+              <option value="Feb" selected="Feb">Jan</option>
+            </select>
+            <select aria-label="Year" name="birthdayYear" class="birthday-select" title="Year">
+              <option value="2002" selected="1">2002</option>
+            </select>
+          </div>
+          <div class="signup-field">
+            <label for="other" class="gender">Other <input type="radio" id="other" name="gender" value="other"
+                aria-label="Gender" checked>
+            </label>
+            <label for="male" class="gender">Male <input type="radio" id="male" name="gender" value="male"
+                aria-label="Gender">
+            </label>
+            <label for="female" class="gender">Female <input type="radio" id="female" name="gender"
+                value="female" aria-label="Gender">
+            </label>
+          </div>
+          <button type="submit" id="signup-btn">Join</button>
+        </form>
+      </section>
+    </div>
+    <div class="outer-container">
+      <section id="learn-more" class="container no-line" title="" tabindex="0">
+        <p class="welcoming">Here you are<i class="welcoming-smile">
+            <svg x="0px" y="0px" viewBox="0 0 1000 1000">
+              <path
+                d="M174.2,327.1c69.9,0,126.5-56.7,126.5-126.5c0-69.8-56.6-126.4-126.5-126.4c-69.8,0-126.4,56.6-126.4,126.4C47.8,270.4,104.5,327.1,174.2,327.1L174.2,327.1z M825.9,327.1c69.9,0,126.5-56.7,126.5-126.5c0-69.8-56.6-126.4-126.5-126.4c-69.8,0-126.4,56.6-126.4,126.4C699.4,270.4,756.1,327.1,825.9,327.1L825.9,327.1z M956.5,567.6c-35.3-24.3-83.4-15.3-107.5,19.8c-79.3,115.1-209.7,183.8-349,183.8c-139.3,0-269.7-68.8-349-183.8c-24.2-35.2-72.3-44.1-107.5-19.9C8.3,591.7-0.6,639.8,23.7,675C131.7,832.1,309.8,925.9,500,925.9c190.2,0.1,368.3-93.8,476.4-250.8C1000.6,639.8,991.7,591.7,956.5,567.6L956.5,567.6L956.5,567.6z" />
+            </svg>
+          </i></p>
+        <p class="learn-more-para">Lets start first with the Second question, Do I need LetsDoHobby?</p>
+        <p class="find-out-para">Lets find out!</p>
+        <h3 class="learn-more-question"><i class="question-dot"></i>Do you have a hobby or an activity that
+          you love but you don't have the right partner to enjoy it?</h3>
+        <h3 class="learn-more-question"><i class="question-dot"></i>Don't you have a hobby but always look
+          forward to find out what you like to do as a hobby </h3>
+        <h3 class="learn-more-question"><i class="question-dot"></i>Do you love to meet and integrate with
+          local people and share activities?</h3>
+        <h3 class="learn-more-question"><i class="question-dot"></i>Are you alone because you don't have
+          friends with similar interests? </h3>
+        <p class="learn-more-para conclusion">If the answer of one of these question is "Yes", then you are in
+          the right place, and there is a big chance that you love this app.</p>
+        <p class="learn-more-para conclusion">Now lets answer the First question.</p>
+        <h1 class="what-is-ldh">What is LetsDoHobby?</h1>
+        <p class="define-ldh"><strong>LetsDoHobby</strong> is a simple platform where you can find your hobby
+          partner to enjoy your hobbies or any other activities that you love to do with local people.
+          <br />The main idea is to take people from the social networks activities to real life
+          activities<br />The second thing the app focus on is bringing like minded people together<br />There
+          aren't a lot of fancy functionalities in there, it's very simple app </p>
+        <h2 class="features-heading">The main features of LetsDoHobby are:</h2>
+        <ol class="features-list">
+          <li>Personal Profile where people can see what you are good at or what you love to</li>
+          <li>Feeds where you see people posting ads based on single activity, in this ad they describe when,
+            where, and how many people they need to practice the selected activity</li>
+          <li>The user can also post his own ad looking for the right partner for a specific activity</li>
+          <li>If the user like the ad, a group chat opens automatically and anyone else likes the ad will be a
+            member of this group chat, this way members can start arranging the meeting and some other needs
+            for them self</li>
+          <li>Meeting people with similar interests as yours in your area.</li>
+          <li>User can see the ads based on the user's location range, which mean the user can not change his
+            location, but he can decide the range of location</li>
+        </ol>
+        <h1>Discover your hobbies</h1>
+        <p>Blah blah</p>
+        <h1>Here some tips on what info your post should include.</h1>
+        <p>e.g. I want to enjoy ... with ...</p>
+      </section>
+    </div>
+    <script src="/script/utility.js"></script>
+    <script src="/script/date-options.js"></script>
+    <script src="/script/home.js"></script>
+  </body>
+
+</html>

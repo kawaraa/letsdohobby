@@ -1,0 +1,45 @@
+.nav-options.list {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  list-style: none;
+  background: white;
+  box-shadow: 0 0 5px 0 var(--font-color);
+  border-radius: 5px;
+}
+.nav-options.item {
+  margin: 0;
+  padding: 0;
+  border-top: 0.1px solid #cfcaca;
+}
+.nav-options.item.user-info {
+  padding: 30px;
+  border: none;
+}
+.user-info.name,
+.user-info.email {
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.user-info.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+.user-info.email {
+  color: var(--font-light-color);
+  font-size: 10;
+}
+.nav-option.link {
+  display: block;
+  margin: 0;
+  padding: 12px 25px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--font-color);
+}

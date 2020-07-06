@@ -1,0 +1,19 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules"
+  ],
+  "verbose": true,
+  "execMap": {
+    "js": "npm run build && npm start"
+  },
+  "events": {
+    "restart": "echo 'App restarted due to: '$FILENAME''"
+  },
+  "watch": [
+    "client/react/*",
+    "server/src/*"
+  ],
+  "ext": "js,css,html"
+}

@@ -1,0 +1,28 @@
+.account.edit-form {
+  margin: 60px 20px;
+  width: auto;
+}
+.account.x-icon-wrapper {
+  top: -30px;
+  right: -10px;
+  width: 25px;
+  height: 25px;
+}
+.account.x-icon-inner {
+  padding: 6px;
+  background: var(--hover-white-color);
+  border-radius: 50%;
+}
+
+.settings.wrapper.account > button[type="button"] {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  background: var(--error-color);
+  color: var(--bg-white-color);
+  border: none;
+  border-radius: 5px;
+}

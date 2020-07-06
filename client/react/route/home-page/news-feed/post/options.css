@@ -1,0 +1,55 @@
+/* ========== User options list styles ========== */
+.post.options-wrapper {
+  position: relative;
+  width: 70px;
+  height: 45px;
+}
+.post.dots-icon-wrapper {
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 15px;
+}
+.post.options-list {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  padding: 0;
+  list-style: none;
+  background: var(--white-color);
+  box-shadow: 0px 0px 3px 0px var(--font-color);
+  border-radius: 5px;
+}
+.post.options-item {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 5px 10px;
+  font-size: var(--p-font-size);
+  text-align: right;
+  color: var(--p-font-color);
+  background: none;
+  border: none;
+  border-top: 0.1px solid var(--font-light-color);
+}
+.post.options-item:hover {
+  background: var(--bg-white-color);
+  box-shadow: 0px 0px 3px 0px var(--font-color);
+  border-radius: 5px;
+}
+.post.options-item.top {
+  border: none;
+}
+/* ========== Member options list styles ========== */
+.post.join-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1px 6px;
+  font-size: 18px;
+  border: none;
+  background: var(--green-color);
+  border-radius: 5px;
+  color: var(--white-color);
+  white-space: nowrap;
+}

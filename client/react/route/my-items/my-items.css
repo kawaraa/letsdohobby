@@ -1,0 +1,42 @@
+.my-items.header {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  padding: 0;
+}
+.header.btn {
+  position: relative;
+  flex: auto;
+  margin: 0;
+  padding: 10px;
+  font-size: 20px;
+  background: var(--font-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.header.btn.active {
+  background: var(--white-color);
+  color: var(---font-light-color);
+  box-shadow: 0 0 5px 0 var(--font-color);
+}
+.header.btn.active:after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-width: 15px;
+  border-style: solid;
+  border-color: var(--white-color) transparent transparent transparent;
+}
+.header.btn:hover {
+  box-shadow: 0 0 5px 0 var(--black-color);
+}
+.my-posts.wrapper,
+.joined-posts.wrapper {
+  width: 60%;
+  margin: 0 auto;
+  padding: 10px 0;
+}

@@ -1,0 +1,37 @@
+/* ========== Field styles ========== */
+
+.profile.full-name {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 40px auto;
+  padding: 10px;
+  text-align: center;
+}
+.full-name.title {
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+.full-name.edit-icon-wrapper {
+  position: relative;
+  padding: 5px;
+  top: 0;
+  right: -10px;
+  border-radius: 5px;
+}
+.full-name.edit-icon-wrapper:hover {
+  background: var(--white-color);
+}
+
+.full-name.x-icon-wrapper {
+  top: -30px;
+  right: -10px;
+  width: 25px;
+  height: 25px;
+}
+.full-name.x-icon-inner {
+  padding: 6px;
+  background: var(--hover-white-color);
+  border-radius: 50%;
+}
