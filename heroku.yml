@@ -1,18 +1,19 @@
 # Resources to provision on app creation
-setup:
-  addons:
-    - plan: heroku-redis
-      as: redis
-    - plan: cleardb
-      as: mysql_db
-  config:
-    MYSQL_ROOT_PASSWORD: password
-    MYSQL_USER: "test"
-    MYSQL_PASSWORD: "test"
-  #   S3_BUCKET: my-example-bucket
+# setup:
+#   addons:
+#     - plan: heroku-redis
+#       as: redis
+#     - plan: cleardb
+#       as: mysql_db
+#   config:
+#     MYSQL_ROOT_PASSWORD: password
+#     MYSQL_USER: "test"
+#     MYSQL_PASSWORD: "test"
+#   S3_BUCKET: my-example-bucket
 # Reference the Dockerfiles to build into Docker images
 build:
   docker:
+    mysql_db: ./mysql-db/dockerfile
     server: ./dockerfile
   # config:
   #   RAILS_ENV: development
