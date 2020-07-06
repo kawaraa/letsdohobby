@@ -14,7 +14,7 @@
 build:
   docker:
     mysql_db: ./mysql-db/dockerfile
-    server: ./dockerfile
+    web: ./dockerfile
   # config:
   #   RAILS_ENV: development
   #   FOO: bar
@@ -27,7 +27,7 @@ build:
 
 # The process types and commands to run
 run:
-  server: npm run build && npm start
+  web: npm run build && npm start
   # asset-syncer:
   #   command:
   #     - python asset-syncer.py
