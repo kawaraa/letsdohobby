@@ -1,15 +1,15 @@
 build:
   docker:
     web: ./dockerfile
-    mysql_db: ./mysql-db/dockerfile
-  config:
-    MYSQL_ROOT_PASSWORD: password
-    MYSQL_USER: "test"
-    MYSQL_PASSWORD: "test"
+  #   mysql_db: ./mysql-db/dockerfile
+  # config:
+  #   MYSQL_ROOT_PASSWORD: password
+  #   MYSQL_USER: "test"
+  #   MYSQL_PASSWORD: "test"
 
 run:
   web: npm run build && npm start
-  mysql_db: --default-authentication-plugin=mysql_native_password
+  # mysql_db: --default-authentication-plugin=mysql_native_password
 # release:
 #   image: mysql_db
 #   image: web
