@@ -36,7 +36,7 @@ class Notification extends React.Component {
     window.addEventListener("ADD_NOTIFICATION", this.onAddNewNotification.bind(this));
     window.addEventListener("REMOVE_NOTIFICATION", this.onRemoveNotification.bind(this));
     try {
-      const unseenNotifications = await Request.fetch(this.config.unseenNotificationsUrl);
+      const unseenNotifications = await Request.fetch(this.config.unseen.url);
       this.setState({ unseenNotifications });
     } catch (error) {
       this.setState({ unseenNotifications: [] });

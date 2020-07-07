@@ -19,7 +19,7 @@ class NotificationList extends React.Component {
   }
   async componentDidMount() {
     try {
-      const notifications = await Request.fetch(this.config.notificationListUrl);
+      const notifications = await Request.fetch(this.config.list.url);
       this.setState({ notifications, error: "", loading: false });
       this.props.markAsSeen();
     } catch (error) {

@@ -57,7 +57,7 @@ class MemberOptions extends React.Component {
   }
   async handleCopyPostLink() {
     try {
-      await navigator.clipboard.writeText(this.config.share.link + this.props.post.id);
+      await navigator.clipboard.writeText(this.config.share.url + this.props.post.id);
       this.showMessage("Copied post link");
     } catch (error) {
       this.showMessage("Couldn't copy post link");

@@ -1,5 +1,37 @@
 import configs from "./config.json";
 
+(() => {
+  const localhost = window.location.hostname === "localhost";
+  if (localhost) {
+    configs.app.socketUrl = configs.localhostSocket + configs.app.socketUrl;
+    for (let key in configs) {
+      const config = configs[key];
+      if (typeof config !== "object") continue;
+      for (let key in config) {
+        if (key === "url") config[key] = configs.localhost + config[key];
+        else if (typeof key === "object") {
+          for (let k in key) {
+            if (k === "url") key[k] = configs.localhost + key[k];
+          }
+        }
+      }
+    }
+  } else {
+    configs.app.socketUrl = configs.prodHostSocket + socketUrl;
+    for (let key in configs) {
+      const config = configs[k];
+      if (typeof config !== "object") continue;
+      for (let key in config) {
+        if (key === "url") config[key] = configs.prodHost + config[key];
+        else if (typeof key === "object") {
+          for (let k in key) {
+            if (k === "url") key[k] = configs.prodHost + key[k];
+          }
+        }
+      }
+    }
+  }
+})();
 export const config = (key) => {
   if (configs[key]) return configs[key];
   for (let k in configs) {
@@ -8,8 +40,8 @@ export const config = (key) => {
   throw new Error(key + " is not a valid config object(!)");
 };
 
-const events = config("events");
 export const setEventsListeners = () => {
+  const events = config("events");
   window.addEventListener("click", (e) => {
     const className = e.className || e.target.className.baseVal || e.target.className;
     events.forEach((event) => window.dispatchEvent(new CustomEvent(event, { detail: className })));

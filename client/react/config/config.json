@@ -1,65 +1,70 @@
 {
+  "localhost": "http://localhost:8080",
+  "localhostSocket": "ws://localhost:8080",
+  "prodHost": "https://letsdohobby.herokuapp.com",
+  "prodHostSocket": "wss://letsdohobby.herokuapp.com",
   "signup": {
-    "url": "http://localhost:8080/api/signup",
+    "url": "/api/signup",
     "method": "POST"
   },
   "login": {
-    "url": "http://localhost:8080/api/login",
+    "url": "/api/login",
     "method": "POST"
   },
   "app": {
     "checkState": {
-      "url": "http://localhost:8080/api/user/state",
+      "url": "/api/user/state",
       "method": "GET"
     },
     "updateSettings": {
-      "url": "http://localhost:8080/api/user/settings",
+      "url": "/api/user/settings",
       "method": "PUT"
-    }
+    },
+    "socketUrl": "/api"
   },
   "updateUsername": {
-    "url": "http://localhost:8080/api/user/username",
+    "url": "/api/user/username",
     "method": "POST"
   },
   "updatePsw": {
-    "url": "http://localhost:8080/api/user/psw",
+    "url": "/api/user/psw",
     "method": "POST"
   },
   "deleteAccount": {
-    "url": "http://localhost:8080/api/user",
+    "url": "/api/user",
     "method": "POST",
     "confirmMessage": "Note: deleting account will also delete all posts, messages etc..\nAre sure you want to continue?"
   },
   "getProfile": {
-    "url": "http://localhost:8080/api/user/profile",
+    "url": "/api/user/profile",
     "method": "GET"
   },
   "updateFullName": {
-    "url": "http://localhost:8080/api/user/profile/full-name",
+    "url": "/api/user/profile/full-name",
     "method": "POST"
   },
   "updateAbout": {
-    "url": "http://localhost:8080/api/user/profile/about",
+    "url": "/api/user/profile/about",
     "method": "POST"
   },
   "updateAvatar": {
-    "url": "http://localhost:8080/api/avatar",
+    "url": "/api/avatar",
     "method": "POST"
   },
   "deleteAvatar": {
-    "url": "http://localhost:8080/api/avatar",
+    "url": "/api/avatar",
     "method": "DELETE"
   },
   "updateActivities": {
-    "url": "http://localhost:8080/api/user/profile/activity",
+    "url": "/api/user/profile/activity",
     "method": "PUT"
   },
   "memberProfile": {
-    "url": "http://localhost:8080/api/member/profile/",
+    "url": "/api/member/profile/",
     "method": "GET"
   },
   "createPostForm": {
-    "url": "http://localhost:8080/api/post",
+    "url": "/api/post",
     "method": "POST",
     "participants": 100,
     "activities": [
@@ -154,50 +159,50 @@
     ]
   },
   "newsFeed": {
-    "url": "http://localhost:8080/api/post",
+    "url": "/api/post",
     "method": "GET",
     "message": "No post found in your area, maybe your location range is a bit narrow."
   },
   "myPosts": {
-    "url": "http://localhost:8080/api/post/my-posts",
+    "url": "/api/post/my-posts",
     "method": "PUT",
     "message": "You don't have any post."
   },
   "joinedPosts": {
-    "url": "http://localhost:8080/api/post/member",
+    "url": "/api/post/member",
     "method": "GET",
     "message": "You are currently not a member in any activity."
   },
   "updatePost": {
-    "url": "http://localhost:8080/api/post",
+    "url": "/api/post",
     "method": "PUT",
     "participants": 100
   },
   "post": {
-    "url": "http://localhost:8080/api/post/",
+    "url": "/api/post/",
     "method": "DELETE",
     "confirmMessage": "Note: deleting post will also delete the post's chat and messages.\nAre sure you want to continue?"
   },
   "options": {
     "join": {
-      "url": "http://localhost:8080/api/group/join/",
+      "url": "/api/group/join/",
       "method": "POST"
     },
     "cancel": {
-      "url": "http://localhost:8080/api/group/cancel/",
+      "url": "/api/group/cancel/",
       "method": "DELETE"
     },
     "report": {
-      "url": "http://localhost:8080/api/post/report/",
+      "url": "/api/post/report/",
       "method": "POST"
     },
     "share": {
-      "link": "http://localhost:8080/posts/",
+      "url": "/posts/",
       "error": "Something wrong happened, Couldn't copy the post link(!)"
     }
   },
   "settings": {
-    "url": "http://localhost:8080/api/user/settings",
+    "url": "/api/user/settings",
     "method": "PUT",
     "languages": [
       "en",
@@ -205,40 +210,45 @@
     ]
   },
   "notification": {
-    "unseenNotificationsUrl": "http://localhost:8080/api/notification",
-    "notificationListUrl": "http://localhost:8080/api/notification/list",
-    "method": "GET"
+    "unseen": {
+      "url": "/api/notification",
+      "method": "GET"
+    },
+    "list": {
+      "url": "/api/notification/list",
+      "method": "GET"
+    }
   },
   "notificationItem": {
     "accept": {
-      "url": "http://localhost:8080/api/group/accept",
+      "url": "/api/group/accept",
       "method": "POST"
     },
     "reject": {
-      "url": "http://localhost:8080/api/group/reject",
+      "url": "/api/group/reject",
       "method": "DELETE"
     }
   },
   "messenger": {
-    "url": "http://localhost:8080/api/chat",
+    "url": "/api/chat",
     "method": "GET"
   },
   "chatList": {
-    "url": "http://localhost:8080/api/chat/list",
+    "url": "/api/chat/list",
     "method": "GET"
   },
   "conversation": {
     "createMessage": {
-      "url": "http://localhost:8080/api/chat",
+      "url": "/api/chat",
       "method": "POST"
     },
     "getMessages": {
-      "url": "http://localhost:8080/api/chat/",
+      "url": "/api/chat/",
       "method": "GET"
     }
   },
   "postDetail": {
-    "url": "http://localhost:8080/api/post/",
+    "url": "/api/post/",
     "method": "GET"
   },
   "events": [

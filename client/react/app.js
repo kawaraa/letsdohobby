@@ -73,7 +73,7 @@ class App extends React.Component {
     location();
     setInterval(location, 3600000);
 
-    window.socket = new Socket("ws://localhost:8080/api");
+    window.socket = new Socket(this.config.socketUrl);
     window.socket.onclose = () => window.socket.close();
     window.socket.onerror = () => window.socket.close();
     window.socket.on("ADD_NOTIFICATION", (e) => this.dispatch("ADD_NOTIFICATION", e));

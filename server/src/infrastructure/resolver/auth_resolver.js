@@ -42,6 +42,8 @@ class AuthResolver {
     }
   }
   async onLogin(request, response) {
+    console.log("Login requested ");
+
     try {
       const account = new CreateAccountCommand(request.body);
       const user = await this.accountRepository.checkAccount(account.username, account.hashedPsw);
