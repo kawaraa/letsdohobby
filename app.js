@@ -14,6 +14,7 @@ const apiRouter = require("./server/src/index.js");
     const app = express();
     const server = http.createServer(app);
     const firewall = new Firewall(cookie, jwt, config.firewall);
+    const PORT = process.env.PORT || config.port;
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
@@ -29,7 +30,7 @@ const apiRouter = require("./server/src/index.js");
     });
 
     app.use("*", (request, response) => response.status(404).end("Not Found page"));
-    const PORT = process.env.PORT || config.port;
+
     server.listen(PORT, () => console.log("Running on: http://localhost:" + PORT));
   } catch (error) {
     console.error("ServerError: ", error);
