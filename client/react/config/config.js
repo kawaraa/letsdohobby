@@ -1,6 +1,7 @@
 import configs from "./config.json";
 
 (() => {
+  console.log(window.location);
   const localhost = window.location.hostname === "localhost";
   if (localhost) {
     configs.app.socketUrl = configs.localhostSocket + configs.app.socketUrl;
