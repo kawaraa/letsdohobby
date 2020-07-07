@@ -2,10 +2,6 @@ build:
   docker:
     web: ./dockerfile
     mysql_db: ./mysql-db/dockerfile
-  config:
-    MYSQL_ROOT_PASSWORD: root-psw
-    MYSQL_USER: "client"
-    MYSQL_PASSWORD: "client-psw"
 
 # release:
 #   image: mysql_db
