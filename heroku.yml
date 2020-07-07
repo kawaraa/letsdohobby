@@ -5,7 +5,7 @@ build:
 
 run:
   web: npm run build
-
-release:
-  image: mysql_db
-  image: web
+# release:
+#   image: mysql_db
+#   image: web
+#   command: npm run build && npm start
