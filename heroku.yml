@@ -4,7 +4,7 @@ build:
     mysql_db: ./mysql-db/dockerfile
 
 run:
-  web: npm run build
+  web: npm run build && npm start
 # release:
 #   image: mysql_db
 #   image: web
