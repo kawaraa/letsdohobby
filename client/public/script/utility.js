@@ -29,23 +29,3 @@ class Http {
     });
   }
 }
-
-function setEventsListeners() {
-  window.addEventListener("click", (e) => {
-    if (document.querySelector(".no-line")) return;
-    document.querySelectorAll(".focus").forEach((el) => {
-      el.className = el.className.replace("focus", "no-line");
-    });
-  });
-
-  window.addEventListener("keydown", (e) => {
-    if ((e.key && e.key.toLowerCase() !== "tab") || document.querySelector(".focus")) return;
-    document.querySelectorAll(".no-line").forEach((el) => {
-      el.className = el.className.replace("no-line", "focus");
-    });
-  });
-}
-setEventsListeners();
-
-const loadingScreen = document.getElementById("loading-screen-wrapper");
-window.addEventListener("load", () => (loadingScreen.style.display = "none"));

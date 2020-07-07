@@ -1,42 +1,29 @@
 import configs from "./config.json";
 
-(() => {
+const checkHost = (config) => {
   console.log(window.location);
-  const localhost = window.location.hostname === "localhost";
-  if (localhost) {
-    configs.app.socketUrl = configs.localhostSocket + configs.app.socketUrl;
-    for (let key in configs) {
-      const config = configs[key];
-      if (typeof config !== "object") continue;
-      for (let key in config) {
-        if (key === "url") config[key] = configs.localhost + config[key];
-        else if (typeof key === "object") {
-          for (let k in key) {
-            if (k === "url") key[k] = configs.localhost + key[k];
-          }
-        }
-      }
-    }
+  if (typeof config !== "object") return config;
+  let host = configs.localhost;
+  if (window.location.hostname === "localhost") {
+    if (config.socketUrl) config.socketUrl = configs.localhostSocket + config.socketUrl;
   } else {
-    configs.app.socketUrl = configs.prodHostSocket + socketUrl;
-    for (let key in configs) {
-      const config = configs[k];
-      if (typeof config !== "object") continue;
-      for (let key in config) {
-        if (key === "url") config[key] = configs.prodHost + config[key];
-        else if (typeof key === "object") {
-          for (let k in key) {
-            if (k === "url") key[k] = configs.prodHost + key[k];
-          }
-        }
+    if (config.socketUrl) config.socketUrl = configs.prodHostSocket + config.socketUrl;
+    host = configs.prodHost;
+  }
+  for (let key in config) {
+    if (key === "url") config[key] = host + config[key];
+    else if (typeof key === "object") {
+      for (let k in key) {
+        if (k === "url") key[k] = host + key[k];
       }
     }
   }
-})();
+  return config;
+};
 export const config = (key) => {
-  if (configs[key]) return configs[key];
+  if (configs[key]) return checkHost(configs[key]);
   for (let k in configs) {
-    if (configs[k][key]) return configs[k][key];
+    if (configs[k][key]) return checkHost(configs[k][key]);
   }
   throw new Error(key + " is not a valid config object(!)");
 };
