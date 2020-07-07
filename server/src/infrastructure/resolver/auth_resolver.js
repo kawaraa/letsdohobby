@@ -37,13 +37,13 @@ class AuthResolver {
       response.cookie("userToken", token, this.config.cookieOption);
       response.json(user);
     } catch (error) {
+      console.error("MyError: ", error);
       response.clearCookie("userToken");
       response.status(400).end(CustomError.toJson(error));
     }
   }
   async onLogin(request, response) {
     console.log("Login requested ");
-
     try {
       const account = new CreateAccountCommand(request.body);
       const user = await this.accountRepository.checkAccount(account.username, account.hashedPsw);

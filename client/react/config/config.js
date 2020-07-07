@@ -1,15 +1,10 @@
 import configs from "./config.json";
 
-const checkHost = (config) => {
-  console.log(window.location);
+const setTheOrigin = (config, host = window.location.origin) => {
   if (typeof config !== "object") return config;
-  let host = configs.localhost;
-  if (window.location.hostname === "localhost") {
-    if (config.socketUrl) config.socketUrl = configs.localhostSocket + config.socketUrl;
-  } else {
-    if (config.socketUrl) config.socketUrl = configs.prodHostSocket + config.socketUrl;
-    host = configs.prodHost;
-  }
+
+  if (config.socketUrl) config.socketUrl = host.replace("https", "wss").replace("http", "ws");
+
   for (let key in config) {
     if (key === "url") config[key] = host + config[key];
     else if (typeof key === "object") {
@@ -21,9 +16,9 @@ const checkHost = (config) => {
   return config;
 };
 export const config = (key) => {
-  if (configs[key]) return checkHost(configs[key]);
+  if (configs[key]) return setTheOrigin(configs[key]);
   for (let k in configs) {
-    if (configs[k][key]) return checkHost(configs[k][key]);
+    if (configs[k][key]) return setTheOrigin(configs[k][key]);
   }
   throw new Error(key + " is not a valid config object(!)");
 };

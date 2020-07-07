@@ -1,8 +1,4 @@
 {
-  "localhost": "http://localhost:8080",
-  "localhostSocket": "ws://localhost:8080",
-  "prodHost": "https://letsdohobby.herokuapp.com",
-  "prodHostSocket": "wss://letsdohobby.herokuapp.com",
   "signup": {
     "url": "/api/signup",
     "method": "POST"

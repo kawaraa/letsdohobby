@@ -1,7 +1,5 @@
 "use strict";
-console.log(window.location);
-let host = "http://localhost:8080";
-if (window.location.hostname !== "localhost") host = "https://letsdohobby.herokuapp.com";
+
 const loadingScreen = document.getElementById("loading-screen-wrapper");
 const signupError = document.getElementById("signup-error");
 const loginError = document.getElementById("login-error");
@@ -48,7 +46,7 @@ async function onSignup(e) {
     birthday,
   };
   try {
-    await Http.post(host + "/api/signup", userInfo);
+    await Http.post(window.location.origin + "/api/signup", userInfo);
     location.reload();
   } catch (error) {
     signupError.style.display = "block";
@@ -64,7 +62,7 @@ async function onLogin(e) {
     psw: psw.value,
   };
   try {
-    await Http.post(host + "/api/login", userCredentials);
+    await Http.post(window.location.origin + "/api/login", userCredentials);
     location.reload();
   } catch (error) {
     loginError.innerHTML = error.message;
