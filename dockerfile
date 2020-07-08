@@ -4,6 +4,6 @@ COPY . /home
 
 WORKDIR /home
 
-RUN npm install
+# CMD npm install
 
-CMD npm run build && npm start
+RUN npm run build && npm start

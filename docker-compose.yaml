@@ -3,30 +3,13 @@ version: "3"
 services:
   mysql_db:
     container_name: mysql-db
-    build: ./mysql-db
-    # command: --default-authentication-plugin=mysql_native_password
-    command: mysqld --default-authentication-plugin=mysql_native_password
-    command: mysqld --default-authentication-plugin=caching_sha2_password
-    environment:
-      MYSQL_ROOT_PASSWORD: root-psw
-    #   MYSQL_USER: "client"
-    #   MYSQL_PASSWORD: "client-psw"
+    build: ./mysql-db/
     restart: always
     tty: true
 
-  phpmyadmin:
-    container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - 8081:80
-    environment:
-      PMA_HOST: mysql_db
-    depends_on:
-      - mysql_db
-
   server:
     container_name: server
-    build: .
+    build: ./
     ports:
       - 8080:8080
     volumes:

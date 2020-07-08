@@ -2,6 +2,10 @@ FROM mysql:latest
 
 COPY init.sql /docker-entrypoint-initdb.d/
 
-# ENV MYSQL_ROOT_PASSWORD=root-psw
+CMD ["--default-authentication-plugin=mysql_native_password", "--default-authentication-plugin=caching_sha2_password"]
 
-EXPOSE 3306:3306
+ENV MYSQL_ROOT_PASSWORD=root-psw
+# ENV MYSQL_USER=client MYSQL_PASSWORD=client-psw
+
+EXPOSE 3306
+# EXPOSE 33060
