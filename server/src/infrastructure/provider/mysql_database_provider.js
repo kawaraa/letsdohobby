@@ -15,7 +15,6 @@ class MysqlDatabaseProvider {
     if (process.env.DB_SOCKET_PATH) {
       this.config.socketPath = process.env.DB_SOCKET_PATH;
       delete this.config.host;
-      delete this.config.port;
     }
     this._connection = this.mysql.createConnection(this.config);
     this.query = this.promisify(this._connection.query.bind(this._connection));
