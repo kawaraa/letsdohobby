@@ -6,6 +6,7 @@
   },
   "mysql": {
     "host": "mysql_db",
+    "port": 3306,
     "user": "root",
     "password": "root-psw"
   },
