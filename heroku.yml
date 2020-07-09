@@ -1,6 +1,5 @@
 build:
   docker:
-    mysql_db: ./mysql-db/dockerfile
     web: ./dockerfile
 
 # release:
@@ -10,5 +9,5 @@ build:
 run:
   web:
     command:
-      - npm run build && npm start
+      - docker run --privileged -it -d --name my-app -p 8080:8080 -p 3306:3306
     image: web
