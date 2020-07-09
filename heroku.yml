@@ -1,16 +1,14 @@
 build:
   docker:
     mysql_db: ./mysql-db/dockerfile
-    server:
-      ./dockerfile
-      # - as: server
+    web: ./dockerfile
 
 # release:
 #   image: mysql_db
 #   command: some command that get executed before run
 
 run:
-  server:
+  web:
     command:
       - npm run build && npm start
-    image: server
+    image: web
