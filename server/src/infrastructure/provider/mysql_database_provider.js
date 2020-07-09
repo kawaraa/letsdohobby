@@ -9,13 +9,9 @@ class MysqlDatabaseProvider {
 
   initialize() {
     this.config.host = process.env.DB_HOST || this.config.host;
+    this.config.port = process.env.DB_PORT || this.config.port;
     this.config.user = process.env.DB_USER || this.config.user;
     this.config.password = process.env.DB_PSW || this.config.password;
-    this.config.port = process.env.DB_PORT || this.config.port;
-    if (process.env.DB_SOCKET_PATH) {
-      this.config.socketPath = process.env.DB_SOCKET_PATH;
-      delete this.config.host;
-    }
     this._connection = this.mysql.createConnection(this.config);
     this.query = this.promisify(this._connection.query.bind(this._connection));
   }
