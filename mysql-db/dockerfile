@@ -8,5 +8,5 @@ ENV default-authentication-plugin=mysql_native_password
 ENV MYSQL_ROOT_PASSWORD=root-psw
 # ENV MYSQL_USER=client MYSQL_PASSWORD=client-psw
 
-EXPOSE 3306
-# EXPOSE 33060
+# EXPOSE 3306
+EXPOSE 33060
