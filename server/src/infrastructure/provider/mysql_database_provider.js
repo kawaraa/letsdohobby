@@ -8,7 +8,9 @@ class MysqlDatabaseProvider {
   }
 
   initialize() {
-    this.config.host = "mysql_db";
+    console.log(process.env);
+    console.log(process.env.DB_HOST);
+    this.config.host = process.env.DB_HOST || this.config.host;
     this._connection = this.mysql.createConnection(this.config);
     this.query = this.promisify(this._connection.query.bind(this._connection));
   }
