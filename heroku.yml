@@ -7,7 +7,4 @@ build:
 #   command: some command that get executed before run
 
 run:
-  web:
-    command:
-      - docker run --privileged -it -d --name my-app -p 8080:8080 -p 3306:3306
-    image: web
+  web: docker-compose up
