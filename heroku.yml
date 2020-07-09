@@ -1,7 +1,7 @@
 build:
   docker:
-    web: ./dockerfile
     mysql_db: ./mysql-db/dockerfile
+    server: ./dockerfile
 
 # release:
 #   image: mysql_db

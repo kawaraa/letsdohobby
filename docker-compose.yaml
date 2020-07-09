@@ -16,3 +16,5 @@ services:
       - ./client/react:/home/client/react
       - ./server/src:/home/server/src
     command: npm run dev
+    depends_on:
+      - mysql_db
