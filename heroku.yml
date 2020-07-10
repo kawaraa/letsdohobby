@@ -2,9 +2,8 @@ build:
   docker:
     web: ./dockerfile
 
-# release:
-#   image: mysql_db
-#   command: some command that get executed before run
+release:
+  image: docker run --privileged -it --name my-app -p 8080:8080 -p 3306:3306 image
 
 run:
-  web: docker-compose up
+  web: bash start
