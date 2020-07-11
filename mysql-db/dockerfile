@@ -1,6 +1,9 @@
 FROM mysql:latest
 
+# ENV DOCKER_HOST=tcp://0.0.0.0:8081
+
 COPY init.sql /docker-entrypoint-initdb.d/
+
 
 # #"--default-authentication-plugin=caching_sha2_password"
 # CMD ["--default-authentication-plugin=mysql_native_password"]
