@@ -1,14 +1,10 @@
-FROM docker:dind
+FROM alpine:3.7
 
 COPY . .
 
-ENV privileged=true
+RUN apk update
+RUN apk add --no-cache docker
+RUN apk add py-pip python3-dev libffi-dev openssl-dev gcc libc-dev make pip3 install docker-compose
+RUN pip install --upgrade pip
 
-
-
-# RUN [  "apk add --no-cache py-pip", "&&", "pip install docker-compose"]
-# RUN --privileged -p 8080:8080 -p 3306:3306
-# CMD docker-compose up
-# ENTRYPOINT [ "sh" ]
-
-# RUN ["--privileged" "--name my-app" "-p 8080:8080" "-p 3306:3306" "-it -d"]
+# WORKDIR /usr
