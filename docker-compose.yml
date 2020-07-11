@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  mysql:
+    container_name: mysql-db
+    build: ./mysql-db/
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root-psw
+      MYSQL_USER: "client"
+      MYSQL_PASSWORD: "client-psw"
+    restart: always
+    tty: true
+
+  server:
+    container_name: server
+    build: ./server/
+    ports:
+      - 3001:3001
+    volumes:
+      - ./api/src:/service/src
+      - ./proxy/public/user:/service/user
+    command: npm run dev
+    tty: true
+    restart: always
+
+  browser-client:
+    container_name: browser-client
+    build: ./browser-client/
+    ports:
+      - 3000:3000
+    volumes:
+      - ./browser-client/src:/service/src
+      - ./browser-client/react:/service/react
+      - ./browser-client/public:/service/public
+    command: npm run dev
+    tty: true
+    restart: always
+
+  proxy:
+    container_name: proxy
+    build: ./proxy/
+    ports:
+      - 8080:8080
+    volumes:
+      - ./proxy/public:/home/www
+    tty: true
+    restart: always

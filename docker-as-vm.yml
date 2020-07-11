@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  vm:
+    container_name: letsdohobby
+    build: ./
+    ports:
+      - 8080:8080
+      - 8081:8081
+    command: docker-compose up
+    restart: always
+    tty: true
