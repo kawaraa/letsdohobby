@@ -1,7 +1,0 @@
-FROM node:lts-alpine
-
-# ENV DOCKER_HOST=tcp://0.0.0.0:8080
-
-COPY . /usr
-
-WORKDIR /usr

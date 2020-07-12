@@ -1,26 +1,14 @@
 version: "3"
 
 services:
-  mysql:
-    container_name: mysql-db
-    build: ./mysql-db/
-    command: --default-authentication-plugin=mysql_native_password
-    # command: --default-authentication-plugin=caching_sha2_password"
-    environment:
-      MYSQL_ROOT_PASSWORD: root-psw
-      MYSQL_USER: "client"
-      MYSQL_PASSWORD: "client-psw"
-    restart: always
-    tty: true
-
-  server:
+  letsdohobby:
     container_name: app
-    build: ./app/
+    build: ./
     ports:
       - 8080:8080
     volumes:
-      - ./client:/usr/client
-      - ./server:/usr/server
+      - ./client/react:/usr/react
+      - ./server/src:/usr/src
     command: npm run dev
-    tty: true
     restart: always
+    tty: true
