@@ -2,4 +2,4 @@ build:
   docker:
     web: ./dockerfile
 run:
-  web: bin/start
+  web: npm run dev

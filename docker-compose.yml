@@ -9,6 +9,6 @@ services:
     volumes:
       - ./client/react:/usr/react
       - ./server/src:/usr/src
-    command: bin/start
+    command: npm run dev
     restart: always
     tty: true
