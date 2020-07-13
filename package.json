@@ -4,8 +4,8 @@
   "description": "letsdohobby.com is a platform where people find the right partner for their hobbies.",
   "main": "index.js",
   "scripts": {
-    "start": "npm install && node app.js",
-    "dev": "npm install && npx nodemon app.js",
+    "start": "node app.js",
+    "dev": "npx nodemon app.js",
     "build": "npx webpack --config webpack.config.js"
   },
   "repository": {
