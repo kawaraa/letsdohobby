@@ -1,0 +1,127 @@
+.aa {
+  margin: 0;
+  padding: 0;
+  font-size: var(--p-font-size);
+}
+.update-post.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 8;
+}
+.update-post.form {
+  overflow: hidden;
+  max-width: 600px;
+  max-height: 90%;
+  margin: auto;
+  padding: 15px 0 15px 0;
+  background: var(--white-color);
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px 0px var(--font-color);
+}
+.update-post.header {
+  display: flex;
+  flex-flow: nowrap;
+  position: relative;
+  width: 100%;
+  padding: 0 15px 5px 15px;
+}
+.owner.avatar-wrapper {
+  margin-right: 8px;
+}
+.update-post.activity-owner-box {
+  flex: auto;
+  margin-top: 10px;
+}
+.update-post.owner-name {
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--black-color);
+  text-decoration: none;
+}
+.update-post.arrow.svg {
+  display: inline-block;
+  width: 10px;
+  margin: 0 8px;
+}
+.update-post.arrow.svg-stroke {
+  fill: var(--pink-color);
+  stroke: var(--black-color);
+  stroke-width: 5px;
+}
+.update-post.activity {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--black-color);
+  text-decoration: none;
+}
+.update-post.x-icon-wrapper {
+  top: 0;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+}
+.update-post.x-icon-inner {
+  padding: 8px;
+  background: var(--hover-white-color);
+  border-radius: 50%;
+}
+.update-post.selects {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+.update-post.selects > label[for="participants"] {
+  display: inline-block;
+  padding: 0;
+  margin: 0 5px 0 0;
+}
+.update-post.selects > select[name="participants"] {
+  margin-right: 20px;
+  width: 55px;
+  font-size: var(--p-font-size);
+  border: none;
+  background: var(--blue-color);
+  color: var(--white-color);
+  cursor: pointer;
+}
+/* .update-post.selects > label[for="date-time"] {} */
+.update-post.description {
+  padding: 10px 15px;
+}
+.update-post.description > textarea[name="description"] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 3px 10px 3px 3px;
+  font-size: 20px;
+  resize: none;
+  border: none;
+}
+
+.update-post.submit {
+  display: block;
+  margin: auto;
+  width: 570px;
+  padding: 10px;
+  font-size: var(--p-font-size);
+  background: var(--green-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.update-post.submit.disabled {
+  background: var(--hover-white-color);
+  color: var(--black-color);
+}

@@ -1,0 +1,73 @@
+.container.settings {
+  margin: 60px;
+  padding: 20px 5% 0 5%;
+}
+.settings.wrapper {
+  margin: 0;
+  padding: 0;
+}
+/* .settings.wrapper > .title {} Or, */
+.distance.title,
+.account.title {
+  margin: 50px 10px 15px 20px;
+  font-size: 25px;
+  color: var(--black-color);
+}
+.distance.box {
+  margin: 0 20px 40px 20px;
+  padding: 15px 10%;
+  background: var(--white-color);
+  font-size: var(--p-font-size);
+}
+/* .distance.box > .title {} Or, */
+.unit.title,
+.range.title {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0;
+  padding: 0;
+  font-size: 22px;
+  color: var(--font-color);
+}
+.distance.box > .title > strong {
+  display: inline-block;
+  color: var(--pink-color);
+}
+.unit.wrapper {
+  display: flex;
+}
+label[for="unit-km"],
+label[for="unit-mi"] {
+  overflow: hidden;
+  position: relative;
+  flex: auto;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+  background: var(--hover-white-color);
+  color: var(--black-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+label[for="unit-km"] {
+  margin-right: 2px;
+}
+label.active {
+  background: var(--pink-color);
+}
+#unit-km,
+#unit-mi {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.distance.box.range > input[type="range"] {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

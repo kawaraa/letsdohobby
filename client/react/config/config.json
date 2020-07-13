@@ -1,0 +1,253 @@
+{
+  "signup": {
+    "url": "/api/signup",
+    "method": "POST"
+  },
+  "login": {
+    "url": "/api/login",
+    "method": "POST"
+  },
+  "app": {
+    "checkState": {
+      "url": "/api/user/state",
+      "method": "GET"
+    },
+    "updateSettings": {
+      "url": "/api/user/settings",
+      "method": "PUT"
+    },
+    "socketUrl": "/api"
+  },
+  "updateUsername": {
+    "url": "/api/user/username",
+    "method": "POST"
+  },
+  "updatePsw": {
+    "url": "/api/user/psw",
+    "method": "POST"
+  },
+  "deleteAccount": {
+    "url": "/api/user",
+    "method": "POST",
+    "confirmMessage": "Note: deleting account will also delete all posts, messages etc..\nAre sure you want to continue?"
+  },
+  "getProfile": {
+    "url": "/api/user/profile",
+    "method": "GET"
+  },
+  "updateFullName": {
+    "url": "/api/user/profile/full-name",
+    "method": "POST"
+  },
+  "updateAbout": {
+    "url": "/api/user/profile/about",
+    "method": "POST"
+  },
+  "updateAvatar": {
+    "url": "/api/avatar",
+    "method": "POST"
+  },
+  "deleteAvatar": {
+    "url": "/api/avatar",
+    "method": "DELETE"
+  },
+  "updateActivities": {
+    "url": "/api/user/profile/activity",
+    "method": "PUT"
+  },
+  "memberProfile": {
+    "url": "/api/member/profile/",
+    "method": "GET"
+  },
+  "createPostForm": {
+    "url": "/api/post",
+    "method": "POST",
+    "participants": 100,
+    "activities": [
+      "Gym",
+      "Exercise",
+      "Pilates",
+      "Swimming",
+      "Running",
+      "Soccer",
+      "Flag football",
+      "Rugby",
+      "Handball",
+      "Badminton",
+      "Field Hockey",
+      "Volleyball",
+      "Basketball",
+      "Tennis",
+      "Cricket",
+      "Table Tennis",
+      "Baseball",
+      "Golf",
+      "Yoga",
+      "Taekwondo",
+      "Karate",
+      "Acrobatics",
+      "Baton twirling",
+      "Juggling",
+      "Bowling",
+      "Book discussion",
+      "Board game",
+      "Card game",
+      "Jigsaw Puzzle",
+      "Crossword puzzle",
+      "Coloring",
+      "Crocheting",
+      "Knitting",
+      "Embroidery",
+      "Needlepoint",
+      "Jewelry making",
+      "Cue Sport",
+      "Dance",
+      "Hula hooping",
+      "Drawing",
+      "Painting",
+      "Pottery",
+      "Woodworking",
+      "Crafting",
+      "Language",
+      "Singing",
+      "Playing Music",
+      "Watching Movies",
+      "Makeup",
+      "Backgammon",
+      "Chess",
+      "Stand-up Comedy",
+      "Poetry",
+      "Trail running",
+      "Climbing",
+      "Rock Climbing",
+      "Skydiving",
+      "Paragliding",
+      "Parkour",
+      "Skiing",
+      "Snowboarding",
+      "Skating",
+      "Skateboarding",
+      "Cycling",
+      "BMX Bike",
+      "Snorkeling",
+      "Scuba Diving",
+      "Surfing",
+      "Windsurfing",
+      "Waterskiing",
+      "Sailing",
+      "Kayaking",
+      "Rafting",
+      "Walking",
+      "Sun Tanning",
+      "Backpacking",
+      "Hiking",
+      "Horseback Riding",
+      "Archery",
+      "Beekeeping",
+      "Camping",
+      "Flying Disc",
+      "Gold Prospecting",
+      "Hunting",
+      "Sand Art",
+      "Shooting",
+      "Slacklining",
+      "Travel"
+    ]
+  },
+  "newsFeed": {
+    "url": "/api/post",
+    "method": "GET",
+    "message": "No post found in your area, maybe your location range is a bit narrow."
+  },
+  "myPosts": {
+    "url": "/api/post/my-posts",
+    "method": "PUT",
+    "message": "You don't have any post."
+  },
+  "joinedPosts": {
+    "url": "/api/post/member",
+    "method": "GET",
+    "message": "You are currently not a member in any activity."
+  },
+  "updatePost": {
+    "url": "/api/post",
+    "method": "PUT",
+    "participants": 100
+  },
+  "post": {
+    "url": "/api/post/",
+    "method": "DELETE",
+    "confirmMessage": "Note: deleting post will also delete the post's chat and messages.\nAre sure you want to continue?"
+  },
+  "options": {
+    "join": {
+      "url": "/api/group/join/",
+      "method": "POST"
+    },
+    "cancel": {
+      "url": "/api/group/cancel/",
+      "method": "DELETE"
+    },
+    "report": {
+      "url": "/api/post/report/",
+      "method": "POST"
+    },
+    "share": {
+      "url": "/posts/",
+      "error": "Something wrong happened, Couldn't copy the post link(!)"
+    }
+  },
+  "settings": {
+    "url": "/api/user/settings",
+    "method": "PUT",
+    "languages": [
+      "en",
+      "ar"
+    ]
+  },
+  "notification": {
+    "unseen": {
+      "url": "/api/notification",
+      "method": "GET"
+    },
+    "list": {
+      "url": "/api/notification/list",
+      "method": "GET"
+    }
+  },
+  "notificationItem": {
+    "accept": {
+      "url": "/api/group/accept",
+      "method": "POST"
+    },
+    "reject": {
+      "url": "/api/group/reject",
+      "method": "DELETE"
+    }
+  },
+  "messenger": {
+    "url": "/api/chat",
+    "method": "GET"
+  },
+  "chatList": {
+    "url": "/api/chat/list",
+    "method": "GET"
+  },
+  "conversation": {
+    "createMessage": {
+      "url": "/api/chat",
+      "method": "POST"
+    },
+    "getMessages": {
+      "url": "/api/chat/",
+      "method": "GET"
+    }
+  },
+  "postDetail": {
+    "url": "/api/post/",
+    "method": "GET"
+  },
+  "events": [
+    "SHOW_HIDE_UPDATE_POST_FORM"
+  ]
+}

@@ -1,0 +1,39 @@
+.dots-icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.dots-icon-inner {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 14px;
+  min-height: 14px;
+  width: 40px;
+  min-width: 40px;
+  margin: 0;
+  padding: 3px 2px;
+}
+.dots-icon.circle {
+  margin: 0 2px;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  min-width: 8px;
+  min-height: 8px;
+  background: black;
+  border-radius: 50%;
+}
+
+.dots-icon[type="button"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

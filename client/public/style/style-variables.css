@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap&family=Roboto&family=Comic+Neue");
+
+/* 
+Facebook
+White = 255,255,255 / #ffffff
+background Dark White = 236,239,243 / #eceff3
+Font Black = 5,5,5 / #050505
+Button Darker White = 221,224,230 / 
+  --bg-white-color: #eceff3;
+  --white-color: #ffffff;
+  --icon-color: #585757;
+  --font-color: #050505;
+
+Dark Gray = 88,87,87 / #585757
+Green = 106,168,79 / #6aa84f
+Blue = 123,149,224 / #7b95e0
+Rosy = 250, 189, 189 / #fabfbf
+--hover-white-color = 221, 224, 230 / #dde0e6
+Light Gray = 155, 151, 151 / #9b9797
+Error = 238, 78, 78 / #ee4e4e
+*/
+
+:root {
+  --white-color: #ffffff;
+  --bg-white-color: #eceff3;
+  --hover-white-color: #dde0e6;
+  --black-color: #050505;
+  --font-color: #585757;
+  --font-light-color: #9b9797;
+
+  --green-color: #6aa84f;
+  --blue-color: #7b95e0;
+  --pink-color: #fabfbf;
+  --error-color: #ee4e4e;
+
+  --p-font-size: 16px;
+  --p-font-weight: lighter;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-white-color);
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+body * {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: "Lato", "Comic", "Roboto", sans-serif, "Helvetica", "Helvetica Neue";
+}
+.outer-container {
+  margin: 60px 0 0 0;
+  padding: 0;
+  width: 100%;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px 5px;
+}
+.no-line {
+  outline: none;
+}
+
+#loading-screen-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.3);
+}
+#loading-screen-svg {
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin: 35vh auto;
+  background: none;
+}
+#rect-1 {
+  fill: var(--green-color);
+}
+#rect-2 {
+  fill: var(--blue-color);
+}
+#rect-3 {
+  fill: var(--pink-color);
+}
+#loading-screen-text {
+  position: absolute;
+  top: 65vh;
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  color: var(--white-color);
+}

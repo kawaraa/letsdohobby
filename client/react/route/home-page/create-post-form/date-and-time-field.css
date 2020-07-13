@@ -1,0 +1,37 @@
+.create-post.date-time {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.create-post.date,
+.create-post.time {
+  display: flex;
+  margin: 0;
+  padding: 0 0 0 10px;
+}
+.create-post.date > select,
+.create-post.time select {
+  margin: 0;
+  padding: 0;
+  font-size: var(--p-font-size);
+  background: var(--hover-white-color);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.create-post.date > select[name="month"],
+.create-post.time > .select[name="hour"] {
+  background: var(--blue-color);
+  color: var(--white-color);
+}
+.create-post.date-dash,
+.time-colon {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  line-height: 18px;
+}
+.create-post.time-colon {
+  line-height: 14px;
+}

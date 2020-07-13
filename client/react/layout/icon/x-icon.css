@@ -1,0 +1,34 @@
+.x-icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+}
+.x-icon-inner {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.x.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.x.svg-layer {
+  fill: none;
+  stroke: var(--black-color);
+  stroke-width: 50px;
+}
+.x-icon[type="button"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

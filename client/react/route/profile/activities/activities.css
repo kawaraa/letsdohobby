@@ -1,0 +1,109 @@
+.profile.activities {
+  position: relative;
+  margin: 0 20px;
+  padding: 0;
+  border: none;
+  font-size: var(--p-font-size);
+}
+.activities.title {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: var(--black-color);
+}
+.activities.list {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+  margin: 0 0 100px 0;
+  padding: 0;
+}
+.activities.item {
+  position: relative;
+  margin: 5px;
+  padding: 3px 6px;
+  color: var(--hover-white-color);
+  background: var(--black-color);
+  border-radius: 15px;
+}
+.activities.item > button[type="button"] {
+  display: inline-block;
+  width: 20px;
+  margin: 0 0 0 5px;
+  padding: 0 4px;
+  line-height: 20px;
+  background: var(--font-light-color);
+  color: var(--black-color);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.activities.item > button[type="button"]:hover {
+  background: var(--white-color);
+  color: var(--font-color);
+}
+.profile.activities > button[type="button"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px 5px;
+  background: var(--blue-color);
+  color: var(--bg-white-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.activities.error {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+}
+.activities.filter {
+  overflow: scroll;
+  display: flex;
+  flex-flow: column-reverse;
+  position: absolute;
+  bottom: 30px;
+  margin: 0;
+  padding: 0;
+  height: 250px;
+  list-style: none;
+}
+.activities.filter > .item {
+  margin: 5px 0;
+  padding: 5px 10px;
+  color: var(--hover-white-color);
+  background: var(--black-color);
+  border-radius: 15px;
+}
+.activities.inputs {
+  margin: 0;
+  padding: 0;
+}
+.activities.inputs > input[type="text"] {
+  display: block;
+  width: 200px;
+  padding: 5px;
+  font-size: var(--p-font-size);
+  border: none;
+  border-radius: 5px;
+}
+.activities.inputs > .save-btn,
+.activities.inputs > .cancel-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: var(--p-font-size);
+  background: var(--blue-color);
+  color: var(--bg-white-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.activities.inputs > .save-btn {
+  right: 75px;
+}

@@ -1,0 +1,88 @@
+.message-card {
+  position: relative;
+  padding: 5px;
+  background: var(--bg-white-color);
+  border-radius: 6px;
+}
+.message-card.right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--bg-white-color) transparent transparent transparent;
+}
+
+.message-owner.avatar-wrapper {
+  position: absolute;
+  top: 0;
+  left: -30px;
+}
+.message-owner.avatar-inner {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border-radius: 50%;
+}
+.message-owner.avatar-icon {
+  position: absolute;
+  padding: 0;
+  background: none;
+  border-radius: 50%;
+}
+
+.message-card.right {
+  margin: 5px 15px 5px 15%;
+}
+.message-card.left {
+  margin: 5px 15% 5px 35px;
+}
+.message-owner.name {
+  display: block;
+  margin: 0 5px;
+  color: var(--blue-color);
+}
+.message-card.right .message-owner.name {
+  text-align: right;
+  margin: 0 5px;
+}
+.message.date {
+  position: absolute;
+  top: 5px;
+  padding: 0;
+  font-size: 11px;
+}
+.message-card.right .message.date {
+  left: 5px;
+}
+.message-card.left .message.date {
+  right: 5px;
+}
+.message.text {
+  margin: 0;
+  padding: 5px;
+  overflow-wrap: break-word;
+}
+.message-card.info {
+  margin: 10px 35px 20px 35px;
+  border-radius: 20px;
+}
+.info.text {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  color: var(--font-white-color);
+}
+.info.date {
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  padding: 0;
+  font-size: 8px;
+}
+.info.name {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}

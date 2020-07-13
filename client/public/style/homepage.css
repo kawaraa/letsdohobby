@@ -1,0 +1,307 @@
+/* === Desktop styles === */
+p {
+  font-size: 18px;
+}
+/* === Navbar styles === */
+.navbar.outer-container {
+  position: fixed;
+  top: 0;
+  margin: 0;
+  background: var(--pink-color);
+  z-index: 10;
+}
+.navbar.container {
+  padding: 10px 5px;
+}
+/* === Brand Logo styles === */
+.logo-link {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+.logo {
+  font-size: 34px;
+  font-weight: bolder;
+}
+.logo.l {
+  color: #6aa84f;
+}
+.logo.d {
+  color: #7b95e0;
+}
+.logo.h {
+  color: #585757;
+}
+/* === Login Form styles === */
+.login-form {
+  position: relative;
+  float: right;
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+.login-form:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+#login-error {
+  position: absolute;
+  top: 50px;
+  left: 5px;
+  padding: 0;
+  color: #ee4e4e;
+}
+.login-form > input[name="username"],
+.login-form > input[name="psw"] {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 3px 6px;
+  width: 150px;
+  font-size: 14px;
+  border: none;
+}
+
+/* === Intro styles === */
+#intro-section {
+  display: flex;
+  height: 100vh;
+}
+.intro.article {
+  flex: 6;
+  margin: 0 20px 0 0;
+}
+.intro.question-1 {
+  font-size: 30px;
+  margin: 10vh 0 0 0;
+  padding: 0;
+  text-align: center;
+}
+.intro.img-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.intro.img {
+  width: 50%;
+}
+.intro.or {
+  display: block;
+  margin: 5px 0 0 0;
+  padding: 0;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+.intro.question-2 {
+  margin: 0 0 0 0;
+  padding: 0;
+  font-size: 30px;
+  text-align: center;
+}
+.intro.learn-more {
+  margin: 20px 0 0 0;
+  padding: 0;
+  text-align: center;
+}
+.intro.learn-more-p {
+  display: block;
+  font-size: 25px;
+}
+.intro.arrow-down {
+  overflow: hidden;
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  padding: 6px;
+  border-radius: 50%;
+  background: white;
+}
+.arrow-down.svg {
+  width: 100%;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-width: 20;
+  stroke: #7b95e0;
+  fill: #7b95e0;
+}
+
+.arrow-down.svg-layer {
+  stroke-width: 99;
+  fill: none;
+}
+.signup-form {
+  flex: 4;
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+.signup-form-heading {
+  margin: 50px 5px 20px 5px;
+  font-size: 25px;
+  font-weight: normal;
+}
+#signup-error {
+  display: none;
+  margin: 5px;
+  padding: 0;
+  color: #ee4e4e;
+}
+.signup-field {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.inputs-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 0 0;
+}
+.signup-input {
+  width: 100%;
+  margin: 8px 5px;
+  padding: 8px 10px;
+  font-size: 18px;
+  border: 1px solid #585757;
+  border-radius: 5px;
+}
+
+.signup-input.name {
+  flex: 5;
+}
+label[for="birthday"] {
+  display: block;
+  margin: 15px 0 5px 5px;
+  padding: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: grey;
+}
+.birthday-select {
+  margin: 5px;
+  font-size: 16px;
+}
+.gender {
+  margin: 10px 10px 10px 5px;
+  padding: 0;
+}
+#signup-btn {
+  display: block;
+  width: 200px;
+  margin: 20px 0;
+  padding: 5px;
+  text-align: center;
+  font-size: 25px;
+  border: 0.1 solid #585757;
+  border-radius: 5px;
+  background: #6aa84f;
+  color: white;
+}
+
+/* #learn-more {
+} */
+.learn-more-para {
+  margin: 10px 0;
+  padding: 0;
+}
+.welcoming {
+  margin: 0 0 30px 0;
+  padding: 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+.welcoming-smile {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 10px;
+  padding: 0;
+}
+.find-out-para {
+  margin: 20px 0;
+  font-size: 25px;
+  font-weight: bold;
+}
+.learn-more-question {
+  margin: 10px 0;
+  padding: 0;
+  font-weight: normal;
+}
+.question-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 10px 4px 0;
+  background: #585757;
+  border-radius: 50%;
+}
+.learn-more-para.conclusion {
+  margin-top: 30px;
+}
+.what-is-ldh,
+.features-heading {
+  margin: 0;
+  padding: 0;
+}
+.define-ldh {
+  margin: 30px 0;
+  padding: 0;
+}
+.features-list {
+  margin: 10px 0 0 20px;
+  padding: 0;
+  font-size: 18px;
+}
+
+/* =============== Tablet styles =============== */
+@media only screen and (max-width: 1170px) {
+  p {
+    font-size: 16px;
+  }
+  /* === Brand Logo styles === */
+  .logo-link {
+    font-size: 25px;
+  }
+  .logo {
+    font-size: 30px;
+  }
+  /* === Login Form styles === */
+  .login-form {
+    margin: 8px 0 0 0;
+  }
+  .login-form > input[name="username"],
+  .login-form > input[name="psw"] {
+    padding: 2px 4px;
+    width: 130px;
+    font-size: 12px;
+  }
+}
+
+/* =============== Mobile styles =============== */
+
+@media only screen and (max-width: 800px) {
+  body {
+    display: none;
+  }
+}
+/* 
+Dark Gray = 88,87,87 / #585757
+Green = 106,168,79 / #6aa84f
+Blue = 123,149,224 / #7b95e0
+Rosy = 250, 189, 189 / #fabfbf
+Error = 238, 78, 78 / #ee4e4e
+font for Logo = Wendy one, Vig, Vampiro one, Trade winds, Baloo, Bangers, Boogaloo, Caeser dressing
+=============================
+Dark to navy = 95,103,126
+Dark = 88,87,87
+Orange = #f39c3f
+Rosy2 = 245,182,195 / #f5b6c3
+ */
