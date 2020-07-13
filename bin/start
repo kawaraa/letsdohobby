@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
 
-docker-compose -f ./docker-as-vm.yml up --build
+node bin/run.js
+
+# echo "\n\nMySQL server is starting ..... \n\n"
+
+# until mysql -uclient -pclient-psw -e'select 1'; do docker-entrypoint.sh mysqld; sleep 6; done
+
+# echo "\n\nMySQL server is running ..... \n\n"
+# ls -l
