@@ -1,25 +1,36 @@
 version: "3"
 
 services:
-  redis:
-    container_name: redis
-    image: redis
-    ports:
-      - 6379:6379
-    # environment:
-    #   SERVICE_6379_NAME: redis
-  mysql:
-    container_name: mysql
-    build: ./mysql/
+  # redis:
+  #   container_name: redis
+  #   image: redis
+  #   ports:
+  #     - 6379:6379
+  database:
+    container_name: sql-database
+    build: ./database/
     ports:
       - 3306:3306
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: "test"
-      MYSQL_PASSWORD: "test"
+      MYSQL_ROOT_PASSWORD: root-psw
+      MYSQL_USER: "client"
+      MYSQL_PASSWORD: "client-psw"
     restart: always
     tty: true
+
+  app:
+    container_name: app
+    build: ./app/
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app:/app
+    command: npm run dev
+    depends_on:
+      - database
+    tty: true
+    restart: always
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -27,41 +38,6 @@ services:
     ports:
       - 8081:80
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: database
     depends_on:
-      - mysql
-
-  api:
-    container_name: api
-    build: ./api/
-    ports:
-      - 3001:3001
-    volumes:
-      - ./api/src:/service/src
-      - ./proxy/public/user:/service/user
-    command: npm run dev
-    tty: true
-    restart: always
-
-  browser-client:
-    container_name: browser-client
-    build: ./browser-client/
-    ports:
-      - 3000:3000
-    volumes:
-      - ./browser-client/src:/service/src
-      - ./browser-client/react:/service/react
-      - ./browser-client/public:/service/public
-    command: npm run dev
-    tty: true
-    restart: always
-
-  proxy:
-    container_name: proxy
-    build: ./proxy/
-    ports:
-      - 8080:8080
-    volumes:
-      - ./proxy/public:/home/www
-    tty: true
-    restart: always
+      - database

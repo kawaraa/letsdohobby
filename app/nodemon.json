@@ -12,8 +12,9 @@
     "restart": "echo 'App restarted due to: '$FILENAME''"
   },
   "watch": [
-    "client/react/*",
-    "server/src/*"
+    "frontend/react/*",
+    "server/src/*",
+    "./"
   ],
   "ext": "js,css,html"
 }

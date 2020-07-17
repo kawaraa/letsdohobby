@@ -1,5 +1,5 @@
 module.exports = {
-  entry: ["babel-polyfill", "./client/react/app.js"],
+  entry: ["babel-polyfill", "./frontend/react/app.js"],
   mode: "production",
   module: {
     rules: [
@@ -12,7 +12,7 @@ module.exports = {
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
     ],
   },
-  output: { path: __dirname + "/client/public", filename: "bundle.js" },
+  output: { path: __dirname + "/frontend/public", filename: "bundle.js" },
   resolve: { extensions: ["*", ".js", ".jsx"] },
 
   // optimizing options to build miner bundled file for production
