@@ -14,7 +14,7 @@
   "watch": [
     "frontend/react/*",
     "server/src/*",
-    "./"
+    "./app.js"
   ],
   "ext": "js,css,html"
 }

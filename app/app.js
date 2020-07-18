@@ -20,13 +20,13 @@ const apiRouter = require("./server/src/index.js");
     app.use(express.urlencoded({ extended: true }));
     app.use("/api", apiRouter(server, express.Router(), cookie, jwt));
 
-    app.use("/", express.static(appDirectory + "/frontend/public"));
+    app.use("/", express.static(__dirname + "/frontend/public"));
 
     app.get("*", (request, response) => {
       if (firewall.isAuthenticated(request)) {
-        return response.sendFile(appDirectory + "/client/public/template/index.html");
+        return response.sendFile(__dirname + "/frontend/public/template/index.html");
       }
-      response.sendFile(appDirectory + "/client/public/template/home.html");
+      response.sendFile(__dirname + "/frontend/public/template/home.html");
     });
 
     app.use("*", (request, response) => response.status(404).end("Not Found page"));

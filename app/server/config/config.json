@@ -5,7 +5,7 @@
     "port": 6379
   },
   "mysql": {
-    "host": "localhost",
+    "host": "database",
     "port": 3306,
     "user": "root",
     "password": "root-psw"
