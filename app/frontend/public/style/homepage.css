@@ -272,33 +272,83 @@ label[for="birthday"] {
 
 /* =============== Tablet styles =============== */
 @media only screen and (max-width: 1170px) {
+  .navbar.container {
+    padding: 8px 5px;
+  }
   p {
     font-size: 16px;
   }
   /* === Brand Logo styles === */
   .logo-link {
-    font-size: 25px;
+    font-size: 24px;
   }
   .logo {
-    font-size: 30px;
+    font-size: 28px;
   }
   /* === Login Form styles === */
   .login-form {
-    margin: 8px 0 0 0;
+    padding: 5px 0 0 0;
   }
   .login-form > input[name="username"],
   .login-form > input[name="psw"] {
-    padding: 2px 4px;
-    width: 130px;
-    font-size: 12px;
+    padding: 3px 5px;
+    width: 150px;
+    font-size: 14px;
+  }
+
+  /* ========== Intro ==========*/
+  .intro.heading {
+    font-size: 28px;
+  }
+  .intro.first-heading {
+    font-size: 28px;
+  }
+  .intro-learn-more {
+    font-size: 20px;
+  }
+  .intro.arrow-down-link {
+    width: 30px;
+    height: 30px;
+    margin: 0 0 0 6px;
+  }
+  .welcoming {
+    font-size: 50px;
+  }
+  .welcoming-smile {
+    width: 60px;
+    height: 60px;
+  }
+  .heading {
+    font-size: 24px;
+  }
+  .questions-list {
+    padding: 0 0 0 35px;
+    font-size: 17px;
+  }
+  .question {
+    margin: 7px 0;
+  }
+  .learn-more-conclusion {
+    font-size: 19px;
+  }
+  .define-ldh {
+    font-size: 17px;
+    line-height: 23px;
+  }
+  .features-list {
+    padding: 0 0 0 35px;
+    font-size: 17px;
   }
 }
 
 /* =============== Mobile styles =============== */
 
 @media only screen and (max-width: 800px) {
-  body {
-    display: none;
+  .navbar.container {
+    padding: 8px 5px;
+  }
+  p {
+    font-size: 16px;
   }
 }
 
