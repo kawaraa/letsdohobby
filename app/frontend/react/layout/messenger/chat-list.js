@@ -14,6 +14,7 @@ class ChatList extends React.Component {
 
   async componentDidMount() {
     try {
+      console.log("URL: ", this.config);
       const chats = await Request.fetch(this.config.url);
       this.setState({ chats, error: "", loading: false });
     } catch (error) {

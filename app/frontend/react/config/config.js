@@ -1,24 +1,29 @@
 import configs from "./config.json";
 
-const setTheOrigin = (config, host = window.location.origin) => {
-  if (typeof config !== "object") return config;
-
-  if (config.socketUrl) config.socketUrl = host.replace("https", "wss").replace("http", "ws");
-
-  for (let key in config) {
-    if (key === "url") config[key] = host + config[key];
-    else if (typeof key === "object") {
-      for (let k in key) {
-        if (k === "url") key[k] = host + key[k];
+((host = window.location.origin) => {
+  configs.app.socketUrl = host.replace("https", "wss").replace("http", "ws") + configs.app.socketUrl;
+  for (let k in configs) {
+    if (k === "url") configs[k] = host + configs[k];
+    else if (typeof configs[k] === "object") {
+      const config = configs[k];
+      for (let kk in config) {
+        if (kk === "url") config[kk] = host + config[kk];
+        else if (typeof config[kk] === "object") {
+          const config1 = config[kk];
+          for (let key in config1) {
+            if (key === "url") config1[key] = host + config1[key];
+          }
+        }
       }
     }
   }
-  return config;
-};
+})();
+
 export const config = (key) => {
-  if (configs[key]) return setTheOrigin(configs[key]);
-  for (let k in configs) {
-    if (configs[k][key]) return setTheOrigin(configs[k][key]);
+  if (configs[key]) return configs[key];
+  const config = configs[key];
+  for (let k in config) {
+    if (config[k]) return config[k];
   }
   throw new Error(key + " is not a valid config object(!)");
 };
