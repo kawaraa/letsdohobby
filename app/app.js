@@ -6,19 +6,19 @@ const express = require("express");
 const cookie = require("cookie");
 const jwt = require("jsonwebtoken");
 const Firewall = require("./server/src/infrastructure/firewall/firewall");
-const apiRouter = require("./server/src/index.js");
+const getApiRouter = require("./server/src/index.js");
 
 (async () => {
   try {
-    const appDirectory = process.cwd();
     const app = express();
     const server = http.createServer(app);
+    const apiRouter = getApiRouter(server, express.Router(), cookie, jwt);
     const firewall = new Firewall(cookie, jwt, config.firewall);
     const PORT = process.env.PORT || config.port;
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use("/api", apiRouter(server, express.Router(), cookie, jwt));
+    app.use("/api", apiRouter);
 
     app.use("/", express.static(__dirname + "/frontend/public"));
 
