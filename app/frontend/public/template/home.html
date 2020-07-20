@@ -19,8 +19,10 @@
       <nav class="navbar container no-line" title="navigation bar" tabindex="0">
         <a href="/" class="logo-link" class="no-line">
           <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
-        <form class="login-form no-line" title="" tabindex="0">
-          <div id="login-error"></div>
+        <div class="nav-btns"><a href="#signup-page">Join</a> <button onclick="showLoginForm()"
+            class="login-btn">Login</button></div>
+        <form onsubmit="onLogin(this)" class="nav login-form no-line" title="" tabindex="0">
+          <div class="login-error"></div>
           <input type="text" name="username" placeholder="Email or Phone" class="no-line" />
           <input type="password" name="psw" placeholder="Password" class="no-line" />
           <button type="submit" class="no-line" title="" tabindex="0">Login</button>
@@ -57,6 +59,12 @@
     </div>
     <div class="outer-container intro">
       <section id="intro-section" class="container no-line" title="Intro" tabindex="0">
+        <form onsubmit="onLogin(this)" class="intro login-form no-line" title="" tabindex="0">
+          <div class="login-error"></div>
+          <input type="text" name="username" placeholder="Email or Phone" class="no-line" />
+          <input type="password" name="psw" placeholder="Password" class="no-line" />
+          <button type="submit" class="no-line" title="" tabindex="0">Login</button>
+        </form>
         <article class="intro article no-line" title="Intro article" tabindex="0">
           <p class="intro first-heading">What is LetsDoHobby?</p>
           <div class="intro img-wrapper">
@@ -69,7 +77,7 @@
               <img src="/image/arrow-down.png" alt="arrow-down" class="arrow-down">
             </a></p>
         </article>
-        <form class="signup-form no-line" title="" tabindex="0">
+        <form onsubmit="onSignup(this)" id="signup-page" class="signup-form no-line" title="" tabindex="0">
           <h4 class="signup-form-heading">Enjoy your hobbies and meet people with similar hobbies anywhere
             anytime</h4>
           <div id="signup-error"></div>
@@ -156,7 +164,7 @@
       </section>
     </div>
     <div class="outer-container footer">
-      <footer></footer>
+      <footer class="container no-line"></footer>
     </div>
     <script src="/script/utility.js"></script>
     <script src="/script/date-options.js"></script>

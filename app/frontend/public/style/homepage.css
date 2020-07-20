@@ -1,6 +1,7 @@
 /* === Desktop styles === */
-p {
-  font-size: 18px;
+.intro.login-form,
+.nav-btns {
+  display: none;
 }
 /* === Navbar styles === */
 .navbar.outer-container {
@@ -36,27 +37,27 @@ p {
   color: #585757;
 }
 /* === Login Form styles === */
-.login-form {
+.nav.login-form {
   display: flex;
   position: relative;
   float: right;
   margin: 0;
   padding: 7px 0 0 0;
 }
-.login-form:after {
+.nav.login-form:after {
   display: block;
   content: "";
   clear: both;
 }
-#login-error {
+.login-error {
   position: absolute;
   top: 50px;
   left: 5px;
   padding: 0;
   color: #ee4e4e;
 }
-.login-form > input[name="username"],
-.login-form > input[name="psw"] {
+.nav.login-form > input[name="username"],
+.nav.login-form > input[name="psw"] {
   display: inline-block;
   margin: 0 10px 0 0;
   padding: 3px 6px;
@@ -64,7 +65,7 @@ p {
   font-size: 16px;
   border: none;
 }
-.login-form > button[type="submit"] {
+.nav.login-form > button[type="submit"] {
   font-size: 16px;
   border: none;
   border-radius: 5px;
@@ -272,11 +273,11 @@ label[for="birthday"] {
 
 /* =============== Tablet styles =============== */
 @media only screen and (max-width: 1170px) {
+  .outer-container {
+    margin: 50px 0 0 0;
+  }
   .navbar.container {
     padding: 8px 5px;
-  }
-  p {
-    font-size: 16px;
   }
   /* === Brand Logo styles === */
   .logo-link {
@@ -286,11 +287,11 @@ label[for="birthday"] {
     font-size: 28px;
   }
   /* === Login Form styles === */
-  .login-form {
+  .nav.login-form {
     padding: 5px 0 0 0;
   }
-  .login-form > input[name="username"],
-  .login-form > input[name="psw"] {
+  .nav.login-form > input[name="username"],
+  .nav.login-form > input[name="psw"] {
     padding: 3px 5px;
     width: 150px;
     font-size: 14px;
@@ -344,11 +345,70 @@ label[for="birthday"] {
 /* =============== Mobile styles =============== */
 
 @media only screen and (max-width: 800px) {
-  .navbar.container {
-    padding: 8px 5px;
+  .outer-container {
+    margin: 40px 0 0 0;
   }
-  p {
+  .navbar.container {
+    padding: 6px;
+  }
+  #intro-section {
+    display: block;
+  }
+  .outer-container.intro {
+    height: inherit;
+  }
+  .nav.login-form {
+    display: none;
+  }
+  .nav-btns {
+    display: block;
+    float: right;
+  }
+  .nav-btns:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+  /* === Brand Logo styles === */
+  .logo-link {
+    font-size: 20px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+  /* === Login Form styles === */
+  .intro.login-form {
+    overflow: hidden;
+    display: flex;
+    height: 0;
+    flex-flow: column nowrap;
+    margin: 0;
+    padding: 0;
+  }
+
+  .login-error {
+    position: static;
+    display: block;
+    margin: 0;
+    padding: 0;
+    color: #ee4e4e;
+  }
+  .intro.login-form > input[name="username"],
+  .intro.login-form > input[name="psw"] {
+    margin: 5px 0;
+    padding: 3px 6px;
+    flex: 100%;
     font-size: 16px;
+    border: none;
+  }
+  .intro.login-form > button[type="submit"] {
+    font-size: 16px;
+    border: none;
+    margin: 10px 0 0 0;
+    padding: 5px;
+    border-radius: 5px;
+    background: var(--blue-color);
+    color: var(--white-color);
   }
 }
 

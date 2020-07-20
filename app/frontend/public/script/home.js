@@ -2,7 +2,7 @@
 
 const loadingScreen = document.getElementById("loading-screen-wrapper");
 const signupError = document.getElementById("signup-error");
-const loginError = document.getElementById("login-error");
+const loginError = document.querySelector("login-error");
 
 (() => {
   window.addEventListener("load", () => (loadingScreen.style.display = "none"));
@@ -21,18 +21,9 @@ const loginError = document.getElementById("login-error");
   });
 })();
 
-async function onSignup(e) {
-  e.preventDefault();
-  const {
-    firstName,
-    lastName,
-    username,
-    psw,
-    pswConfirm,
-    birthdayDay,
-    birthdayMonth,
-    birthdayYear,
-  } = e.target;
+async function onSignup(form) {
+  window.event.preventDefault();
+  const { firstName, lastName, username, psw, pswConfirm, birthdayDay, birthdayMonth, birthdayYear } = form;
   if (psw.value !== pswConfirm.value) {
     signupError.style.display = "block";
     signupError.innerHTML = "Passwords don't match";
@@ -54,13 +45,9 @@ async function onSignup(e) {
   }
 }
 
-async function onLogin(e) {
-  e.preventDefault();
-  const { username, psw } = e.target;
-  const userCredentials = {
-    username: username.value,
-    psw: psw.value,
-  };
+async function onLogin({ username, psw } = form) {
+  window.event.preventDefault();
+  const userCredentials = { username: username.value, psw: psw.value };
   try {
     await Http.post(window.location.origin + "/api/login", userCredentials);
     location.reload();
@@ -69,5 +56,8 @@ async function onLogin(e) {
   }
 }
 
-document.forms[1].addEventListener("submit", onSignup);
-document.forms[0].addEventListener("submit", onLogin);
+function showLoginForm() {
+  const form = document.querySelector(".intro.login-form");
+  if (form && form.offsetHeight > 0) form.style.height = "0px";
+  else if (form) form.style.height = "110px";
+}
