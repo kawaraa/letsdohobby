@@ -72,7 +72,7 @@ class NewsFeed extends React.Component {
   getToTheTopButton() {
     return (
       <button type="button" onClick={this.refresh} className="to-the-top no-line" title="Scroll to the top">
-        <img src="image/to-the-top-arrow-icon.png" className="to-the-top img" />
+        <img src="image/arrow-up.png" className="to-the-top img" />
       </button>
     );
   }

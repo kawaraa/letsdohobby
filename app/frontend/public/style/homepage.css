@@ -52,7 +52,7 @@
 }
 .login-error {
   position: absolute;
-  top: 50px;
+  top: 60px;
   left: 5px;
   padding: 0;
   color: #ee4e4e;
@@ -240,7 +240,7 @@ label[for="birthday"] {
   font-weight: bold;
 }
 .heading {
-  margin: 30px 0 0 0;
+  margin: 30px 0 10px 0;
   padding: 0;
   font-size: 25px;
 }
@@ -259,7 +259,7 @@ label[for="birthday"] {
 }
 
 .define-ldh {
-  margin: 10px 0 0 20px;
+  margin: 0 0 0 20px;
   padding: 0;
   font-size: 18px;
   line-height: 25px;
@@ -352,6 +352,11 @@ label[for="birthday"] {
 /* =============== Mobile styles =============== */
 
 @media only screen and (max-width: 800px) {
+  #loading-screen-svg {
+    width: 100px;
+    height: 100px;
+    /* margin: 35vh auto; */
+  }
   .outer-container {
     margin: 40px 0 0 0;
   }
@@ -419,12 +424,11 @@ label[for="birthday"] {
     transition: height 0.5s ease;
   }
 
-  .login-error {
+  .intro.login-form > .login-error {
     position: static;
     display: block;
     margin: 0;
     padding: 0;
-    color: #ee4e4e;
   }
   .intro.login-form > input[name="username"],
   .intro.login-form > input[name="psw"] {
@@ -468,8 +472,12 @@ label[for="birthday"] {
     height: 25px;
     margin: 10px 0 0 0;
   }
+  .signup-form {
+    padding: 30px 0;
+    height: 95vh;
+  }
   .signup-form-heading {
-    margin: 20px 5px;
+    margin: 0 5px 20px 5px;
     font-size: 20px;
   }
   .signup-input {
@@ -484,6 +492,31 @@ label[for="birthday"] {
     font-size: 14px;
   }
   .gender {
+    font-size: 15px;
+  }
+  .welcoming {
+    font-size: 35px;
+  }
+  .welcoming-smile {
+    width: 40px;
+    height: 40px;
+  }
+  .heading {
+    font-size: 20px;
+    font-weight: normal;
+  }
+  .questions-list {
+    padding: 0 0 0 25px;
+    font-size: 15px;
+  }
+  .learn-more-conclusion {
+    font-size: 16px;
+  }
+  .define-ldh {
+    font-size: 15px;
+  }
+  .features-list {
+    padding: 0 0 0 25px;
     font-size: 15px;
   }
 }

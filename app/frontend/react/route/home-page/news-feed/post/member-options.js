@@ -31,7 +31,7 @@ class MemberOptions extends React.Component {
       this.setState({ loading: false, success: true });
       window.dispatchEvent(new CustomEvent("UPDATE_POST", { detail: post }));
     } catch (error) {
-      this.setState({ success: false });
+      this.setState({ loading: false, success: false });
     }
   }
   async handleCancelRequest() {
@@ -43,7 +43,7 @@ class MemberOptions extends React.Component {
       this.setState({ loading: false, success: true });
       window.dispatchEvent(new CustomEvent("UPDATE_POST", { detail: post }));
     } catch (error) {
-      this.setState({ success: false });
+      this.setState({ loading: false, success: false });
     }
   }
   async handleReportPost() {
@@ -65,7 +65,7 @@ class MemberOptions extends React.Component {
   }
   componentDidMount() {
     window.addEventListener("click", ({ target } = e) => {
-      const cssClass = target.classNambaseVal || target.className;
+      const cssClass = target.classNameVal || target.className;
       if (!/dots-icon/gim.test(cssClass)) this.setState({ showList: false });
     });
   }

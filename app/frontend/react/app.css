@@ -172,5 +172,8 @@ input[type="password"] {
 }
 
 /* =============== Tablet styles =============== */
-
+@media only screen and (max-width: 1170px) {
+}
 /* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+}

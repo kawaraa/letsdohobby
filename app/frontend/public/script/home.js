@@ -2,7 +2,7 @@
 
 const loadingScreen = document.getElementById("loading-screen-wrapper");
 const signupError = document.getElementById("signup-error");
-const loginError = document.querySelector("login-error");
+const loginError = document.querySelector(".login-error");
 
 (() => {
   window.addEventListener("load", () => (loadingScreen.style.display = "none"));

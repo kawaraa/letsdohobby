@@ -13,7 +13,7 @@ class NotificationItem extends React.Component {
     this.config = config("notificationItem");
     this.onAcceptJoinRequest = this.handleAcceptJoinRequest.bind(this);
     this.onRejectJoinRequest = this.handleRejectJoinRequest.bind(this);
-    this.state = { loading: true, success: true };
+    this.state = { loading: false, success: true };
   }
 
   async handleAcceptJoinRequest() {

@@ -21,9 +21,9 @@ import configs from "./config.json";
 
 export const config = (key) => {
   if (configs[key]) return configs[key];
-  const config = configs[key];
-  for (let k in config) {
-    if (config[k]) return config[k];
+  for (let kk in configs) {
+    const config = configs[kk];
+    for (let k in config) if (k === key) return config[k];
   }
   throw new Error(key + " is not a valid config object(!)");
 };

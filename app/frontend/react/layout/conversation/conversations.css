@@ -19,7 +19,7 @@
   position: relative;
   display: flex;
   flex-flow: column nowrap;
-  height: 400px;
+  height: 496px;
   width: 350px;
   min-width: 300px;
   margin: 0 10px;
@@ -31,20 +31,20 @@
 .conversation.header {
   width: 100%;
   margin: 0;
-  padding: 10px;
+  padding: 12px 10px;
   border-bottom: 0.5px solid var(--hover-white-color);
 }
 .conversation.activity {
   display: inline-block;
   margin: 0;
   padding: 0;
-  font-size: 18px;
+  font-size: 20px;
   color: var(--black-color);
   text-decoration: none;
 }
 .conversation.arrow-svg {
   display: inline-block;
-  width: 10px;
+  width: 11px;
   margin: 0 8px;
   padding: 0;
 }
@@ -57,7 +57,7 @@
   display: inline-block;
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--black-color);
 }
 .conversation.x-icon-wrapper {
@@ -71,7 +71,7 @@
 }
 .conversations.messages {
   overflow: auto;
-  height: 313px;
+  height: 400px;
   width: 100%;
   margin: 0;
   padding: 0 0 10px 0;
@@ -86,17 +86,16 @@
   width: 100%;
 }
 .conversation.textarea-field {
-  margin: 0 0 10px 10px;
+  margin: 0 0 12px 10px;
   width: 280px;
 }
 .conversation.textarea {
   display: block;
-  height: 35px;
   width: 100%;
   margin: 0;
   padding: 5px 8px;
   resize: none;
-  font-size: 16px;
+  font-size: 18px;
   border: 1px solid black;
   border-radius: 30px;
 }
@@ -105,8 +104,8 @@
   bottom: 8px;
   right: 10px;
   margin: 0;
-  padding: 10px 4px;
-  font-size: 14px;
+  padding: 12px 4px;
+  font-size: 16px;
   background: var(--blue-color);
   color: var(--white-color);
   border: none;

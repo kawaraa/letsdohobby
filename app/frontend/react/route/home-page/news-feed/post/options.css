@@ -12,7 +12,7 @@
 }
 .post.options-list {
   position: absolute;
-  top: 20px;
+  top: 24px;
   right: 5px;
   padding: 0;
   list-style: none;
@@ -24,8 +24,8 @@
   display: block;
   width: 100%;
   margin: 0;
-  padding: 5px 10px;
-  font-size: var(--p-font-size);
+  padding: 5px 20px;
+  font-size: 18px;
   text-align: right;
   color: var(--p-font-color);
   background: none;

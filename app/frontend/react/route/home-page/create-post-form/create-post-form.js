@@ -84,7 +84,7 @@ class CreatePostForm extends React.Component {
     if (loading) return <LoadingScreen text={percentComplete + "%"} />;
 
     return (
-      <div className="create-post container">
+      <div className="create-post-container">
         <form
           onChange={this.onChange}
           onSubmit={this.onSubmit}

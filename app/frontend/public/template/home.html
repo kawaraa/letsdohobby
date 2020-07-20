@@ -15,22 +15,6 @@
   </head>
 
   <body>
-    <div class="navbar outer-container">
-      <nav class="navbar container no-line" title="navigation bar" tabindex="0">
-        <a href="/" class="logo-link no-line">
-          <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
-        <div class="nav-btns">
-          <a href="#signup-page" class="nav btn">Join</a>
-          <a href="#intro-section" onclick="showLoginForm()" class="nav btn login">Login</a>
-        </div>
-        <form onsubmit="onLogin(this)" class="nav login-form no-line" title="" tabindex="0">
-          <div class="login-error"></div>
-          <input type="text" name="username" placeholder="Email or Phone" class="no-line" />
-          <input type="password" name="psw" placeholder="Password" class="no-line" />
-          <button type="submit" class="no-line" title="" tabindex="0">Login</button>
-        </form>
-      </nav>
-    </div>
     <div id="loading-screen-wrapper">
       <svg viewBox="0 0 100 100" id="loading-screen-svg">
         <rect x="25.6405" y="55" width="30" height="30" rx="3" ry="3" id="rect-1">
@@ -58,6 +42,22 @@
             begin="0s"></animate>
         </rect>
       </svg>
+    </div>
+    <div class="navbar outer-container">
+      <nav class="navbar container no-line" title="navigation bar" tabindex="0">
+        <a href="/" class="logo-link no-line">
+          <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
+        <div class="nav-btns">
+          <a href="#signup-page" class="nav btn">Join</a>
+          <a href="#intro-section" onclick="showLoginForm()" class="nav btn login">Login</a>
+        </div>
+        <form onsubmit="onLogin(this)" class="nav login-form no-line" title="" tabindex="0">
+          <div class="login-error"></div>
+          <input type="text" name="username" placeholder="Email or Phone" class="no-line" />
+          <input type="password" name="psw" placeholder="Password" class="no-line" />
+          <button type="submit" class="no-line" title="" tabindex="0">Login</button>
+        </form>
+      </nav>
     </div>
     <div class="outer-container intro">
       <section id="intro-section" class="container no-line" title="Intro" tabindex="0">
@@ -159,9 +159,9 @@
           <li class="feature">User can see the ads based on the user's location range, which mean the user can
             not change his location, but he can decide the range of location</li>
         </ol>
-        <h2>Discover your hobbies</h2>
+        <h2 class="heading">Discover your hobbies</h2>
         <p>....</p>
-        <h2>Here some tips on what info your post should include.</h2>
+        <h2 class="heading">Here some tips on what info your post should include.</h2>
         <p>...
           <!-- e.g. I want to enjoy ... with ... -->
         </p>
