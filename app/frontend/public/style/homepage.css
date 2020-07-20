@@ -348,34 +348,59 @@ label[for="birthday"] {
   .outer-container {
     margin: 40px 0 0 0;
   }
+  /* === Navbar styles === */
   .navbar.container {
     padding: 6px;
-  }
-  #intro-section {
-    display: block;
-  }
-  .outer-container.intro {
-    height: inherit;
   }
   .nav.login-form {
     display: none;
   }
   .nav-btns {
-    display: block;
+    display: flex;
     float: right;
+    margin: 4px 0 0 0;
   }
   .nav-btns:after {
     display: block;
     content: "";
     clear: both;
   }
-  /* === Brand Logo styles === */
+  .nav.btn {
+    flex: auto;
+    font-size: 18px;
+    text-decoration: none;
+    background: none;
+    color: var(--font-color);
+    border: none;
+    cursor: pointer;
+  }
+  .nav.btn.login {
+    padding: 0 2px;
+    margin: 0 0 0 5px;
+    font-size: 16px;
+    background: var(--blue-color);
+    color: var(--white-color);
+
+    /* border: 0.5px solid var(--black-color); */
+  }
+  .nav.btn:hover {
+    color: var(--white-color);
+  }
   .logo-link {
     font-size: 20px;
   }
   .logo {
     font-size: 24px;
   }
+
+  /* === Intro styles === */
+  #intro-section {
+    display: block;
+  }
+  .outer-container.intro {
+    height: inherit;
+  }
+
   /* === Login Form styles === */
   .intro.login-form {
     overflow: hidden;
@@ -409,6 +434,30 @@ label[for="birthday"] {
     border-radius: 5px;
     background: var(--blue-color);
     color: var(--white-color);
+  }
+  .intro.article {
+    height: 100vh;
+  }
+  .intro.first-heading {
+    font-size: 26px;
+    margin-top: 20px;
+  }
+  .intro.img-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+  .intro.heading {
+    font-size: 26px;
+    font-weight: normal;
+  }
+  .intro-learn-more {
+    margin: 20px 0 0 0;
+    font-size: 17px;
+  }
+  .intro.arrow-down-link {
+    width: 25px;
+    height: 25px;
+    margin-left: 3px;
   }
 }
 
