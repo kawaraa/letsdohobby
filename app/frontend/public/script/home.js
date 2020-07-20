@@ -64,7 +64,8 @@ function showLoginForm() {
 
 let prevScroll = window.pageYOffset;
 window.onscroll = (_, currentScroll = window.pageYOffset) => {
-  if (prevScroll > currentScroll) document.querySelector(".navbar.outer-container").style.top = "0";
-  else document.querySelector(".navbar.outer-container").style.top = "-700px";
+  const navbar = document.querySelector(".navbar.outer-container");
+  if (prevScroll > currentScroll) navbar.style.top = "0";
+  else navbar.style.top = `-${navbar.offsetHeight}px`;
   prevScroll = currentScroll;
 };

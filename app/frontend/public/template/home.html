@@ -21,7 +21,7 @@
           <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
         <div class="nav-btns">
           <a href="#signup-page" class="nav btn">Join</a>
-          <button onclick="showLoginForm()" class="nav btn login">Login</button>
+          <a href="#intro-section" onclick="showLoginForm()" class="nav btn login">Login</a>
         </div>
         <form onsubmit="onLogin(this)" class="nav login-form no-line" title="" tabindex="0">
           <div class="login-error"></div>
@@ -74,10 +74,12 @@
           </div>
           <p class="intro heading">Or</p>
           <p class="intro heading">Do I even need it?</p>
-          <p class="intro-learn-more">Let's find out and get to know LetsDoHobby <a href="#learn-more"
-              title="Find out what Lets Do Hobby is" class="intro arrow-down-link">
+          <div class="intro-learn-more">
+            <p class="learn-more-para">Let's find out and get to know LetsDoHobby</p>
+            <a href="#learn-more" title="Find out what Lets Do Hobby is" class="intro arrow-down-link">
               <img src="/image/arrow-down.png" alt="arrow-down" class="arrow-down">
-            </a></p>
+            </a>
+          </div>
         </article>
         <form onsubmit="onSignup(this)" id="signup-page" class="signup-form no-line" title="" tabindex="0">
           <h4 class="signup-form-heading">Enjoy your hobbies and meet people with similar hobbies anywhere
