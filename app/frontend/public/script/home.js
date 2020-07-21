@@ -59,7 +59,10 @@ async function onLogin({ username, psw } = form) {
 function showLoginForm() {
   const form = document.querySelector(".intro.login-form");
   if (form && form.offsetHeight > 0) form.style.height = "0px";
-  else if (form) form.style.height = "110px";
+  else if (form) {
+    form.style.height = "110px";
+    window.scrollTo({ top: 100, left: 100, behavior: "smooth" });
+  }
 }
 
 let prevScroll = window.pageYOffset;

@@ -49,7 +49,7 @@
           <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
         <div class="nav-btns">
           <a href="#signup-page" class="nav btn">Join</a>
-          <a href="#intro-section" onclick="showLoginForm()" class="nav btn login">Login</a>
+          <button type="button" onclick="showLoginForm()" class="nav btn login">Login</button>
         </div>
         <form onsubmit="onLogin(this)" class="nav login-form no-line" title="" tabindex="0">
           <div class="login-error"></div>
@@ -60,7 +60,7 @@
       </nav>
     </div>
     <div class="outer-container intro">
-      <section id="intro-section" class="container no-line" title="Intro" tabindex="0">
+      <section class="container intro no-line" title="Intro" tabindex="0">
         <form onsubmit="onLogin(this)" class="intro login-form no-line" title="" tabindex="0">
           <div class="login-error"></div>
           <input type="text" name="username" placeholder="Email or Phone" class="no-line" />

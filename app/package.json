@@ -1,11 +1,12 @@
 {
   "name": "letsdohobby",
   "version": "1.0.0",
-  "description": "letsdohobby.com is a platform where people find the right partner for their hobbies.",
+  "description": "letsdohobby is a platform where people find the right partner for their hobbies.",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "npx nodemon app.js"
+    "dev": "npx nodemon app.js",
+    "build": "npx webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",

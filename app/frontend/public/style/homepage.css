@@ -78,7 +78,7 @@
 .outer-container.intro {
   height: 97vh;
 }
-#intro-section {
+.container.intro {
   display: flex;
 }
 .intro.article {
@@ -161,7 +161,7 @@
 .inputs-container {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 0 0 0;
+  margin: 0;
 }
 .signup-input {
   width: 100%;
@@ -196,16 +196,8 @@ label[for="birthday"] {
   font-size: 18px;
 }
 #signup-btn {
-  display: block;
-  width: 100%;
-  margin: 20px 0;
-  padding: 5px;
-  font-size: 25px;
-  text-align: center;
-  background: var(--green-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
+  width: 90%;
+  margin: 20px auto;
 }
 
 .outer-container.about {
@@ -360,6 +352,9 @@ label[for="birthday"] {
   .outer-container {
     margin: 40px 0 0 0;
   }
+  .container {
+    padding: 20px 5px;
+  }
   /* === Navbar styles === */
   .navbar.container {
     padding: 6px;
@@ -406,11 +401,15 @@ label[for="birthday"] {
   }
 
   /* === Intro styles === */
-  #intro-section {
-    display: block;
-  }
   .outer-container.intro {
     height: inherit;
+  }
+  .container.intro {
+    display: block;
+    margin-top: 15vh;
+  }
+  .intro.first-heading {
+    margin: 20px 0;
   }
 
   /* === Login Form styles === */
@@ -448,7 +447,7 @@ label[for="birthday"] {
     color: var(--white-color);
   }
   .intro.article {
-    height: 100vh;
+    height: 75vh;
   }
   .intro.first-heading {
     font-size: 24px;
@@ -465,25 +464,28 @@ label[for="birthday"] {
   .intro-learn-more {
     flex-flow: column;
     margin: 20px 0 0 0;
-    font-size: 15px;
+    font-size: 17px;
   }
   .intro.arrow-down-link {
-    width: 25px;
-    height: 25px;
-    margin: 10px 0 0 0;
+    width: 30px;
+    height: 30px;
+    margin: 20px 0 0 0;
   }
   .signup-form {
-    padding: 30px 0;
-    height: 95vh;
+    padding: 15vh 0 0 0;
+    height: 100vh;
+  }
+  .signup-field {
+    margin: 0;
   }
   .signup-form-heading {
-    margin: 0 5px 20px 5px;
+    margin: 0 5px 25px 5px;
     font-size: 20px;
   }
   .signup-input {
-    margin: 8px 5px;
+    margin: 10px 5px;
     padding: 3px 6px;
-    font-size: 14px;
+    font-size: 15px;
   }
   label[for="birthday"] {
     font-size: 16px;
@@ -492,8 +494,22 @@ label[for="birthday"] {
     font-size: 14px;
   }
   .gender {
+    margin: 20px 10px 10px 5px;
     font-size: 15px;
   }
+  #signup-btn {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    padding: 5px;
+    font-size: 25px;
+    text-align: center;
+    background: var(--green-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
   .welcoming {
     font-size: 35px;
   }
