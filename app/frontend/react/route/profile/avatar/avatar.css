@@ -2,8 +2,8 @@
   overflow: hidden;
   position: relative;
   margin: 20px auto;
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   background: var(--white-color);
   border-radius: 50%;
   box-shadow: 0 0 5px 0 var(--font-color);
@@ -52,7 +52,7 @@
   flex: 5;
   margin: 0 0.5px;
   padding: 5px 5px 12px 5px;
-  font-size: 13px;
+  font-size: 14px;
   text-align: right;
   color: var(--bg-white-color);
   background: var(--font-color);

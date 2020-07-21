@@ -8,16 +8,14 @@
   text-align: center;
 }
 .full-name.title {
-  font-size: 30px;
-  margin: 0;
+  font-size: 35px;
+  margin: 0 10px 0 0;
   padding: 0;
   font-weight: bold;
 }
 .full-name.edit-icon-wrapper {
   position: relative;
   padding: 5px;
-  top: 0;
-  right: -10px;
   border-radius: 5px;
 }
 .full-name.edit-icon-wrapper:hover {

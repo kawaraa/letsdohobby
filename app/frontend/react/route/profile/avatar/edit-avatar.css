@@ -23,9 +23,8 @@ label[for="upload-avatar"] {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 35px;
   padding: 8px 0;
-  font-size: var(--p-font-size);
+  font-size: 18px;
   text-align: center;
   text-transform: uppercase;
   color: var(--font-color);
@@ -46,10 +45,10 @@ label[for="upload-avatar"] {
   right: 15px;
   height: 30px;
   width: 30px;
-  font-size: 30px;
+  font-size: 35px;
   font-weight: bold;
   text-align: center;
-  line-height: 0.9;
+  line-height: 0.8;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -58,6 +57,8 @@ label[for="upload-avatar"] {
 }
 .edit-avatar.zoom.out {
   top: 50%;
+  font-size: 45px;
+  line-height: 0.6;
 }
 .edit-avatar.zoom:hover {
   background: var(--bg-white-color);
@@ -72,11 +73,13 @@ label[for="upload-avatar"] {
   cursor: pointer;
 }
 .edit-avatar.btn {
+  width: 70px;
   margin: 0 5px;
-  padding: 2px 5px;
+  padding: 2px 0;
   background: var(--blue-color);
   color: var(--bg-white-color);
-  font-size: var(--p-font-size);
+  font-size: 18px;
+  text-align: center;
   border: none;
   border-radius: 5px;
 }
