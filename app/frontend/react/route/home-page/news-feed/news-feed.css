@@ -22,3 +22,12 @@
   margin: 0;
   padding: 0;
 }
+/* =============== Tablet styles =============== */
+@media only screen and (max-width: 1170px) {
+  .news-feed.wrapper {
+    width: 60%;
+  }
+}
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+}

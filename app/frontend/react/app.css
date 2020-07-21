@@ -110,13 +110,14 @@ button {
 .custom-field > .title {
   margin: 0;
   padding: 0;
-  font-size: 18px;
+  font-size: 20px;
   color: var(--black-color);
+  font-weight: normal;
 }
 .custom-field > .content {
   margin: 0;
   padding: 30px 0 15px 0;
-  font-size: var(--p-font-size);
+  font-size: 18px;
   color: var(--font-light-color);
 }
 .custom-field > button[type="button"] {
@@ -126,7 +127,7 @@ button {
   padding: 4px;
   background: var(--blue-color);
   color: var(--bg-white-color);
-  font-size: var(--p-font-size);
+  font-size: 18px;
   border: none;
   border-radius: 5px;
 }
@@ -136,7 +137,7 @@ button {
   display: flex;
   margin: 0 auto;
   padding: 0;
-  width: 400px;
+  width: 500px;
   box-shadow: 0 0 5px 0 var(--font-light-color);
   border-radius: 5px;
 }
@@ -145,7 +146,7 @@ input[type="password"] {
   flex: auto;
   margin: 0;
   padding: 5px;
-  font-size: var(--p-font-size);
+  font-size: 18px;
   border: none;
   border-right: 0.5px solid var(--hover-white-color);
 }
@@ -159,7 +160,7 @@ input[type="password"] {
   flex: auto;
   margin: 0;
   padding: 5px;
-  font-size: var(--p-font-size);
+  font-size: 18px;
   background: var(--pink-color);
   color: var(--p-font-weight);
   border: none;

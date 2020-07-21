@@ -91,7 +91,11 @@ class Settings extends React.Component {
               </h4>
               <input type="range" name="locationRange" min="5" max="161" value={locationRange} />
             </div>
-            {didChange && <button type="submit">Save</button>}
+            {didChange && (
+              <button type="submit" className="settings save-btn">
+                Save
+              </button>
+            )}
           </form>
           <Account />
         </div>

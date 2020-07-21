@@ -31,6 +31,7 @@
   font-weight: bold;
   color: var(--black-color);
   text-decoration: none;
+  overflow-wrap: break-word;
 }
 .post.arrow.svg {
   display: inline-block;

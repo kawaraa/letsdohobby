@@ -1,6 +1,6 @@
 .my-items.header {
   display: flex;
-  width: 60%;
+  width: 55%;
   margin: 0 auto;
   padding: 0;
 }
@@ -36,7 +36,20 @@
 }
 .my-posts.wrapper,
 .joined-posts.wrapper {
-  width: 60%;
+  width: 55%;
   margin: 0 auto;
   padding: 10px 0;
+}
+/* =============== Tablet styles =============== */
+@media only screen and (max-width: 1170px) {
+  .my-posts.wrapper,
+  .joined-posts.wrapper {
+    width: 60%;
+  }
+  .my-items.header {
+    width: 60%;
+  }
+}
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
 }

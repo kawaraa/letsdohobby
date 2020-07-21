@@ -76,7 +76,6 @@ class conversation extends Component {
     return (
       <div className="conversation wrapper">
         <div className="conversation header">
-          <XIcon name="conversation" onClick={this.onClose} />
           <Link className="conversation activity" to={"post/" + id}>
             {activity}
           </Link>
@@ -87,6 +86,7 @@ class conversation extends Component {
             />
           </svg>
           <p className="conversation date">{CustomDate.toText(startAt)}</p>
+          <XIcon name="conversation" onClick={this.onClose} />
         </div>
 
         <ul className="conversations messages">

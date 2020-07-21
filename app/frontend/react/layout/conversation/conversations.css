@@ -19,9 +19,9 @@
   position: relative;
   display: flex;
   flex-flow: column nowrap;
-  height: 496px;
-  width: 350px;
-  min-width: 300px;
+  height: 504px;
+  width: 400px;
+  min-width: 350px;
   margin: 0 10px;
   padding: 0;
   background: var(--white-color);
@@ -71,23 +71,24 @@
 }
 .conversations.messages {
   overflow: auto;
+  display: flex;
+  flex-flow: column-reverse;
   height: 400px;
   width: 100%;
   margin: 0;
-  padding: 0 0 10px 0;
+  padding: 0;
   list-style: none;
-  display: flex;
-  flex-flow: column-reverse;
 }
 .conversation.form {
-  position: relative;
-  margin: 0;
-  max-height: 150px;
+  position: static;
+  display: flex;
+  align-items: flex-end;
+  padding: 15px 0 20px 0;
   width: 100%;
 }
 .conversation.textarea-field {
-  margin: 0 0 12px 10px;
-  width: 280px;
+  flex: 9;
+  margin: 0 0 0 10px;
 }
 .conversation.textarea {
   display: block;
@@ -100,14 +101,70 @@
   border-radius: 30px;
 }
 .conversation.send-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 10px;
-  margin: 0;
-  padding: 12px 4px;
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+  padding: 0;
+  text-align: center;
   font-size: 16px;
   background: var(--blue-color);
   color: var(--white-color);
   border: none;
   border-radius: 50%;
+}
+
+/* =============== Tablet styles =============== */
+@media only screen and (max-width: 1170px) {
+  .conversation.wrapper {
+    width: 300px;
+    height: 449px;
+    min-width: 265px;
+  }
+  .conversation.header {
+    padding: 10px;
+  }
+  .conversation.x-icon-wrapper {
+    top: 9px;
+    width: 22px;
+    height: 22px;
+  }
+  .conversation.activity {
+    font-size: 18px;
+  }
+  .conversation.arrow-svg {
+    width: 9px;
+    margin: 0 4px;
+  }
+  .conversation.date {
+    font-size: 14px;
+  }
+  .conversations.messages {
+    height: 350px;
+  }
+  .conversation.form {
+    padding: 10px 0 15px 0;
+  }
+  .conversation.textarea-field {
+    margin: 0 0 0 10px;
+    width: 100%;
+  }
+  .conversation.textarea {
+    font-size: 16px;
+  }
+  .conversation.send-btn {
+    position: static;
+    width: 35px;
+    height: 35px;
+    margin: 0 10px;
+    padding: 0;
+    font-size: 14px;
+    text-align: center;
+    background: var(--blue-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 50%;
+  }
+}
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
 }

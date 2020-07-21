@@ -65,10 +65,14 @@ class UpdatePostForm extends React.Component {
     if (loading) return <LoadingScreen />;
 
     return (
-      <div className="update-post container">
+      <div className="update-post-container">
         <form className="update-post form no-line" onSubmit={this.onSubmit} onChange={this.onChange}>
+          <h3 className="update-post title no-line" tabindex="0">
+            Update Post
+          </h3>
+          <XIcon name="update-post" />
           <header className="update-post header no-line" title="Post Header owner info" tabindex="0">
-            <Avatar src={post.owner.avatarUrl} name="owner" />
+            <Avatar src={post.owner.avatarUrl} name="update-post" />
 
             <div className="update-post activity-owner-box">
               <span className="update-post owner-name no-line" title="Owner name">
@@ -79,10 +83,9 @@ class UpdatePostForm extends React.Component {
                 {post.activity}
               </p>
             </div>
-            <XIcon name="update-post" />
+            <time className="update-post created-at">{CustomDate.toText(post.createdAt)}</time>
           </header>
 
-          <time className="post created-at">{CustomDate.toText(post.createdAt)}</time>
           {error && <CustomMessage text={error} name="error" />}
 
           <div className="update-post selects">

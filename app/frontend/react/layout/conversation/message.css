@@ -1,6 +1,6 @@
 .message-card {
   position: relative;
-  padding: 5px;
+  padding: 7px;
   background: var(--bg-white-color);
   border-radius: 6px;
 }
@@ -40,9 +40,10 @@
 }
 .message-owner.name {
   display: block;
-  margin: 0 5px;
+  margin: 0;
   color: var(--blue-color);
   font-size: 17px;
+  overflow-wrap: break-word;
 }
 .message-card.right .message-owner.name {
   text-align: right;
@@ -50,19 +51,19 @@
 }
 .message.date {
   position: absolute;
-  top: 5px;
+  top: 7px;
   padding: 0;
   font-size: 12px;
 }
 .message-card.right .message.date {
-  left: 5px;
+  left: 7px;
 }
 .message-card.left .message.date {
-  right: 5px;
+  right: 7px;
 }
 .message.text {
   margin: 0;
-  padding: 5px;
+  padding: 7px 0;
   overflow-wrap: break-word;
   font-size: 18px;
 }
@@ -87,4 +88,38 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+/* =============== Tablet styles =============== */
+@media only screen and (max-width: 1170px) {
+  .message-card {
+    padding: 5px;
+  }
+  .message-card.left {
+    margin: 5px 10% 5px 30px;
+  }
+  .message-owner.avatar-inner {
+    width: 20px;
+    height: 20px;
+    left: -25px;
+  }
+  .message-owner.name {
+    font-size: 16px;
+  }
+  .message.date {
+    top: 5px;
+    font-size: 11px;
+  }
+  .message-card.right .message.date {
+    left: 5px;
+  }
+  .message-card.left .message.date {
+    right: 5px;
+  }
+  .message.text {
+    margin: 5px 0;
+    font-size: 15px;
+  }
+}
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
 }

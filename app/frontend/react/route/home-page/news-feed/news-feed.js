@@ -17,7 +17,7 @@ class NewsFeed extends React.Component {
 
   showHideUpdatePost({ detail } = e) {
     if (typeof detail === "number") return this.setState({ editPost: detail });
-    if (/update-post x-icon|update-post container/gm.test(detail)) this.setState({ editPost: -1 });
+    if (/update-post x-icon|update-post-container/gm.test(detail)) this.setState({ editPost: -1 });
   }
   addNewPost({ detail } = e) {
     const { posts } = this.state;
