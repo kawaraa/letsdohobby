@@ -55,15 +55,18 @@ async function onLogin({ username, psw } = form) {
     loginError.innerHTML = error.message;
   }
 }
-
-function showLoginForm() {
-  const form = document.querySelector(".intro.login-form");
-  if (form && form.offsetHeight > 0) form.style.height = "0px";
-  else if (form) {
-    form.style.height = "110px";
-    window.scrollTo({ top: 100, left: 100, behavior: "smooth" });
+window.addEventListener("click", (e) => {
+  const form = document.querySelector(".nav.login-form");
+  if (!form || !e.target.className) return;
+  if (e.target.className === "login-form-close") {
+    form.reset();
+    loginError.innerHTML = "";
+    form.style.top = "-" + form.offsetHeight + "px";
+  } else if (e.target.className === "nav btn login") {
+    form.style.top = "80px";
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
-}
+});
 
 let prevScroll = window.pageYOffset;
 window.onscroll = (_, currentScroll = window.pageYOffset) => {

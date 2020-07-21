@@ -1,6 +1,6 @@
 /* === Desktop styles === */
-.intro.login-form,
-.nav-btns {
+.nav-btns,
+.login-form-close {
   display: none;
 }
 /* === Navbar styles === */
@@ -13,6 +13,9 @@
   transition: top 0.5s ease;
 }
 .navbar.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 5px;
 }
 /* === Brand Logo styles === */
@@ -38,17 +41,11 @@
   color: #585757;
 }
 /* === Login Form styles === */
-.nav.login-form {
-  display: flex;
+.login-form {
   position: relative;
-  float: right;
+  display: flex;
   margin: 0;
-  padding: 7px 0 0 0;
-}
-.nav.login-form:after {
-  display: block;
-  content: "";
-  clear: both;
+  padding: 0;
 }
 .login-error {
   position: absolute;
@@ -57,8 +54,8 @@
   padding: 0;
   color: #ee4e4e;
 }
-.nav.login-form > input[name="username"],
-.nav.login-form > input[name="psw"] {
+.login-form > input[name="username"],
+.login-form > input[name="psw"] {
   display: inline-block;
   margin: 0 10px 0 0;
   padding: 3px 6px;
@@ -66,7 +63,7 @@
   font-size: 16px;
   border: none;
 }
-.nav.login-form > button[type="submit"] {
+.login-form > button[type="submit"] {
   font-size: 16px;
   border: none;
   border-radius: 5px;
@@ -196,8 +193,16 @@ label[for="birthday"] {
   font-size: 18px;
 }
 #signup-btn {
-  width: 90%;
-  margin: 20px auto;
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+  padding: 5px;
+  font-size: 25px;
+  text-align: center;
+  background: var(--green-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
 .outer-container.about {
@@ -286,9 +291,6 @@ label[for="birthday"] {
     font-size: 28px;
   }
   /* === Login Form styles === */
-  .nav.login-form {
-    padding: 5px 0 0 0;
-  }
   .nav.login-form > input[name="username"],
   .nav.login-form > input[name="psw"] {
     padding: 3px 5px;
@@ -347,7 +349,6 @@ label[for="birthday"] {
   #loading-screen-svg {
     width: 100px;
     height: 100px;
-    /* margin: 35vh auto; */
   }
   .outer-container {
     margin: 40px 0 0 0;
@@ -359,9 +360,55 @@ label[for="birthday"] {
   .navbar.container {
     padding: 6px;
   }
+  /* === Login Form styles === */
   .nav.login-form {
-    display: none;
+    position: fixed;
+    top: -200px;
+    right: 5px;
+    left: 5px;
+    padding: 0;
+    flex-flow: column nowrap;
+    transition: top 0.5s ease;
   }
+  .login-form-close {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 132px;
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    font-size: 20px;
+    font-family: "Lato", "Roboto", sans-serif, "Helvetica", "Helvetica Neue";
+    text-align: center;
+    background: var(--hover-white-color);
+    border-radius: 50%;
+  }
+  .nav.login-form > .login-error {
+    position: static;
+    margin: 0 0 30px 0;
+    padding: 0;
+  }
+  .nav.login-form > input[name="username"],
+  .nav.login-form > input[name="psw"] {
+    margin: 5px 0;
+    padding: 8px 6px;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    box-shadow: 0 0 5px 0 var(--font-color);
+    border-radius: 5px;
+  }
+  .nav.login-form > button[type="submit"] {
+    font-size: 18px;
+    border: none;
+    margin: 10px 0 0 0;
+    padding: 5px;
+    border-radius: 5px;
+    background: var(--blue-color);
+    color: var(--white-color);
+  }
+
   .nav-btns {
     display: flex;
     float: right;
@@ -412,40 +459,6 @@ label[for="birthday"] {
     margin: 20px 0;
   }
 
-  /* === Login Form styles === */
-  .intro.login-form {
-    overflow: hidden;
-    display: flex;
-    height: 0;
-    flex-flow: column nowrap;
-    margin: 0;
-    padding: 0;
-    transition: height 0.5s ease;
-  }
-
-  .intro.login-form > .login-error {
-    position: static;
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
-  .intro.login-form > input[name="username"],
-  .intro.login-form > input[name="psw"] {
-    margin: 5px 0;
-    padding: 3px 6px;
-    flex: 100%;
-    font-size: 16px;
-    border: none;
-  }
-  .intro.login-form > button[type="submit"] {
-    font-size: 16px;
-    border: none;
-    margin: 10px 0 0 0;
-    padding: 5px;
-    border-radius: 5px;
-    background: var(--blue-color);
-    color: var(--white-color);
-  }
   .intro.article {
     height: 75vh;
   }
@@ -498,16 +511,8 @@ label[for="birthday"] {
     font-size: 15px;
   }
   #signup-btn {
-    display: block;
-    width: 100%;
-    margin: 20px 0;
-    padding: 5px;
-    font-size: 25px;
-    text-align: center;
-    background: var(--green-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
+    width: 90%;
+    margin: 20px auto;
   }
 
   .welcoming {
