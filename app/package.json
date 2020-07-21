@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "npx nodemon app.js",
-    "build-client": "npx webpack --config webpack.config.js"
+    "dev": "npx nodemon app.js"
   },
   "repository": {
     "type": "git",
