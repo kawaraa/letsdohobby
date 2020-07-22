@@ -43,3 +43,15 @@
   border: none;
   cursor: pointer;
 }
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .avatar-wrapper {
+    width: 30px;
+    height: 30px;
+  }
+  .avatar-inner {
+    width: 30px;
+    height: 30px;
+  }
+}

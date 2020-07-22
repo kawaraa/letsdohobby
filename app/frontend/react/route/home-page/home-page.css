@@ -31,4 +31,7 @@
 }
 /* =============== Mobile styles =============== */
 @media only screen and (max-width: 800px) {
+  .create-post.button {
+    font-size: 4px;
+  }
 }

@@ -2,6 +2,8 @@
 .navbar.outer-container {
   position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   margin: 0;
   background: var(--white-color);
   z-index: 10;
@@ -75,6 +77,10 @@
   stroke-width: 25px;
   fill: none;
 }
+.nav-svg-layer.my-items,
+.nav-svg-layer.notification {
+  stroke-width: 22px;
+}
 
 /* === Avatar and Options drop list styles === */
 .navbar.options {
@@ -90,13 +96,40 @@
 
 /* =============== Mobile styles =============== */
 @media only screen and (max-width: 800px) {
-  .nav-icon.wrapper {
-    width: 40px;
-    height: 35px;
-    padding: 2px 3px;
-    border-radius: 18px;
+  .navbar.container {
+    padding: 0 5px;
+    /* align-items: center; */
   }
-  .create-post.button {
-    font-size: 12px;
+  .logo.wrapper {
+    line-height: 20px;
+  }
+  .logo.item {
+    font-size: 20px;
+  }
+  .navbar.status {
+    margin: 0 0 0 2px;
+    font-size: 10px;
+    line-height: 20px;
+  }
+  .nav-icon.wrapper,
+  .nav-icon.wrapper.home-link,
+  .nav-icon.wrapper.messenger,
+  .nav-icon.wrapper.notification {
+    width: 30px;
+    height: 30px;
+    padding: 4px 2px;
+    border-radius: 5px;
+  }
+  .nav-icon.wrapper.my-items-link {
+    padding: 6px 3px;
+  }
+  .notification-button,
+  .messenger-button {
+    width: 30px;
+    height: 30px;
+  }
+  .navbar.options {
+    width: 30px;
+    margin: 5px 0;
   }
 }
