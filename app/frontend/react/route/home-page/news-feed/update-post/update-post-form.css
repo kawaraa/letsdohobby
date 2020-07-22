@@ -93,20 +93,27 @@
   padding: 10px;
   font-size: 18px;
 }
-.update-post.selects > label[for="participants"] {
-  display: inline-block;
+.selects.row {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.selects.row > label {
   padding: 0;
   margin: 0 5px 0 0;
 }
-.update-post.selects > select[name="participants"] {
-  margin-right: 20px;
+.selects.row > select[name="participants"] {
   width: 55px;
-  border: none;
+  margin-right: 20px;
+  padding: 2px 4px;
+  font-size: 18px;
   background: var(--blue-color);
   color: var(--white-color);
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
 }
-/* .update-post.selects > label[for="date-time"] {} */
 .update-post.description {
   padding: 10px 15px;
   height: 250px;
@@ -136,4 +143,50 @@
 .update-post.submit.disabled {
   background: var(--hover-white-color);
   color: var(--black-color);
+}
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .update-post-container {
+    padding: 85px 5px 0 5px;
+  }
+  .update-post.form {
+    width: 100%;
+    padding: 0 0 10px 0;
+  }
+  .update-post.title {
+    padding: 10px;
+  }
+  .update-post.x-icon-wrapper {
+    top: 9px;
+    right: 9px;
+    width: 30px;
+    height: 30px;
+  }
+  .update-post.header {
+    padding: 0 10px;
+  }
+  .update-post.activity-owner-box {
+    margin: 15px 0 0 10px;
+  }
+  .update-post.created-at {
+    left: 67px;
+  }
+  .update-post.selects {
+    flex-flow: wrap;
+    margin: 0 10px;
+  }
+  .selects.row {
+    margin: 5px;
+  }
+  .selects.row > select[name="participants"] {
+    border-radius: 15px;
+  }
+
+  .update-post.submit {
+    margin: 0 auto;
+    width: 97%;
+    padding: 10px;
+    font-size: 18px;
+  }
 }

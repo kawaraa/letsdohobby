@@ -7,6 +7,7 @@ import DateAndTimeField from "../../create-post-form/date-and-time-field";
 import XIcon from "../../../../layout/icon/x-icon";
 import ArrowIcon from "../../../../layout/icon/arrow-icon";
 import LoadingScreen from "../../../../layout/icon/loading-screen";
+import CustomMessage from "../../../../layout/custom-message";
 import "./update-post-form.css";
 
 class UpdatePostForm extends React.Component {
@@ -15,11 +16,13 @@ class UpdatePostForm extends React.Component {
     this.config = config("updatePost");
     this.onChange = this.handleChange.bind(this);
     this.onSubmit = this.handleSubmit.bind(this);
-    this.state = { loading: true, error: "", post: {} };
+    this.close = this.closeErrorMessage.bind(this);
+    this.state = { loading: true, error: "", active: false };
   }
 
   handleChange({ target } = e) {
-    this.setState({ [target.name]: target.value });
+    const active = this.state.description.length > 30 ? true : false;
+    this.setState({ [target.name]: target.value, active });
   }
   async handleSubmit(e) {
     e.preventDefault();
@@ -38,6 +41,9 @@ class UpdatePostForm extends React.Component {
       this.setState({ loading: false, error: error.message });
     }
   }
+  closeErrorMessage() {
+    this.setState({ error: "" });
+  }
 
   getSelectOptionsForParticipants(selectedParticipants) {
     const option = [<option value="0">Open</option>];
@@ -53,16 +59,12 @@ class UpdatePostForm extends React.Component {
     return option;
   }
   componentDidMount() {
-    this.setState({ loading: false, post: this.props.post });
+    this.setState({ loading: false, ...this.props.post });
   }
 
   render() {
-    let { loading, error, post } = this.state,
-      isDisabled = "disabled",
-      active = true;
-    post.description && post.description.length > 30 ? (isDisabled = "") : (active = false);
-
-    if (loading) return <LoadingScreen />;
+    const { error, active, owner, activity, participants, description, startAt, createdAt } = this.state;
+    if (this.state.loading) return <LoadingScreen />;
 
     return (
       <div className="update-post-container">
@@ -72,35 +74,38 @@ class UpdatePostForm extends React.Component {
           </h3>
           <XIcon name="update-post" />
           <header className="update-post header no-line" title="Post Header owner info" tabindex="0">
-            <Avatar src={post.owner.avatarUrl} name="update-post" />
+            <Avatar src={owner.avatarUrl} name="update-post" />
 
             <div className="update-post activity-owner-box">
               <span className="update-post owner-name no-line" title="Owner name">
-                {post.owner.displayName}
+                {owner.displayName}
               </span>
               <ArrowIcon name="update-post" />
               <p className="update-post activity no-line" title="Activity">
-                {post.activity}
+                {activity}
               </p>
             </div>
-            <time className="update-post created-at">{CustomDate.toText(post.createdAt)}</time>
+            <time className="update-post created-at">{CustomDate.toText(createdAt)}</time>
           </header>
 
-          {error && <CustomMessage text={error} name="error" />}
+          {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
 
           <div className="update-post selects">
-            <label for="participants">Participants</label>
-            <select name="participants" required className="no-line">
-              {this.getSelectOptionsForParticipants(post.participants)}
-            </select>
-
-            <label for="date-time">Date</label>
-            <DateAndTimeField defaultDate={new Date(post.startAt)} />
+            <div className="selects row">
+              <label for="participants">Participants</label>
+              <select name="participants" required className="no-line">
+                {this.getSelectOptionsForParticipants(participants)}
+              </select>
+            </div>
+            <div className="selects row">
+              <label for="date-time">Date</label>
+              <DateAndTimeField defaultDate={new Date(startAt)} />
+            </div>
           </div>
 
           <div className="update-post description">
             <textarea
-              defaultValue={post.description}
+              defaultValue={description}
               name="description"
               minlength="30"
               maxlength="1500"
@@ -109,8 +114,12 @@ class UpdatePostForm extends React.Component {
             ></textarea>
           </div>
 
-          <button type="submit" className={"update-post submit " + isDisabled} disabled={active}>
-            Update
+          <button
+            type="submit"
+            className={"update-post submit " + (active ? "" : "disabled")}
+            disabled={!active}
+          >
+            Save
           </button>
         </form>
       </div>

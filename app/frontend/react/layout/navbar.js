@@ -17,7 +17,7 @@ class Navbar extends Component {
   componentDidMount() {
     window.addEventListener("click", ({ target } = e) => {
       const cssClass = target.classNambaseVal || target.className;
-      if (!/user avatar-icon/gim.test(cssClass)) return this.setState({ showList: false });
+      if (!/navbar avatar-icon/gim.test(cssClass)) return this.setState({ showList: false });
       this.setState({ showList: !this.state.showList });
     });
   }
@@ -50,7 +50,7 @@ class Navbar extends Component {
           </div>
 
           <div className="navbar options">
-            <Avatar src={window.user.avatarUrl} name="user" />
+            <Avatar src={window.user.avatarUrl} name="navbar" />
             {showList && <OptionsList />}
           </div>
         </nav>
