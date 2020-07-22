@@ -97,26 +97,30 @@
 /* =============== Mobile styles =============== */
 @media only screen and (max-width: 800px) {
   .navbar.container {
-    padding: 0 5px;
+    padding: 0 10px;
     /* align-items: center; */
   }
   .logo.wrapper {
-    line-height: 30px;
+    line-height: 47px;
   }
   .logo.item {
-    font-size: 20px;
+    font-size: 25px;
   }
   .navbar.status {
     margin: 0 0 0 2px;
-    font-size: 10px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 25px;
+  }
+  .navbar.icons {
+    justify-content: space-between;
+    margin: 0 15px 0 5px;
   }
   .nav-icon.wrapper,
   .nav-icon.wrapper.home-link,
   .nav-icon.wrapper.messenger,
   .nav-icon.wrapper.notification {
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
     padding: 4px 2px;
     border-radius: 5px;
   }
@@ -125,11 +129,11 @@
   }
   .notification-button,
   .messenger-button {
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
   }
   .navbar.options {
-    width: 30px;
-    margin: 5px 0;
+    width: 35px;
+    margin: 0;
   }
 }

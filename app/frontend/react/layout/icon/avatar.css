@@ -47,11 +47,12 @@
 /* =============== Mobile styles =============== */
 @media only screen and (max-width: 800px) {
   .avatar-wrapper {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+    margin: 8px 0;
   }
   .avatar-inner {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
   }
 }

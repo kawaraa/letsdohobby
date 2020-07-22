@@ -42,14 +42,27 @@
 }
 /* =============== Tablet styles =============== */
 @media only screen and (max-width: 1170px) {
-  .my-posts.wrapper,
-  .joined-posts.wrapper {
+  .my-items.header {
     width: 60%;
   }
-  .my-items.header {
+  .my-posts.wrapper,
+  .joined-posts.wrapper {
     width: 60%;
   }
 }
 /* =============== Mobile styles =============== */
 @media only screen and (max-width: 800px) {
+  .my-items.header {
+    width: 100%;
+  }
+  .header.btn {
+    flex: 5;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 15px;
+  }
+  .my-posts.wrapper,
+  .joined-posts.wrapper {
+    width: 100%;
+  }
 }

@@ -52,6 +52,7 @@
   top: 60px;
   left: 5px;
   padding: 0;
+  font-size: 18px;
   color: #ee4e4e;
 }
 .login-form > input[name="username"],
@@ -147,6 +148,7 @@
   display: none;
   margin: 5px;
   padding: 0;
+  font-size: 18px;
   color: #ee4e4e;
 }
 .signup-field {
@@ -354,18 +356,50 @@ label[for="birthday"] {
     margin: 40px 0 0 0;
   }
   .container {
-    padding: 20px 5px;
+    padding: 20px 10px;
   }
   /* === Navbar styles === */
   .navbar.container {
-    padding: 6px;
+    padding: 6px 10px;
+  }
+
+  .logo-link {
+    font-size: 22px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+  .nav-btns {
+    display: flex;
+    margin: 0;
+  }
+  .nav.btn {
+    flex: auto;
+    font-size: 22px;
+    margin: 0 10px;
+    text-decoration: none;
+    background: none;
+    color: var(--font-color);
+    border: none;
+    cursor: pointer;
+  }
+  .nav.btn.login {
+    padding: 0 4px;
+    margin: 0 0 0 5px;
+    background: var(--blue-color);
+    color: var(--white-color);
+    border-radius: 3px;
+    /* border: 0.5px solid var(--black-color); */
+  }
+  .nav.btn:hover {
+    color: var(--white-color);
   }
   /* === Login Form styles === */
   .nav.login-form {
     position: fixed;
     top: -200px;
-    right: 5px;
-    left: 5px;
+    right: 10px;
+    left: 10px;
     padding: 0;
     flex-flow: column nowrap;
     transition: top 0.5s ease;
@@ -374,11 +408,11 @@ label[for="birthday"] {
     display: block;
     position: absolute;
     right: 0;
-    bottom: 132px;
-    width: 30px;
-    height: 30px;
+    bottom: 150px;
+    width: 35px;
+    height: 35px;
     padding: 3px;
-    font-size: 20px;
+    font-size: 23px;
     font-family: "Lato", "Roboto", sans-serif, "Helvetica", "Helvetica Neue";
     text-align: center;
     background: var(--hover-white-color);
@@ -394,57 +428,19 @@ label[for="birthday"] {
     margin: 5px 0;
     padding: 8px 6px;
     width: 100%;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     box-shadow: 0 0 5px 0 var(--font-color);
     border-radius: 5px;
   }
   .nav.login-form > button[type="submit"] {
-    font-size: 18px;
+    font-size: 20px;
     border: none;
     margin: 10px 0 0 0;
-    padding: 5px;
+    padding: 8px;
     border-radius: 5px;
     background: var(--blue-color);
     color: var(--white-color);
-  }
-
-  .nav-btns {
-    display: flex;
-    float: right;
-    margin: 4px 0 0 0;
-  }
-  .nav-btns:after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-  .nav.btn {
-    flex: auto;
-    font-size: 18px;
-    text-decoration: none;
-    background: none;
-    color: var(--font-color);
-    border: none;
-    cursor: pointer;
-  }
-  .nav.btn.login {
-    padding: 0 4px;
-    margin: 0 0 0 5px;
-    font-size: 16px;
-    background: var(--blue-color);
-    color: var(--white-color);
-    border-radius: 3px;
-    /* border: 0.5px solid var(--black-color); */
-  }
-  .nav.btn:hover {
-    color: var(--white-color);
-  }
-  .logo-link {
-    font-size: 20px;
-  }
-  .logo {
-    font-size: 24px;
   }
 
   /* === Intro styles === */
@@ -455,23 +451,20 @@ label[for="birthday"] {
     display: block;
     margin-top: 15vh;
   }
+
   .intro.first-heading {
+    font-size: 30px;
     margin: 20px 0;
   }
-
   .intro.article {
-    height: 75vh;
-  }
-  .intro.first-heading {
-    font-size: 24px;
-    margin-top: 20px;
+    height: 80vh;
   }
   .intro.img-wrapper {
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
   }
   .intro.heading {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: normal;
   }
   .intro-learn-more {
@@ -480,12 +473,12 @@ label[for="birthday"] {
     font-size: 17px;
   }
   .intro.arrow-down-link {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     margin: 20px 0 0 0;
   }
   .signup-form {
-    padding: 15vh 0 0 0;
+    padding: 10vh 0 0 0;
     height: 100vh;
   }
   .signup-field {
@@ -493,25 +486,20 @@ label[for="birthday"] {
   }
   .signup-form-heading {
     margin: 0 5px 25px 5px;
-    font-size: 20px;
+    font-size: 25px;
   }
   .signup-input {
     margin: 10px 5px;
-    padding: 3px 6px;
-    font-size: 15px;
-  }
-  label[for="birthday"] {
-    font-size: 16px;
+    padding: 5px;
+    font-size: 18px;
   }
   .birthday-select {
-    font-size: 14px;
+    font-size: 18px;
   }
   .gender {
     margin: 20px 10px 10px 5px;
-    font-size: 15px;
   }
   #signup-btn {
-    width: 90%;
     margin: 20px auto;
   }
 
@@ -523,22 +511,22 @@ label[for="birthday"] {
     height: 40px;
   }
   .heading {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: normal;
   }
   .questions-list {
     padding: 0 0 0 25px;
-    font-size: 15px;
+    font-size: 17px;
   }
   .learn-more-conclusion {
-    font-size: 16px;
+    font-size: 18px;
   }
   .define-ldh {
-    font-size: 15px;
+    font-size: 17px;
   }
   .features-list {
     padding: 0 0 0 25px;
-    font-size: 15px;
+    font-size: 17px;
   }
 }
 

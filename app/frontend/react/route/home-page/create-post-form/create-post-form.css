@@ -61,12 +61,12 @@
 }
 .create-post.selects {
   display: flex;
+  justify-content: center;
   margin: 0;
   padding: 10px;
-  justify-content: center;
 }
 .create-post.selects > select[name="activity"],
-select[name="participants"] {
+.create-post.selects > select[name="participants"] {
   margin: 0 20px 0 0;
   padding: 2px 10px;
   width: 135px;
@@ -170,4 +170,86 @@ select[name="participants"] {
 .create-post.submit.disabled {
   background: var(--hover-white-color);
   color: var(--black-color);
+}
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .create-post-container {
+    padding: 85px 5px 0 5px;
+  }
+  .create-post.form {
+    width: 100%;
+    margin: 0;
+    padding: 0 0 10px 0;
+    border-radius: 10px;
+  }
+  .create-post.title {
+    padding: 10px;
+  }
+  .create-post.x-icon-wrapper {
+    top: 9px;
+    right: 9px;
+    width: 30px;
+    height: 30px;
+  }
+  .create-post.user-info {
+    padding: 0 10px;
+  }
+  .create-post.user-name {
+    top: 10px;
+    left: 65px;
+  }
+  .create-post.selects {
+    flex-flow: wrap;
+    padding: 10px;
+  }
+  .create-post.selects > select[name="activity"],
+  .create-post.selects > select[name="participants"] {
+    margin: 0 0 10px 0;
+    border-radius: 15px;
+  }
+  .create-post.selects > select[name="activity"] {
+    margin-right: 10px;
+  }
+
+  .create-post.media {
+    padding: 5px 10px;
+  }
+  .create-post.submit {
+    margin: 0 auto;
+    width: 97%;
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  .create-post.uploaded {
+    min-height: 100px;
+  }
+  .create-post.error {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    margin: 10px;
+    padding: 28px 5px 10px 5px;
+    font-size: 16px;
+    text-align: initial;
+    background: var(--error-big-color);
+    border-radius: 5px;
+  }
+  .create-post.error-x {
+    display: block;
+    position: absolute;
+    top: -3px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    padding: 1px 5px;
+    font-size: 15px;
+    text-align: center;
+    background: var(--font-light-color);
+    color: var(--white-color);
+    border-radius: 50%;
+    font-family: "Lato", "Roboto", sans-serif, "Helvetica", "Helvetica Neue";
+    cursor: pointer;
+  }
 }

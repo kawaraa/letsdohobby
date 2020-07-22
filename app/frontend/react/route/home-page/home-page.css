@@ -1,5 +1,6 @@
 .create-post.button-wrapper {
   display: flex;
+  align-items: center;
   width: 55%;
   margin: 0 auto 20px auto;
   padding: 10px 20px;
@@ -10,7 +11,7 @@
 .create-post.button {
   flex: 10;
   margin: 0 0 0 10px;
-  padding: 0 20px;
+  padding: 9px 20px;
   font-size: 18px;
   text-align: left;
   color: gray;
@@ -34,11 +35,11 @@
   .create-post.button-wrapper {
     width: 100%;
     margin: 0 0 20px 0;
-    padding: 5px 15px;
+    padding: 0 15px;
     border-radius: 8px;
   }
   .create-post.button {
-    font-size: 13px;
-    padding: 0 15px;
+    font-size: 14px;
+    padding: 8px 10px;
   }
 }

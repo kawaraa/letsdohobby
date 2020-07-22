@@ -33,3 +33,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .profile.edit-about {
+    padding: 0 10px;
+  }
+}

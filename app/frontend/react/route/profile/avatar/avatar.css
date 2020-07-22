@@ -65,3 +65,16 @@
   color: var(--font-color);
   box-shadow: 0 0 2px 0 var(--font-color) inset;
 }
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .profile.avatar.wrapper {
+    margin: 20px auto;
+    width: 190px;
+    height: 190px;
+  }
+  .avatar.btns {
+    visibility: visible;
+    opacity: 1;
+  }
+}

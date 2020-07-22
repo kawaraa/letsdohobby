@@ -110,3 +110,26 @@
 .activities.inputs > .save-btn {
   right: 75px;
 }
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .activities.filter {
+    bottom: 35px;
+  }
+  .activities.inputs {
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: space-between;
+  }
+  .activities.inputs > input[type="text"] {
+    flex: auto;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+  .activities.inputs > .save-btn,
+  .activities.inputs > .cancel-btn {
+    position: static;
+    border-radius: 5px;
+    margin: 0 0 0 5px;
+  }
+}

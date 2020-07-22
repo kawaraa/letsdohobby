@@ -16,6 +16,7 @@ class CreatePostForm extends React.Component {
     this.onChange = this.handleChange.bind(this);
     this.onSubmit = this.handleSubmit.bind(this);
     this.removeFile = this.handleRemoveFile.bind(this);
+    this.close = this.closeErrorMessage.bind(this);
     this.config = config("createPostForm");
     this.state = {
       loading: false,
@@ -66,6 +67,9 @@ class CreatePostForm extends React.Component {
     xhr.uploadForm(form, this.config.url);
     this.setState({ loading: true });
   }
+  closeErrorMessage() {
+    this.setState({ error: "" });
+  }
 
   getSelectOptionsForParticipants() {
     const option = [];
@@ -104,7 +108,7 @@ class CreatePostForm extends React.Component {
             </span>
           </div>
 
-          {error && <CustomMessage text={error} name="error" />}
+          {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
 
           <div className="create-post selects">
             <select name="activity" required className="no-line" title="Activity">

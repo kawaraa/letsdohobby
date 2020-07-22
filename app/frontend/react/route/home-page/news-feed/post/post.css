@@ -144,3 +144,25 @@
   fill: var(--font-light-color);
   stroke: var(--font-light-color);
 }
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .event.participants {
+    font-size: 18px;
+    text-align: left;
+  }
+  .event.date {
+    font-size: 20px;
+    text-align: right;
+  }
+  .post.header {
+    padding: 0 10px 0 10px;
+  }
+  .post.activity-owner {
+    margin: 8px 0 0 0;
+  }
+  .post.created-at {
+    top: 28px;
+    left: 56px;
+  }
+}

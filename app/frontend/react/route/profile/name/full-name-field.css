@@ -3,6 +3,7 @@
 .profile.full-name {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 0 auto 40px auto;
   padding: 10px;
   text-align: center;
@@ -32,4 +33,18 @@
   padding: 6px;
   background: var(--hover-white-color);
   border-radius: 50%;
+}
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .profile.full-name {
+    padding: 0 10px;
+  }
+  .full-name.title {
+    font-size: 30px;
+  }
+  .edit-icon-wrapper {
+    width: 30px;
+    height: 30px;
+  }
 }

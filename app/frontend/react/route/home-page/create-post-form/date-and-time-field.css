@@ -35,3 +35,20 @@
 .create-post.time-colon {
   line-height: 20px;
 }
+
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .create-post.date-time {
+    flex: 10;
+    justify-content: space-evenly;
+  }
+  .create-post.date,
+  .create-post.time {
+    padding: 0;
+  }
+  .create-post.date > select,
+  .create-post.time > select {
+    padding: 2px 4px;
+    border-radius: 15px;
+  }
+}
