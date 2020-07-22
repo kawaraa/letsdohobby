@@ -1,7 +1,7 @@
 .nav-options.list {
   position: absolute;
   top: 55px;
-  right: 0;
+  right: 25px;
   margin: 0;
   padding: 0;
   z-index: 10;
@@ -32,7 +32,7 @@
 }
 .user-info.email {
   color: var(--font-light-color);
-  font-size: 10;
+  font-size: 16px;
 }
 .nav-option.link {
   display: block;
@@ -42,4 +42,24 @@
   text-align: center;
   text-decoration: none;
   color: var(--font-color);
+}
+/* =============== Mobile styles =============== */
+@media only screen and (max-width: 800px) {
+  .nav-options.list {
+    top: 45px;
+    right: 15px;
+  }
+  .nav-options.item.user-info {
+    padding: 15px;
+  }
+  .user-info.name {
+    font-size: 16px;
+  }
+  .user-info.email {
+    font-size: 12px;
+  }
+  .nav-option.link {
+    padding: 10px 60px;
+    font-size: 16px;
+  }
 }

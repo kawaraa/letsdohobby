@@ -31,7 +31,14 @@
 }
 /* =============== Mobile styles =============== */
 @media only screen and (max-width: 800px) {
+  .create-post.button-wrapper {
+    width: 100%;
+    margin: 0 0 20px 0;
+    padding: 5px 15px;
+    border-radius: 8px;
+  }
   .create-post.button {
-    font-size: 4px;
+    font-size: 13px;
+    padding: 0 15px;
   }
 }

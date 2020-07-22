@@ -30,4 +30,8 @@
 }
 /* =============== Mobile styles =============== */
 @media only screen and (max-width: 800px) {
+  .news-feed.wrapper {
+    width: 100%;
+    margin: 0;
+  }
 }

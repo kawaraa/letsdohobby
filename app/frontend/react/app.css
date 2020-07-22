@@ -181,4 +181,12 @@ input[type="password"] {
     width: 100px;
     height: 100px;
   }
+  .outer-container {
+    margin: 50px 0 0 0;
+  }
+  .container {
+    margin: 0;
+    width: 100%;
+    padding: 0 5px;
+  }
 }
