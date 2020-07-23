@@ -52,6 +52,8 @@ CREATE TABLE `post` (
   PRIMARY KEY(id)
 );
 
+alter table `post` modify column `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+
 CREATE TABLE `request` (
   `receiver` VARCHAR(150),
   `sender` INT NOT NULL,
@@ -114,3 +116,10 @@ CREATE TABLE `deleted` (
   `content` TEXT NOT NULL,
   PRIMARY KEY(id)
 );
+
+-- This query show the utf-8 encoding for all databases.
+-- SELECT SCHEMA_NAME 'database', default_character_set_name 'charset', DEFAULT_COLLATION_NAME 'collation' FROM information_schema.SCHEMATA;
+
+-- This statement modify the utf-8 encoding to support Other languages for column description in post table.
+-- ALTER TABLE `post` MODIFY COLUMN `description` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+-- If the column type is VARCHAR, replace LONGTEXT with VARCHAR(250)

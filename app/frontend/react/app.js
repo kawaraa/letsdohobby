@@ -108,7 +108,7 @@ class App extends React.Component {
           <Route exact path="/" render={(props) => <HomePage {...props} geolocation={geolocation} />} />
           <Route exact path="/profile" render={(props) => <Profile {...props} />} />
           <Route exact path="/settings" render={(props) => <Settings {...props} />} />
-          <Route exact path="/posts/:id" render={(props) => <PostDetail {...props} />} />
+          {/* <Route exact path="/posts/:id" render={(props) => <PostDetail {...props} />} /> */}
           <Route exact path="/my-posts" render={(props) => <MyItems {...props} />} />
           {/* <Route exact path="/member/:id" render={(props) => <Member {...props} />} /> */}
         </Switch>
