@@ -9,10 +9,10 @@ class GCloudStorageProvider {
   }
 
   initialize(gCloud) {
-    // const { projectId, keyFileName, bucketName } = this.config;
-    // const cloud = new gCloud.Storage({ projectId, keyFilename: process.cwd() + keyFileName });
-    // // cloud.getBuckets().then(console.log).catch(console.log);
-    // this.storage = cloud.bucket(bucketName);
+    const { projectId, keyFileName, bucketName } = this.config;
+    const cloud = new gCloud.Storage({ projectId, keyFilename: process.cwd() + keyFileName });
+    // cloud.getBuckets().then(console.log).catch(console.log);
+    this.storage = cloud.bucket(bucketName);
   }
 }
 

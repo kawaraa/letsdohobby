@@ -12,10 +12,7 @@ class AvatarResolver {
     this.profileRepository = profileRepository;
     this.storageProvider = storageProvider;
     this.idGenerator = idGenerator;
-    this.config = {
-      domain: "https://storage.googleapis.com/letsdohobby/",
-      fileError: "Not supported file type",
-    };
+    this.config = config;
   }
 
   resolve() {
@@ -64,8 +61,8 @@ class AvatarResolver {
   }
   async handleAddingAvatar(userInfo, fields, files) {
     const dimensions = new Dimensions(fields);
-    // let filePath = userInfo.avatarUrl;
-    let filePath = process.cwd() + userInfo.avatarUrl.replace("http://localhost:8080", "");
+    let filePath = "";
+
     if (files.avatar && files.avatar.name) {
       const imageExt = /\.(jpg|png|jpeg|gif|bmp)$/i;
       const ext = path.extname(files.avatar.name.toLowerCase());
@@ -73,47 +70,49 @@ class AvatarResolver {
       filePath = files.avatar.path + ext;
       fs.renameSync(files.avatar.path, filePath);
     }
+
     const newName = `${this.idGenerator() + path.extname(filePath)}`;
     await this.setAvatarDimensions(filePath, newName, dimensions, fields.sameSize === "true");
-    // userInfo.avatarUrl = `${this.config.domain}${newName}`;
-    userInfo.avatarUrl = `http://localhost:8080/user/${newName}`;
+    await this.deleteFileOnGCloud(userInfo.avatarUrl);
+    userInfo.avatarUrl = `${this.config.domain}${newName}`;
     await this.profileRepository.updateAvatar(userInfo);
-    await this.deleteFileOnGCloud(filePath);
     return userInfo;
   }
 
   async setAvatarDimensions(filePath, newName, { width, height, x, y } = dimensions, sameSize, size = 350) {
-    if (sameSize) {
-      if (width === height) return;
+    if (sameSize && width !== height) {
       size = width > height ? height : width;
       if (width > height) x = (width - height) / 2;
       if (width < height) y = (height - width) / 2;
     }
 
     return new Promise((resolve, reject) => {
-      // const storage = this.storageProvider.storage.file(newName).createWriteStream({ resumable: false });
-      // storage.on("error", reject).on("finish", resolve);
-      // Jimp.read(filePath)
-      //   .then((img) => img.resize(width, height).crop(x, y, size, size))
-      //   .then((file) =>
-      //     file.getBuffer(file._originalMime, (error, buffer) => {
-      //       if (error) reject(error);
-      //       storage.end(buffer);
-      //     })
-      //   )
-      //   .catch(reject);
+      const storage = this.storageProvider.storage.file(newName).createWriteStream({ resumable: false });
+      storage.on("error", reject).on("finish", resolve);
+
       Jimp.read(filePath)
-        .then((img) =>
-          img.resize(width, height).crop(x, y, size, size).write(`${process.cwd()}/user/${newName}`)
+        .then((img) => img.resize(width, height).crop(x, y, size, size))
+        .then((file) =>
+          file.getBuffer(file._originalMime, (error, buffer) => {
+            if (error) reject(error);
+            storage.end(buffer);
+          })
         )
-        .then(resolve)
         .catch(reject);
+
+      // Jimp.read(filePath)
+      //   .then((img) =>
+      //     img.resize(width, height).crop(x, y, size, size).write(`${process.cwd()}/user/${newName}`)
+      //   )
+      //   .then(resolve)
+      //   .catch(reject);
       if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
     });
   }
   deleteFileOnGCloud(filePath) {
-    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-    // return this.storageProvider.storage.file(path.basename(filePath)).delete();
+    if (!filePath) return;
+    // if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+    return this.storageProvider.storage.file(path.basename(filePath)).delete();
   }
 }
 

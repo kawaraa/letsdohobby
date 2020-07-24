@@ -80,6 +80,12 @@ class PostRepository {
     return this.mySqlProvider.query(`INSERT INTO archive.reporter SET ?`, reporter);
   }
 
+  async getMediaUrls(id) {
+    let query = `SELECT mediaUrls FROM feeds.post WHERE id=?`;
+    const result = await this.mySqlProvider.query(query, [id]);
+    return result[0] ? Validator.stringToArray(result[0].mediaUrls) : [];
+  }
+
   async getById(userInfo, postId) {
     let query = `SELECT t1.id, t1.owner, t1.activity, t1.description, t1.participants, t1.mediaUrls, t1.createdAt, t1.startAt, t1.locationLat, t1.locationLng, t2.displayName, t2.avatarUrl, (SELECT COUNT(*) FROM feeds.request WHERE sender=?) AS requested, (SELECT COUNT(member) FROM feeds.chat WHERE postId=t1.id) AS members FROM feeds.post t1 JOIN user.profile t2 ON t1.owner = t2.owner WHERE t1.id=?`;
     const result = await this.mySqlProvider.query(query, [userInfo.id, postId]);

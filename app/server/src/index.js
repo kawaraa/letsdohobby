@@ -31,6 +31,7 @@ const AvatarResolver = require("./infrastructure/resolver/avatar_resolver");
 const NotificationHandler = require("./application/handler/notification-handler");
 const DeleteAccountHandler = require("./application/handler/delete-account-handler");
 const CreatPostHandler = require("./application/handler/create-post-handler");
+const DeletePostHandler = require("./application/handler/delete-post-handler");
 
 module.exports = (server, router, cookie, jwt) => {
   const firewall = new Firewall(cookie, jwt, config.firewall);
@@ -67,11 +68,19 @@ module.exports = (server, router, cookie, jwt) => {
     profileRepository,
     storageProvider,
     uuid,
-    config
+    config.createPostHandler
   );
   const notificationHandler = new NotificationHandler(socketResolver, notificationRepository, chatRepository);
   const deleteAccountHandler = new DeleteAccountHandler(mySqlProvider, uuid);
-  const creatPostHandler = new CreatPostHandler(formidable, postRepository, storageProvider, uuid);
+  const creatPostHandler = new CreatPostHandler(
+    formidable,
+    postRepository,
+    storageProvider,
+    uuid,
+    config.createPostHandler
+  );
+
+  const deletePostHandler = new DeletePostHandler(postRepository, storageProvider, config.createPostHandler);
 
   const userResolver = new UserResolver(
     router,
@@ -86,6 +95,7 @@ module.exports = (server, router, cookie, jwt) => {
     firewall,
     postRepository,
     creatPostHandler,
+    deletePostHandler,
     notificationHandler
   );
   const groupResolver = new GroupResolver(router, firewall, groupRepository, notificationHandler);

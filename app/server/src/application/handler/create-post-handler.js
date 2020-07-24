@@ -2,10 +2,9 @@ const path = require("path");
 const fs = require("fs");
 const CustomError = require("../../domain/model/custom-error");
 const CreatePostCommand = require("../../domain/command/create-post-command");
-const uploadDir = process.cwd() + "/user/";
 
 class CreatePostHandler {
-  constructor(formidable, postRepository, storageProvider, idGenerator) {
+  constructor(formidable, postRepository, storageProvider, idGenerator, config) {
     this.fileParser = formidable({ keepExtensions: false, multiples: false });
     this.postRepository = postRepository;
     this.storageProvider = storageProvider;
@@ -14,10 +13,7 @@ class CreatePostHandler {
     this.fileParser.maxFileSize = 10 * 1000 * 1000000;
     this.fileParser.maxFields = 10;
     this.onFile = this.handelFile.bind(this);
-    this.config = {
-      domain: "https://storage.googleapis.com/letsdohobby/",
-      fileError: "Not supported file type",
-    };
+    this.config = config;
     this.post = {};
     this.command = {};
     this.filesInProcess = 0;
@@ -79,27 +75,28 @@ class CreatePostHandler {
       if (!test1 && !test2 && !test3) throw CustomError(this.config.fileError);
 
       const fileName = `${this.idGenerator()}${path.extname(part.filename)}`;
-      await new Promise((resolve, reject) => {
-        const file = fs.createWriteStream(uploadDir + fileName);
-        part.on("data", (chunk) => {
-          this.fileParser.pause();
-          file.write(chunk);
-          this.fileParser.resume();
-        });
-        part.on("end", () => file.end());
-        file.on("error", reject).on("finish", resolve);
-        this.command.mediaUrls = `http://localhost:8080/user/${fileName},` + this.command.mediaUrls;
 
-        // const storage = this.storageProvider.storage.file(fileName).createWriteStream({ resumable: false });
+      await new Promise((resolve, reject) => {
+        // const file = fs.createWriteStream(uploadDir + fileName);
         // part.on("data", (chunk) => {
         //   this.fileParser.pause();
-        //   storage.write(chunk);
+        //   file.write(chunk);
         //   this.fileParser.resume();
         // });
-        // part.on("end", () => storage.end());
-        // storage.on("error", reject).on("finish", resolve);
+        // part.on("end", () => file.end());
+        // file.on("error", reject).on("finish", resolve);
+        // this.command.mediaUrls = `http://localhost:8080/user/${fileName},` + this.command.mediaUrls;
+
+        const storage = this.storageProvider.storage.file(fileName).createWriteStream({ resumable: false });
+        part.on("data", (chunk) => {
+          this.fileParser.pause();
+          storage.write(chunk);
+          this.fileParser.resume();
+        });
+        part.on("end", () => storage.end());
+        storage.on("error", reject).on("finish", resolve);
       });
-      // this.command.mediaUrls = `${this.config.domain}${fileName},` + this.command.mediaUrls;
+      this.command.mediaUrls = `${this.config.domain}${fileName},` + this.command.mediaUrls;
 
       this.filesInProcess -= 1;
       this.fileParser.emit("end");

@@ -1,13 +1,15 @@
 const CustomError = require("../../domain/model/custom-error");
 const UpdatePostCommand = require("../../domain/command/update-post-command");
+const DeletePostCommand = require("../../domain/command/delete-post-command");
 const SearchCriteria = require("../../domain/model/search-criteria");
 
 class PostResolver {
-  constructor(server, firewall, postRepository, createPostHandler, notificationHandler) {
+  constructor(server, firewall, postRepository, createPostHandler, deletePostHandler, notificationHandler) {
     this.server = server;
     this.firewall = firewall;
     this.postRepository = postRepository;
     this.createPostHandler = createPostHandler;
+    this.deletePostHandler = deletePostHandler;
     this.notificationHandler = notificationHandler;
   }
 
@@ -87,10 +89,11 @@ class PostResolver {
   }
   async deletePost(request, response) {
     try {
-      const post = { id: request.params.id, owner: request.user.id };
-      await this.postRepository.deletePost(post);
+      const command = new DeletePostCommand({ id: request.params.id, owner: request.user.id });
+      await this.deletePostHandler.handle(command);
       response.json({ success: true });
     } catch (error) {
+      console.log("Eroor: ", error);
       response.status(500).end(CustomError.toJson(error));
     }
   }

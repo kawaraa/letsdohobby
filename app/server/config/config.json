@@ -11,9 +11,9 @@
     "password": "root-psw"
   },
   "gCloud": {
-    "projectId": "letsdohobby",
-    "keyFileName": "/config/letsdohobby-a6727fcf512f.json",
-    "bucketName": "letsdohobby"
+    "projectId": "projects-121",
+    "keyFileName": "/server/config/google-bucket.json",
+    "bucketName": "letsdohobby-111"
   },
   "firewall": {
     "secretKey": "my-secret",
@@ -28,6 +28,10 @@
     "cookieOption": {
       "httpOnly": true
     }
+  },
+  "createPostHandler": {
+    "domain": "https://storage.googleapis.com/letsdohobby-111/",
+    "fileError": "Not supported file type"
   },
   "memberRepository": {},
   "hobbies": [
