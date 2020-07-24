@@ -148,7 +148,13 @@
 /* =============== Mobile styles =============== */
 @media screen and (max-width: 800px) {
   .update-post-container {
+    overflow: scroll;
     padding: 85px 5px 0 5px;
+  }
+  .update-post-inner {
+    margin: 0;
+    padding: 0;
+    height: 150%;
   }
   .update-post.form {
     width: 100%;

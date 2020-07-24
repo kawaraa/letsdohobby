@@ -68,60 +68,62 @@ class UpdatePostForm extends React.Component {
 
     return (
       <div className="update-post-container">
-        <form className="update-post form no-line" onSubmit={this.onSubmit} onChange={this.onChange}>
-          <h3 className="update-post title no-line" tabindex="0">
-            Update Post
-          </h3>
-          <XIcon name="update-post" />
-          <header className="update-post header no-line" title="Post Header owner info" tabindex="0">
-            <Avatar src={owner.avatarUrl} name="update-post" />
+        <div className="update-post-inner">
+          <form className="update-post form no-line" onSubmit={this.onSubmit} onChange={this.onChange}>
+            <h3 className="update-post title no-line" tabindex="0">
+              Update Post
+            </h3>
+            <XIcon name="update-post" />
+            <header className="update-post header no-line" title="Post Header owner info" tabindex="0">
+              <Avatar src={owner.avatarUrl} name="update-post" />
 
-            <div className="update-post activity-owner-box">
-              <span className="update-post owner-name no-line" title="Owner name">
-                {owner.displayName}
-              </span>
-              <ArrowIcon name="update-post" />
-              <p className="update-post activity no-line" title="Activity">
-                {activity}
-              </p>
+              <div className="update-post activity-owner-box">
+                <span className="update-post owner-name no-line" title="Owner name">
+                  {owner.displayName}
+                </span>
+                <ArrowIcon name="update-post" />
+                <p className="update-post activity no-line" title="Activity">
+                  {activity}
+                </p>
+              </div>
+              <time className="update-post created-at">{CustomDate.toText(createdAt)}</time>
+            </header>
+
+            {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
+
+            <div className="update-post selects">
+              <div className="selects row">
+                <label for="participants">Participants</label>
+                <select name="participants" required className="no-line">
+                  {this.getSelectOptionsForParticipants(participants)}
+                </select>
+              </div>
+              <div className="selects row">
+                <label for="date-time">Date</label>
+                <DateAndTimeField defaultDate={new Date(startAt)} />
+              </div>
             </div>
-            <time className="update-post created-at">{CustomDate.toText(createdAt)}</time>
-          </header>
 
-          {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
-
-          <div className="update-post selects">
-            <div className="selects row">
-              <label for="participants">Participants</label>
-              <select name="participants" required className="no-line">
-                {this.getSelectOptionsForParticipants(participants)}
-              </select>
+            <div className="update-post description">
+              <textarea
+                defaultValue={description}
+                name="description"
+                minlength="30"
+                maxlength="1500"
+                className="no-line"
+                required
+              ></textarea>
             </div>
-            <div className="selects row">
-              <label for="date-time">Date</label>
-              <DateAndTimeField defaultDate={new Date(startAt)} />
-            </div>
-          </div>
 
-          <div className="update-post description">
-            <textarea
-              defaultValue={description}
-              name="description"
-              minlength="30"
-              maxlength="1500"
-              className="no-line"
-              required
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className={"update-post submit " + (active ? "" : "disabled")}
-            disabled={!active}
-          >
-            Save
-          </button>
-        </form>
+            <button
+              type="submit"
+              className={"update-post submit " + (active ? "" : "disabled")}
+              disabled={!active}
+            >
+              Save
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

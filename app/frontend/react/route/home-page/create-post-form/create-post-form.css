@@ -175,7 +175,13 @@
 /* =============== Mobile styles =============== */
 @media screen and (max-width: 800px) {
   .create-post-container {
+    overflow: scroll;
     padding: 85px 5px 0 5px;
+  }
+  .create-post-inner {
+    margin: 0;
+    padding: 0;
+    height: 150%;
   }
   .create-post.form {
     width: 100%;

@@ -89,89 +89,91 @@ class CreatePostForm extends React.Component {
 
     return (
       <div className="create-post-container">
-        <form
-          onChange={this.onChange}
-          onSubmit={this.onSubmit}
-          className="create-post form no-line"
-          title="Create post"
-          tabindex="0"
-        >
-          <h3 className="create-post title no-line" tabindex="0">
-            Create Post
-          </h3>
-          <XIcon name="create-post" />
-
-          <div className="create-post user-info">
-            <Avatar name="create-post" />
-            <span className="create-post user-name no-line" title="User name" tabindex="0">
-              {window.user.displayName}
-            </span>
-          </div>
-
-          {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
-
-          <div className="create-post selects">
-            <select name="activity" required className="no-line" title="Activity">
-              <option value="activity" selected>
-                Activity
-              </option>
-              {this.config.activities.map((a) => (
-                <option value={a}>{a}</option>
-              ))}
-            </select>
-
-            <select name="participants" required className="no-line" title="Number of participants">
-              <option value="0" selected>
-                Participants
-              </option>
-              {this.getSelectOptionsForParticipants()}
-            </select>
-            <DateAndTimeField />
-          </div>
-
-          <div className="create-post inputs">
-            <div className="create-post description">
-              <textarea
-                name="description"
-                minlength="30"
-                maxlength="1500"
-                placeholder="Describe how your plan will look like"
-                required
-                className="create-post textarea no-line"
-                title="Description"
-              ></textarea>
-            </div>
-            {files[0] && (
-              <div className="create-post uploaded">
-                {files.map((file) => (
-                  <FilePreview file={file} close={this.removeFile} />
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="create-post media no-line" title="Media inputs" tabindex="0">
-            <p className="create-post media-title">Add to your post</p>
-            <label
-              for="photo"
-              className="create-post media-label no-line"
-              title="Upload photo/video"
-              tabindex="0"
-            >
-              <img src="/image/media-image-icon.png" className="create-post media-img" />
-              <input type="file" name="photoVideo" accept="image/*, video/*" id="photo" />
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            disabled={active}
-            className={"create-post submit no-line " + isDisabled}
+        <div className="create-post-inner">
+          <form
+            onChange={this.onChange}
+            onSubmit={this.onSubmit}
+            className="create-post form no-line"
             title="Create post"
+            tabindex="0"
           >
-            Post
-          </button>
-        </form>
+            <h3 className="create-post title no-line" tabindex="0">
+              Create Post
+            </h3>
+            <XIcon name="create-post" />
+
+            <div className="create-post user-info">
+              <Avatar name="create-post" />
+              <span className="create-post user-name no-line" title="User name" tabindex="0">
+                {window.user.displayName}
+              </span>
+            </div>
+
+            {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
+
+            <div className="create-post selects">
+              <select name="activity" required className="no-line" title="Activity">
+                <option value="activity" selected>
+                  Activity
+                </option>
+                {this.config.activities.map((a) => (
+                  <option value={a}>{a}</option>
+                ))}
+              </select>
+
+              <select name="participants" required className="no-line" title="Number of participants">
+                <option value="0" selected>
+                  Participants
+                </option>
+                {this.getSelectOptionsForParticipants()}
+              </select>
+              <DateAndTimeField />
+            </div>
+
+            <div className="create-post inputs">
+              <div className="create-post description">
+                <textarea
+                  name="description"
+                  minlength="30"
+                  maxlength="1500"
+                  placeholder="Describe how your plan will look like"
+                  required
+                  className="create-post textarea no-line"
+                  title="Description"
+                ></textarea>
+              </div>
+              {files[0] && (
+                <div className="create-post uploaded">
+                  {files.map((file) => (
+                    <FilePreview file={file} close={this.removeFile} />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="create-post media no-line" title="Media inputs" tabindex="0">
+              <p className="create-post media-title">Add to your post</p>
+              <label
+                for="photo"
+                className="create-post media-label no-line"
+                title="Upload photo/video"
+                tabindex="0"
+              >
+                <img src="/image/media-image-icon.png" className="create-post media-img" />
+                <input type="file" name="photoVideo" accept="image/*, video/*" id="photo" />
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              disabled={active}
+              className={"create-post submit no-line " + isDisabled}
+              title="Create post"
+            >
+              Post
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
