@@ -10,10 +10,10 @@ class GCloudStorageProvider {
 
   initialize(gCloud) {
     const { projectId, keyFileName, bucketName } = this.config;
-    let credentials = process.env.STORAGE_KEY || fs.readFileSync(process.cwd() + keyFileName, "utf8");
+    let credentials = process.env.GCLOUD_STORAGE_KEY || fs.readFileSync(process.cwd() + keyFileName, "utf8");
     if (typeof credentials === "string") credentials = JSON.parse(credentials);
     const cloud = new gCloud.Storage({ projectId, credentials });
-    cloud.getBuckets().then(console.log).catch(console.log);
+    // cloud.getBuckets().then(console.log).catch(console.log);
     this.storage = cloud.bucket(bucketName);
   }
 }
