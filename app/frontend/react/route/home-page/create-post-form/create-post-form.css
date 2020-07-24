@@ -173,7 +173,7 @@
 }
 
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .create-post-container {
     padding: 85px 5px 0 5px;
   }

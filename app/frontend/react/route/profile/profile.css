@@ -3,7 +3,7 @@
 }
 
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .container.profile {
     padding: 25px 0 100px 0;
   }

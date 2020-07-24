@@ -29,7 +29,7 @@
   list-style: none;
 }
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .notification.list {
     width: 290px;
     top: 62px;

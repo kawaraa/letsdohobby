@@ -56,10 +56,10 @@ class Post extends React.Component {
             <Link to={"/posts/" + post.id} className="post activity no-line" title="Activity">
               {post.activity}
             </Link>
+            <time className="post created-at no-line" title="Created date" tabindex="0">
+              {CustomDate.toText(post.createdAt)}
+            </time>
           </div>
-          <time className="post created-at no-line" title="Created date" tabindex="0">
-            {CustomDate.toText(post.createdAt)}
-          </time>
 
           {isOwner ? (
             <UserOptions post={post} i={i} delete={this.onDelete} onError={onError} />

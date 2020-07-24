@@ -67,7 +67,7 @@
 }
 
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .profile.avatar.wrapper {
     margin: 20px auto;
     width: 190px;

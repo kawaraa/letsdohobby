@@ -112,7 +112,7 @@
 }
 
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .activities.filter {
     bottom: 35px;
   }

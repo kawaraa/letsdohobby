@@ -45,7 +45,7 @@
 }
 
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .avatar-wrapper {
     width: 35px;
     height: 35px;

@@ -91,11 +91,11 @@
 }
 
 /* =============== Tablet styles =============== */
-/* @media only screen and (max-width: 1170px) {
+/* @media screen and (max-width: 1170px) {
 } */
 
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .navbar.container {
     padding: 0 10px;
     /* align-items: center; */

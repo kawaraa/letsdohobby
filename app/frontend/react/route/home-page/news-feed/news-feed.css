@@ -23,13 +23,13 @@
   padding: 0;
 }
 /* =============== Tablet styles =============== */
-@media only screen and (max-width: 1170px) {
+@media screen and (max-width: 1170px) {
   .news-feed.wrapper {
     width: 60%;
   }
 }
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .news-feed.wrapper {
     width: 100%;
     margin: 0;

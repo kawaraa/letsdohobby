@@ -44,7 +44,7 @@
   color: var(--font-color);
 }
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .nav-options.list {
     top: 60px;
     right: 15px;

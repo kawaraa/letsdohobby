@@ -90,7 +90,7 @@
   font-family: sans-serif;
 }
 /* =============== Tablet styles =============== */
-@media only screen and (max-width: 1170px) {
+@media screen and (max-width: 1170px) {
   .message-card {
     padding: 5px;
   }
@@ -121,5 +121,5 @@
   }
 }
 /* =============== Mobile styles =============== */
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
 }
