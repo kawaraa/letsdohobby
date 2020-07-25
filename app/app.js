@@ -18,9 +18,8 @@ const getApiRouter = require("./server/src/index.js");
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use("/api", apiRouter);
-
     app.use("/", express.static(__dirname + "/frontend/public"));
+    app.use("/api", apiRouter);
 
     app.get("*", (request, response) => {
       if (firewall.isAuthenticated(request)) {
