@@ -6,8 +6,8 @@ class Http {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", url, true);
       xhr.onload = () => {
-        if (xhr.status >= 200 && xhr.status < 300) return resolve(xhr.response || xhr.responseText);
-        return reject(new Error(xhr.response || xhr.responseText));
+        const response = Http.parseJSON(xhr.response || xhr.responseText);
+        return xhr.status >= 200 && xhr.status < 300 ? resolve(response) : reject(response);
       };
       xhr.onerror = (error) => reject(new Error("NetworkError: Please check your connection(!)"));
       xhr.send();
@@ -21,11 +21,26 @@ class Http {
       xhr.open(method, url, true);
       xhr.setRequestHeader("Content-Type", type);
       xhr.onload = () => {
-        if (xhr.status >= 200 && xhr.status < 300) return resolve(xhr.response);
-        return reject(new Error(xhr.response || xhr.responseText));
+        const response = Http.parseJSON(xhr.response || xhr.responseText);
+        return xhr.status >= 200 && xhr.status < 300 ? resolve(response) : reject(response);
       };
       xhr.onerror = (error) => reject(new Error("NetworkError: Please check your connection(!)"));
-      xhr.send(JSON.stringify(data));
+      xhr.send(Http.toJSON(data));
     });
+  }
+
+  static toJSON(data) {
+    try {
+      const json = JSON.stringify(data);
+      return json;
+    } catch (e) {}
+    return data;
+  }
+  static parseJSON(data) {
+    try {
+      const json = JSON.parse(data);
+      return json;
+    } catch (e) {}
+    return data;
   }
 }
