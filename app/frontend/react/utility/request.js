@@ -1,6 +1,7 @@
 class MultipartRequest extends XMLHttpRequest {
   constructor(responseType = "json") {
     super();
+    Object.setPrototypeOf(this, MultipartRequest.prototype);
     this.responseType = responseType;
     // Not: if "Content-Type" is "multipart/form-data", then the data you send must be binary.
   }
