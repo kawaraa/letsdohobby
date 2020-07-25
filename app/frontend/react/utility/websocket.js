@@ -1,7 +1,9 @@
 class Socket extends WebSocket {
   constructor(url) {
     super(url);
-    this.onmessage = this.dispatch.bind(this);
+    // this needed to fix safari bug in inheriting class from the WebSocket
+    Object.setPrototypeOf(this, Socket.prototype);
+    this.onmessage = (e) => this.dispatch(e);
     this._events = new Set();
   }
 
