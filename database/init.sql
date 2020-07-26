@@ -120,6 +120,7 @@ CREATE TABLE `deleted` (
 -- This query show the utf-8 encoding for all databases.
 -- SELECT SCHEMA_NAME 'database', default_character_set_name 'charset', DEFAULT_COLLATION_NAME 'collation' FROM information_schema.SCHEMATA;
 
--- This statement modify the utf-8 encoding to support Other languages for column description in post table.
+-- This statement modify the utf-8 encoding to support Other languages.
 -- ALTER TABLE `post` MODIFY COLUMN `description` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+-- ALTER TABLE `message` MODIFY COLUMN `content` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
 -- If the column type is VARCHAR, replace LONGTEXT with VARCHAR(250)
