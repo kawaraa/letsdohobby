@@ -28,6 +28,9 @@ class Firewall {
   }
 
   checkToken(cookie, ip) {
+    console.log("Cookie: ", cookie);
+    console.log("Cookie type: ", typeof cookie);
+    console.log("Cookie type: ", cookie || "aaaaa");
     const userToken = this.cookie.parse(cookie)["userToken"];
     const decodedUser = this.parseToken(userToken);
     // Check the client IP by adding, || decodedUser.ip !==ip
