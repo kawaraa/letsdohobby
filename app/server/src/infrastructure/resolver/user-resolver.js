@@ -58,7 +58,6 @@ class UserResolver {
   async deleteAccount(request, response) {
     try {
       request.body.username = request.user.username;
-      console.log(request.body);
       await this.deleteAccountHandler.handleDeleteAccount(new UpdateAccountCommand(request.body));
       response.clearCookie("userToken");
       response.json({ success: true });

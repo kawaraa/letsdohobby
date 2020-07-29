@@ -1,9 +1,51 @@
-/* === Desktop styles === */
+/* =============== Desktop styles =============== */
 .nav-btns,
 .login-form-close {
   display: none;
 }
-/* === Navbar styles === */
+
+@keyframes screen-message {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#screen-message {
+  display: none;
+  position: fixed;
+  z-index: 9;
+  top: 35vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  font-size: 20px;
+  background: var(--white-color);
+  color: var(--green-color);
+  border-radius: 5px;
+  box-shadow: 0 0 5px 0 var(--font-color);
+  animation-name: screen-message;
+  animation-duration: 1s;
+}
+.message.error-x {
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  padding: 1px 5px;
+  font-size: 15px;
+  text-align: center;
+  background: var(--font-light-color);
+  color: var(--white-color);
+  border-radius: 50%;
+  font-family: "Lato", "Roboto", sans-serif, "Helvetica", "Helvetica Neue";
+  cursor: pointer;
+}
+
+/* Navbar styles */
 .navbar.outer-container {
   position: fixed;
   top: 0;
@@ -18,7 +60,7 @@
   align-items: center;
   padding: 10px 5px;
 }
-/* === Brand Logo styles === */
+/* Brand Logo styles */
 .logo-link {
   text-decoration: none;
   margin: 0;
@@ -40,7 +82,7 @@
 .logo.h {
   color: #585757;
 }
-/* === Login Form styles === */
+/* Login Form styles */
 .login-form {
   position: relative;
   display: flex;
@@ -72,7 +114,7 @@
   color: var(--white-color);
 }
 
-/* === Intro styles === */
+/* Intro styles */
 .outer-container.intro {
   height: 97vh;
 }
@@ -358,7 +400,7 @@ label[for="birthday"] {
   .container {
     padding: 20px 10px;
   }
-  /* === Navbar styles === */
+  /* Navbar styles */
   .navbar.container {
     padding: 6px 10px;
   }
@@ -394,7 +436,7 @@ label[for="birthday"] {
   .nav.btn:hover {
     color: var(--white-color);
   }
-  /* === Login Form styles === */
+  /* Login Form styles */
   .nav.login-form {
     position: fixed;
     top: -200px;
@@ -443,7 +485,7 @@ label[for="birthday"] {
     color: var(--white-color);
   }
 
-  /* === Intro styles === */
+  /* Intro styles */
   .outer-container.intro {
     height: inherit;
   }

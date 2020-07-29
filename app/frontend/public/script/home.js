@@ -3,6 +3,7 @@
 const loadingScreen = document.getElementById("loading-screen-wrapper");
 const signupError = document.getElementById("signup-error");
 const loginError = document.querySelector(".login-error");
+const messageScreen = document.getElementById("screen-message");
 
 (() => {
   window.addEventListener("load", () => (loadingScreen.style.display = "none"));
@@ -35,10 +36,14 @@ async function onSignup(form) {
     username: username.value,
     psw: psw.value,
     birthday,
+    gender: form.gender.value,
   };
   try {
     await Http.post(window.location.origin + "/api/signup", userInfo);
-    location.reload();
+    form.reset();
+    signupError.style.display = "none";
+    messageScreen.style.display = "block";
+    //  location.reload()
   } catch (error) {
     signupError.style.display = "block";
     signupError.innerHTML = error.message;
@@ -67,6 +72,10 @@ window.addEventListener("click", (e) => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
 });
+
+function hideMe(element) {
+  element.style.display = "none";
+}
 
 let prevScroll = window.pageYOffset;
 window.onscroll = (_, currentScroll = window.pageYOffset) => {

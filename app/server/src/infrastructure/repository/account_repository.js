@@ -18,8 +18,14 @@ class AccountRepository {
     return new UserInfo(result[0]);
   }
 
+  async getAccountById(id) {
+    const query = `SELECT * FROM user.account WHERE id=?`;
+    const result = await this.mySqlProvider.query(query, id);
+    return result[0];
+  }
+
   async checkAccount(username, psw) {
-    let query = `SELECT t1.id, t1.username, t2.displayName, t2.avatarUrl, t3.currentLat, t3.currentLng, t3.locationRange, t3.unit, t3.language, t3.accountStatus FROM user.account t1 JOIN user.profile t2 ON t1.id = t2.owner JOIN user.settings t3 ON t1.id = t3.owner WHERE t1.username = ?`;
+    let query = `SELECT t1.id, t1.username, t1.confirmed, t2.displayName, t2.avatarUrl, t3.currentLat, t3.currentLng, t3.locationRange, t3.unit, t3.language, t3.accountStatus FROM user.account t1 JOIN user.profile t2 ON t1.id = t2.owner JOIN user.settings t3 ON t1.id = t3.owner WHERE t1.username = ?`;
 
     if (psw) query += " AND t1.hashedPsw = ?";
     const result = await this.mySqlProvider.query(query, psw ? [username, psw] : [username]);
@@ -45,6 +51,9 @@ class AccountRepository {
     const user = await this.checkAccount(username, psw);
     if (!user) throw new CustomError("Unauthorized operation");
     return user;
+  }
+  async confirmAccount(id) {
+    await this.mySqlProvider.query("UPDATE user.account SET confirmed=? WHERE id=?", [1, id]);
   }
 }
 

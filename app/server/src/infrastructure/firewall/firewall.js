@@ -28,12 +28,14 @@ class Firewall {
   }
 
   checkToken(cookie, ip) {
+    const userToken = this.cookie.parse(cookie)["userToken"];
+    const decodedUser = this.parseToken(userToken);
+    // Check the client IP by adding, || decodedUser.ip !==ip
+    return decodedUser;
+  }
+  parseToken(token) {
     try {
-      const userToken = this.cookie.parse(cookie)["userToken"];
-      const decodedUser = this.jwt.verify(userToken, this.config.secretKey).payload;
-      // Check the client IP by adding, || decodedUser.ip !==ip
-      if (!userToken || !decodedUser) return null;
-      return decodedUser;
+      return this.jwt.verify(token, this.config.secretKey).payload;
     } catch (error) {
       return null;
     }

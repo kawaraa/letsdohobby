@@ -33,6 +33,18 @@
     "domain": "https://storage.googleapis.com/letsdohobby-111/",
     "fileError": "Not supported file type"
   },
+  "nodemailer": {
+    "service": "gmail",
+    "auth": {
+      "user": "ahma6d@gmail.com",
+      "pass": "rsbaoszwbvlxtccg"
+    }
+  },
+  "twilio": {
+    "accountSID": "ACc76d93e695ec78502582a373d413fb2e",
+    "authToken": "4324587d8105d49d126f22c086a71e5e",
+    "phoneNumber": "+12058905443"
+  },
   "memberRepository": {},
   "hobbies": [
     "Gym",

@@ -5,12 +5,13 @@ const CreateProfileCommand = require("../../domain/command/create-profile-comman
 const CreateSettingsCommand = require("../../domain/command/create-settings-command");
 
 class AuthResolver {
-  constructor(server, firewall, accountRepository, profileRepository, settingsRepository, config) {
+  constructor(server, firewall, accountRepo, profileRepo, settingsRepo, mailHandler, config) {
     this.server = server;
     this.firewall = firewall;
-    this.accountRepository = accountRepository;
-    this.profileRepository = profileRepository;
-    this.settingsRepository = settingsRepository;
+    this.accountRepository = accountRepo;
+    this.profileRepository = profileRepo;
+    this.settingsRepository = settingsRepo;
+    this.mailHandler = mailHandler;
     this.config = config;
   }
 
@@ -23,38 +24,41 @@ class AuthResolver {
     try {
       const settings = new CreateSettingsCommand();
       const profile = new CreateProfileCommand({ ...request.body });
-      const account = await this.accountRepository.createAccount(
-        new CreateAccountCommand({ id: 0, ...request.body })
-      );
+      const createAccountCommand = new CreateAccountCommand({ id: 0, ...request.body });
+
+      const account = await this.accountRepository.createAccount(createAccountCommand);
       settings.owner = account.id;
       profile.owner = account.id;
       await this.profileRepository.createProfile(profile);
       await this.settingsRepository.createSettings(settings);
 
       const user = await this.accountRepository.checkAccount(account.username, account.hashedPsw);
-      const token = this.firewall.createToken(user);
+      const token = this.firewall.createToken({ id: user.id });
       if (!token) return response.status(500).end(CustomError.toJson());
-      response.cookie("userToken", token, this.config.cookieOption);
-      response.json(user);
+
+      const result = await this.mailHandler.sendConfirmationLink(user, token);
+      response.json({ success: true });
     } catch (error) {
-      console.error("MyError: ", error);
       response.clearCookie("userToken");
       response.status(400).end(CustomError.toJson(error));
     }
   }
   async onLogin(request, response) {
-    console.log("Login requested ");
     try {
       const account = new CreateAccountCommand(request.body);
       const user = await this.accountRepository.checkAccount(account.username, account.hashedPsw);
       if (!user) throw new CustomError("Incorrect combination of Username / Password");
-
-      const token = this.firewall.createToken(user);
+      if (user.confirmed < 1) {
+        const token = await this.firewall.createToken({ id: user.id });
+        const info = await this.mailHandler.sendConfirmationLink(user, token);
+        const username = Number.isNaN(Number.parseInt(user.username)) ? "Email" : "Phone Number";
+        throw new CustomError(`Please confirm your ${username} to login`);
+      }
+      const token = await this.firewall.createToken(user);
       if (!token) return response.status(500).end(CustomError.toJson());
       response.cookie("userToken", token, this.config.cookieOption);
       response.json(user);
     } catch (error) {
-      console.error("MyError: ", error);
       response.clearCookie("userToken");
       response.status(400).end(CustomError.toJson(error));
     }

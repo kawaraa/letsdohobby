@@ -3,14 +3,14 @@ const WebSocket = require("ws");
 const formidable = require("formidable");
 const redis = require("redis");
 const mysql = require("mysql");
+const nodemailer = require("nodemailer");
+const twilio = require("twilio");
 const uuid = require("uuid/v4");
 const { promisify } = require("util");
-const CustomError = require("./domain/model/custom-error");
 const MysqlDatabaseProvider = require("./infrastructure/provider/mysql_database_provider");
 const gCloud = require("@google-cloud/storage");
 // const RedisDatabaseProvider = require("./infrastructure/provider/redis_database_provider");
 const GCloudStorageProvider = require("./infrastructure/provider/gcloud-storage-provider");
-const Logger = require("./application/logger/logger");
 const AccountRepository = require("./infrastructure/repository/account_repository");
 const ProfileRepository = require("./infrastructure/repository/profile_repository");
 const SettingsRepository = require("./infrastructure/repository/settings-repository");
@@ -28,12 +28,19 @@ const PostResolver = require("./infrastructure/resolver/post-resolver");
 const GroupResolver = require("./infrastructure/resolver/group-resolver");
 const ChatResolver = require("./infrastructure/resolver/chat-resolver");
 const AvatarResolver = require("./infrastructure/resolver/avatar_resolver");
+const ConfirmationResolver = require("./infrastructure/resolver/confirmation-resolver");
 const NotificationHandler = require("./application/handler/notification-handler");
 const DeleteAccountHandler = require("./application/handler/delete-account-handler");
 const CreatPostHandler = require("./application/handler/create-post-handler");
 const DeletePostHandler = require("./application/handler/delete-post-handler");
+const MailHandler = require("./application/handler/mail-handler");
 
 module.exports = (server, router, cookie, jwt) => {
+  const mailConfig = {
+    mailer: process.env.NODEMAILER ? JSON.parse(process.env.NODEMAILER) : config.nodemailer,
+    twilio: process.env.TWILIO ? JSON.parse(process.env.TWILIO) : config.twilio,
+  };
+
   const firewall = new Firewall(cookie, jwt, config.firewall);
 
   // Providers
@@ -53,12 +60,15 @@ module.exports = (server, router, cookie, jwt) => {
 
   // Resolvers
   const socketResolver = new SocketResolver(server, WebSocket.Server, firewall);
+  const mailHandler = new MailHandler(router, nodemailer, twilio, mailConfig);
+  const confirmationResolver = new ConfirmationResolver(router, firewall, accountRepository, mailHandler);
   const authResolver = new AuthResolver(
     router,
     firewall,
     accountRepository,
     profileRepository,
     settingsRepository,
+    mailHandler,
     config.authResolver
   );
   const avatarResolver = new AvatarResolver(
@@ -116,6 +126,7 @@ module.exports = (server, router, cookie, jwt) => {
   groupResolver.resolve();
   chatResolver.resolve();
   notificationResolver.resolve();
+  confirmationResolver.resolve();
 
   return router;
 };
