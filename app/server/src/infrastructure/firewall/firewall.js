@@ -16,8 +16,6 @@ class Firewall {
     next();
   }
   isAuthenticated(request) {
-    console.log("request: ", request);
-    console.log("Headers: ", request.headers);
     if (!this.checkToken(request.headers.cookie, request.connection.remoteAddress)) return false;
     return true;
   }
@@ -30,10 +28,7 @@ class Firewall {
   }
 
   checkToken(cookie, ip) {
-    console.log("Cookie: ", cookie);
-    console.log("Cookie type: ", typeof cookie);
-    console.log("Cookie type: ", cookie || "aaaaa");
-    const userToken = this.cookie.parse(cookie)["userToken"];
+    const userToken = this.cookie.parse(cookie || "")["userToken"];
     const decodedUser = this.parseToken(userToken);
     // Check the client IP by adding, || decodedUser.ip !==ip
     return decodedUser;
