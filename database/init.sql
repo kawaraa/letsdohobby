@@ -6,6 +6,7 @@ CREATE TABLE `account` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(100) NOT NULL UNIQUE,
   `hashedPsw` VARCHAR(250),
+  `confirmed` TINYINT NOT NULL,
   PRIMARY KEY(id)
 );
 CREATE TABLE `profile` (
