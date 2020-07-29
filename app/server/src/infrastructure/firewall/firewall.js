@@ -16,6 +16,8 @@ class Firewall {
     next();
   }
   isAuthenticated(request) {
+    console.log("request: ", request);
+    console.log("Headers: ", request.headers);
     if (!this.checkToken(request.headers.cookie, request.connection.remoteAddress)) return false;
     return true;
   }
