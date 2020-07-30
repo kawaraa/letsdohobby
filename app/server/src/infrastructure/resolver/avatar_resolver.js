@@ -110,7 +110,7 @@ class AvatarResolver {
     });
   }
   deleteFileOnGCloud(filePath) {
-    if (!filePath) return;
+    if (!filePath || filePath.length < 15) return;
     // if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
     return this.storageProvider.storage.file(path.basename(filePath)).delete();
   }

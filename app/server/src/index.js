@@ -81,7 +81,12 @@ module.exports = (server, router, cookie, jwt) => {
     config.createPostHandler
   );
   const notificationHandler = new NotificationHandler(socketResolver, notificationRepository, chatRepository);
-  const deleteAccountHandler = new DeleteAccountHandler(mySqlProvider, uuid);
+  const deleteAccountHandler = new DeleteAccountHandler(
+    mySqlProvider,
+    storageProvider,
+    uuid,
+    config.createPostHandler
+  );
   const creatPostHandler = new CreatPostHandler(
     formidable,
     postRepository,

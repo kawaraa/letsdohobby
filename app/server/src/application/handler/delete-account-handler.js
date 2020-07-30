@@ -1,15 +1,43 @@
 const CustomError = require("../../domain/model/custom-error");
+const Validator = require("../../my-npm/validator");
 
 class DeleteAccountHandler {
-  constructor(mySqlProvider, idGenerator) {
+  constructor(mySqlProvider, storageProvider, idGenerator, config) {
     this.mySqlProvider = mySqlProvider;
+    this.storageProvider = storageProvider;
     this.idGenerator = idGenerator;
+    this.config = config;
   }
-  async handleDeleteAccount({ username, hashedPsw } = command) {
+  async handle({ username, hashedPsw } = command) {
     let query = `SELECT * FROM user.account WHERE username=? AND hashedPsw=?`;
     const result = await this.mySqlProvider.query(query, [username, hashedPsw]);
     if (!result[0]) throw new CustomError("Incorrect password");
+    await this.deleteMedia(result[0]);
     await this.deleteAccount(result[0]);
+  }
+
+  async deleteMedia(account) {
+    let query = `SELECT avatarUrl FROM user.profile WHERE owner=?`;
+    const avatarRes = await this.mySqlProvider.query(query, account.id);
+
+    query = `SELECT photoUrls FROM user.profile WHERE owner=?`;
+    const photoRes = await this.mySqlProvider.query(query, account.id);
+
+    query = `SELECT mediaUrls FROM feeds.post WHERE owner=?`;
+    const mediaRes = await this.mySqlProvider.query(query, account.id);
+
+    let allMedia = mediaRes.reduce((total, item) => total + item.mediaUrls, "");
+
+    if (avatarRes[0].avatarUrl) allMedia += avatarRes[0].avatarUrl + ",";
+    if (photoRes[0].photoUrls) allMedia += photoRes[0].photoUrls;
+
+    const allMediaUrls = Validator.stringToArray(allMedia);
+
+    return await Promise.all(
+      allMediaUrls.map(
+        async (url) => await this.storageProvider.storage.file(url.replace(this.config.domain, "")).delete()
+      )
+    );
   }
 
   async deleteAccount(account) {
