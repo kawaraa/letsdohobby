@@ -1,7 +1,7 @@
 const config = require("../config/config.json");
 const WebSocket = require("ws");
 const formidable = require("formidable");
-const redis = require("redis");
+// const redis = require("redis");
 const mysql = require("mysql");
 const nodemailer = require("nodemailer");
 const twilio = require("twilio");
@@ -18,6 +18,7 @@ const PostRepository = require("./infrastructure/repository/post_repository");
 const GroupRepository = require("./infrastructure/repository/group-repository");
 const ChatRepository = require("./infrastructure/repository/chat-repository");
 const NotificationRepository = require("./infrastructure/repository/notification-repository");
+const MemberRepository = require("./infrastructure/repository/member_repository");
 
 const Firewall = require("./infrastructure/firewall/firewall");
 const AuthResolver = require("./infrastructure/resolver/auth_resolver");
@@ -34,6 +35,7 @@ const DeleteAccountHandler = require("./application/handler/delete-account-handl
 const CreatPostHandler = require("./application/handler/create-post-handler");
 const DeletePostHandler = require("./application/handler/delete-post-handler");
 const MailHandler = require("./application/handler/mail-handler");
+const MemberResolver = require("./infrastructure/resolver/member-resolver");
 
 module.exports = (server, router, cookie, jwt) => {
   const mailConfig = {
@@ -57,10 +59,22 @@ module.exports = (server, router, cookie, jwt) => {
   const groupRepository = new GroupRepository(mySqlProvider, config.postRepository);
   const chatRepository = new ChatRepository(mySqlProvider, config.postRepository);
   const notificationRepository = new NotificationRepository(mySqlProvider);
+  const memberRepository = new MemberRepository(mySqlProvider);
+
+  // Handlers
+  const deletePostHandler = new DeletePostHandler(postRepository, storageProvider, config.createPostHandler);
+  const deleteAccountHandler = new DeleteAccountHandler(
+    mySqlProvider,
+    storageProvider,
+    uuid,
+    config.createPostHandler
+  );
+  const mailHandler = new MailHandler(nodemailer, twilio, mailConfig);
 
   // Resolvers
-  const socketResolver = new SocketResolver(server, WebSocket.Server, firewall);
-  const mailHandler = new MailHandler(router, nodemailer, twilio, mailConfig);
+  const socketResolver = new SocketResolver(server, WebSocket.Server, firewall, profileRepository);
+  const notificationHandler = new NotificationHandler(socketResolver, notificationRepository, chatRepository);
+
   const confirmationResolver = new ConfirmationResolver(router, firewall, accountRepository, mailHandler);
   const authResolver = new AuthResolver(
     router,
@@ -80,13 +94,7 @@ module.exports = (server, router, cookie, jwt) => {
     uuid,
     config.createPostHandler
   );
-  const notificationHandler = new NotificationHandler(socketResolver, notificationRepository, chatRepository);
-  const deleteAccountHandler = new DeleteAccountHandler(
-    mySqlProvider,
-    storageProvider,
-    uuid,
-    config.createPostHandler
-  );
+
   const creatPostHandler = new CreatPostHandler(
     formidable,
     postRepository,
@@ -94,9 +102,6 @@ module.exports = (server, router, cookie, jwt) => {
     uuid,
     config.createPostHandler
   );
-
-  const deletePostHandler = new DeletePostHandler(postRepository, storageProvider, config.createPostHandler);
-
   const userResolver = new UserResolver(
     router,
     firewall,
@@ -122,6 +127,7 @@ module.exports = (server, router, cookie, jwt) => {
     notificationHandler
   );
   const notificationResolver = new NotificationResolver(router, firewall, notificationRepository);
+  const memberResolver = new MemberResolver(router, firewall, memberRepository);
 
   socketResolver.resolve();
   authResolver.resolve();
@@ -132,6 +138,7 @@ module.exports = (server, router, cookie, jwt) => {
   chatResolver.resolve();
   notificationResolver.resolve();
   confirmationResolver.resolve();
+  memberResolver.resolve();
 
   return router;
 };

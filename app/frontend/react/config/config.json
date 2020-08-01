@@ -56,7 +56,7 @@
     "method": "PUT"
   },
   "memberProfile": {
-    "url": "/api/member/profile/",
+    "url": "/api/member/",
     "method": "GET"
   },
   "createPostForm": {

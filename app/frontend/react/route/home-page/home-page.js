@@ -33,7 +33,7 @@ class HomePage extends React.Component {
       <div className="outer-container">
         <main className="container no-line" title="News feed">
           <div className="create-post button-wrapper">
-            <Avatar src={window.user.avatarUrl} name="user" />
+            <Avatar src={window.user.avatarUrl} name="my" />
             <button className="create-post button no-line" title="Show create post form">
               Share your favorite activity with locals
             </button>

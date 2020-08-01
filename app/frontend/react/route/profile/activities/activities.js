@@ -1,6 +1,18 @@
 import React from "react";
 import "./activities.css";
 
+export const Activities = ({ changeMode, activities } = props) => {
+  return (
+    <div className="profile activities">
+      <h4 className="activities title">Activities</h4>
+      {activities[0] && <ActivityList activities={activities} />}
+      <button type="button" className="no-line" onClick={() => changeMode({ editField: "activity" })}>
+        Update
+      </button>
+    </div>
+  );
+};
+
 export const ActivityList = ({ activities, listener } = props) => {
   return (
     <ul className="activities list no-line" title="Referable activities list" tabindex="0">
@@ -21,18 +33,6 @@ export const ActivityList = ({ activities, listener } = props) => {
         </li>
       ))}
     </ul>
-  );
-};
-
-export const Activities = ({ changeMode, profile } = props) => {
-  return (
-    <div className="profile activities">
-      <h2 className="activities title">Activities</h2>
-      {profile.activities[0] && <ActivityList activities={profile.activities} />}
-      <button type="button" className="no-line" onClick={() => changeMode({ editField: "activity" })}>
-        Update
-      </button>
-    </div>
   );
 };
 

@@ -1,6 +1,5 @@
 class MailHandler {
-  constructor(router, mailer, twilio, config) {
-    this.router = router;
+  constructor(mailer, twilio, config) {
     this.mailTransporter = mailer.createTransport(config.mailer);
     this.smsTransporter = twilio(config.twilio.accountSID, config.twilio.authToken);
     this.phoneNumber = config.twilio.phoneNumber;

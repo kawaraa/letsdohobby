@@ -34,8 +34,7 @@ class PostRepository {
   }
   async getPostById(userInfo, postId) {
     const post = await this.getById(userInfo, postId);
-    let query = `SELECT owner, displayName, avatarUrl FROM user.profile WHERE owner IN(SELECT member FROM feeds.chat WHERE postId=?)`;
-
+    let query = `SELECT owner AS id, displayName, avatarUrl FROM user.profile WHERE owner IN(SELECT member FROM feeds.chat WHERE postId=?)`;
     const result = await this.mySqlProvider.query(query, postId);
     post.members = result[0] ? result : [];
     return post;

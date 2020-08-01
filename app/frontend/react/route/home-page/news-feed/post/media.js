@@ -2,6 +2,7 @@ import React from "react";
 import Request from "../../../../utility/request";
 import LoadingIcon from "../../../../layout/icon/loading-icon";
 import ExclamationMark from "../../../../layout/exclamation-mark";
+import "./media.css";
 /**
  * Todo
  * 1- Change the way the big file is loaded to be piped directly the element

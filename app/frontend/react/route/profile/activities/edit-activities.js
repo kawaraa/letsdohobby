@@ -3,6 +3,7 @@ import { config } from "../../../config/config";
 import Request from "../../../utility/request";
 import { ActivityList, FilteredActivities } from "./activities";
 import CustomMessage from "../../../layout/custom-message";
+import LoadingScreen from "../../../layout/icon/loading-screen";
 import "./activities.css";
 
 class EditActivities extends React.Component {
@@ -43,8 +44,7 @@ class EditActivities extends React.Component {
     }
   }
   componentDidMount() {
-    const acts = this.props.profile.activities;
-    this.setState({ activities: acts[0] ? acts : [] });
+    this.setState({ activities: this.props.activities[0] ? this.props.activities : [] });
   }
 
   render() {

@@ -9,11 +9,10 @@ class UpdateAccountCommand {
   set _username(value) {
     if (!value) throw new CustomError("username is required field");
     const isEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w[a-zA-Z]{2,5})+$/.test(value);
-    const isPhoneNumber = /^[+|0][\s/0-9]*$/.test(value);
+    const isPhoneNumber = !Number.isNaN(Number.parseInt(value));
+    // const isPhoneNumber = /^[+|0][\s/0-9]*$/.test(value);
     if (!isEmail && !isPhoneNumber) throw new CustomError("Invalid input username");
-    if (isEmail) value = value.toLowerCase();
-    if (isPhoneNumber) value = Number.parseInt(isPhoneNumber);
-    this.username = value;
+    this.username = value.toLowerCase();
   }
 }
 

@@ -1,0 +1,21 @@
+.media.box {
+  overflow: hidden;
+  max-height: 400px;
+  flex: 50%;
+}
+.media.image,
+.media.video {
+  width: 100%;
+}
+.media.box.loading-spinner-icon.svg {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+.media.box.exclamation-mark.wrapper {
+  width: 50px;
+  height: 50px;
+}
+.media.box.exclamation-mark.wrapper > .mark-btn {
+  font-size: 25px;
+}

@@ -37,6 +37,13 @@ class ProfileRepository {
     await this.mySqlProvider.query(query, [activities, owner]);
     return this.getProfile(owner);
   }
+  async updateStatus(id, status) {
+    try {
+      await this.mySqlProvider.query(`UPDATE user.profile SET status=? WHERE owner=?`, [status, id]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 module.exports = ProfileRepository;

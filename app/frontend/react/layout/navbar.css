@@ -136,4 +136,7 @@
     width: 35px;
     margin: 0;
   }
+  .navbar.avatar-wrapper {
+    margin: 8px 0;
+  }
 }

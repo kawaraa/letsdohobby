@@ -1,1 +1,10 @@
-
+.member.full-name {
+  text-align: center;
+}
+.profile.custom-field > .activities.list {
+  position: static;
+  margin: 20px 20px 20px 0;
+}
+.profile.activities.custom-field > .title {
+  margin: 0 0 20px 0;
+}

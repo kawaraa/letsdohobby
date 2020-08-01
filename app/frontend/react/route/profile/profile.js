@@ -38,7 +38,8 @@ class Profile extends React.Component {
     const { loading, error, profile, editField } = this.state;
     if (loading) return <LoadingScreen />;
     if (error) return <CustomMessage text={error} name="error" />;
-    const props = { profile, changeMode: this.changeMode };
+    const nameProps = { profile, changeMode: this.changeMode };
+    const actProps = { activities: profile.activities, changeMode: this.changeMode };
     const editAvatar = editField === "avatar";
     const editName = editField === "name";
     const editAbout = editField === "about";
@@ -47,18 +48,19 @@ class Profile extends React.Component {
       <div className="outer-container">
         <div className="profile container">
           {editAvatar ? <EditAvatar changeMode={this.changeMode} /> : <Avatar changeMode={this.changeMode} />}
-          {editName ? <EditFullName {...props} /> : <FullNameField changeMode={this.changeMode} />}
-          {editAbout ? <EditAbout {...props} /> : <AboutField {...props} />}
+          {editName ? <EditFullName {...nameProps} /> : <FullNameField changeMode={this.changeMode} />}
+          {editAbout ? <EditAbout {...nameProps} /> : <AboutField {...nameProps} />}
 
           <div className="profile custom-field">
-            <h2 className="title">Gender</h2>
+            <h4 className="title">Gender</h4>
             <p className="content">{profile.gender}</p>
           </div>
           <div className="profile custom-field">
-            <h2 className="title">Birthday</h2>
+            <h4 className="title">Birthday</h4>
             <p className="content">{profile.birthday || "Not specified"}</p>
           </div>
-          {editField === "activity" ? <EditActivities {...props} /> : <Activities {...props} />}
+
+          {editField === "activity" ? <EditActivities {...actProps} /> : <Activities {...actProps} />}
         </div>
       </div>
     );

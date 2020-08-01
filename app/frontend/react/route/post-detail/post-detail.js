@@ -6,9 +6,10 @@ import CustomDate from "../../utility/custom-date";
 import Avatar from "../../layout/icon/avatar";
 import ArrowIcon from "../../layout/icon/arrow-icon";
 import Media from "../home-page/news-feed/post/media";
-import MemberName from "./member-name";
+import MemberName from "./member-info";
 import LoadingScreen from "../../layout/icon/loading-screen";
 import CustomMessage from "../../layout/custom-message";
+import LocationSvg from "../../layout/icon/location-icon";
 import "./post-detail.css";
 
 class PostDetail extends React.Component {
@@ -22,64 +23,80 @@ class PostDetail extends React.Component {
     try {
       const postDetail = await Request.fetch(this.config.url + this.props.match.params.id);
       this.setState({ ...postDetail, loading: false });
+      console.log(postDetail);
     } catch (error) {
       this.setState({ message: error.message, loading: false });
     }
   }
   render() {
-    const { loading, error, id, owner, participants, startAt, mediaUrls, members } = this.state;
+    const { loading, error, id, owner, activity, participants, startAt, distance } = this.state;
     if (loading) return <LoadingScreen />;
     if (error) return <CustomMessage text={error} name="error" />;
 
     return (
       <div className="outer-container">
-        <main className="post-details container no-line" title="Post details" tabindex="0">
-          <header className="post-details header no-line" title="Post Header owner info" tabindex="0">
-            <Link
-              to={"/member/" + owner.id}
-              className="post-details avatar-link no-line"
-              title="Owner avatar"
-            >
-              <Avatar src={owner.avatarUrl} name="post-details" />
-            </Link>
+        <main className="container no-line" title="Post details" tabindex="0">
+          <div className="post-details wrapper">
+            <header className="post-details header no-line" title="Post Header owner info" tabindex="0">
+              <Link
+                to={"/member/" + owner.id}
+                className="post-details avatar-link no-line"
+                title="Owner avatar"
+              >
+                <Avatar src={owner.avatarUrl} name="post-details" />
+              </Link>
 
-            <div className="post-details activity-owner">
-              <Link to={"/member/" + owner.id} className="post-details owner-name no-line" title="Owner name">
-                {owner.displayName}
-              </Link>
-              <ArrowIcon name="post-details" />
-              <Link to={"/posts/" + id} className="post-details activity no-line" title="Activity">
-                {this.state.activity}
-              </Link>
+              <div className="post-details activity-owner">
+                <Link
+                  to={"/member/" + owner.id}
+                  className="post-details owner-name no-line"
+                  title="Owner name"
+                >
+                  {owner.displayName}
+                </Link>
+
+                <ArrowIcon name="post-details" />
+                <Link to={"/posts/" + id} className="post-details activity no-line" title="Activity">
+                  {activity}
+                </Link>
+
+                <time className="post-details created-at no-line" title="Creation date" tabindex="0">
+                  {CustomDate.toText(this.state.createdAt)}
+                </time>
+              </div>
+            </header>
+
+            <div className="post-details event">
+              <p className="post-details participants no-line" title="Number of participants" tabindex="0">
+                {participants} Participants
+              </p>
+              <time className="post-details date no-line" title="Event date" tabindex="0">
+                {CustomDate.toText(startAt)}
+              </time>
             </div>
 
-            <time className="post-details creation-date no-line" title="Creation date" tabindex="0">
-              {CustomDate.toText(this.state.createdAt)}
-            </time>
-          </header>
-          {this.state.error && <CustomMessage text={this.state.error} name="error" />}
+            <article className="post-details description no-line" title="Description" tabindex="0">
+              {this.state.description}
+            </article>
 
-          <div className="post-details event">
-            <p className="post-details participant no-line" title="Number of participants" tabindex="0">
-              <span className="post-details participants-counter">{participants}</span> Participants
-            </p>
-            <time className="post-details date no-line" title="Event date" tabindex="0">
-              {CustomDate.toText(startAt)}
-            </time>
+            <span className="post distance" title="Distance" tabindex="0">
+              <LocationSvg name="distance" />
+              {distance.length + " " + distance.unit}
+            </span>
           </div>
-          <article className="post-details description no-line" title="Description" tabindex="0">
-            {this.state.description}
-          </article>
-          {mediaUrls[0] && (
+
+          {this.state.mediaUrls[0] && (
             <aside className="post-details media no-line" title="Post media attachments" tabindex="0">
-              {mediaUrls.map((url) => (
+              {this.state.mediaUrls.map((url) => (
                 <Media url={url} />
               ))}
             </aside>
           )}
-          {members[0] && (
-            <ul className="post-details members" title="Distance" tabindex="0">
-              {members.map((member) => (
+
+          {this.state.members[0] && (
+            <ul className="post-details member-list" title="Members List" tabindex="0">
+              <h3 className="member-list header">{this.state.members.length} Members joined</h3>
+              {this.state.members.map((member) => (
                 <MemberName member={member} />
               ))}
             </ul>

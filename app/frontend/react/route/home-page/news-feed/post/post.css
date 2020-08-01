@@ -3,7 +3,7 @@
   position: relative;
   width: 100%;
   margin: 10px auto;
-  padding: 10px 0 40px 0;
+  padding: 10px 10px 40px 10px;
   background: var(--white-color);
   box-shadow: 0px 0px 3px 0px var(--font-color);
   border-radius: 5px;
@@ -14,10 +14,11 @@
   align-items: center;
   width: 100%;
   margin: 0;
-  padding: 0 10px 5px 10px;
+  padding: 0;
 }
 .post.avatar-link {
-  display: inline-block;
+  width: 40px;
+  height: 40px;
   margin-right: 10px;
   border-radius: 50%;
   text-decoration: none;
@@ -29,6 +30,8 @@
 }
 .post.owner-name {
   display: inline-block;
+  margin: 0;
+  padding: 0;
   font-size: 18px;
   font-weight: bold;
   color: var(--black-color);
@@ -39,6 +42,7 @@
   display: inline-block;
   width: 10px;
   margin: 0 8px;
+  padding: 0;
 }
 .post.arrow.svg-stroke {
   fill: var(--pink-color);
@@ -47,6 +51,8 @@
 }
 .post.activity {
   display: inline-block;
+  margin: 0;
+  padding: 0;
   font-size: 18px;
   font-weight: bold;
   color: var(--black-color);
@@ -65,7 +71,7 @@
 }
 .post.event {
   display: flex;
-  margin: 10px;
+  margin: 20px 0 10px 0;
   padding: 5px 0;
   border-top: 1px solid var(--hover-white-color);
   border-bottom: 1px solid var(--hover-white-color);
@@ -76,10 +82,7 @@
   font-size: 22px;
   text-align: center;
 }
-.participants.number {
-  font-size: 22px;
-  color: var(--black-color);
-}
+
 .event.date {
   flex: auto;
   font-size: 22px;
@@ -91,33 +94,14 @@
   margin: 0 10px;
   padding: 15px 0;
   font-size: 18px;
-  color: var(--black-color);
+  color: var(--font-color);
+  overflow-wrap: break-word;
 }
 .post.media {
   display: flex;
   flex-flow: wrap;
 }
-.media.box {
-  overflow: hidden;
-  max-height: 400px;
-  flex: 50%;
-}
-.media.image,
-.media.video {
-  width: 100%;
-}
-.media.box.loading-spinner-icon.svg {
-  width: 50px;
-  height: 50px;
-  margin: auto;
-}
-.media.box.exclamation-mark.wrapper {
-  width: 50px;
-  height: 50px;
-}
-.media.box.exclamation-mark.wrapper > .mark-btn {
-  font-size: 25px;
-}
+
 .post.members {
   position: absolute;
   bottom: 10px;
@@ -157,13 +141,10 @@
     font-size: 20px;
     text-align: right;
   }
-  .post.header {
-    padding: 0 10px 0 10px;
-  }
   .post.arrow.svg {
     margin: 0 5px;
   }
-  .post.event {
-    margin: 15px 10px 10px 10px;
+  .post.description {
+    margin: 0;
   }
 }

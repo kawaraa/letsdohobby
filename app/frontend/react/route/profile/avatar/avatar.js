@@ -23,7 +23,7 @@ export default class ProfileAvatar extends React.Component {
   render() {
     const { displayName, avatarUrl } = window.user;
     const { error } = this.state;
-    const initials = <span className={"avatar initials"}>{displayName[0]}</span>;
+    const initials = <span className="avatar initials">{displayName[0]}</span>;
     const avatar = <img src={avatarUrl} alt="Profile Avatar" className="avatar img" />;
 
     return (
