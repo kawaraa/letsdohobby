@@ -3,7 +3,7 @@ class CreateSettingsCommand {
     this.owner = 0;
     this.currentLat = 0;
     this.currentLng = 0;
-    this.locationRange = 5;
+    this.locationRange = 161;
     this.unit = "km";
     this.language = "en";
     this.accountStatus = 0;

@@ -7,8 +7,6 @@ import CustomMessage from "../../layout/custom-message";
 import "./settings.css";
 
 /*
-
-- Adjust range: the distance range per KM
 - Manage notifications: manage what notifications to receive
 - Manage what to see: manage what type of post or category to show based on the selected activities
 */
@@ -52,6 +50,7 @@ class Settings extends React.Component {
   render() {
     const { loading, error, locationRange, unit, language, didChange } = this.state;
     if (loading) return <LoadingScreen />;
+    const range = "km" !== unit && locationRange > 100 ? 100 : locationRange;
 
     return (
       <div className="outer-container">
@@ -87,9 +86,15 @@ class Settings extends React.Component {
             </div>
             <div className="distance box range">
               <h4 className="range title">
-                Maximum distance <strong title="Distance">{this.state.locationRange + unit}</strong>
+                Maximum distance <strong title="Distance">{range + unit}</strong>
               </h4>
-              <input type="range" name="locationRange" min="5" max="161" value={locationRange} />
+              <input
+                type="range"
+                name="locationRange"
+                min="5"
+                max={"km" === unit ? 161 : 100}
+                value={range}
+              />
             </div>
             {didChange && (
               <button type="submit" className="settings save-btn">

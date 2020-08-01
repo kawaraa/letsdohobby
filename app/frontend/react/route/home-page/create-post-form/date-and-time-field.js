@@ -35,7 +35,7 @@ class DateAndTimeField extends React.Component {
     const monthDays = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
     const defaultMonth = date.getMonth() + 1,
       defaultDay = date.getDate(),
-      defaultHour = date.getHours(),
+      defaultHour = date.getHours() + 1,
       defaultMinute = date.getMinutes();
     this.setState({ monthDays, defaultMonth, defaultDay, defaultHour, defaultMinute });
   }
