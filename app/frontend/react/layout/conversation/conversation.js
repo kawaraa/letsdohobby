@@ -76,7 +76,7 @@ class conversation extends Component {
     return (
       <div className="conversation wrapper">
         <div className="conversation header">
-          <Link className="conversation activity" to={"post/" + id}>
+          <Link className="conversation activity" to={"/posts/" + id}>
             {activity}
           </Link>
           <svg viewBox="0 0 400 400" className="conversation arrow-svg">
