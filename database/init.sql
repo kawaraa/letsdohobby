@@ -125,3 +125,5 @@ CREATE TABLE `deleted` (
 -- ALTER TABLE `post` MODIFY COLUMN `description` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
 -- ALTER TABLE `message` MODIFY COLUMN `content` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
 -- If the column type is VARCHAR, replace LONGTEXT with VARCHAR(250)
+-- Or
+-- ALTER DATABASE feeds CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;

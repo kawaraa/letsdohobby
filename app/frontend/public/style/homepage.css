@@ -253,7 +253,7 @@ label[for="birthday"] {
   margin: 0;
 }
 #learn-more {
-  margin: 0;
+  margin: 0 auto;
 }
 .welcoming {
   display: flex;
@@ -311,14 +311,47 @@ label[for="birthday"] {
   color: rgb(88, 86, 86);
 }
 .features-list {
-  margin: 0;
+  margin: 0 0 100px 0;
   padding: 0 0 0 40px;
   font-size: 18px;
 }
 .feature {
   margin: 10px 0;
 }
-
+.preview.box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.preview.box.left {
+  flex-flow: row-reverse;
+}
+.preview.info {
+  flex: auto;
+  margin: 0 35px 0 0;
+}
+.preview.box.left > .preview.info {
+  margin: 0 0 0 35px;
+}
+.preview.heading {
+  font-size: 35px;
+  text-align: center;
+}
+.preview.para {
+  font-size: 24px;
+  color: var(--font-color);
+  text-align: center;
+}
+.preview.img {
+  width: 350px;
+  height: 600px;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 5px 0 var(--font-color);
+  border-radius: 10px;
+}
 /* =============== Tablet styles =============== */
 @media screen and (max-width: 1170px) {
   .outer-container {
@@ -384,6 +417,17 @@ label[for="birthday"] {
   .features-list {
     padding: 0 0 0 35px;
     font-size: 17px;
+  }
+
+  .preview.heading {
+    font-size: 30px;
+  }
+  .preview.para {
+    font-size: 20px;
+  }
+  .preview.img {
+    width: 300px;
+    height: 550px;
   }
 }
 
@@ -569,6 +613,26 @@ label[for="birthday"] {
   .features-list {
     padding: 0 0 0 25px;
     font-size: 17px;
+  }
+
+  .preview.box,
+  .preview.box.left {
+    flex-flow: column;
+  }
+  .preview.box.left > .preview.info,
+  .preview.info {
+    margin: 0;
+  }
+  .preview.heading {
+    font-size: 30px;
+  }
+  .preview.para {
+    font-size: 20px;
+  }
+  .preview.img {
+    width: 280px;
+    height: 500px;
+    margin: 0 0 30px 0;
   }
 }
 
