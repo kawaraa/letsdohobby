@@ -32,7 +32,7 @@ class AvatarResolver {
         this.firewall.updateToken(userInfo, response);
         response.json(userInfo);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         response.status(500).end(CustomError.toJson(error));
       }
     });
@@ -55,7 +55,7 @@ class AvatarResolver {
       await this.profileRepository.updateAvatar(request.user);
       response.status(200).end(JSON.stringify(request.user));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       response.status(500).end(CustomError.toJson(error));
     }
   }
@@ -68,7 +68,7 @@ class AvatarResolver {
       const ext = path.extname(files.avatar.name.toLowerCase());
       if (!imageExt.test(ext)) throw new CustomError(this.config.fileError);
       filePath = files.avatar.path + ext;
-      fs.renameSync(files.avatar.path, filePath);
+      if (fs.existsSync(files.avatar.path)) fs.renameSync(files.avatar.path, filePath);
     }
 
     const newName = `${this.idGenerator() + path.extname(filePath)}`;
