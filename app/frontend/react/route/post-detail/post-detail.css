@@ -2,7 +2,7 @@
   overflow: hidden;
   position: relative;
   margin: 0;
-  padding: 20px 20px 40px 20px;
+  padding: 20px 0 40px 20px;
   background: var(--white-color);
   box-shadow: 0px 0px 3px 0px var(--font-color);
   border-radius: 5px;
@@ -12,8 +12,7 @@
   display: flex;
   flex-flow: nowrap;
   align-items: center;
-  width: 100%;
-  margin: 0;
+  margin: 0 20px;
   padding: 0;
 }
 .post-details.avatar-link {
@@ -74,7 +73,7 @@
 
 .post-details.event {
   display: flex;
-  margin: 20px 0 10px 0;
+  margin: 20px;
   padding: 5px 0;
   border-top: 1px solid var(--hover-white-color);
   border-bottom: 1px solid var(--hover-white-color);
@@ -93,7 +92,7 @@
 }
 
 .post-details.description {
-  margin: 0;
+  margin: 0 20px;
   padding: 15px 0;
   font-size: 20px;
   color: var(--font-color);
@@ -123,7 +122,7 @@
 /* =============== Mobile styles =============== */
 @media screen and (max-width: 800px) {
   .post-details.wrapper {
-    padding: 10px 10px 40px 10px;
+    padding: 10px 0 40px 0;
   }
   .post-details.avatar-link,
   .post-details.avatar-wrapper,

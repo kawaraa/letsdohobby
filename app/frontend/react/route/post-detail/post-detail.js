@@ -79,19 +79,19 @@ class PostDetail extends React.Component {
               {this.state.description}
             </article>
 
+            {this.state.mediaUrls[0] && (
+              <aside className="post-details media no-line" title="Post media attachments" tabindex="0">
+                {this.state.mediaUrls.map((url) => (
+                  <Media url={url} />
+                ))}
+              </aside>
+            )}
+
             <span className="post distance" title="Distance" tabindex="0">
               <LocationSvg name="distance" />
               {distance.length + " " + distance.unit}
             </span>
           </div>
-
-          {this.state.mediaUrls[0] && (
-            <aside className="post-details media no-line" title="Post media attachments" tabindex="0">
-              {this.state.mediaUrls.map((url) => (
-                <Media url={url} />
-              ))}
-            </aside>
-          )}
 
           {this.state.members[0] && (
             <ul className="post-details member-list" title="Members List" tabindex="0">
