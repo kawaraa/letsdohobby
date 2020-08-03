@@ -25,15 +25,12 @@ class AvatarResolver {
 
   addAvatar(request, response) {
     this.fileParser.parse(request, async (error, fields, files) => {
-      console.log("Start");
       try {
         if (response.finished) return;
         if (error) throw new Error(error);
         const userInfo = await this.handleAddingAvatar(request.user, fields, files);
-        if (userInfo) {
-          this.firewall.updateToken(userInfo, response);
-          response.json(userInfo);
-        }
+        this.firewall.updateToken(userInfo, response);
+        response.json(userInfo);
       } catch (error) {
         console.error(error);
         response.status(500).end(CustomError.toJson(error));
@@ -65,6 +62,7 @@ class AvatarResolver {
   async handleAddingAvatar(userInfo, fields, files) {
     const dimensions = new Dimensions(fields);
     let filePath = "";
+
     if (files.avatar && files.avatar.name) {
       const imageExt = /\.(jpg|png|jpeg|gif|bmp)$/i;
       const ext = path.extname(files.avatar.name.toLowerCase());
@@ -73,16 +71,12 @@ class AvatarResolver {
       if (fs.existsSync(files.avatar.path)) fs.renameSync(files.avatar.path, filePath);
     }
 
-    if (fs.existsSync(filePath)) {
-      const newName = `${this.idGenerator() + path.extname(filePath)}`;
-      await this.setAvatarDimensions(filePath, newName, dimensions, fields.sameSize === "true");
-      console.log("Set up the dimensions");
-      await this.deleteFileOnGCloud(userInfo.avatarUrl);
-      console.log("Deleted previous file");
-      userInfo.avatarUrl = `${this.config.domain}${newName}`;
-      await this.profileRepository.updateAvatar(userInfo);
-      return userInfo;
-    }
+    const newName = `${this.idGenerator() + path.extname(filePath)}`;
+    await this.setAvatarDimensions(filePath, newName, dimensions, fields.sameSize === "true");
+    await this.deleteFileOnGCloud(userInfo.avatarUrl);
+    userInfo.avatarUrl = `${this.config.domain}${newName}`;
+    await this.profileRepository.updateAvatar(userInfo);
+    return userInfo;
   }
 
   async setAvatarDimensions(filePath, newName, { width, height, x, y } = dimensions, sameSize, size = 350) {
@@ -98,19 +92,13 @@ class AvatarResolver {
 
       Jimp.read(filePath)
         .then((img) => img.resize(width, height).crop(x, y, size, size))
-        .then((file) => {
-          console.log("file", file);
+        .then((file) =>
           file.getBuffer(file._originalMime, (error, buffer) => {
-            console.log("Getting  buffer", buffer);
-            console.log("Getting error", error);
             if (error) reject(error);
             storage.end(buffer);
-          });
-        })
-        .catch((err) => {
-          console.log("Error: >>", err);
-          reject(err);
-        });
+          })
+        )
+        .catch(reject);
 
       // Jimp.read(filePath)
       //   .then((img) =>
