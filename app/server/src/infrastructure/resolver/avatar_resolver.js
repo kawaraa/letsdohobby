@@ -63,16 +63,14 @@ class AvatarResolver {
   async handleAddingAvatar(userInfo, fields, files) {
     const dimensions = new Dimensions(fields);
     let filePath = "";
-    console.log("Create dimensions");
     if (files.avatar && files.avatar.name) {
-      console.log("There is a file");
       const imageExt = /\.(jpg|png|jpeg|gif|bmp)$/i;
       const ext = path.extname(files.avatar.name.toLowerCase());
       if (!imageExt.test(ext)) throw new CustomError(this.config.fileError);
       filePath = files.avatar.path + ext;
       if (fs.existsSync(files.avatar.path)) fs.renameSync(files.avatar.path, filePath);
     }
-    console.log("Passed the validation");
+
     const newName = `${this.idGenerator() + path.extname(filePath)}`;
     await this.setAvatarDimensions(filePath, newName, dimensions, fields.sameSize === "true");
     console.log("Set up the dimensions");
@@ -91,12 +89,17 @@ class AvatarResolver {
     }
 
     return new Promise((resolve, reject) => {
+      console.log("createWriteStream");
       const storage = this.storageProvider.storage.file(newName).createWriteStream({ resumable: false });
+      console.log("storage", storage);
+
       storage.on("error", reject).on("finish", resolve);
 
       Jimp.read(filePath)
         .then((img) => img.resize(width, height).crop(x, y, size, size))
         .then((file) => {
+          console.log("file", file);
+
           file.getBuffer(file._originalMime, (error, buffer) => {
             console.log("Getting  buffer", buffer);
             console.log("Getting error", error);
@@ -104,7 +107,10 @@ class AvatarResolver {
             storage.end(buffer);
           });
         })
-        .catch(reject);
+        .catch((err) => {
+          console.log("Error: >>", err);
+          reject(err);
+        });
 
       // Jimp.read(filePath)
       //   .then((img) =>
