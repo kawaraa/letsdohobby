@@ -85,7 +85,7 @@ class CreatePostForm extends React.Component {
     const isActivity = this.config.activities.find((act) => selectedActivity.test(act));
     const isDisabled = this.state.description.length > 30 && isActivity ? " " : "disabled";
     const active = isDisabled.length > 5 ? true : false;
-    if (loading) return <LoadingScreen text={percentComplete + "%"} />;
+    if (loading) return <LoadingScreen text={percentComplete.toFixed() + "%"} />;
 
     return (
       <div className="create-post-container">

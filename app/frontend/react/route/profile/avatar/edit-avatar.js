@@ -66,7 +66,7 @@ class EditAvatar extends React.Component {
           {loading && (
             <div className="edit-avatar loader">
               <LoadingIcon name="edit-avatar" color="#7b95e0" />
-              <div className="edit-avatar progress">{percentComplete + "%"}</div>
+              <div className="edit-avatar progress">{percentComplete.toFixed() + "%"}</div>
             </div>
           )}
         </div>
