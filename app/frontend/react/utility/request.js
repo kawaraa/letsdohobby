@@ -64,7 +64,7 @@ class Request {
     this.MultipartRequest = MultipartRequest;
   }
   fetch(url, method = "GET", responseType = "json") {
-    // "json", "text", "document", "arraybuffer"
+    // "json", "text", "document", blob, "arraybuffer"
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.responseType = responseType.toLocaleLowerCase();

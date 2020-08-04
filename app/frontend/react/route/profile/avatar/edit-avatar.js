@@ -54,12 +54,11 @@ class EditAvatar extends React.Component {
 
   render() {
     const { loading, error, percentComplete, uploadedAvatarUrl } = this.state;
-    const avatarUrl = uploadedAvatarUrl || window.user.avatarUrl;
 
     return (
       <form className="edit-avatar container" onSubmit={this.onSubmit} onChange={this.onChange}>
         <div id="edit-avatar-wrapper">
-          <EditAvatarPosition setDimensions={this.onSetDimensions} src={avatarUrl} />
+          <EditAvatarPosition setDimensions={this.onSetDimensions} src={uploadedAvatarUrl} />
           <label for="upload-avatar" className="no-line" title="Upload new avatar" tabindex="0">
             Upload
             <input type="file" name="avatar" accept="image/*" id="upload-avatar" />
