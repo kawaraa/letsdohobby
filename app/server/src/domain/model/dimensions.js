@@ -7,6 +7,7 @@ class Dimensions {
     this._width = dimensions.width;
     this._y = dimensions.y;
     this._height = dimensions.height;
+    this.sameSize = dimensions.sameSize && dimensions.sameSize === "true";
   }
   set _x(value) {
     if (!Validator.isNumber(value)) throw new CustomError("Invalid input X in dimensions");

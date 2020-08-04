@@ -5,13 +5,10 @@ const CreatePostCommand = require("../../domain/command/create-post-command");
 
 class CreatePostHandler {
   constructor(formidable, postRepository, storageProvider, idGenerator, config) {
-    this.fileParser = formidable({ keepExtensions: false, multiples: false });
+    this.formidable = formidable;
     this.postRepository = postRepository;
     this.storageProvider = storageProvider;
     this.idGenerator = idGenerator;
-    this.fileParser.maxFieldsSize = 20 * 1000000; // MB = 1 million byte, GB = 1000 MB
-    this.fileParser.maxFileSize = 10 * 1000 * 1000000;
-    this.fileParser.maxFields = 10;
     this.onFile = this.handelFile.bind(this);
     this.config = config;
     this.post = {};
@@ -20,6 +17,10 @@ class CreatePostHandler {
   }
 
   handle(request, response) {
+    this.fileParser = this.formidable({ keepExtensions: false, multiples: false });
+    this.fileParser.maxFieldsSize = 20 * 1000000; // a MB = 1 million byte, a GB = 1000 MB
+    this.fileParser.maxFileSize = 10 * 1000 * 1000000;
+    this.fileParser.maxFields = 10;
     this.fileParser.onPart = this.onFile;
     this.fileParser.on("field", (name, value) => this.handleField(name, value, request.user));
 
@@ -27,6 +28,7 @@ class CreatePostHandler {
       this.fileParser.on("error", (error) => {
         this.post = {};
         this.command = {};
+        this.fileParser = null;
         if (!response.finished) reject(error);
       });
       this.fileParser.on("end", async () => {
@@ -35,6 +37,7 @@ class CreatePostHandler {
           const post = await this.postRepository.createPost(request.user, this.command);
           this.post = {};
           this.command = {};
+          this.fileParser = null;
           return resolve(post);
         } catch (error) {
           this.fileParser.emit("error", error);

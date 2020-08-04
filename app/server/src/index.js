@@ -32,6 +32,7 @@ const AvatarResolver = require("./infrastructure/resolver/avatar_resolver");
 const ConfirmationResolver = require("./infrastructure/resolver/confirmation-resolver");
 const NotificationHandler = require("./application/handler/notification-handler");
 const DeleteAccountHandler = require("./application/handler/delete-account-handler");
+const CreateAvatarHandler = require("./application/handler/create-avatar-handler");
 const CreatPostHandler = require("./application/handler/create-post-handler");
 const DeletePostHandler = require("./application/handler/delete-post-handler");
 const MailHandler = require("./application/handler/mail-handler");
@@ -62,6 +63,13 @@ module.exports = (server, router, cookie, jwt) => {
   const memberRepository = new MemberRepository(mySqlProvider);
 
   // Handlers
+  const createAvatarHandler = new CreateAvatarHandler(
+    formidable,
+    storageProvider,
+    uuid,
+    config.createPostHandler
+  );
+
   const deletePostHandler = new DeletePostHandler(postRepository, storageProvider, config.createPostHandler);
   const deleteAccountHandler = new DeleteAccountHandler(
     mySqlProvider,
@@ -85,15 +93,7 @@ module.exports = (server, router, cookie, jwt) => {
     mailHandler,
     config.authResolver
   );
-  const avatarResolver = new AvatarResolver(
-    router,
-    firewall,
-    formidable,
-    profileRepository,
-    storageProvider,
-    uuid,
-    config.createPostHandler
-  );
+  const avatarResolver = new AvatarResolver(router, firewall, profileRepository, createAvatarHandler);
 
   const creatPostHandler = new CreatPostHandler(
     formidable,
