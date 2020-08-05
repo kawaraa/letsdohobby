@@ -72,7 +72,7 @@ class Post extends React.Component {
 
         <div className="post event">
           <p className="event participants no-line" title="Number of participants" tabindex="0">
-            {post.participants} Participants
+            {Number.parseInt(post.participants) < 1 ? "Unlimited" : post.participants + " Participants"}
           </p>
           <time className="event date no-line" title="Event date" tabindex="0">
             {CustomDate.toText(post.startAt)}
