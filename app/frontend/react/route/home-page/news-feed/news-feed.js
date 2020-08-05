@@ -32,8 +32,7 @@ class NewsFeed extends React.Component {
   }
   removePost({ detail } = e) {
     const { posts } = this.state;
-    posts.splice(detail, 1);
-    this.setState({ posts });
+    this.setState({ posts: posts.filter((p) => p.id !== detail) });
   }
   async handleScrollEvent() {
     const { limit, offset } = this.state;

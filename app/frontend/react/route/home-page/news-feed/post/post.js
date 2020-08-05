@@ -28,7 +28,7 @@ class Post extends React.Component {
       this.setState({ loading: true });
       await Request.send(null, this.config.url + this.props.post.id, this.config.method);
       this.setState({ loading: false, error: "" });
-      window.dispatchEvent(new CustomEvent("REMOVE_POST", { detail: this.props.index }));
+      window.dispatchEvent(new CustomEvent("REMOVE_POST", { detail: this.props.post.id }));
     } catch (error) {
       this.setState({ error: error.message });
     }
