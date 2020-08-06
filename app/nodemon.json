@@ -6,13 +6,14 @@
   ],
   "verbose": true,
   "execMap": {
-    "js": "npm run build-react && npm start"
+    "js": "npm start"
   },
   "events": {
     "restart": "echo 'App restarted due to: '$FILENAME''"
   },
   "watch": [
     "frontend/react/*",
+    "frontend/ssr/*",
     "server/src/*",
     "./app.js"
   ],
