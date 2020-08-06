@@ -7,10 +7,10 @@ class Component extends BaseComponent {
     super(path);
   }
 
-  render(data) {
+  render(posts) {
     const page = this.readFile("index.html");
     const NAVBAR = navbar.render();
-    const POSTS = post.render([]);
+    const POSTS = post.render(posts);
 
     return this.injectComponent(page, { NAVBAR, POSTS });
   }

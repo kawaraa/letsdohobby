@@ -7,7 +7,9 @@ class Controller extends BaseController {
 
   render(posts) {
     const component = this.readFile("post.html");
-    return posts.map((post) => this.injectComponent(component, post));
+    const style = `<style>${this.readFile("style.css")}</style>`;
+    const allComponents = posts.map((post) => this.injectComponent(component, post));
+    return style + allComponents;
   }
 }
 

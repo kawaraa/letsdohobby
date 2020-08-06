@@ -1,0 +1,147 @@
+.post.card {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px 0 40px 0;
+  background: var(--white-color);
+  box-shadow: 0px 0px 3px 0px var(--font-color);
+  border-radius: 5px;
+}
+.post.header {
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0 10px;
+}
+.post.avatar-link {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  text-decoration: none;
+}
+.post.activity-owner {
+  position: relative;
+  flex: auto;
+  margin: 0;
+}
+.post.owner-name {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--black-color);
+  text-decoration: none;
+  overflow-wrap: break-word;
+}
+.post.arrow.svg {
+  display: inline-block;
+  width: 10px;
+  margin: 0 8px;
+  padding: 0;
+}
+.post.arrow.svg-stroke {
+  fill: var(--pink-color);
+  stroke: var(--black-color);
+  stroke-width: 5px;
+}
+.post.activity {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--black-color);
+  text-decoration: none;
+}
+.post.created-at {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  font-size: 12px;
+}
+.post.error {
+  margin: 5px;
+  text-align: center;
+  color: var(--error-color);
+}
+.post.event {
+  display: flex;
+  margin: 20px 10px 10px 10px;
+  padding: 5px 0;
+  border-top: 1px solid var(--hover-white-color);
+  border-bottom: 1px solid var(--hover-white-color);
+}
+.event.participants {
+  flex: auto;
+  margin: 0;
+  font-size: 22px;
+  text-align: center;
+}
+
+.event.date {
+  flex: auto;
+  font-size: 22px;
+  color: var(--black-color);
+  text-align: center;
+}
+
+.post.description {
+  margin: 0 10px;
+  padding: 15px 0;
+  font-size: 18px;
+  color: var(--font-color);
+  overflow-wrap: break-word;
+}
+.post.media {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.post.members {
+  position: absolute;
+  bottom: 10px;
+  left: 30px;
+  font-size: 18px;
+}
+.members.member.svg {
+  width: 17px;
+  margin: 0 5px;
+}
+.members.member.svg-stroke {
+  fill: var(--font-light-color);
+  stroke-width: 0;
+}
+.post.distance {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
+  font-size: 18px;
+}
+.distance.location.svg {
+  width: 14px;
+  margin: 0 5px;
+}
+.distance.location.svg-stroke {
+  fill: var(--font-light-color);
+  stroke: var(--font-light-color);
+}
+
+/* =============== Mobile styles =============== */
+@media screen and (max-width: 800px) {
+  .event.participants {
+    font-size: 18px;
+    text-align: left;
+  }
+  .event.date {
+    font-size: 20px;
+    text-align: right;
+  }
+  .post.arrow.svg {
+    margin: 0 5px;
+  }
+}

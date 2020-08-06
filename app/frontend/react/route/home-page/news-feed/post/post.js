@@ -88,7 +88,7 @@ class Post extends React.Component {
             ))}
           </aside>
         )}
-        <span className="post members" title="Numbers" tabindex="0">
+        <span className="post members" title="Members" tabindex="0">
           {post.members}
           <MemberSvg name="members" />
         </span>
