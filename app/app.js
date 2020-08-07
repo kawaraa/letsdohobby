@@ -41,7 +41,7 @@ const getWebRouter = require("./frontend/ssr/index.js");
 
     app.get("*", (request, response) => {
       if (firewall.isAuthenticated(request)) {
-        return response.sendFile(__dirname + "/frontend/public/template/index.html");
+        return response.sendFile(__dirname + "/frontend/public/template/react.html");
       }
       response.sendFile(__dirname + "/frontend/public/template/home.html");
     });

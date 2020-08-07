@@ -1,8 +1,9 @@
+(CONTENT, NAVBAR, FOOTER, SIDE_MENU)=>`
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/style/variables.css" />
     <link rel="shortcut icon" type="image/ico" href="/image/favicon/favicon.ico" />
@@ -13,19 +14,9 @@
       content="Lets Do Hobby is a free app for meeting like-minded local people who have the same interests as you" />
     <meta name="keywords" content="Hobby, Activity, Meeting people, Making new friends, lets do hobby" />
     <meta name="author" content="Ahmad Kawara" />
-    <title>news-feed</title>
-    <style>
-    </style>
+    <title>LetsDoHobby</title>
   </head>
 
-  <body> (NAVBAR) <div className="outer-container">
-      <main className="container no-line" title="News feed">
-        <section className="news-feed wrapper" title="News feeds" tabindex="0">(POSTS)</section>
-      </main>
-    </div>
-    <script>
-      console.log("Welcome from homepage script");
-    </script>
-  </body>
+  <body> ${NAVBAR || ""} ${SIDE_MENU || ""} ${CONTENT || ""} ${FOOTER || ""}</body>
 
-</html>
+</html>`
