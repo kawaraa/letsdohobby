@@ -45,12 +45,6 @@
   padding: 10px 15px;
 }
 
-.create-post.avatar-wrapper,
-.create-post.avatar-inner {
-  width: 45px;
-  height: 45px;
-}
-
 .create-post.user-name {
   position: absolute;
   top: 20px;

@@ -1,74 +1,113 @@
-(user)=> `<div class="navbar outer-container">
-  <nav class="navbar container no-line" title="navigation bar" tabindex="0">
-    <style>
-      /* Navbar styles */
-      .navbar.outer-container {
-        position: fixed;
-        top: 0;
-        margin: 0;
-        background: var(--pink-color);
-        z-index: 10;
-        transition: top 0.5s ease;
-      }
+(user)=> ` <style>
+  .navbar.outer-container {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    background: var(--pink-color);
+    z-index: 10;
+    transition: top 0.5s ease;
+  }
 
-      .navbar.container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 5px;
-      }
+  .navbar.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+  }
 
-      /* Brand Logo styles */
-      .logo-link {
-        text-decoration: none;
-        margin: 0;
-        padding: 0;
-        font-size: 30px;
-        font-weight: bold;
-        color: white;
-      }
+  /* Brand Logo styles */
+  .logo-link {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+  }
 
-      .logo {
-        font-size: 34px;
-        font-weight: bolder;
-      }
+  .logo {
+    font-size: 34px;
+    font-weight: bolder;
+  }
 
-      .logo.l {
-        color: #6aa84f;
-      }
+  .logo.l {
+    color: #6aa84f;
+  }
 
-      .logo.d {
-        color: #7b95e0;
-      }
+  .logo.d {
+    color: #7b95e0;
+  }
 
-      .logo.h {
-        color: #585757;
-      }
+  .logo.h {
+    color: #585757;
+  }
 
-      .nav-btns {
-        display: flex;
-        margin: 0;
-      }
+  .nav-btns {
+    display: flex;
+    margin: 0;
+  }
 
-      .nav.btn {
-        flex: auto;
-        font-size: 22px;
-        margin: 0 10px;
-        text-decoration: none;
-        background: none;
-        color: var(--font-color);
-        border: none;
-        cursor: pointer;
-      }
+  .nav.btn {
+    flex: auto;
+    font-size: 22px;
+    margin: 0 10px;
+    text-decoration: none;
+    background: none;
+    color: var(--font-color);
+    border: none;
+    cursor: pointer;
+  }
 
-      .nav.btn:hover {
-        color: var(--white-color);
-      }
-    </style> ${!user? ` <a href="/" class="logo-link no-line">
+  .nav.btn:hover {
+    color: var(--white-color);
+  }
+
+  /* =============== Tablet styles =============== */
+  @media screen and (max-width: 1170px) {
+    .outer-container {
+      margin: 50px 0 0 0;
+    }
+
+    .navbar.container {
+      padding: 8px 5px;
+    }
+
+    .logo-link {
+      font-size: 24px;
+    }
+
+    .logo {
+      font-size: 28px;
+    }
+  }
+
+  /* =============== Mobile styles =============== */
+  @media screen and (max-width: 800px) {
+    .outer-container {
+      margin: 40px 0 0 0;
+    }
+
+    .navbar.container {
+      padding: 6px 10px;
+    }
+
+    .logo-link {
+      font-size: 22px;
+    }
+
+    .logo {
+      font-size: 24px;
+    }
+  }
+</style>
+<div class="navbar outer-container"> ${!user? ` <nav class="navbar container no-line" title="navigation bar"
+    tabindex="0"> <a href="/" class="logo-link no-line">
       <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
     <div class="nav-btns">
       <a href="/" class="nav btn">Join</a><a href="/" class="nav btn">Login</a>
-    </div> `:` <a class="logo wrapper no-line" href="/"><span class="logo item l">L</span><span
+    </div>
+  </nav>`:`<nav class="navbar container no-line" title="navigation bar" tabindex="0"> <a
+      class="logo wrapper no-line" href="/"><span class="logo item l">L</span><span
         class="logo item d">D</span><span class="logo item h">H</span></a>
     <div class="navbar status online" title="Connection status" tabindex="0">Online</div>
     <div class="navbar icons"><a class="nav-icon wrapper home-link no-line" href="/"><svg
@@ -140,6 +179,5 @@
               class="avatar svg stroke"></path>
           </svg></div><button type="button" title="navbar avatar" class="navbar avatar-icon no-line"></button>
       </div>
-    </div> `}
-  </nav>
-</div>`
+    </div>
+  </nav> `} </div>`

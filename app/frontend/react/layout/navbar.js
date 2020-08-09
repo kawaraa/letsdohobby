@@ -3,7 +3,6 @@ import { Link, NavLink, withRouter } from "react-router-dom";
 import OptionsList from "./options-list";
 import Messenger from "./messenger/messenger";
 import Notification from "./notification/notification";
-import Avatar from "./icon/avatar";
 import HomeIcon from "./home-icon";
 import MyItemsIcon from "./my-items-icon";
 import "./navbar.css";
@@ -16,7 +15,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     window.addEventListener("click", ({ target } = e) => {
-      if (!/navbar avatar-icon/gim.test(target.className)) return this.setState({ showList: false });
+      if (!/navbar avatar/gim.test(target.className)) return this.setState({ showList: false });
       this.setState({ showList: !this.state.showList });
     });
   }
@@ -49,7 +48,13 @@ class Navbar extends Component {
           </div>
 
           <div className="navbar options">
-            <Avatar src={window.user.avatarUrl} name="navbar" />
+            <div class="navbar avatar link no-line" title="My avatar">
+              <img
+                src={window.user.avatarUrl || "/image/avatar.svg"}
+                alt="My Avatar and Option button"
+                class="navbar avatar img"
+              />
+            </div>
             {showList && <OptionsList />}
           </div>
         </nav>

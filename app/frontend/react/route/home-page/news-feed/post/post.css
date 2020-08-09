@@ -27,9 +27,10 @@
   position: relative;
   flex: auto;
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 .post.owner-name {
-  display: inline-block;
   margin: 0;
   padding: 0;
   font-size: 18px;
@@ -38,19 +39,13 @@
   text-decoration: none;
   overflow-wrap: break-word;
 }
-.post.arrow.svg {
-  display: inline-block;
+.triangle-right-arrow {
   width: 10px;
-  margin: 0 8px;
+  margin: 0 5px;
   padding: 0;
 }
-.post.arrow.svg-stroke {
-  fill: var(--pink-color);
-  stroke: var(--black-color);
-  stroke-width: 5px;
-}
+
 .post.activity {
-  display: inline-block;
   margin: 0;
   padding: 0;
   font-size: 18px;
@@ -107,28 +102,25 @@
   bottom: 10px;
   left: 30px;
   font-size: 18px;
+  padding: 0;
 }
-.members.member.svg {
-  width: 17px;
+.members-img {
+  width: 20px;
+  height: 20px;
   margin: 0 5px;
 }
-.members.member.svg-stroke {
-  fill: var(--font-light-color);
-  stroke-width: 0;
-}
+
 .post.distance {
   position: absolute;
   bottom: 10px;
   right: 30px;
   font-size: 18px;
+  padding: 0;
 }
-.distance.location.svg {
-  width: 14px;
+.location-img {
+  width: 20px;
+  height: 20px;
   margin: 0 5px;
-}
-.distance.location.svg-stroke {
-  fill: var(--font-light-color);
-  stroke: var(--font-light-color);
 }
 
 /* =============== Mobile styles =============== */
@@ -140,8 +132,5 @@
   .event.date {
     font-size: 20px;
     text-align: right;
-  }
-  .post.arrow.svg {
-    margin: 0 5px;
   }
 }

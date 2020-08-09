@@ -15,7 +15,7 @@
   margin: 0 20px;
   padding: 0;
 }
-.post-details.avatar-link {
+.post-details.avatar.link {
   width: 70px;
   height: 70px;
   margin: 0 10px 0 0;
@@ -24,18 +24,14 @@
   text-decoration: none;
 }
 
-.post-details.avatar-wrapper,
-.post-details.avatar-inner {
-  width: 70px;
-  height: 70px;
-}
 .post-details.activity-owner {
   position: relative;
   flex: auto;
   padding: 0;
+  display: flex;
+  align-items: center;
 }
 .post-details.owner-name {
-  display: inline-block;
   margin: 0;
   padding: 0;
   font-size: 24px;
@@ -44,19 +40,13 @@
   text-decoration: none;
   overflow-wrap: break-word;
 }
-.post-details.arrow.svg {
-  display: inline-block;
+.post-details.triangle-right-arrow {
   width: 15px;
   margin: 0 8px;
   padding: 0;
 }
-.post-details.arrow.svg-stroke {
-  fill: var(--pink-color);
-  stroke: var(--black-color);
-  stroke-width: 5px;
-}
+
 .post-details.activity {
-  display: inline-block;
   margin: 0;
   padding: 0;
   font-size: 24px;
@@ -124,9 +114,7 @@
   .post-details.wrapper {
     padding: 10px 0 40px 0;
   }
-  .post-details.avatar-link,
-  .post-details.avatar-wrapper,
-  .post-details.avatar-inner {
+  .post-details.avatar.link {
     width: 40px;
     height: 40px;
   }
@@ -134,7 +122,7 @@
   .post-details.activity {
     font-size: 18px;
   }
-  .post-details.arrow.svg {
+  .post-details.triangle-right-arrow {
     width: 10px;
     margin: 0 5px;
   }

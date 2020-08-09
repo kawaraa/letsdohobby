@@ -47,33 +47,20 @@
   width: 100%;
   padding: 10px 15px;
 }
-.update-post.avatar-wrapper,
-.update-post.avatar-inner {
-  width: 45px;
-  height: 45px;
-}
+
 .update-post.activity-owner-box {
   flex: auto;
   margin: 5px 0 0 10px;
+  display: flex;
+  align-items: center;
 }
 .update-post.owner-name {
-  display: inline-block;
   font-size: 20px;
   color: var(--black-color);
   text-decoration: none;
 }
-.update-post.arrow.svg {
-  display: inline-block;
-  width: 10px;
-  margin: 0 8px;
-}
-.update-post.arrow.svg-stroke {
-  fill: var(--pink-color);
-  stroke: var(--black-color);
-  stroke-width: 5px;
-}
+
 .update-post.activity {
-  display: inline-block;
   margin: 0;
   padding: 0;
   font-size: 20px;

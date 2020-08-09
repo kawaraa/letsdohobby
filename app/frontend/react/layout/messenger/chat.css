@@ -31,8 +31,9 @@
   font-size: 18px;
   font-weight: var(--p-font-weight);
 }
-.chat.member.svg {
-  width: 16px;
+.chat.members-svg {
+  width: 20px;
+  height: 20px;
 }
 .chat.member.svg-stroke {
   fill: var(--font-light-color);

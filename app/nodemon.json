@@ -6,7 +6,7 @@
   ],
   "verbose": true,
   "execMap": {
-    "js": "npm start"
+    "js": "npm run build-react &&  npm start"
   },
   "events": {
     "restart": "echo 'App restarted due to: '$FILENAME''"

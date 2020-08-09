@@ -1,5 +1,5 @@
 // const config = require("../config/config.json");
-const templateEngine = require("./template-engine");
+const templateEngine = require("./utility/template-engine");
 // const homepage = require("./route/home/component");
 // const post = require("./route/post/component");
 
@@ -30,9 +30,8 @@ module.exports = (router, firewall, MysqlDatabaseProvider) => {
     result[0].members = await MysqlDatabaseProvider.query(query, id);
 
     const navbar = templateEngine.render(__dirname + "/layout/navbar.html", false);
-    const members = compile(__dirname + "/view/members.html");
 
-    const post = templateEngine.render(__dirname + "/view/post-by-id.html", result[0], members);
+    const post = templateEngine.render(__dirname + "/view/post-by-id.html", result[0]);
 
     response.send(templateEngine.render(__dirname + "/view/index.html", post, navbar));
   });
