@@ -14,12 +14,10 @@
   border-color: var(--bg-white-color) transparent transparent transparent;
 }
 
-.message-owner.avatar.link {
+.message-owner.avatar.img {
   position: absolute;
   top: 0;
   left: -30px;
-}
-.message-owner.avatar.img {
   width: 25px;
   height: 25px;
   padding: 0;
@@ -91,7 +89,7 @@
   .message-card.left {
     margin: 5px 10% 5px 30px;
   }
-  .message-owner.avatar.link {
+  .message-owner.avatar.img {
     width: 20px;
     height: 20px;
     left: -25px;

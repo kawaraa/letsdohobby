@@ -3,7 +3,6 @@ import { config } from "../../../../config/config";
 import Request from "../../../../utility/request";
 import CustomDate from "../../../../utility/custom-date";
 import DateAndTimeField from "../../create-post-form/date-and-time-field";
-import XIcon from "../../../../layout/icon/x-icon";
 import LoadingScreen from "../../../../layout/icon/loading-screen";
 import CustomMessage from "../../../../layout/custom-message";
 import "./update-post-form.css";
@@ -71,15 +70,20 @@ class UpdatePostForm extends React.Component {
             <h3 className="update-post title no-line" tabindex="0">
               Update Post
             </h3>
-            <XIcon name="update-post" />
+
+            <img
+              src="/image/x-icon.svg"
+              alt="Close update post form button"
+              className="update-post x-icon img"
+            />
+
             <header className="update-post header no-line" title="Post Header owner info" tabindex="0">
-              <div className="update-post avatar link no-line" title="My avatar">
-                <img
-                  src={window.user.avatarUrl || "/image/avatar.svg"}
-                  alt="My Avatar"
-                  className="update-post avatar img"
-                />
-              </div>
+              <img
+                src={window.user.avatarUrl || "/image/avatar.svg"}
+                alt="My Avatar"
+                className="update-post avatar img no-line"
+              />
+
               <div className="update-post activity-owner-box">
                 <span className="update-post owner-name no-line" title="Owner name">
                   {owner.displayName}

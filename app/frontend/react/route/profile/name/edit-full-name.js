@@ -1,7 +1,6 @@
 import React from "react";
 import { config } from "../../../config/config";
 import Request from "../../../utility/request";
-import XIcon from "../../../layout/icon/x-icon";
 import LoadingScreen from "../../../layout/icon/loading-screen";
 import CustomMessage from "../../../layout/custom-message";
 import "./full-name-field.css";
@@ -40,7 +39,12 @@ class EditFullName extends React.Component {
 
     return (
       <form className="full-name edit-form" onSubmit={this.onSubmit}>
-        <XIcon onClick={() => changeMode({ editField: "" })} name="full-name" />
+        <img
+          src="/image/x-icon.svg"
+          alt="Close edit full name form button"
+          className="full-name x-icon img"
+          onClick={() => changeMode({ editField: "" })}
+        />
 
         <input type="text" name="firstName" defaultValue={f} placeholder="First Name" className="f no-line" />
         <input type="text" name="lastName" defaultValue={l} placeholder="Last Name" className="l no-line" />

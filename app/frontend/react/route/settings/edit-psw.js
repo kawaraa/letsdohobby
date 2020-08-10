@@ -1,7 +1,6 @@
 import React from "react";
 import { config } from "../../config/config";
 import Request from "../../utility/request";
-import XIcon from "../../layout/icon/x-icon";
 
 class EditPSW extends React.Component {
   constructor(props) {
@@ -29,7 +28,13 @@ class EditPSW extends React.Component {
 
     return (
       <form onSubmit={this.onSubmit} className="account psw edit-form">
-        <XIcon onClick={() => this.props.changeMode({ editField: "" })} name="account" />
+        <img
+          src="/image/x-icon.svg"
+          alt="Close edit password form button"
+          className="account x-icon img"
+          onClick={() => this.props.changeMode({ editField: "" })}
+        />
+
         <input type="password" name="psw" placeholder="Password" required className="f no-line" />
         <input type="password" name="newPsw" placeholder="Password" required className="no-line" />
         <input

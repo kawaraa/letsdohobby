@@ -3,7 +3,6 @@ import { Link, NavLink, withRouter } from "react-router-dom";
 import Request from "../../utility/request";
 import { config } from "../../config/config";
 import CustomDate from "../../utility/custom-date";
-import XIcon from "../icon/x-icon";
 import Message from "./message";
 
 class conversation extends Component {
@@ -86,7 +85,13 @@ class conversation extends Component {
             />
           </svg>
           <p className="conversation date">{CustomDate.toText(startAt)}</p>
-          <XIcon name="conversation" onClick={this.onClose} />
+
+          <img
+            src="/image/x-icon.svg"
+            alt="Close conversation button"
+            className="conversation x-icon img"
+            onClick={this.onClose}
+          />
         </div>
 
         <ul className="conversations messages">

@@ -32,13 +32,12 @@ class HomePage extends React.Component {
       <div className="outer-container">
         <main className="container no-line" title="News feed">
           <div className="create-post button-wrapper">
-            <div className="avatar link no-line" title="My avatar">
-              <img
-                src={window.user.avatarUrl || "/image/avatar.svg"}
-                alt="My Avatar"
-                className="avatar img"
-              />
-            </div>
+            <img
+              src={window.user.avatarUrl || "/image/avatar.svg"}
+              alt="My Avatar"
+              className="avatar img no-line"
+            />
+
             <button className="create-post button no-line" title="Show create post form">
               Share your favorite activity with locals
             </button>

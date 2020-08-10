@@ -48,13 +48,12 @@ class Navbar extends Component {
           </div>
 
           <div className="navbar options">
-            <div class="navbar avatar link no-line" title="My avatar">
-              <img
-                src={window.user.avatarUrl || "/image/avatar.svg"}
-                alt="My Avatar and Option button"
-                class="navbar avatar img"
-              />
-            </div>
+            <img
+              src={window.user.avatarUrl || "/image/avatar.svg"}
+              alt="My Avatar and Option button"
+              class="navbar avatar img no-line"
+            />
+
             {showList && <OptionsList />}
           </div>
         </nav>

@@ -1,6 +1,5 @@
 import React from "react";
 import "./file-preview.css";
-import XIcon from "../../../layout/icon/x-icon";
 
 export default (props) => {
   const { type } = props.file;
@@ -19,7 +18,13 @@ export default (props) => {
   return (
     <div className="uploaded wrapper no-line" title="Uploaded item" tabindex="0">
       {element}
-      <XIcon onClick={() => props.close(props.file.name)} name="uploaded-item" />
+
+      <img
+        src="/image/x-icon.svg"
+        alt="Close uploaded item button"
+        className="uploaded-item x-icon img"
+        onClick={() => props.close(props.file.name)}
+      />
     </div>
   );
 };

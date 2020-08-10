@@ -25,13 +25,11 @@ class Message extends Component {
     return (
       <li className={"message-card no-line " + cssClass} title="Message card" tabindex="0">
         {!isOwner && (
-          <div className="message-owner avatar link no-line" title="Message owner avatar">
-            <img
-              src={owner.avatarUrl || "/image/avatar.svg"}
-              alt="Message owner avatar"
-              className="message-owner avatar img"
-            />
-          </div>
+          <img
+            src={owner.avatarUrl || "/image/avatar.svg"}
+            alt="Message owner avatar"
+            className="message-owner avatar img no-line"
+          />
         )}
         <span className="message-owner name">{isOwner ? "Me" : owner.name}</span>
         <span className="message date">{CustomDate.toText(createdAt)}</span>

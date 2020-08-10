@@ -61,15 +61,19 @@
   font-size: 16px;
   color: var(--black-color);
 }
-.conversation.x-icon-wrapper {
+.conversation.x-icon.img {
+  position: absolute;
   top: 9px;
   right: 10px;
-  padding: 5px;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  margin: 0;
+  background: var(--hover-white-color);
+  cursor: pointer;
   border-radius: 50%;
 }
-.conversation.x-icon-wrapper:hover {
-  background: var(--bg-white-color);
-}
+
 .conversations.messages {
   overflow: auto;
   display: flex;
@@ -124,7 +128,7 @@
   .conversation.header {
     padding: 10px;
   }
-  .conversation.x-icon-wrapper {
+  .conversation.x-icon.img {
     top: 9px;
     width: 22px;
     height: 22px;
