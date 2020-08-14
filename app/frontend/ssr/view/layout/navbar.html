@@ -1,0 +1,183 @@
+(user)=> ` <style>
+  .navbar.outer-container {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    background: var(--pink-color);
+    z-index: 10;
+    transition: top 0.5s ease;
+  }
+
+  .navbar.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+  }
+
+  /* Brand Logo styles */
+  .logo-link {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .logo {
+    font-size: 34px;
+    font-weight: bolder;
+  }
+
+  .logo.l {
+    color: #6aa84f;
+  }
+
+  .logo.d {
+    color: #7b95e0;
+  }
+
+  .logo.h {
+    color: #585757;
+  }
+
+  .nav-btns {
+    display: flex;
+    margin: 0;
+  }
+
+  .nav.btn {
+    flex: auto;
+    font-size: 22px;
+    margin: 0 10px;
+    text-decoration: none;
+    background: none;
+    color: var(--font-color);
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav.btn:hover {
+    color: var(--white-color);
+  }
+
+  /* =============== Tablet styles =============== */
+  @media screen and (max-width: 1170px) {
+    .outer-container {
+      margin: 50px 0 0 0;
+    }
+
+    .navbar.container {
+      padding: 8px 5px;
+    }
+
+    .logo-link {
+      font-size: 24px;
+    }
+
+    .logo {
+      font-size: 28px;
+    }
+  }
+
+  /* =============== Mobile styles =============== */
+  @media screen and (max-width: 800px) {
+    .outer-container {
+      margin: 40px 0 0 0;
+    }
+
+    .navbar.container {
+      padding: 6px 10px;
+    }
+
+    .logo-link {
+      font-size: 22px;
+    }
+
+    .logo {
+      font-size: 24px;
+    }
+  }
+</style>
+<div class="navbar outer-container"> ${!user? ` <nav class="navbar container no-line" title="navigation bar"
+    tabindex="0"> <a href="/" class="logo-link no-line">
+      <span class="logo l">L</span>ets<span class="logo d">D</span>o<span class="logo h">H</span>obby</a>
+    <div class="nav-btns">
+      <a href="/" class="nav btn">Join</a><a href="/" class="nav btn">Login</a>
+    </div>
+  </nav>`:`<nav class="navbar container no-line" title="navigation bar" tabindex="0"> <a
+      class="logo wrapper no-line" href="/"><span class="logo item l">L</span><span
+        class="logo item d">D</span><span class="logo item h">H</span></a>
+    <div class="navbar status online" title="Connection status" tabindex="0">Online</div>
+    <div class="navbar icons"><a class="nav-icon wrapper home-link no-line" href="/"><svg
+          viewBox="0 0 650 500" class="nav-svg-icon home">
+          <path
+            d="m28.50001,250.00001c99.32306,-74 301.64612,-226 297.96918,-222c98.51027,73.83948 300.02054,223.67896 295.53081,221.51844l-106.31306,0c0,74.16052 1,224.32104 0,222.48156l-118.9926,-0.92624l0.97534,-143.5423c3.23254,-1.32104 -150.53492,-2.64209 -146.30238,-0.96313l0,143.50543c-58,-0.16486 -118.67817,1 -118.01725,0l0.97535,-219.5922c-35.27513,-0.16052 -106.55026,-0.32104 -105.82539,-0.48156z"
+            stroke-linecap="butt" stroke-linejoin="miter" class="nav-svg-stroke home"></path>
+        </svg></a><a class="nav-icon wrapper my-items-link no-line" href="/my-posts"><svg
+          viewBox="0 0 500 450" class="nav-svg-icon my-items">
+          <g class="nav-svg-layer my-items">
+            <path
+              d="m11.80745,82.97563l0,0c1.09982,-45.61966 31.59775,-68.35876 79.5016,-71.16809l317.99682,0l0,0c47.90385,0.98453 77.38255,25.54843 79.50156,71.16809l0,284.66384l0,0c-0.08056,39.23291 -32.61694,69.27112 -79.50156,71.16806l-317.99682,0c-42.80769,-0.98456 -79.42101,-31.02277 -79.5016,-71.16806l0,-284.66384z"
+              stroke-linecap="square" stroke-linejoin="round"></path>
+            <line stroke-linecap="round" stroke-linejoin="round" x1="81.50001" x2="82.50001" y1="230"
+              y2="230">
+            </line>
+            <line stroke-linecap="round" stroke-linejoin="round" x1="145.50001" x2="421.5" y1="230.5"
+              y2="230.5">
+            </line>
+            <path
+              d="m91.3655,12.79088l317.94602,0l0,0c34.80644,0.78982 45.51512,8.34494 57.89366,16.21824c12.37855,7.8733 21.2495,28.29445 21.6674,39.40012l-0.07214,86.37697c0,0.00064 -0.00185,0.00118 -0.00399,0.00118l-476.91988,-0.00118l0,0c-0.00217,0 -0.004,-0.00052 -0.004,-0.00118l0.004,-82.73972l1.01923,-10.5639c8.62277,-48.68574 76.48319,-48.733 78.46969,-48.69053l0,-0.00001l0,0.00001z"
+              stroke-linecap="square"></path>
+            <line stroke-linecap="round" stroke-linejoin="round" x1="145.50001" x2="421.5" y1="360" y2="360">
+            </line>
+            <line stroke-linecap="round" stroke-linejoin="round" x1="145.50001" x2="421.5" y1="295" y2="295">
+            </line>
+            <line stroke-linecap="round" stroke-linejoin="round" x1="81.00001" x2="82.00001" y1="360"
+              y2="360">
+            </line>
+            <line stroke-linecap="round" stroke-linejoin="round" x1="81.00001" x2="82.00001" y1="294"
+              y2="294">
+            </line>
+          </g>
+        </svg></a>
+      <div class="nav-icon wrapper messenger">
+        <svg viewBox="0 0 650 500" class="messenger nav-svg-icon">
+          <g class="messenger nav-svg-layer">
+            <path
+              d="m159.74983,60.88375c127.15031,-54.25276 262.85514,-33.4502 343.44513,5.04714c161.0927,71.00356 157.13892,248.11352 -4.2694,297.44313c-65.30144,24.05628 -124.64542,29.98619 -194.71283,29.44239c-23.49512,61.28439 -163.58403,91.56669 -193.20942,76.38971c-29.62539,-15.17698 75.46138,-48.97572 72.68124,-82.52678l-21.98965,-4.22084c-174.05317,-43.28319 -177.48169,-244.91317 -1.94506,-321.57476l-0.00001,0l0,0.00001z"
+              stroke-linejoin="miter join"></path>
+            <line x1="475.49999" x2="258.5" y1="164" y2="164" stroke-linecap="round"></line>
+            <line x1="176.5" x2="174.5" y1="163.5" y2="163.5" stroke-linecap="round"></line>
+            <line x1="476.99999" x2="178.99999" y1="263" y2="263" stroke-linecap="round"></line>
+          </g>
+        </svg>
+        <button type="button" class="messenger-button no-line"></button>
+      </div>
+      <div class="nav-icon wrapper notification">
+        <svg viewBox="0 0 470 480" class="notification nav-svg-icon">
+          <g class="notification nav-svg-layer">
+            <path
+              d="m15.39688,380.18584c-20.39916,-0.18869 -41.55969,-25.30082 -20.17195,-45.78388c21.38775,-20.48306 52.11014,-18.43488 62.08345,-49.81377c9.97331,-31.37889 -6.61586,-59.61305 2.05659,-100.77493c8.67247,-41.16188 30.69205,-65.08701 73.8023,-81.54214c43.11026,-16.45514 103.22337,-16.82709 143.08028,0.84953c39.85689,17.67662 62.3468,38.15714 70.35646,79.34604c8.00967,41.18891 -8.00438,71.804 1.55396,101.51232c9.55833,29.70832 37.68869,29.81964 61.63045,49.93173c23.94176,20.11209 0.5767,44.90783 -14.57084,45.96915l-362.57306,0.20157"
+              transform="rotate(-15.6007 203.182 235.041)" stroke-linecap="square"></path>
+            <path
+              d="m90.90556,108.26459c0.00713,-7.09421 2.5148,-54.19977 58.69813,-54.19977c56.18333,0 57.90021,46.53802 58.24688,53.34846"
+              transform="rotate(-18.0702 149.378 81.1647)" stroke-linecap="butt"></path>
+            <path
+              d="m129.87083,449.29148c0.00705,-7.63406 2.48511,-58.32421 58.00533,-58.32421c55.52021,0 57.21683,50.07942 57.5594,57.40811"
+              transform="rotate(165.126 187.653 420.129)" stroke-linecap="butt"></path>
+          </g>
+        </svg><button type="button" class="notification-button no-line"></button></div>
+    </div>
+    <div class="navbar options">
+      <div class="navbar avatar-wrapper">
+        <div class="navbar avatar-inner"><svg viewBox="0 0 400 400" class="avatar svg">
+            <title>navbar Avatar</title>
+            <path
+              d="m199.88096,10c-73.18293,0 -132.91667,54.51448 -132.91667,121.30305c0,41.46943 23.17274,78.28907 58.15104,100.18332c-67.91941,26.36907 -115.11534,88.00762 -115.11534,159.75179l37.9762,0c0,-77.40292 67.09126,-138.63206 151.90476,-138.63206c84.81348,0 151.90474,61.22916 151.90474,138.63206l37.9762,0c0,-71.74416 -47.19593,-133.38272 -115.11531,-159.75179c34.97828,-21.89426 58.15104,-58.7139 58.15104,-100.18332c0,-66.78857 -59.73374,-121.30305 -132.91667,-121.30305zm0,34.65802c52.65906,0 94.94047,38.58705 94.94047,86.64503c0,48.05799 -42.2814,86.64503 -94.94047,86.64503c-52.65908,0 -94.9405,-38.58705 -94.9405,-86.64503c0,-48.05799 42.2814,-86.64503 94.9405,-86.64503z"
+              class="avatar svg stroke"></path>
+          </svg></div><button type="button" title="navbar avatar" class="navbar avatar-icon no-line"></button>
+      </div>
+    </div>
+  </nav> `} </div>`

@@ -1,7 +1,6 @@
 import React from "react";
 import CreatePostForm from "./create-post-form/create-post-form";
 import NewsFeed from "./news-feed/news-feed";
-import Avatar from "../../layout/icon/avatar";
 import LoadingScreen from "../../layout/icon/loading-screen";
 import CustomMessage from "../../layout/custom-message";
 import "./home-page.css";
@@ -33,7 +32,12 @@ class HomePage extends React.Component {
       <div className="outer-container">
         <main className="container no-line" title="News feed">
           <div className="create-post button-wrapper">
-            <Avatar src={window.user.avatarUrl} name="my" />
+            <img
+              src={window.user.avatarUrl || "/image/avatar.svg"}
+              alt="My Avatar"
+              className="avatar img no-line"
+            />
+
             <button className="create-post button no-line" title="Show create post form">
               Share your favorite activity with locals
             </button>

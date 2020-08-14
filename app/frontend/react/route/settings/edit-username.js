@@ -1,8 +1,8 @@
 import React from "react";
 import { config } from "../../config/config";
 import Request from "../../utility/request";
-import XIcon from "../../layout/icon/x-icon";
 import LoadingIcon from "../../layout/icon/loading-icon";
+import CustomMessage from "../../layout/custom-message";
 
 class EditEmail extends React.Component {
   constructor(props) {
@@ -20,7 +20,8 @@ class EditEmail extends React.Component {
       await Request.send({ username: username.value, psw: psw.value }, this.config.url);
       window.user.username = username.value;
       window.dispatchEvent(new CustomEvent("UPDATE_APP", { detail: { user: window.user } }));
-      this.handleCancel();
+      console.log(this.props);
+      this.props.changeMode({ editField: "" });
     } catch (error) {
       this.setState({ loading: false, error: error.message });
     }
@@ -32,8 +33,12 @@ class EditEmail extends React.Component {
 
     return (
       <form onSubmit={this.onSubmit} className="account edit-form">
-        <XIcon onClick={() => this.props.changeMode({ editField: "" })} name="account" />
-
+        <img
+          src="/image/x-icon.svg"
+          alt="Close edit username form button"
+          className="account x-icon img"
+          onClick={() => this.props.changeMode({ editField: "" })}
+        />
         <input type="text" name="username" defaultValue={n} placeholder="Email/Phone" className="f no-line" />
         <input type="password" name="psw" placeholder="Confirm Password" required className="l no-line" />
 

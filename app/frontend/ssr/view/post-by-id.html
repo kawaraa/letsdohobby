@@ -1,0 +1,258 @@
+(post)=>` <style>
+  .post-details.wrapper {
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 20px 0 40px 20px;
+    background: var(--white-color);
+    box-shadow: 0px 0px 3px 0px var(--font-color);
+    border-radius: 5px;
+  }
+
+  .post-details.header {
+    display: flex;
+    flex-flow: nowrap;
+    align-items: center;
+    margin: 0 20px;
+    padding: 0;
+  }
+
+  .post-details.avatar.link {
+    width: 70px;
+    height: 70px;
+    margin: 0 15px 0 0;
+    padding: 0;
+    background: var(--hover-white-color);
+    border-radius: 50%;
+    text-decoration: none;
+  }
+
+  .avatar.img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .post-details.activity-owner {
+    flex: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .post-details.owner-name {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--black-color);
+    text-decoration: none;
+    overflow-wrap: break-word;
+  }
+
+  .post-details.triangle-right-arrow {
+    width: 18px;
+    height: 18px;
+    margin: 0 5px;
+    padding: 0;
+  }
+
+  .post-details.activity {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--black-color);
+    text-decoration: none;
+  }
+
+  .post-details.created-at {
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+    font-size: 14px;
+  }
+
+  .post-details.event {
+    display: flex;
+    margin: 20px;
+    padding: 5px 0;
+    border-top: 1px solid var(--hover-white-color);
+    border-bottom: 1px solid var(--hover-white-color);
+  }
+
+  .post-details.participants {
+    flex: auto;
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .post-details.start-at {
+    flex: auto;
+    font-size: 24px;
+    color: var(--black-color);
+    text-align: center;
+  }
+
+  .post-details.description {
+    margin: 0 20px;
+    padding: 15px 0;
+    font-size: 20px;
+    color: var(--font-color);
+    overflow-wrap: break-word;
+  }
+
+  .post-details.media {
+    display: flex;
+    flex-flow: wrap;
+    margin: 0;
+    padding: 0;
+  }
+
+  .media.box {
+    overflow: hidden;
+    max-height: 400px;
+    display: flex;
+    align-items: center;
+    flex: 50%;
+  }
+
+  .media.image,
+  .media.video {
+    width: 100%;
+  }
+
+  .post-details.member-list {
+    margin: 20px 0 0 0;
+    padding: 20px;
+    list-style: none;
+    background: var(--white-color);
+    box-shadow: 0px 0px 3px 0px var(--font-color);
+    border-radius: 5px;
+  }
+
+  .member-list.header {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .member.wrapper {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  .member.name {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    color: var(--black-color);
+    text-decoration: none;
+  }
+
+  .member.avatar.link {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px 0 0;
+    padding: 0;
+    background: var(--hover-white-color);
+    border-radius: 50%;
+    text-decoration: none;
+  }
+
+  /* =============== Mobile styles =============== */
+  @media screen and (max-width: 800px) {
+    .post-details.wrapper {
+      padding: 10px 0 40px 0;
+    }
+
+    .post-details.avatar.link {
+      width: 40px;
+      height: 40px;
+      margin: 0 10px 0 0;
+      padding: 10px;
+    }
+
+    .post-details.owner-name,
+    .post-details.activity {
+      font-size: 18px;
+    }
+
+    .post-details.triangle-right-arrow {
+      width: 12px;
+      margin: 0 5px;
+    }
+
+    .post-details.created-at {
+      font-size: 12px;
+    }
+
+    .post-details.participants {
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .post-details.date {
+      font-size: 20px;
+      text-align: right;
+    }
+
+    .post-details.description {
+      font-size: 18px;
+    }
+
+    .member-list.header {
+      font-size: 20px;
+    }
+  }
+</style>
+<div class="outer-container">
+  <main class="container no-line" title="Post details" tabindex="0">
+    <div class="post-details wrapper">
+      <header class="post-details header no-line" title="Post Header owner info" tabindex="0">
+        <a class="post-details avatar link no-line" title="Owner avatar" href="/">
+          <img src=${post.avatarUrl? post.avatarUrl:"/image/avatar.svg"} alt="Avatar"
+            class="post-details avatar img" />
+        </a>
+        <div class="post-details activity-owner">
+          <a class="post-details owner-name no-line" title="Owner name" href="/">${post.displayName} </a>
+          <img src="/image/triangle-right-arrow.svg" alt="Pointing to"
+            class="post-details triangle-right-arrow" />
+          <a class="post-details activity no-line" title="Activity" href="/">${post.activity}</a>
+          <time class="post-details created-at no-line" title="Creation date"
+            tabindex="0">${post.createdAt}</time>
+        </div>
+      </header>
+      <div class="post-details event">
+        <p class="post-details participants no-line" title="Number of participants" tabindex="0">
+          ${post.participants} Participants </p>
+        <time class="post-details start-at no-line" title="Event date" tabindex="0">${post.startAt}</time>
+      </div>
+      <article class="post-details description no-line" title="Description" tabindex="0">${post.description}
+      </article>
+      <aside class="post-details media no-line" title="Post media attachments" tabindex="0">
+        ${!post.mediaUrls[0]? "":post.mediaUrls.reduce((init, url)=> init + ` <div class="media box">
+          <img src=${url} class="media image no-line" alt="Post photo" tabindex="0" /></div> `)} </aside>
+    </div> ${!post.members[0]? "": `<ul class="post-details member-list" title="Members List" tabindex="0">
+      <h3 class="member-list header">${post.members.length} Members joined</h3> ${post.members.reduce((init,
+      member) => init + ` <li class="member wrapper no-line" title="Member info" tabindex="0">
+        <a class="member avatar link no-line" title="Member avatar" href="/">
+          <img src=${member.avatarUrl? member.avatarUrl:"/image/avatar.svg"} alt="Member Avatar"
+            class="member avatar img" />
+        </a>
+        <a class="member name no-line" title="Member name" href="/">${member.displayName}</a></li>`, "")}
+    </ul>`}
+  </main>
+</div>
+<script>
+  const creationDateElements = document.querySelectorAll(".created-at");
+  const startDateElements = document.querySelectorAll(".start-at");
+  Array.from(creationDateElements).forEach((el, i) => {
+    el.innerHTML = CustomDate.toText(el.innerHTML);
+    startDateElements[i].innerHTML = CustomDate.toText(startDateElements[i].innerHTML)
+  })
+</script>`

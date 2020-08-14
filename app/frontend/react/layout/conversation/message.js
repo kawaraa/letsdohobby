@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import CustomDate from "../../utility/custom-date";
-import Avatar from "../icon/avatar";
 import "./message.css";
 
 class Message extends Component {
@@ -25,7 +24,13 @@ class Message extends Component {
     }
     return (
       <li className={"message-card no-line " + cssClass} title="Message card" tabindex="0">
-        {!isOwner && <Avatar src={owner.avatarUrl} name="message-owner" />}
+        {!isOwner && (
+          <img
+            src={owner.avatarUrl || "/image/avatar.svg"}
+            alt="Message owner avatar"
+            className="message-owner avatar img no-line"
+          />
+        )}
         <span className="message-owner name">{isOwner ? "Me" : owner.name}</span>
         <span className="message date">{CustomDate.toText(createdAt)}</span>
         <p className="message text">{content}</p>

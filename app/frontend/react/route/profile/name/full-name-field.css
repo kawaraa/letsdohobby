@@ -23,15 +23,16 @@
   background: var(--white-color);
 }
 
-.full-name.x-icon-wrapper {
+.full-name.x-icon.img {
+  position: absolute;
   top: -35px;
   right: -20px;
   width: 30px;
   height: 30px;
-}
-.full-name.x-icon-inner {
-  padding: 6px;
+  padding: 0;
+  margin: 0;
   background: var(--hover-white-color);
+  cursor: pointer;
   border-radius: 50%;
 }
 

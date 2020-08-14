@@ -1,16 +1,9 @@
 const config = require("../config/config.json");
 const WebSocket = require("ws");
 const formidable = require("formidable");
-// const redis = require("redis");
-const mysql = require("mysql");
 const nodemailer = require("nodemailer");
 const twilio = require("twilio");
 const uuid = require("uuid/v4");
-const { promisify } = require("util");
-const MysqlDatabaseProvider = require("./infrastructure/provider/mysql_database_provider");
-const gCloud = require("@google-cloud/storage");
-// const RedisDatabaseProvider = require("./infrastructure/provider/redis_database_provider");
-const GCloudStorageProvider = require("./infrastructure/provider/gcloud-storage-provider");
 const AccountRepository = require("./infrastructure/repository/account_repository");
 const ProfileRepository = require("./infrastructure/repository/profile_repository");
 const SettingsRepository = require("./infrastructure/repository/settings-repository");
@@ -20,7 +13,6 @@ const ChatRepository = require("./infrastructure/repository/chat-repository");
 const NotificationRepository = require("./infrastructure/repository/notification-repository");
 const MemberRepository = require("./infrastructure/repository/member_repository");
 
-const Firewall = require("./infrastructure/firewall/firewall");
 const AuthResolver = require("./infrastructure/resolver/auth_resolver");
 const UserResolver = require("./infrastructure/resolver/user-resolver");
 const NotificationResolver = require("./infrastructure/resolver/notification-resolver");
@@ -38,19 +30,11 @@ const DeletePostHandler = require("./application/handler/delete-post-handler");
 const MailHandler = require("./application/handler/mail-handler");
 const MemberResolver = require("./infrastructure/resolver/member-resolver");
 
-module.exports = (server, router, cookie, jwt) => {
+module.exports = (server, router, firewall, mySqlProvider, storageProvider) => {
   const mailConfig = {
     mailer: process.env.NODEMAILER ? JSON.parse(process.env.NODEMAILER) : config.nodemailer,
     twilio: process.env.TWILIO ? JSON.parse(process.env.TWILIO) : config.twilio,
   };
-
-  const firewall = new Firewall(cookie, jwt, config.firewall);
-
-  // Providers
-  const mySqlProvider = new MysqlDatabaseProvider(mysql, promisify, config.mysql);
-  // const redisProvider = new RedisDatabaseProvider(redis, promisify, config.redis);
-  // console.log(await redisProvider.get("name"));
-  const storageProvider = new GCloudStorageProvider(gCloud, promisify, config.gCloud);
 
   // Repositories
   const accountRepository = new AccountRepository(mySqlProvider, config.accountRepository);

@@ -5,11 +5,7 @@ import Request from "../../../../utility/request";
 import CustomDate from "../../../../utility/custom-date";
 import UserOptions from "./user-options";
 import MemberOptions from "./member-options";
-import Avatar from "../../../../layout/icon/avatar";
 import Media from "./media";
-import MemberSvg from "../../../../layout/icon/member-icon";
-import LocationSvg from "../../../../layout/icon/location-icon";
-import ArrowIcon from "../../../../layout/icon/arrow-icon";
 import LoadingScreen from "../../../../layout/icon/loading-screen";
 import CustomMessage from "../../../../layout/custom-message";
 import "./post.css";
@@ -44,14 +40,22 @@ class Post extends React.Component {
     return (
       <article className="post card no-line" title="Post card" tabindex="0">
         <header className="post header no-line" title="Post Header owner info" tabindex="0">
-          <Link to={"/member/" + post.owner.id} className="post avatar-link no-line" title="Owner avatar">
-            <Avatar src={post.owner.avatarUrl} name="post" />
+          <Link to={"/member/" + post.owner.id} className="post avatar link no-line" title="Owner avatar">
+            <img
+              src={post.owner.avatarUrl || "/image/avatar.svg"}
+              alt="Post owner avatar"
+              className="post avatar img"
+            />
           </Link>
           <div className="post activity-owner">
             <Link to={"/member/" + post.owner.id} className="post owner-name no-line" title="Owner name">
               {post.owner.displayName}
             </Link>
-            <ArrowIcon name="post" />
+            <img
+              src="/image/triangle-right-arrow.svg"
+              alt="Pointing to"
+              className="post triangle-right-arrow"
+            />
 
             <Link to={"/posts/" + post.id} className="post activity no-line" title="Activity">
               {post.activity}
@@ -88,12 +92,13 @@ class Post extends React.Component {
             ))}
           </aside>
         )}
-        <span className="post members" title="Numbers" tabindex="0">
+        <span className="post members" title="Members" tabindex="0">
           {post.members}
-          <MemberSvg name="members" />
+
+          <img src="/image/members.svg" alt="Activity members" className="post members-img" />
         </span>
         <span className="post distance" title="Distance" tabindex="0">
-          <LocationSvg name="distance" />
+          <img src="/image/location.svg" alt="Location Distance" className="post location-img" />
           {post.distance.length + " " + post.distance.unit}
         </span>
       </article>

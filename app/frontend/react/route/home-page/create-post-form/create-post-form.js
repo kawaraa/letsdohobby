@@ -2,8 +2,6 @@ import React from "react";
 import { config } from "../../../config/config";
 import Request from "../../../utility/request";
 import CustomDate from "../../../utility/custom-date";
-import XIcon from "../../../layout/icon/x-icon";
-import Avatar from "../../../layout/icon/avatar";
 import DateAndTimeField from "./date-and-time-field";
 import FilePreview from "./file-preview";
 import LoadingScreen from "../../../layout/icon/loading-screen";
@@ -100,10 +98,20 @@ class CreatePostForm extends React.Component {
             <h3 className="create-post title no-line" tabindex="0">
               Create Post
             </h3>
-            <XIcon name="create-post" />
+
+            <img
+              src="/image/x-icon.svg"
+              alt="Close create post form button"
+              className="create-post x-icon img"
+            />
 
             <div className="create-post user-info">
-              <Avatar name="create-post" />
+              <img
+                src={window.user.avatarUrl || "/image/avatar.svg"}
+                alt="My Avatar"
+                className="create-post avatar img no-line"
+              />
+
               <span className="create-post user-name no-line" title="User name" tabindex="0">
                 {window.user.displayName}
               </span>

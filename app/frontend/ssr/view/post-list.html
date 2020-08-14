@@ -1,0 +1,176 @@
+(posts)=>` <style>
+  .post.card {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px 0 40px 0;
+    background: var(--white-color);
+    box-shadow: 0px 0px 3px 0px var(--font-color);
+    border-radius: 5px;
+  }
+
+  .post.header {
+    display: flex;
+    flex-flow: nowrap;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0 10px;
+  }
+
+  .post.avatar.link {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px 0 0;
+    padding: 0;
+    background: var(--hover-white-color);
+    border-radius: 50%;
+    text-decoration: none;
+  }
+
+  .post.avatar.img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .post.activity-owner {
+    position: relative;
+    flex: auto;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .post.owner-name {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--black-color);
+    text-decoration: none;
+    overflow-wrap: break-word;
+  }
+
+  .post.triangle-right-arrow {
+    width: 10px;
+    margin: 0 5px;
+    padding: 0;
+  }
+
+  .post.activity {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--black-color);
+    text-decoration: none;
+  }
+
+  .post.created-at {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    font-size: 12px;
+  }
+
+  .post.event {
+    display: flex;
+    margin: 20px 10px 10px 10px;
+    padding: 5px 0;
+    border-top: 1px solid var(--hover-white-color);
+    border-bottom: 1px solid var(--hover-white-color);
+  }
+
+  .event.participants {
+    flex: auto;
+    margin: 0;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .event.start-at {
+    flex: auto;
+    font-size: 22px;
+    color: var(--black-color);
+    text-align: center;
+  }
+
+  .post.description {
+    margin: 0 10px;
+    padding: 15px 0;
+    font-size: 18px;
+    color: var(--font-color);
+    overflow-wrap: break-word;
+  }
+
+  .post.media {
+    display: flex;
+    flex-flow: wrap;
+  }
+
+  .post.members {
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    font-size: 18px;
+    padding: 0;
+  }
+
+  .post.member-img {
+    width: 17px;
+    height: 17px;
+    margin: 0 0 0 5px;
+    padding: 0;
+  }
+
+  /* =============== Mobile styles =============== */
+  @media screen and (max-width: 800px) {
+    .event.participants {
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .event.date {
+      font-size: 20px;
+      text-align: right;
+    }
+  }
+</style>
+<div class="outer-container">
+  <main class="container no-line" title="News feed">
+    <section class="news-feed wrapper" title="News feeds" tabindex="0"> ${!posts[0]?``:posts.reduce((init,
+      post)=>init + ` <article class="post card no-line" title="Post card" tabindex="0">
+        <header class="post header no-line" title="Post Header owner info" tabindex="0">
+          <a class="post avatar link no-line" title="Owner avatar" href="/">
+            <img src=${post.avatarUrl? post.avatarUrl:"/image/avatar.svg"} alt="Avatar"
+              class="post avatar img" />
+          </a>
+          <div class="post activity-owner">
+            <a class="post owner-name no-line" title="Owner name" href="/">${post.displayName}</a>
+            <img src="/image/triangle-right-arrow.svg" alt="Pointing to" class="post triangle-right-arrow" />
+            <a class="post activity no-line" title="Activity" href="/">${post.activity}</a>
+            <time class="post created-at no-line" title="Creation date" tabindex="0">${post.startAt}</time>
+          </div>
+        </header>
+        <div class="post event">
+          <p class="event participants no-line" title="Number of participants" tabindex="0">
+            ${post.participants} Participants</p>
+          <time class="event start-at no-line" title="Event start date" tabindex="0">${post.createdAt}</time>
+        </div>
+        <p class="post description no-line" title="Description" tabindex="0">${post.description}</p>
+        <span class="post members" title="Members" tabindex="0">${post.members}<img src="/image/members.svg"
+            alt="Members" class="post member-img" />
+        </span>
+      </article>`, "")} </section>
+  </main>
+</div>
+<script>
+
+  const creationDateElements = document.querySelectorAll(".created-at");
+  const startDateElements = document.querySelectorAll(".start-at");
+  Array.from(creationDateElements).forEach((el, i) => {
+    el.innerHTML = CustomDate.toText(el.innerHTML);
+    startDateElements[i].innerHTML = CustomDate.toText(startDateElements[i].innerHTML)
+  })
+</script>`

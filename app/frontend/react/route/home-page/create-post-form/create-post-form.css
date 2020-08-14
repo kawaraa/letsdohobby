@@ -26,15 +26,16 @@
   text-align: center;
   border-bottom: 1px solid var(--hover-white-color);
 }
-.create-post.x-icon-wrapper {
+.create-post.x-icon.img {
+  position: absolute;
   top: 12px;
   right: 15px;
   width: 35px;
   height: 35px;
-}
-.create-post.x-icon-inner {
-  padding: 8px;
+  padding: 0;
+  margin: 0;
   background: var(--hover-white-color);
+  cursor: pointer;
   border-radius: 50%;
 }
 
@@ -43,12 +44,6 @@
   width: 100%;
   margin: 0;
   padding: 10px 15px;
-}
-
-.create-post.avatar-wrapper,
-.create-post.avatar-inner {
-  width: 45px;
-  height: 45px;
 }
 
 .create-post.user-name {
@@ -190,7 +185,7 @@
   .create-post.title {
     padding: 10px;
   }
-  .create-post.x-icon-wrapper {
+  .create-post.x-icon.img {
     top: 9px;
     right: 9px;
     width: 30px;

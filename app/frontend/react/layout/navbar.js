@@ -3,9 +3,6 @@ import { Link, NavLink, withRouter } from "react-router-dom";
 import OptionsList from "./options-list";
 import Messenger from "./messenger/messenger";
 import Notification from "./notification/notification";
-import Avatar from "./icon/avatar";
-import HomeIcon from "./home-icon";
-import MyItemsIcon from "./my-items-icon";
 import "./navbar.css";
 
 class Navbar extends Component {
@@ -16,7 +13,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     window.addEventListener("click", ({ target } = e) => {
-      if (!/navbar avatar-icon/gim.test(target.className)) return this.setState({ showList: false });
+      if (!/navbar avatar/gim.test(target.className)) return this.setState({ showList: false });
       this.setState({ showList: !this.state.showList });
     });
   }
@@ -39,17 +36,22 @@ class Navbar extends Component {
 
           <div className="navbar icons">
             <Link to="/" className="nav-icon wrapper home-link no-line">
-              <HomeIcon />
+              <img src="/image/home.svg" alt="Home icon" className="nav-icon home img" />
             </Link>
             <Link to="/my-posts" className="nav-icon wrapper my-items-link no-line">
-              <MyItemsIcon />
+              <img src="/image/my-items.svg" alt="My items icon" className="nav-icon my-items img" />
             </Link>
             <Messenger />
             <Notification />
           </div>
 
           <div className="navbar options">
-            <Avatar src={window.user.avatarUrl} name="navbar" />
+            <img
+              src={window.user.avatarUrl || "/image/avatar.svg"}
+              alt="My Avatar and Option button"
+              class="navbar avatar img no-line"
+            />
+
             {showList && <OptionsList />}
           </div>
         </nav>

@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 import { config } from "../../config/config";
 import Request from "../../utility/request";
 import CustomDate from "../../utility/custom-date";
-import Avatar from "../../layout/icon/avatar";
-import ArrowIcon from "../../layout/icon/arrow-icon";
 import Media from "../home-page/news-feed/post/media";
 import MemberName from "./member-info";
 import LoadingScreen from "../../layout/icon/loading-screen";
 import CustomMessage from "../../layout/custom-message";
-import LocationSvg from "../../layout/icon/location-icon";
 import "./post-detail.css";
 
 class PostDetail extends React.Component {
@@ -23,7 +20,6 @@ class PostDetail extends React.Component {
     try {
       const postDetail = await Request.fetch(this.config.url + this.props.match.params.id);
       this.setState({ ...postDetail, loading: false });
-      console.log(postDetail);
     } catch (error) {
       this.setState({ message: error.message, loading: false });
     }
@@ -40,10 +36,14 @@ class PostDetail extends React.Component {
             <header className="post-details header no-line" title="Post Header owner info" tabindex="0">
               <Link
                 to={"/member/" + owner.id}
-                className="post-details avatar-link no-line"
+                className="post-details avatar link no-line"
                 title="Owner avatar"
               >
-                <Avatar src={owner.avatarUrl} name="post-details" />
+                <img
+                  src={owner.avatarUrl || "/image/avatar.svg"}
+                  alt="post-details avatar"
+                  className="post-details avatar img"
+                />
               </Link>
 
               <div className="post-details activity-owner">
@@ -54,8 +54,11 @@ class PostDetail extends React.Component {
                 >
                   {owner.displayName}
                 </Link>
-
-                <ArrowIcon name="post-details" />
+                <img
+                  src="/image/triangle-right-arrow.svg"
+                  alt="Pointing to"
+                  className="post-details triangle-right-arrow"
+                />
                 <Link to={"/posts/" + id} className="post-details activity no-line" title="Activity">
                   {activity}
                 </Link>
@@ -88,7 +91,7 @@ class PostDetail extends React.Component {
             )}
 
             <span className="post distance" title="Distance" tabindex="0">
-              <LocationSvg name="distance" />
+              <img src="/image/location.svg" alt="Location Distance" className="post location-img" />
               {distance.length + " " + distance.unit}
             </span>
           </div>

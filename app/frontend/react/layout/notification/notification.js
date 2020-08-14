@@ -1,7 +1,6 @@
 import React from "react";
 import Request from "../../utility/request";
 import { config } from "../../config/config";
-import NotificationIcon from "./notification-icon";
 import NotificationList from "./notification-list";
 import "./notification.css";
 
@@ -48,7 +47,7 @@ class Notification extends React.Component {
     const nots = unseenNotifications.length > 0;
     return (
       <div className="nav-icon wrapper notification">
-        <NotificationIcon />
+        <img src="/image/notification.svg" alt="Notification icon" className="nav-icon notification img" />
         {nots && <span className="notification unseen-counter">{unseenNotifications.length}</span>}
         {showNotificationList && <NotificationList markAsSeen={this.markAsSeen} />}
         <button type="button" className="notification-button no-line"></button>
