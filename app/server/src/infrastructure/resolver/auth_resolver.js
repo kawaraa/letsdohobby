@@ -41,6 +41,7 @@ class AuthResolver {
     } catch (error) {
       response.clearCookie("userToken");
       response.status(400).end(CustomError.toJson(error));
+      console.log(error);
     }
   }
   async onLogin(request, response) {
@@ -61,6 +62,7 @@ class AuthResolver {
     } catch (error) {
       response.clearCookie("userToken");
       response.status(400).end(CustomError.toJson(error));
+      console.log(error);
     }
   }
   onLogout(request, response) {

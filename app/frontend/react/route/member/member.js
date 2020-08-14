@@ -27,7 +27,7 @@ class Member extends React.Component {
     if (loading) return <LoadingScreen />;
     if (error) return <CustomMessage text={error} name="error" />;
     const initials = <span className="avatar initials">{displayName[0]}</span>;
-    const avatar = <img src={avatarUrl} alt="Profile Avatar" className="avatar img" />;
+    const avatar = <img src={avatarUrl} alt="Profile Avatar" className="member avatar-img" />;
 
     return (
       <div className="outer-container">

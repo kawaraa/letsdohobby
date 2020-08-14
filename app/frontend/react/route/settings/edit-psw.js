@@ -1,6 +1,8 @@
 import React from "react";
 import { config } from "../../config/config";
 import Request from "../../utility/request";
+import LoadingIcon from "../../layout/icon/loading-icon";
+import CustomMessage from "../../layout/custom-message";
 
 class EditPSW extends React.Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class EditPSW extends React.Component {
       if (newPsw.value !== confirmNewPsw.value) throw new Error("Password doesn't match");
       this.setState({ loading: true });
       await Request.send({ psw: psw.value, newPsw: newPsw.value }, this.config.url);
-      this.handleCancel();
+      this.props.changeMode({ editField: "" });
     } catch (error) {
       this.setState({ loading: false, error: error.message });
     }
@@ -36,11 +38,11 @@ class EditPSW extends React.Component {
         />
 
         <input type="password" name="psw" placeholder="Password" required className="f no-line" />
-        <input type="password" name="newPsw" placeholder="Password" required className="no-line" />
+        <input type="password" name="newPsw" placeholder="New Password" required className="no-line" />
         <input
           type="password"
           name="confirmNewPsw"
-          placeholder="Confirm Password"
+          placeholder="Confirm New Password"
           required
           className="l no-line"
         />

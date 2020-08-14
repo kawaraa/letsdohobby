@@ -20,7 +20,6 @@ class PostDetail extends React.Component {
     try {
       const postDetail = await Request.fetch(this.config.url + this.props.match.params.id);
       this.setState({ ...postDetail, loading: false });
-      console.log(postDetail);
     } catch (error) {
       this.setState({ message: error.message, loading: false });
     }

@@ -1,7 +1,6 @@
 import React from "react";
 import Request from "../../utility/request";
 import { config } from "../../config/config";
-import MessengerIcon from "./messenger-icon";
 import ChatList from "./chat-list";
 import "./messenger.css";
 
@@ -45,7 +44,7 @@ class Messenger extends React.Component {
 
     return (
       <div className="nav-icon wrapper messenger">
-        <MessengerIcon />
+        <img src="/image/messenger.svg" alt="Messenger icon" className="nav-icon messenger img" />
         {unseenChats.length > 0 && <span className="messenger unseen-counter">{unseenChats.length}</span>}
         {showChatList && <ChatList />}
         <button type="button" className="messenger-button no-line"></button>

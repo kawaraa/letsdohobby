@@ -2,6 +2,7 @@ import React from "react";
 import { config } from "../../config/config";
 import Request from "../../utility/request";
 import LoadingIcon from "../../layout/icon/loading-icon";
+import CustomMessage from "../../layout/custom-message";
 
 class EditEmail extends React.Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class EditEmail extends React.Component {
       await Request.send({ username: username.value, psw: psw.value }, this.config.url);
       window.user.username = username.value;
       window.dispatchEvent(new CustomEvent("UPDATE_APP", { detail: { user: window.user } }));
-      this.handleCancel();
+      console.log(this.props);
+      this.props.changeMode({ editField: "" });
     } catch (error) {
       this.setState({ loading: false, error: error.message });
     }

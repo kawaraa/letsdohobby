@@ -3,8 +3,6 @@ import { Link, NavLink, withRouter } from "react-router-dom";
 import OptionsList from "./options-list";
 import Messenger from "./messenger/messenger";
 import Notification from "./notification/notification";
-import HomeIcon from "./home-icon";
-import MyItemsIcon from "./my-items-icon";
 import "./navbar.css";
 
 class Navbar extends Component {
@@ -38,10 +36,10 @@ class Navbar extends Component {
 
           <div className="navbar icons">
             <Link to="/" className="nav-icon wrapper home-link no-line">
-              <HomeIcon />
+              <img src="/image/home.svg" alt="Home icon" className="nav-icon home img" />
             </Link>
             <Link to="/my-posts" className="nav-icon wrapper my-items-link no-line">
-              <MyItemsIcon />
+              <img src="/image/my-items.svg" alt="My items icon" className="nav-icon my-items img" />
             </Link>
             <Messenger />
             <Notification />
