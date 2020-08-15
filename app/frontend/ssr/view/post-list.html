@@ -1,4 +1,5 @@
-(posts)=>` <style>
+(posts)=>`
+<style>
   .post.card {
     overflow: hidden;
     position: relative;
@@ -137,40 +138,47 @@
     }
   }
 </style>
+
 <div class="outer-container">
   <main class="container no-line" title="News feed">
-    <section class="news-feed wrapper" title="News feeds" tabindex="0"> ${!posts[0]?``:posts.reduce((init,
-      post)=>init + ` <article class="post card no-line" title="Post card" tabindex="0">
+    <section class="news-feed wrapper" title="News feeds" tabindex="0">
+      ${!posts[0] ? "" : posts.reduce((init, post) => init + `
+      <article class="post card no-line" title="Post card" tabindex="0">
+
         <header class="post header no-line" title="Post Header owner info" tabindex="0">
           <a class="post avatar link no-line" title="Owner avatar" href="/">
-            <img src=${post.avatarUrl? post.avatarUrl:"/image/avatar.svg"} alt="Avatar"
-              class="post avatar img" />
+            <img src=${post.avatarUrl? post.avatarUrl:"/image/avatar.svg"} alt="Avatar" class="post avatar img" />
           </a>
           <div class="post activity-owner">
             <a class="post owner-name no-line" title="Owner name" href="/">${post.displayName}</a>
             <img src="/image/triangle-right-arrow.svg" alt="Pointing to" class="post triangle-right-arrow" />
-            <a class="post activity no-line" title="Activity" href="/">${post.activity}</a>
+            <a class="post activity no-line" title="Activity" href="/web/post/${post.id}">${post.activity}</a>
             <time class="post created-at no-line" title="Creation date" tabindex="0">${post.startAt}</time>
           </div>
         </header>
+
         <div class="post event">
           <p class="event participants no-line" title="Number of participants" tabindex="0">
             ${post.participants} Participants</p>
           <time class="event start-at no-line" title="Event start date" tabindex="0">${post.createdAt}</time>
         </div>
+
         <p class="post description no-line" title="Description" tabindex="0">${post.description}</p>
-        <span class="post members" title="Members" tabindex="0">${post.members}<img src="/image/members.svg"
-            alt="Members" class="post member-img" />
+        <span class="post members" title="Members" tabindex="0">
+          ${post.members}<img src="/image/members.svg" alt="Members" class="post member-img" />
         </span>
-      </article>`, "")} </section>
+
+      </article>`)}
+    </section>
   </main>
 </div>
-<script>
 
+<script>
   const creationDateElements = document.querySelectorAll(".created-at");
   const startDateElements = document.querySelectorAll(".start-at");
   Array.from(creationDateElements).forEach((el, i) => {
     el.innerHTML = CustomDate.toText(el.innerHTML);
     startDateElements[i].innerHTML = CustomDate.toText(startDateElements[i].innerHTML)
   })
-</script>`
+</script>
+`
