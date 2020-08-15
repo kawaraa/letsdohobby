@@ -223,7 +223,7 @@
         <div class="post-details activity-owner">
           <a class="post-details owner-name no-line" title="Owner name" href="/">${post.displayName} </a>
           <img src="/image/triangle-right-arrow.svg" alt="Pointing to" class="post-details triangle-right-arrow" />
-          <a class="post-details activity no-line" title="Activity" href="/">${post.activity}</a>
+          <a class="post-details activity no-line" title="Activity" href="/web/post/${post.id}">${post.activity}</a>
           <time class="post-details created-at no-line" title="Creation date" tabindex="0">${post.createdAt}</time>
         </div>
       </header>
@@ -240,7 +240,7 @@
         ${!post.mediaUrls[0] ? "" : post.mediaUrls.reduce((init, url) => init + `
         <div class="media box">
           <img src=${url} class="media image no-line" alt="Post photo" tabindex="0" />
-        </div>`)}
+        </div>`, "")}
       </aside>
 
     </div>
@@ -256,7 +256,7 @@
             class="member avatar img" />
         </a>
         <a class="member name no-line" title="Member name" href="/">${member.displayName}</a>
-      </li>`)}
+      </li>`, "")}
 
     </ul>`}
 
