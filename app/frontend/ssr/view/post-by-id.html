@@ -1,4 +1,5 @@
-(post)=>` <style>
+(post)=>`
+<style>
   .post-details.wrapper {
     overflow: hidden;
     position: relative;
@@ -210,44 +211,58 @@
     }
   }
 </style>
+
 <div class="outer-container">
   <main class="container no-line" title="Post details" tabindex="0">
     <div class="post-details wrapper">
+
       <header class="post-details header no-line" title="Post Header owner info" tabindex="0">
         <a class="post-details avatar link no-line" title="Owner avatar" href="/">
-          <img src=${post.avatarUrl? post.avatarUrl:"/image/avatar.svg"} alt="Avatar"
-            class="post-details avatar img" />
+          <img src=${post.avatarUrl? post.avatarUrl:"/image/avatar.svg"} alt="Avatar" class="post-details avatar img" />
         </a>
         <div class="post-details activity-owner">
           <a class="post-details owner-name no-line" title="Owner name" href="/">${post.displayName} </a>
-          <img src="/image/triangle-right-arrow.svg" alt="Pointing to"
-            class="post-details triangle-right-arrow" />
+          <img src="/image/triangle-right-arrow.svg" alt="Pointing to" class="post-details triangle-right-arrow" />
           <a class="post-details activity no-line" title="Activity" href="/">${post.activity}</a>
-          <time class="post-details created-at no-line" title="Creation date"
-            tabindex="0">${post.createdAt}</time>
+          <time class="post-details created-at no-line" title="Creation date" tabindex="0">${post.createdAt}</time>
         </div>
       </header>
+
       <div class="post-details event">
         <p class="post-details participants no-line" title="Number of participants" tabindex="0">
           ${post.participants} Participants </p>
         <time class="post-details start-at no-line" title="Event date" tabindex="0">${post.startAt}</time>
       </div>
-      <article class="post-details description no-line" title="Description" tabindex="0">${post.description}
-      </article>
+
+      <article class="post-details description no-line" title="Description" tabindex="0">${post.description}</article>
+
       <aside class="post-details media no-line" title="Post media attachments" tabindex="0">
-        ${!post.mediaUrls[0]? "":post.mediaUrls.reduce((init, url)=> init + ` <div class="media box">
-          <img src=${url} class="media image no-line" alt="Post photo" tabindex="0" /></div> `)} </aside>
-    </div> ${!post.members[0]? "": `<ul class="post-details member-list" title="Members List" tabindex="0">
-      <h3 class="member-list header">${post.members.length} Members joined</h3> ${post.members.reduce((init,
-      member) => init + ` <li class="member wrapper no-line" title="Member info" tabindex="0">
+        ${!post.mediaUrls[0] ? "" : post.mediaUrls.reduce((init, url) => init + `
+        <div class="media box">
+          <img src=${url} class="media image no-line" alt="Post photo" tabindex="0" />
+        </div>`)}
+      </aside>
+
+    </div>
+
+    ${!post.members[0]? "" : `
+    <ul class="post-details member-list" title="Members List" tabindex="0">
+      <h3 class="member-list header">${post.members.length} Members joined</h3>
+
+      ${post.members.reduce((init, member) => init + `
+      <li class="member wrapper no-line" title="Member info" tabindex="0">
         <a class="member avatar link no-line" title="Member avatar" href="/">
           <img src=${member.avatarUrl? member.avatarUrl:"/image/avatar.svg"} alt="Member Avatar"
             class="member avatar img" />
         </a>
-        <a class="member name no-line" title="Member name" href="/">${member.displayName}</a></li>`, "")}
+        <a class="member name no-line" title="Member name" href="/">${member.displayName}</a>
+      </li>`)}
+
     </ul>`}
+
   </main>
 </div>
+
 <script>
   const creationDateElements = document.querySelectorAll(".created-at");
   const startDateElements = document.querySelectorAll(".start-at");
@@ -255,4 +270,5 @@
     el.innerHTML = CustomDate.toText(el.innerHTML);
     startDateElements[i].innerHTML = CustomDate.toText(startDateElements[i].innerHTML)
   })
-</script>`
+</script>
+`
