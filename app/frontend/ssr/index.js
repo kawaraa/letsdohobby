@@ -12,7 +12,7 @@ module.exports = (router, firewall, MysqlDatabaseProvider) => {
   router.use((req, res, next) => (firewall.isAuthenticated(req) ? res.redirect("/") : next()));
 
   router.get("/", async (request, response) => {
-    const query = `SELECT t1.activity, t1.description, t1.participants, t1.mediaUrls, t1.createdAt, t1.startAt, t2.displayName, (SELECT COUNT(member) FROM feeds.chat WHERE postId=t1.id) AS members FROM feeds.post t1 JOIN user.profile t2 ON t1.owner=t2.owner ORDER BY t1.createdAt DESC LIMIT ? OFFSET ?`;
+    const query = `SELECT t1.id, t1.activity, t1.description, t1.participants, t1.mediaUrls, t1.createdAt, t1.startAt, t2.displayName, (SELECT COUNT(member) FROM feeds.chat WHERE postId=t1.id) AS members FROM feeds.post t1 JOIN user.profile t2 ON t1.owner=t2.owner ORDER BY t1.createdAt DESC LIMIT ? OFFSET ?`;
     const posts = await MysqlDatabaseProvider.query(query, [20, 0]);
 
     const postList = templateEngine.render("post-list.html", posts);
