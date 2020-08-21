@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../../../config/config";
+import { getConfig } from "../../../../config/config";
 import Request from "../../../../utility/request";
 import CustomDate from "../../../../utility/custom-date";
 import DateAndTimeField from "../../create-post-form/date-and-time-field";
@@ -10,7 +10,7 @@ import "./update-post-form.css";
 class UpdatePostForm extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("updatePost");
+    this.config = getConfig("updatePost");
     this.onChange = this.handleChange.bind(this);
     this.onSubmit = this.handleSubmit.bind(this);
     this.close = this.closeErrorMessage.bind(this);

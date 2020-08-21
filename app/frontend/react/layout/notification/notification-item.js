@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../config/config";
+import { getConfig } from "../../config/config";
 import Request from "../../utility/request";
 import CustomDate from "../../utility/custom-date";
 import LoadingIcon from "../icon/loading-icon";
@@ -10,7 +10,7 @@ import "./notification-item.css";
 class NotificationItem extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("notificationItem");
+    this.config = getConfig("notificationItem");
     this.onAcceptJoinRequest = this.handleAcceptJoinRequest.bind(this);
     this.onRejectJoinRequest = this.handleRejectJoinRequest.bind(this);
     this.state = { loading: false, success: true };

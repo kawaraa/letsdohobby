@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../config/config";
+import { getConfig } from "../../config/config";
 import Request from "../../utility/request";
 import Account from "./account";
 import LoadingScreen from "../../layout/icon/loading-screen";

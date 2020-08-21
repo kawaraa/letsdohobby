@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../config/config";
+import { getConfig } from "../../config/config";
 import Request from "../../utility/request";
 import NotificationItem from "./notification-item";
 import LoadingIcon from "../icon/loading-icon";
@@ -8,7 +8,7 @@ import "./notification-list.css";
 class NotificationList extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("notification");
+    this.config = getConfig("notification");
     this.onRemoveNotification = this.handleRemoveNotification.bind(this);
     this.state = { loading: true, error: "", notifications: [] };
   }

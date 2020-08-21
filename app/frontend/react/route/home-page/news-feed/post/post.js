@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { config } from "../../../../config/config";
+import { getConfig } from "../../../../config/config";
 import Request from "../../../../utility/request";
 import CustomDate from "../../../../utility/custom-date";
 import UserOptions from "./user-options";
@@ -13,7 +13,7 @@ import "./post.css";
 class Post extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("post");
+    this.config = getConfig("post");
     this.onDelete = this.handleDelete.bind(this);
     this.state = { loading: false, error: "" };
   }

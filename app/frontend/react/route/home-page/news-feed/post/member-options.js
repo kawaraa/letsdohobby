@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../../../config/config";
+import { getConfig } from "../../../../config/config";
 import Request from "../../../../utility/request";
 import DotsIcon from "../../../../layout/icon/dots-icon";
 import LoadingIcon from "../../../../layout/icon/loading-icon";
@@ -14,7 +14,7 @@ class MemberOptions extends React.Component {
     this.onCancel = this.handleCancelRequest.bind(this);
     this.onReport = this.handleReportPost.bind(this);
     this.onShare = this.handleCopyPostLink.bind(this);
-    this.config = config("options");
+    this.config = getConfig("options");
     this.state = { loading: false, success: true, showList: false };
   }
 

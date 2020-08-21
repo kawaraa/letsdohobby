@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { config } from "../../config/config";
+import { getConfig } from "../../config/config";
 import Request from "../../utility/request";
 import CustomDate from "../../utility/custom-date";
 import Media from "../home-page/news-feed/post/media";

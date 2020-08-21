@@ -1,5 +1,6 @@
 import React from "react";
-import { config } from "../../../config/config";
+import { getConfig } from "../../../config/config";
+import AppContext from "../../../store/app-store";
 import Request from "../../../utility/request";
 import Post from "./post/post";
 import UpdatePostForm from "./update-post/update-post-form";
@@ -7,11 +8,13 @@ import LoadingScreen from "../../../layout/icon/loading-screen";
 import CustomMessage from "../../../layout/custom-message";
 import "./news-feed.css";
 
+// const { Request } = useContext(AppContext);
+
 class NewsFeed extends React.Component {
   constructor(props) {
     super(props);
     this.refresh = this.refreshNewsFeeds.bind(this);
-    this.config = config("newsFeed");
+    this.config = getConfig("newsFeed");
     this.state = { loading: false, error: "", limit: 20, offset: 0, posts: [], editPost: -1, topBtn: false };
   }
 

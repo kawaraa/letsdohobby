@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../../config/config";
+import { getConfig } from "../../../config/config";
 import Request from "../../../utility/request";
 import "./avatar.css";
 

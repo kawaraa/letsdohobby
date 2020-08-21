@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../../config/config";
+import { getConfig } from "../../../config/config";
 import Request from "../../../utility/request";
 import CustomDate from "../../../utility/custom-date";
 import DateAndTimeField from "./date-and-time-field";
@@ -15,7 +15,7 @@ class CreatePostForm extends React.Component {
     this.onSubmit = this.handleSubmit.bind(this);
     this.removeFile = this.handleRemoveFile.bind(this);
     this.close = this.closeErrorMessage.bind(this);
-    this.config = config("createPostForm");
+    this.config = getConfig("createPostForm");
     this.state = {
       loading: false,
       error: "",

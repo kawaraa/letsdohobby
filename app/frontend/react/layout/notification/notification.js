@@ -1,13 +1,16 @@
 import React from "react";
 import Request from "../../utility/request";
-import { config } from "../../config/config";
+import { getConfig } from "../../config/config";
+import { AppContext } from "../../store/app-store";
 import NotificationList from "./notification-list";
 import "./notification.css";
+
+// const {Request,  user } = useContext(AppContext);
 
 class Notification extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("notification");
+    this.config = getConfig("notification");
     this.markAsSeen = this.onSeeNotifications.bind(this);
     this.state = { showNotificationList: false, unseenNotifications: [] };
   }

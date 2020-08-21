@@ -1,35 +1,33 @@
-import React from "react";
-import { config } from "../../config/config";
+import React, { useEffect, useState } from "react";
+import { getConfig } from "../../config/config";
 import Request from "../../utility/request";
 import Chat from "./chat";
 import LoadingIcon from "../icon/loading-icon";
 import "./chat-list.css";
 
-class ChatList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.config = config("chatList");
-    this.state = { loading: true, error: "", chats: [] };
-  }
+const ChatList = (props) => {
+  const config = getConfig("chatList");
+  const [state, setState] = useState({ chats: [], loading: true, error: "" });
 
-  async componentDidMount() {
-    try {
-      const chats = await Request.fetch(this.config.url);
-      this.setState({ chats, error: "", loading: false });
-    } catch (error) {
-      this.setState({ error: error.message, loading: false });
-    }
-  }
+  useEffect(() => {
+    (async () => {
+      try {
+        const chats = await Request.fetch(config.url);
+        setState({ chats, loading: false, error: "" });
+      } catch (error) {
+        setState({ error: error.message, loading: false, chats: [] });
+      }
+    })();
+  }, []);
 
-  render() {
-    const { loading, error, chats } = this.state;
-    let content = chats.map((chat, i) => <Chat chat={chat} key={i} />);
+  const { loading, error, chats } = state;
 
-    if (!chats[0]) content = <li className="chat no-items">No notifications</li>;
-    if (error) content = <li className="chat error">{error}</li>;
-    if (loading) content = <LoadingIcon name="chat" color="#7b95e0" />;
+  const resultMessage = <li className="chat no-items">No notifications</li>;
+  let content = chats[0] ? chats.map((chat, i) => <Chat chat={chat} key={i} />) : resultMessage;
 
-    return <ul className="chat list">{content}</ul>;
-  }
-}
+  if (error) content = <li className="chat error">{error}</li>;
+  if (loading) content = <LoadingIcon name="chat" color="#7b95e0" />;
+
+  return <ul className="chat list">{content}</ul>;
+};
 export default ChatList;

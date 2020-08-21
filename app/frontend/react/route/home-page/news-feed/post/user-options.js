@@ -1,5 +1,5 @@
 import React from "react";
-import { config } from "../../../../config/config";
+import { getConfig } from "../../../../config/config";
 import DotsIcon from "../../../../layout/icon/dots-icon";
 import "./options.css";
 
@@ -9,7 +9,7 @@ class UserOptions extends React.Component {
     this.onShow = () => this.setState({ showList: !this.state.showList });
     this.onEdit = this.handleEdit.bind(this);
     this.onShare = this.handleCopyPostLink.bind(this);
-    this.config = config("share");
+    this.config = getConfig("share");
     this.state = { showList: false };
   }
 
