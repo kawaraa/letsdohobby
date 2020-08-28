@@ -8,7 +8,7 @@ class EditPSW extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.handleSubmit.bind(this);
-    this.config = config("updatePsw");
+    this.config = getConfig("updatePsw");
     this.state = { loading: false, error: "" };
   }
 

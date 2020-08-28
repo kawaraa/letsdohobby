@@ -11,8 +11,8 @@ const Navbar = (props) => {
   const { user, connected } = useContext(AppContext);
 
   useEffect(() => {
-    window.addEventListener("click", ({ target } = e) => {
-      if (!/navbar avatar/gim.test(target.className)) setShowList(false);
+    window.addEventListener("click", ({ target: { className } }) => {
+      if (!/navbar avatar/gim.test(className)) setShowList(false);
     });
   }, []);
 
@@ -47,7 +47,7 @@ const Navbar = (props) => {
             onClick={() => setShowList(!showList)}
           />
 
-          {showList && <OptionsList user={user} />}
+          {showList && <OptionsList {...user} />}
         </div>
       </nav>
     </div>

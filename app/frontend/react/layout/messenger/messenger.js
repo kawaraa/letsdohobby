@@ -10,8 +10,8 @@ const Messenger = (props) => {
   const { Request, unseenChats, setUnseenChats } = useContext(AppContext);
 
   useEffect(() => {
-    window.addEventListener("click", ({ target } = e) => {
-      if (!/messenger-button/.test(target.className)) setShowChatList(false);
+    window.addEventListener("click", ({ target: { className } }) => {
+      if (!/messenger-button/.test(className)) setShowChatList(false);
     });
     Request.fetch(config.url)
       .then((unseenChats) => setUnseenChats(unseenChats))

@@ -14,12 +14,15 @@
   padding: 0;
   font-weight: bold;
 }
-.full-name.edit-icon-wrapper {
+.full-name.edit-icon {
   position: relative;
-  padding: 5px;
+  width: 35px;
+  height: 35px;
+  padding: 0;
   border-radius: 5px;
+  cursor: pointer;
 }
-.full-name.edit-icon-wrapper:hover {
+.full-name.edit-icon:hover {
   background: var(--white-color);
 }
 
@@ -44,7 +47,7 @@
   .full-name.title {
     font-size: 30px;
   }
-  .edit-icon-wrapper {
+  .edit-icon {
     width: 30px;
     height: 30px;
   }

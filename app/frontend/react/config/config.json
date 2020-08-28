@@ -174,11 +174,6 @@
     "method": "PUT",
     "participants": 100
   },
-  "post": {
-    "url": "/api/post/",
-    "method": "DELETE",
-    "confirmMessage": "Note: deleting post will also delete the post's chat and messages.\nAre sure you want to continue?"
-  },
   "options": {
     "join": {
       "url": "/api/group/join/",
@@ -192,10 +187,15 @@
       "url": "/api/post/report/",
       "method": "POST"
     },
+    "delete": {
+      "url": "/api/post/",
+      "method": "DELETE"
+    },
     "share": {
       "url": "/posts/",
       "error": "Something wrong happened, Couldn't copy the post link(!)"
-    }
+    },
+    "confirmMessage": "Note: deleting post will also delete the post's chat and messages.\nAre sure you want to continue?"
   },
   "settings": {
     "url": "/api/user/settings",

@@ -1,119 +1,87 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { getConfig } from "../../../../config/config";
-import Request from "../../../../utility/request";
-import DotsIcon from "../../../../layout/icon/dots-icon";
+import { AppContext } from "../../../../store/app-store";
 import LoadingIcon from "../../../../layout/icon/loading-icon";
-import ExclamationMark from "../../../../layout/exclamation-mark";
 import "./options.css";
 
-class MemberOptions extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onShow = () => this.setState({ showList: !this.state.showList });
-    this.onJoin = this.handleJoinRequest.bind(this);
-    this.onCancel = this.handleCancelRequest.bind(this);
-    this.onReport = this.handleReportPost.bind(this);
-    this.onShare = this.handleCopyPostLink.bind(this);
-    this.config = getConfig("options");
-    this.state = { loading: false, success: true, showList: false };
-  }
+const MemberOptions = ({ post }) => {
+  const config = getConfig("options");
+  const { Request, updatePost, updateProgress, popMessage } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
+  const [showList, setShowList] = useState(false);
 
-  showMessage(message) {
-    window.dispatchEvent(new CustomEvent("SHOW_MESSAGE", { detail: message }));
-  }
-
-  async handleJoinRequest() {
-    const { post } = this.props;
+  const handleJoinAndCancelRequest = async () => {
+    const url = post.requested ? config.cancel.url : config.join.url;
+    const method = post.requested ? config.cancel.method : config.join.method;
     try {
-      this.setState({ loading: true });
-      await Request.send(null, this.config.join.url + post.id, this.config.join.method);
-      post.requested = true;
-      this.setState({ loading: false, success: true });
-      window.dispatchEvent(new CustomEvent("UPDATE_POST", { detail: post }));
+      setLoading(true);
+      await Request.send(null, url + post.id, method);
+      post.requested = !post.requested;
+      setLoading(false);
+      updatePost(post);
+      updateProgress({ error: "" });
     } catch (error) {
-      this.setState({ loading: false, success: false });
+      setLoading(false);
+      updateProgress({ error: error.message });
     }
-  }
-  async handleCancelRequest() {
-    const { post } = this.props;
+  };
+  const handleReportPost = async () => {
     try {
-      this.setState({ loading: true });
-      await Request.send(null, this.config.cancel.url + post.id, this.config.cancel.method);
-      post.requested = false;
-      this.setState({ loading: false, success: true });
-      window.dispatchEvent(new CustomEvent("UPDATE_POST", { detail: post }));
+      await Request.send(null, config.report.url + post.id, config.report.method);
+      popMessage("Post has been reported");
     } catch (error) {
-      this.setState({ loading: false, success: false });
+      updateProgress({ loading: false, error: error.message });
     }
-  }
-  async handleReportPost() {
-    const { url, method } = this.config.report;
+  };
+  const handleCopyPostLink = async () => {
     try {
-      await Request.send(null, url + this.props.post.id, method);
-      this.showMessage("Post has been reported");
+      await navigator.clipboard.writeText(config.share.url + post.id);
+      popMessage("Copied post link");
     } catch (error) {
-      this.showMessage("Couldn't report the post");
+      updateProgress({ loading: false, error: config.share.error });
     }
-  }
-  async handleCopyPostLink() {
-    try {
-      await navigator.clipboard.writeText(this.config.share.url + this.props.post.id);
-      this.showMessage("Copied post link");
-    } catch (error) {
-      this.showMessage("Couldn't copy post link");
-    }
-  }
-  componentDidMount() {
-    window.addEventListener("click", ({ target } = e) => {
-      const cssClass = target.classNameVal || target.className;
-      if (!/dots-icon/gim.test(cssClass)) this.setState({ showList: false });
+  };
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (!/post dots-icon/gim.test(e.target.className)) setShowList(false);
     });
-  }
+  }, []);
 
-  renderJoinBtn(post) {
-    return !post.requested ? (
-      <button className="post join-button" onClick={this.onJoin}>
-        {this.state.loading && <LoadingIcon />} {!this.state.success && <ExclamationMark />}Join
-      </button>
-    ) : (
-      <button className="post join-button" onClick={this.onCancel}>
-        {this.state.loading && <LoadingIcon />} {!this.state.success && <ExclamationMark />}Cancel
-      </button>
-    );
-  }
+  return (
+    <div className="post options-wrapper">
+      <img
+        onClick={() => setShowList(!showList)}
+        src="/image/dots.svg"
+        alt="Post options button"
+        className="post dots-icon no-line"
+      />
 
-  render() {
-    const { post } = this.props;
+      {post.requested !== undefined && (
+        <button className="post join-button" onClick={handleJoinAndCancelRequest}>
+          {loading && <LoadingIcon />} {post.requested ? "Cancel" : "Join"}
+        </button>
+      )}
 
-    return (
-      <div className="post options-wrapper">
-        <DotsIcon onClick={this.onShow} name="post" />
-
-        {post.requested !== undefined && this.renderJoinBtn(post)}
-
-        {this.state.showList && (
-          <div className="post options-list" role="list" title="Options list" tabindex="0">
-            <button
-              onClick={this.onReport}
-              type="button"
-              className="post options-item top"
-              title="Report post"
-            >
-              Report
-            </button>
-            <button
-              onClick={this.onShare}
-              type="button"
-              className="post options-item"
-              title="Share post or Copy the post link"
-            >
-              Share
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+      {showList && (
+        <div className="post options-list" role="list" title="Options list" tabindex="0">
+          <button
+            onClick={handleReportPost}
+            type="button"
+            className="post options-item top"
+            title="Report post">
+            Report
+          </button>
+          <button
+            onClick={handleCopyPostLink}
+            type="button"
+            className="post options-item"
+            title="Share post or Copy the post link">
+            Share
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default MemberOptions;

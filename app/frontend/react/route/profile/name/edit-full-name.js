@@ -1,60 +1,66 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { getConfig } from "../../../config/config";
-import Request from "../../../utility/request";
+import { AppContext } from "../../../store/app-store";
+import { ProfileContext } from "../../../store/profile-store";
 import LoadingScreen from "../../../layout/icon/loading-screen";
 import CustomMessage from "../../../layout/custom-message";
 import "./full-name-field.css";
 
-class EditFullName extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.handleSubmit.bind(this);
-    this.config = config("updateFullName");
-    this.state = { loading: false, error: "" };
-  }
+const EditFullName = (props) => {
+  const config = getConfig("updateFullName");
+  const { Request, setUser } = useContext(AppContext);
+  const { profile, setProfile, setEditingField } = useContext(ProfileContext);
+  const [{ loading, error }, setState] = useState({ loading: false, error: "" });
 
-  async handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { profile } = this.props;
       const fullName = { firstName: e.target.firstName.value, lastName: e.target.lastName.value };
-      this.setState({ loading: true });
-      const user = await Request.send(fullName, this.config.url);
-      window.user = user;
+      setState({ loading: true, error: "" });
+      const user = await Request.send(fullName, config.url);
       profile.displayName = user.displayName;
       profile.firstName = fullName.firstName;
       profile.lastName = fullName.lastName;
-      this.props.changeMode({ editField: "", profile });
+      setProfile(profile);
+      setUser(user);
+      setState({ loading: false, error: "" });
+      setEditingField("");
     } catch (error) {
-      this.setState({ loading: false, error: error.message });
+      setState({ loading: false, error: error.message });
     }
-  }
+  };
 
-  render() {
-    const { loading, error } = this.state;
-    if (loading) return <LoadingScreen />;
-    const { profile, changeMode } = this.props;
-    const f = profile.firstName,
-      l = profile.lastName;
+  if (loading) return <LoadingScreen />;
 
-    return (
-      <form className="full-name edit-form" onSubmit={this.onSubmit}>
-        <img
-          src="/image/x-icon.svg"
-          alt="Close edit full name form button"
-          className="full-name x-icon img"
-          onClick={() => changeMode({ editField: "" })}
-        />
+  return (
+    <form className="full-name edit-form" onSubmit={handleSubmit}>
+      <img
+        src="/image/x-icon.svg"
+        alt="Close edit full name form button"
+        className="full-name x-icon img"
+        onClick={() => setEditingField("")}
+      />
 
-        <input type="text" name="firstName" defaultValue={f} placeholder="First Name" className="f no-line" />
-        <input type="text" name="lastName" defaultValue={l} placeholder="Last Name" className="l no-line" />
-        <button type="submit" className="no-line">
-          Save
-        </button>
-        {error && <CustomMessage text={error} name="error" />}
-      </form>
-    );
-  }
-}
+      <input
+        type="text"
+        name="firstName"
+        defaultValue={profile.firstName}
+        placeholder="First Name"
+        className="f no-line"
+      />
+      <input
+        type="text"
+        name="lastName"
+        defaultValue={profile.lastName}
+        placeholder="Last Name"
+        className="l no-line"
+      />
+      <button type="submit" className="no-line">
+        Save
+      </button>
+      {error && <CustomMessage text={error} name="error" />}
+    </form>
+  );
+};
 
 export default EditFullName;

@@ -7,40 +7,29 @@ import AppStore, { AppContext } from "./store/app-store";
 import LoadingScreen from "./layout/icon/loading-screen";
 import CustomMessage from "./layout/custom-message";
 import Navbar from "./layout/navbar";
+import Conversations from "./layout/conversation/conversations";
 import HomePage from "./route/home-page/home-page";
 import Profile from "./route/profile/profile";
 import Settings from "./route/settings/settings";
 import PostDetail from "./route/post-detail/post-detail";
 import MyItems from "./route/my-items/my-items";
-import Conversations from "./layout/conversation/conversations";
 import Member from "./route/member/member";
 import "./app.css";
+import ProfileStore from "./store/profile-store";
 
 const App = (props) => {
   const config = getConfig("app");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const {
-    Request,
-    user,
-    setUser,
-    setLocation,
-    setConnected,
-    conversations,
-    showMessage,
-    addNotification,
-    removeNotification,
-    addUnseenChat,
-  } = useContext(AppContext);
+  const store = useContext(AppContext);
+  const [{ loading, error }, setState] = useState({ loading: true, error: "" });
+  const { Request, progress, updateProgress, conversations, showMessage, percentComplete } = store;
 
   const getUser = async () => {
     try {
       const user = await Request.fetch(config.checkState.url);
-      setUser(user);
-      setLoading(false);
+      store.setUser(user);
+      setState({ loading: false, error: "" });
     } catch (error) {
-      setError(error.message);
-      setLoading(false);
+      setState({ loading: false, error: error.message });
     }
   };
 
@@ -50,11 +39,13 @@ const App = (props) => {
       if (!position.coords) throw new Error("Couldn't get the location");
       const { latitude, longitude } = position.coords;
       await Request.send({ currentLat: latitude, currentLng: longitude }, url, method);
-      setLocation({ latitude, longitude, error: "" });
+      store.setLocation({ latitude, longitude, error: "" });
     } catch (error) {
-      setLocation({ latitude: 0, longitude: 0, error: error.message });
+      store.setLocation({ latitude: 0, longitude: 0, error: error.message });
     }
   };
+
+  const closeError = () => updateProgress({ error: "" });
 
   useEffect(() => {
     setEventsListeners();
@@ -63,33 +54,37 @@ const App = (props) => {
     setInterval(() => navigator.geolocation.getCurrentPosition(getLocation, getLocation), 3600000);
 
     window.socket = new Socket(config.socketUrl);
-    window.socket.onclose = () => setConnected(false);
-    window.socket.onerror = () => setConnected(false);
-    window.socket.on("ADD_NOTIFICATION", (e) => addNotification(e.detail));
-    window.socket.on("REMOVE_NOTIFICATION", (e) => removeNotification(e.detail));
-    window.socket.on("NEW_UNSEEN_CHAT", (e) => addUnseenChat(e.detail));
+    window.socket.onclose = () => store.setConnected(false);
+    window.socket.onerror = () => store.setConnected(false);
+    window.socket.on("ADD_NOTIFICATION", (e) => store.addNotification(e.detail));
+    window.socket.on("REMOVE_NOTIFICATION", (e) => store.removeNotification(e.detail));
+    window.socket.on("NEW_UNSEEN_CHAT", (e) => store.addUnseenChat(e.detail));
     window.socket.on("NEW_MESSAGE", (e) => window.dispatchEvent(new CustomEvent("NEW_MESSAGE", e)));
-    window.socket.onopen = () => setConnected(true);
+    window.socket.onopen = () => store.setConnected(true);
     setInterval(() => window.socket.readyState === 1 && socket.emit("PING", {}), 60000);
     return () => window.socket.close(); // this act exactly like componentWillUnmount
   }, []);
 
   if (loading) return <LoadingScreen />;
   if (error) return <CustomMessage text={error} name="error" />;
-  if (!user || !user.id) return window.location.reload();
+  if (!store.user || !store.user.id) return window.location.reload();
 
   return (
     <BrowserRouter>
       <Navbar />
+      {progress.loading && <LoadingScreen text={percentComplete + "%"} />}
+      {progress.error && <CustomMessage text={progress.error} name="progress-error" listener={closeError} />}
+      {showMessage && <p className="screen-message">{showMessage}</p>}
       <Switch>
         <Route exact path="/" render={() => <HomePage />} />
-        <Route exact path="/profile" render={(props) => <Profile {...props} />} />
-        <Route exact path="/settings" render={(props) => <Settings {...props} />} />
+        <ProfileStore>
+          <Route exact path="/profile" render={(props) => <Profile {...props} />} />
+          <Route exact path="/settings" render={(props) => <Settings {...props} />} />
+        </ProfileStore>
         <Route exact path="/posts/:id" render={(props) => <PostDetail {...props} />} />
         <Route exact path="/my-posts" render={(props) => <MyItems {...props} />} />
         <Route exact path="/member/:id" render={(props) => <Member {...props} />} />
       </Switch>
-      {showMessage && <p className="screen-message">{showMessage}</p>}
       {conversations[0] && <Conversations conversations={conversations} />}
     </BrowserRouter>
   );

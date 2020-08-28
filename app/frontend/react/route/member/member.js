@@ -9,7 +9,7 @@ import "./member.css";
 class Member extends React.Component {
   constructor() {
     super();
-    this.config = config("memberProfile");
+    this.config = getConfig("memberProfile");
     this.state = { loading: true, error: "" };
   }
 

@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
-import { AppContext } from "../../store/app-store";
+import React from "react";
 import CustomDate from "../../utility/custom-date";
 import "./chat.css";
 
-export default ({ chat } = props) => {
-  const { openConversation } = useContext(AppContext);
-
+export default ({ chat, openChat }) => {
   return (
-    <li className={"chat-list item"} onClick={() => openConversation(chat)}>
+    <li className={"chat-list item"} onClick={() => openChat(chat)}>
       <h2 className="chat name">{chat.activity}</h2>
       <span className="chat members">
         <span className="chat members-counter">{chat.members}</span>

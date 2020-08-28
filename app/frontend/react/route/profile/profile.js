@@ -1,6 +1,7 @@
-import React from "react";
-import { getConfig } from "../../config/config";
+import React, { useContext, useState, useEffect } from "react";
 import Request from "../../utility/request";
+import { getConfig } from "../../config/config";
+import { ProfileContext } from "../../store/profile-store";
 import Avatar from "./avatar/avatar";
 import EditAvatar from "./avatar/edit-avatar";
 import FullNameField from "./name/full-name-field";
@@ -13,58 +14,51 @@ import LoadingScreen from "../../layout/icon/loading-screen";
 import CustomMessage from "../../layout/custom-message";
 import "./profile.css";
 
-class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.changeMode = this.handleUpdateState.bind(this);
-    this.config = config("getProfile");
-    this.state = { loading: true, error: "", profile: null, editField: "" };
-  }
+const Profile = (props) => {
+  const config = getConfig("getProfile");
+  const { profile, setProfile, editingField, setEditingField } = useContext(ProfileContext);
+  const [{ loading, error }, setState] = useState({ loading: true, error: "" });
+  const setMode = (fieldName) => setEditingField(fieldName);
 
-  handleUpdateState(data) {
-    this.setState(data);
-  }
-  async componentDidMount() {
+  const componentDidMount = async () => {
     try {
-      const profile = await Request.fetch(this.config.url);
-      this.setState({ profile, loading: false });
+      const profile = await Request.fetch(config.url);
+      setProfile(profile);
+      setState({ loading: false, error: "" });
     } catch (error) {
-      this.setState({ message: error.message, loading: false });
+      setState({ loading: false, error: error.message });
     }
-  }
+  };
 
-  render() {
-    if (this.state.loading) return "Loading...";
-    const { loading, error, profile, editField } = this.state;
-    if (loading) return <LoadingScreen />;
-    if (error) return <CustomMessage text={error} name="error" />;
-    const nameProps = { profile, changeMode: this.changeMode };
-    const actProps = { activities: profile.activities, changeMode: this.changeMode };
-    const editAvatar = editField === "avatar";
-    const editName = editField === "name";
-    const editAbout = editField === "about";
+  useEffect(() => {
+    componentDidMount();
+  }, []);
 
-    return (
-      <div className="outer-container">
-        <div className="profile container">
-          {editAvatar ? <EditAvatar changeMode={this.changeMode} /> : <Avatar changeMode={this.changeMode} />}
-          {editName ? <EditFullName {...nameProps} /> : <FullNameField changeMode={this.changeMode} />}
-          {editAbout ? <EditAbout {...nameProps} /> : <AboutField {...nameProps} />}
+  if (loading) return <LoadingScreen />;
+  if (error) return <CustomMessage text={error} name="error" />;
 
-          <div className="profile custom-field">
-            <h4 className="title">Gender</h4>
-            <p className="content">{profile.gender}</p>
-          </div>
-          <div className="profile custom-field">
-            <h4 className="title">Birthday</h4>
-            <p className="content">{profile.birthday || "Not specified"}</p>
-          </div>
+  const properties = { activities: profile.activities, setMode };
 
-          {editField === "activity" ? <EditActivities {...actProps} /> : <Activities {...actProps} />}
+  return (
+    <div className="outer-container">
+      <div className="profile container">
+        {editingField === "avatar" ? <EditAvatar setMode={setMode} /> : <Avatar setMode={setMode} />}
+        {editingField === "name" ? <EditFullName /> : <FullNameField />}
+        {editingField === "about" ? <EditAbout /> : <AboutField />}
+
+        <div className="profile custom-field">
+          <h4 className="title">Gender</h4>
+          <p className="content">{profile.gender}</p>
         </div>
+        <div className="profile custom-field">
+          <h4 className="title">Birthday</h4>
+          <p className="content">{profile.birthday || "Not specified"}</p>
+        </div>
+
+        {editingField === "activity" ? <EditActivities /> : <Activities {...properties} />}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Profile;

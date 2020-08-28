@@ -12,7 +12,7 @@ import "./post-detail.css";
 class PostDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("postDetail");
+    this.config = getConfig("postDetail");
     this.state = { loading: true };
   }
 
@@ -37,8 +37,7 @@ class PostDetail extends React.Component {
               <Link
                 to={"/member/" + owner.id}
                 className="post-details avatar link no-line"
-                title="Owner avatar"
-              >
+                title="Owner avatar">
                 <img
                   src={owner.avatarUrl || "/image/avatar.svg"}
                   alt="post-details avatar"
@@ -50,8 +49,7 @@ class PostDetail extends React.Component {
                 <Link
                   to={"/member/" + owner.id}
                   className="post-details owner-name no-line"
-                  title="Owner name"
-                >
+                  title="Owner name">
                   {owner.displayName}
                 </Link>
                 <img

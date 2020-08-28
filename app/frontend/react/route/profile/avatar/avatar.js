@@ -1,56 +1,49 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { getConfig } from "../../../config/config";
-import Request from "../../../utility/request";
+import { AppContext } from "../../../store/app-store";
+import CustomMessage from "../../../layout/custom-message";
 import "./avatar.css";
 
-export default class ProfileAvatar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onDelete = this.handleDelete.bind(this);
-    this.config = config("deleteAvatar");
-    this.state = { error: "" };
-  }
+const ProfileAvatar = ({ setMode }) => {
+  const config = getConfig("deleteAvatar");
+  const { Request, user, setUser } = useContext(AppContext);
+  const [error, setError] = useState("");
 
-  async handleDelete() {
+  const handleDelete = async () => {
     try {
-      const user = await Request.send(null, this.config.url, this.config.method);
-      window.dispatchEvent(new CustomEvent("UPDATE_APP", { detail: { user } }));
+      const user = await Request.send(null, config.url, config.method);
+      setError("");
+      setUser(user);
     } catch (error) {
-      console.log(error);
-      this.setState({ error: error.message });
+      setError(error.message);
     }
-  }
-  render() {
-    const { displayName, avatarUrl } = window.user;
-    const { error } = this.state;
-    const initials = <span className="avatar initials">{displayName[0]}</span>;
-    const avatar = <img src={avatarUrl} alt="Profile Avatar" className="profile avatar-img" />;
+  };
 
-    return (
-      <div className="profile avatar wrapper">
-        {error && (
-          <p className="avatar error" title="Deleting avatar Error message">
-            {error}
-          </p>
-        )}
-        {avatarUrl ? avatar : initials}
-        <div className="avatar btns">
-          {avatarUrl && (
-            <button type="button" onClick={this.onDelete} title="Delete avatar" className="delete no-line">
-              Delete
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={() => this.props.changeMode({ editField: "avatar" })}
-            title="Edit avatar"
-            className="edit no-line"
-            style={{ textAlign: avatarUrl ? "left" : "center" }}
-          >
-            Edit
+  const initials = <span className="avatar initials">{user.displayName[0]}</span>;
+  const avatar = <img src={user.avatarUrl} alt="Profile Avatar" className="profile avatar-img" />;
+
+  return (
+    <div className="profile avatar wrapper">
+      {error && <CustomMessage name="avatar error" text={error} listener={() => setError("")} />}
+
+      {user.avatarUrl ? avatar : initials}
+
+      <div className="avatar btns">
+        {user.avatarUrl && (
+          <button type="button" onClick={handleDelete} title="Delete avatar" className="delete no-line">
+            Delete
           </button>
-        </div>
+        )}
+        <button
+          type="button"
+          onClick={() => setMode("avatar")}
+          title="Edit avatar"
+          className="edit no-line"
+          style={{ textAlign: user.avatarUrl ? "left" : "center" }}>
+          Edit
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+export default ProfileAvatar;

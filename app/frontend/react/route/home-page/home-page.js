@@ -8,12 +8,12 @@ import "./home-page.css";
 
 const HomePage = (props) => {
   const [showForm, setShowForm] = useState(false);
-  const { user, location, showMessage } = useContext(AppContext);
+  const { user, location } = useContext(AppContext);
 
   useEffect(() => {
-    window.addEventListener("click", ({ target } = e) => {
-      if (/create-post button/gim.test(target.className)) return setShowForm(true);
-      else if (/create-post x-icon|container/gm.test(target.className)) setShowForm(false);
+    window.addEventListener("click", ({ target: { className } }) => {
+      if (/create-post-button/gim.test(className)) setShowForm(true);
+      else if (/create-post x-icon|create-post-container/gm.test(className)) setShowForm(false);
     });
   }, []);
 
@@ -28,13 +28,12 @@ const HomePage = (props) => {
         <div className="create-post button-wrapper">
           <img src={user.avatarUrl || "/image/avatar.svg"} alt="My Avatar" className="avatar img no-line" />
 
-          <button className="create-post button no-line" title="Show create post form">
+          <button className="create-post-button no-line" title="Show create post form">
             Share your favorite activity with locals
           </button>
         </div>
         {showForm && <CreatePostForm closeForm={() => setShowForm(false)} />}
-        {showMessage && <p className="screen-message">{showMessage}</p>}
-        {/* <NewsFeed /> */}
+        <NewsFeed />
       </main>
     </div>
   );

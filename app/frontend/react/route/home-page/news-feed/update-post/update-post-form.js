@@ -1,50 +1,46 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { getConfig } from "../../../../config/config";
-import Request from "../../../../utility/request";
+import { AppContext } from "../../../../store/app-store";
 import CustomDate from "../../../../utility/custom-date";
 import DateAndTimeField from "../../create-post-form/date-and-time-field";
-import LoadingScreen from "../../../../layout/icon/loading-screen";
 import CustomMessage from "../../../../layout/custom-message";
 import "./update-post-form.css";
 
-class UpdatePostForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.config = getConfig("updatePost");
-    this.onChange = this.handleChange.bind(this);
-    this.onSubmit = this.handleSubmit.bind(this);
-    this.close = this.closeErrorMessage.bind(this);
-    this.state = { loading: true, error: "", active: false };
-  }
+const UpdatePostForm = ({ post: { id, owner, activity, participants, startAt, description, createdAt } }) => {
+  const config = getConfig("updatePost");
+  const { Request, user, updateProgress, updatePost, setEditingPost } = useContext(AppContext);
+  const [describe, setDescribe] = useState(description);
 
-  handleChange({ target } = e) {
-    const active = this.state.description.length > 30 ? true : false;
-    this.setState({ [target.name]: target.value, active });
-  }
-  async handleSubmit(e) {
+  const handleChange = ({ target: { name, value } }) => name === "description" && setDescribe(value);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { id, participants, description } = this.state;
-    const form = new FormData(e.target);
-    const d = new Date();
-    let startAt = `${form.get("month")}-${form.get("day")} ${form.get("hour")}:${form.get("minute")}`;
-    startAt = d.getFullYear() + "-" + startAt;
-    const data = { id, participants, description, todayDate: CustomDate.toString(d), startAt };
-    try {
-      this.setState({ loading: true });
-      const post = await Request.send(data, this.config.url, this.config.method);
-      window.dispatchEvent(new CustomEvent("UPDATE_POST", { detail: post }));
-      window.dispatchEvent(new CustomEvent("SHOW_HIDE_UPDATE_POST_FORM", { detail: "update-post x-icon" }));
-    } catch (error) {
-      this.setState({ loading: false, error: error.message });
-    }
-  }
-  closeErrorMessage() {
-    this.setState({ error: "" });
-  }
+    const { month, day, hour, minute, participants } = e.target;
+    const date = new Date();
+    const startAt = `${date.getFullYear()}-${month.value}-${day.value} ${hour.value}:${minute.value}`;
+    const todayDate = CustomDate.toString(date);
+    const data = { id, participants: participants.value, description: describe, todayDate, startAt };
 
-  getSelectOptionsForParticipants(selectedParticipants) {
+    try {
+      updateProgress({ loading: true });
+      const post = await Request.send(data, config.url, config.method);
+      updatePost(post);
+      setEditingPost("");
+      updateProgress({ loading: false, error: "" });
+    } catch (error) {
+      updateProgress({ loading: false, error: error.message });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (/update-post x-icon|update-post-container/gm.test(e.target.className)) setEditingPost("");
+    });
+  }, []);
+
+  const getSelectOptionsForParticipants = (selectedParticipants) => {
     const option = [<option value="0">Open</option>];
-    for (let i = 1; i < this.config.participants; i += 1) {
+    for (let i = 1; i < config.participants; i += 1) {
       let item = (
         <option value={i} selected>
           {i}
@@ -54,89 +50,77 @@ class UpdatePostForm extends React.Component {
       option.push(item);
     }
     return option;
-  }
-  componentDidMount() {
-    this.setState({ loading: false, ...this.props.post });
-  }
+  };
 
-  render() {
-    const { error, active, owner, activity, participants, description, startAt, createdAt } = this.state;
-    if (this.state.loading) return <LoadingScreen />;
+  return (
+    <div className="update-post-container">
+      <div className="update-post-inner">
+        <form className="update-post form no-line" onSubmit={handleSubmit} onChange={handleChange}>
+          <h3 className="update-post title no-line" tabindex="0">
+            Update Post
+          </h3>
 
-    return (
-      <div className="update-post-container">
-        <div className="update-post-inner">
-          <form className="update-post form no-line" onSubmit={this.onSubmit} onChange={this.onChange}>
-            <h3 className="update-post title no-line" tabindex="0">
-              Update Post
-            </h3>
+          <img
+            src="/image/x-icon.svg"
+            alt="Close update post form button"
+            className="update-post x-icon img"
+          />
 
+          <header className="update-post header no-line" title="Post Header owner info" tabindex="0">
             <img
-              src="/image/x-icon.svg"
-              alt="Close update post form button"
-              className="update-post x-icon img"
+              src={user.avatarUrl || "/image/avatar.svg"}
+              alt="My Avatar"
+              className="update-post avatar img no-line"
             />
 
-            <header className="update-post header no-line" title="Post Header owner info" tabindex="0">
+            <div className="update-post activity-owner-box">
+              <span className="update-post owner-name no-line" title="Owner name">
+                {owner.displayName}
+              </span>
               <img
-                src={window.user.avatarUrl || "/image/avatar.svg"}
-                alt="My Avatar"
-                className="update-post avatar img no-line"
+                src="/image/triangle-right-arrow.svg"
+                alt="Pointing to"
+                className="update-post triangle-right-arrow"
               />
-
-              <div className="update-post activity-owner-box">
-                <span className="update-post owner-name no-line" title="Owner name">
-                  {owner.displayName}
-                </span>
-                <img
-                  src="/image/triangle-right-arrow.svg"
-                  alt="Pointing to"
-                  className="update-post triangle-right-arrow"
-                />
-                <p className="update-post activity no-line" title="Activity">
-                  {activity}
-                </p>
-              </div>
-              <time className="update-post created-at">{CustomDate.toText(createdAt)}</time>
-            </header>
-
-            {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
-
-            <div className="update-post selects">
-              <div className="selects row">
-                <label for="participants">Participants</label>
-                <select name="participants" required className="no-line">
-                  {this.getSelectOptionsForParticipants(participants)}
-                </select>
-              </div>
-              <div className="selects row">
-                <label for="date-time">Date</label>
-                <DateAndTimeField defaultDate={new Date(startAt)} />
-              </div>
+              <p className="update-post activity no-line" title="Activity">
+                {activity}
+              </p>
             </div>
+            <time className="update-post created-at">{CustomDate.toText(createdAt)}</time>
+          </header>
 
-            <div className="update-post description">
-              <textarea
-                defaultValue={description}
-                name="description"
-                minlength="30"
-                maxlength="1500"
-                className="no-line"
-                required
-              ></textarea>
+          <div className="update-post selects">
+            <div className="selects row">
+              <label for="participants">Participants</label>
+              <select name="participants" required className="no-line">
+                {getSelectOptionsForParticipants(participants)}
+              </select>
             </div>
+            <div className="selects row">
+              <label for="date-time">Date</label>
+              <DateAndTimeField date={new Date(startAt)} />
+            </div>
+          </div>
 
-            <button
-              type="submit"
-              className={"update-post submit " + (active ? "" : "disabled")}
-              disabled={!active}
-            >
-              Save
-            </button>
-          </form>
-        </div>
+          <div className="update-post description">
+            <textarea
+              defaultValue={describe}
+              name="description"
+              minlength="30"
+              maxlength="1500"
+              className="no-line"
+              required></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className={"update-post submit " + (description.length > 30 ? "" : "disabled")}
+            disabled={description.length <= 30}>
+            Save
+          </button>
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 export default UpdatePostForm;

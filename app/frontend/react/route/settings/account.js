@@ -13,7 +13,7 @@ class Account extends React.Component {
     super(props);
     this.updateState = this.handleUpdateState.bind(this);
     this.onDeleteAccount = this.HandleDeleteAccount.bind(this);
-    this.config = config("deleteAccount");
+    this.config = getConfig("deleteAccount");
     this.state = {
       loading: false,
       error: "",

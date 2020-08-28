@@ -1,13 +1,13 @@
 import React from "react";
 import "./activities.css";
 
-export const Activities = ({ changeMode, activities } = props) => {
+export const Activities = ({ setMode, activities } = props) => {
   return (
     <div className="profile activities">
       <h4 className="activities title">Activities</h4>
       {activities[0] && <ActivityList activities={activities} />}
-      <button type="button" className="no-line" onClick={() => changeMode({ editField: "activity" })}>
-        Update
+      <button type="button" className="no-line" onClick={() => setMode("activity")}>
+        Edit
       </button>
     </div>
   );
@@ -25,8 +25,7 @@ export const ActivityList = ({ activities, listener } = props) => {
               onClick={() => listener(act)}
               className="no-line"
               title="Remove activity"
-              tabIndex="0"
-            >
+              tabIndex="0">
               X
             </button>
           )}
@@ -44,8 +43,7 @@ export const FilteredActivities = ({ filter, addActivity } = props) => {
           onClick={() => addActivity(act)}
           className="item no-line"
           title="Filtered activity item"
-          tabindex="0"
-        >
+          tabindex="0">
           {act}
         </li>
       ))}

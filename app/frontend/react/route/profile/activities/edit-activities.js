@@ -1,80 +1,66 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { getConfig } from "../../../config/config";
 import Request from "../../../utility/request";
+import { ProfileContext } from "../../../store/profile-store";
 import { ActivityList, FilteredActivities } from "./activities";
 import CustomMessage from "../../../layout/custom-message";
 import LoadingScreen from "../../../layout/icon/loading-screen";
 import "./activities.css";
+import { AppContext } from "../../../store/app-store";
 
-class EditActivities extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onChange = this.handleChange.bind(this);
-    this.addActivity = this.handleAddActivity.bind(this);
-    this.removeActivity = this.handleRemoveActivity.bind(this);
-    this.submit = this.handleSubmit.bind(this);
-    this.activities = config("activities");
-    this.config = config("updateActivities");
-    this.state = { loading: false, activities: [], filter: [] };
-  }
+const EditActivities = (props) => {
+  const availableActivities = getConfig("activities");
+  const config = getConfig("updateActivities");
+  const { Request, updateProgress } = useContext(AppContext);
+  const { profile, setProfile, setEditingField } = useContext(ProfileContext);
+  const [activities, setActivities] = useState(profile.activities);
+  const [filter, setFilter] = useState([]);
+  const [error, setError] = useState("");
 
-  handleChange({ target } = e) {
-    const has = (item) => this.state.activities.indexOf(item) >= 0;
-    const test = (item) => item.toLowerCase().indexOf(target.value.toLowerCase()) >= 0 && !has(item);
-    const filter = target.value.trim().length > 0 ? this.activities.filter(test) : [];
-    this.setState({ filter });
-  }
-  handleAddActivity(activity) {
-    const { activities } = this.state;
-    if (activities.indexOf(activity) < 0) activities.push(activity);
-    this.setState({ activities });
-  }
-  handleRemoveActivity(activity) {
-    const { activities } = this.state;
-    this.setState({ activities: activities.filter((act) => act !== activity) });
-  }
+  const handleChange = ({ target: { value } }) => {
+    const has = (item) => activities.indexOf(item) > -1;
+    const test = (item) => item.toLowerCase().indexOf(value.toLowerCase()) > -1 && !has(item);
+    setFilter(value.trim().length > 0 ? availableActivities.filter(test) : []);
+  };
 
-  async handleSubmit() {
+  const handleAddActivity = (activity) => {
+    if (activities.indexOf(activity) < 0) setActivities([...activities, activity]);
+  };
+
+  const handleRemoveActivity = (activity) => setActivities(activities.filter((act) => act !== activity));
+
+  const handleSubmit = async () => {
     try {
-      this.setState({ loading: true });
-      const profile = await Request.send(this.state.activities, this.config.url, "PUT");
-      this.props.changeMode({ editField: "", profile });
+      updateProgress({ loading: true });
+      const profile = await Request.send(activities, config.url, "PUT");
+      setProfile(profile);
+      setEditingField("");
+      updateProgress({ loading: false });
     } catch (error) {
-      this.setState({ loading: false });
+      setError(error.message);
+      updateProgress({ loading: false });
     }
-  }
-  componentDidMount() {
-    this.setState({ activities: this.props.activities[0] ? this.props.activities : [] });
-  }
+  };
 
-  render() {
-    const { loading, error, activities, filter } = this.state;
-    if (loading) return <LoadingScreen />;
+  return (
+    <div className="profile activities">
+      {error && <CustomMessage text={error} name="activities error" />}
+      {filter[0] && <FilteredActivities filter={filter} addActivity={handleAddActivity} />}
 
-    return (
-      <div className="profile activities">
-        {error && <CustomMessage text={error} name="activities error" />}
-        {filter[0] && <FilteredActivities filter={filter} addActivity={this.addActivity} />}
+      <div className="activities inputs">
+        <input type="text" name="activity" placeholder="Activity" onChange={handleChange} />
 
-        <div className="activities inputs">
-          <input type="text" name="activity" placeholder="Activity" onChange={this.onChange} />
-
-          <button type="button" className="save-btn no-line" onClick={this.submit}>
-            Save
-          </button>
-          <button
-            type="button"
-            className="cancel-btn no-line"
-            onClick={() => this.props.changeMode({ editField: "" })}
-          >
-            Cancel
-          </button>
-        </div>
-
-        {activities[0] && <ActivityList activities={activities} listener={this.removeActivity} />}
+        <button type="button" className="save-btn no-line" onClick={handleSubmit}>
+          Save
+        </button>
+        <button type="button" className="cancel-btn no-line" onClick={() => setEditingField("")}>
+          Cancel
+        </button>
       </div>
-    );
-  }
-}
+
+      {activities[0] && <ActivityList activities={activities} listener={handleRemoveActivity} />}
+    </div>
+  );
+};
 
 export default EditActivities;

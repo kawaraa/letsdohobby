@@ -8,7 +8,7 @@ class EditEmail extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.handleSubmit.bind(this);
-    this.config = config("updateUsername");
+    this.config = getConfig("updateUsername");
     this.state = { error: "" };
   }
 
