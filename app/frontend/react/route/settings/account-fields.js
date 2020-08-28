@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 
-export const UsernameField = (props) => {
+export const UsernameField = ({ user, setEditingField }) => {
   return (
     <div className="account custom-field">
       <h4 className="title">Email</h4>
-      <p className="content">{window.user.username}</p>
-      <button type="button" onClick={() => props.changeMode({ editField: "username" })} className="no-line">
+      <p className="content">{user.username}</p>
+      <button type="button" onClick={() => setEditingField("username")} className="no-line">
         Update
       </button>
     </div>
   );
 };
-export const PswField = (props) => {
+
+export const PswField = ({ setEditingField }) => {
   return (
     <div className="account custom-field">
       <h4 className="title">Password</h4>
       <p className="content">******</p>
-      <button type="button" onClick={() => props.changeMode({ editField: "psw" })} className="no-line">
+      <button type="button" onClick={() => setEditingField("psw")} className="no-line">
         Update
       </button>
     </div>

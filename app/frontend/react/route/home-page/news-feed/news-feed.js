@@ -35,7 +35,8 @@ const NewsFeed = (props) => {
 
   useEffect(() => {
     refreshNewsFeeds();
-    window.onscroll = handleScrollEvent;
+    window.addEventListener("scroll", handleScrollEvent);
+    return () => window.removeEventListener("scroll", handleScrollEvent);
   }, []);
 
   if (!posts || !posts[0]) return <CustomMessage text={config.message} name="no-items" />;

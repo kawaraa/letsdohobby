@@ -2,14 +2,12 @@ import React, { useContext, useState } from "react";
 import { getConfig } from "../../../config/config";
 import { AppContext } from "../../../store/app-store";
 import { ProfileContext } from "../../../store/profile-store";
-import CustomMessage from "../../../layout/custom-message";
 import "./about.css";
 
 const EditAbout = (props) => {
   const config = getConfig("updateAbout");
   const { Request, updateProgress } = useContext(AppContext);
   const { profile, setProfile, setEditingField } = useContext(ProfileContext);
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,10 +16,9 @@ const EditAbout = (props) => {
       const profile = await Request.send({ about: e.target.about.value }, config.url);
       setProfile(profile);
       setEditingField("");
-      updateProgress({ loading: false });
+      updateProgress({ loading: false, error: "" });
     } catch (error) {
-      updateProgress({ loading: false });
-      setError(error.message);
+      updateProgress({ loading: false, error: error.message });
     }
   };
 
@@ -35,8 +32,6 @@ const EditAbout = (props) => {
           Cancel
         </button>
       </div>
-
-      {error && <CustomMessage text={error} name="error" />}
     </form>
   );
 };

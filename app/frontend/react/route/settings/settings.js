@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { getConfig } from "../../config/config";
 import { AppContext } from "../../store/app-store";
 import Account from "./account";
-import CustomMessage from "../../layout/custom-message";
 import "./settings.css";
 
 /*
@@ -42,11 +41,7 @@ const Settings = (props) => {
   // const getLanguages = () => {
   //   return config.languages.map((lang) => {
   //     if (language !== lang) return <option defaultValue="lang">{lang}</option>;
-  //     return (
-  //       <option defaultValue="lang" selected>
-  //         {lang}
-  //       </option>
-  //     );
+  //     return <option defaultValue="lang" selected>{lang}</option>;
   //   });
   // };
 

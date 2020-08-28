@@ -1,36 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { getConfig } from "../../../config/config";
 import { AppContext } from "../../../store/app-store";
 import { ProfileContext } from "../../../store/profile-store";
-import LoadingScreen from "../../../layout/icon/loading-screen";
-import CustomMessage from "../../../layout/custom-message";
 import "./full-name-field.css";
 
 const EditFullName = (props) => {
   const config = getConfig("updateFullName");
-  const { Request, setUser } = useContext(AppContext);
+  const { Request, setUser, updateProgress } = useContext(AppContext);
   const { profile, setProfile, setEditingField } = useContext(ProfileContext);
-  const [{ loading, error }, setState] = useState({ loading: false, error: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const fullName = { firstName: e.target.firstName.value, lastName: e.target.lastName.value };
-      setState({ loading: true, error: "" });
+      updateProgress({ loading: true });
       const user = await Request.send(fullName, config.url);
       profile.displayName = user.displayName;
       profile.firstName = fullName.firstName;
       profile.lastName = fullName.lastName;
       setProfile(profile);
       setUser(user);
-      setState({ loading: false, error: "" });
       setEditingField("");
+      updateProgress({ loading: false, error: "" });
     } catch (error) {
-      setState({ loading: false, error: error.message });
+      updateProgress({ loading: false, error: error.message });
     }
   };
-
-  if (loading) return <LoadingScreen />;
 
   return (
     <form className="full-name edit-form" onSubmit={handleSubmit}>
@@ -58,7 +53,6 @@ const EditFullName = (props) => {
       <button type="submit" className="no-line">
         Save
       </button>
-      {error && <CustomMessage text={error} name="error" />}
     </form>
   );
 };

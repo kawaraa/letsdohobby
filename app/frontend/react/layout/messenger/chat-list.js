@@ -8,7 +8,7 @@ import "./chat-list.css";
 const ChatList = (props) => {
   const config = getConfig("chatList");
   const { Request, openConversation } = useContext(AppContext);
-  const [state, setState] = useState({ chats: [], loading: true, error: "" });
+  const [{ loading, error, chats }, setState] = useState({ chats: [], loading: true, error: "" });
 
   useEffect(() => {
     (async () => {
@@ -20,8 +20,6 @@ const ChatList = (props) => {
       }
     })();
   }, []);
-
-  const { loading, error, chats } = state;
 
   let content = chats[0] ? (
     chats.map((chat, i) => <Chat chat={chat} key={i} openChat={openConversation} />)

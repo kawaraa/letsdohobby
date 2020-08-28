@@ -15,7 +15,6 @@ const EditActivities = (props) => {
   const { profile, setProfile, setEditingField } = useContext(ProfileContext);
   const [activities, setActivities] = useState(profile.activities);
   const [filter, setFilter] = useState([]);
-  const [error, setError] = useState("");
 
   const handleChange = ({ target: { value } }) => {
     const has = (item) => activities.indexOf(item) > -1;
@@ -35,16 +34,14 @@ const EditActivities = (props) => {
       const profile = await Request.send(activities, config.url, "PUT");
       setProfile(profile);
       setEditingField("");
-      updateProgress({ loading: false });
+      updateProgress({ loading: false, error: "" });
     } catch (error) {
-      setError(error.message);
-      updateProgress({ loading: false });
+      updateProgress({ loading: false, error: error.message });
     }
   };
 
   return (
     <div className="profile activities">
-      {error && <CustomMessage text={error} name="activities error" />}
       {filter[0] && <FilteredActivities filter={filter} addActivity={handleAddActivity} />}
 
       <div className="activities inputs">
