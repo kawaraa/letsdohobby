@@ -19,6 +19,7 @@ const EditPSW = (props) => {
       setLoading(false);
       setEditingField("");
     } catch (error) {
+      setLoading(false);
       updateProgress({ error: error.message });
     }
   };

@@ -33,7 +33,7 @@ const NotificationItem = ({ id, text, unseen, removeNotification }) => {
   };
 
   return (
-    <li className={"notification item " + unseen ? "new" : ""}>
+    <li className={"notification item " + (unseen ? "new" : "")}>
       <p className="notification text">
         <strong className="notification subject">{text[0]}</strong>
         {text[1]} <strong className="notification object">{text[2]}</strong>

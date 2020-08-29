@@ -46,9 +46,9 @@ class GroupRepository {
     const { id, owner, membersNumber, newMemberId, newMemberName } = result[0];
 
     query = `INSERT IGNORE INTO feeds.chat SET ?`;
-    await this.mySqlProvider.query(query, { postId: id, member: newMemberId, unseenMessages: 1 });
+    await this.mySqlProvider.query(query, { postId: id, member: newMemberId, unseenMessages: 0 });
     if (membersNumber < 2) {
-      await this.mySqlProvider.query(query, { postId: id, member: owner, unseenMessages: 1 });
+      await this.mySqlProvider.query(query, { postId: id, member: owner, unseenMessages: 0 });
     }
 
     query = `DELETE FROM feeds.request WHERE receiver=? AND sender=?`;

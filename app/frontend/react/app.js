@@ -58,8 +58,7 @@ const App = (props) => {
     window.socket.onerror = () => store.setConnected(false);
     window.socket.on("ADD_NOTIFICATION", (e) => store.addNotification(e.detail));
     window.socket.on("REMOVE_NOTIFICATION", (e) => store.removeNotification(e.detail));
-    window.socket.on("NEW_UNSEEN_CHAT", (e) => store.addUnseenChat(e.detail));
-    window.socket.on("NEW_MESSAGE", (e) => window.dispatchEvent(new CustomEvent("NEW_MESSAGE", e)));
+    window.socket.on("NEW_MESSAGE", (e) => store.setReceivedMessage(e.detail));
     window.socket.onopen = () => store.setConnected(true);
     setInterval(() => window.socket.readyState === 1 && socket.emit("PING", {}), 60000);
     return () => window.socket.close(); // this act exactly like componentWillUnmount
