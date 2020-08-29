@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { getConfig } from "../../config/config";
 import { AppContext } from "../../store/app-store";
-import { ProfileContext } from "../../store/profile-store";
 import { UsernameField, PswField } from "./account-fields";
 import EditUsername from "./edit-username";
 import EditPSW from "./edit-psw";
@@ -9,8 +8,7 @@ import "./account.css";
 
 const Account = (props) => {
   const config = getConfig("deleteAccount");
-  const { Request, user, setUser, updateProgress } = useContext(AppContext);
-  const { editingField, setEditingField } = useContext(ProfileContext);
+  const { Request, user, setUser, updateProgress, editingField, setEditingField } = useContext(AppContext);
 
   const HandleDeleteAccount = async () => {
     try {

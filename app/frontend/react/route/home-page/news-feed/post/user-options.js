@@ -47,7 +47,7 @@ const UserOptions = ({ post }) => {
       {showOptions && (
         <div className="post options-list" role="list" title="Options list" tabindex="0">
           <button
-            onClick={() => setEditingPost(post.id)}
+            onClick={() => setEditingPost(post)}
             type="button"
             className="post options-item top"
             title="Edit post">

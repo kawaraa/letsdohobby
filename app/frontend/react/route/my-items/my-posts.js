@@ -6,10 +6,12 @@ import UpdatePostForm from "../home-page/news-feed/update-post/update-post-form"
 import LoadingScreen from "../../layout/icon/loading-screen";
 import CustomMessage from "../../layout/custom-message";
 
+// const { Request, updateProgress, removePost, setEditingPost, popMessage } = useContext(AppContext);
+
 class MyPosts extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("myPosts");
+    this.config = getConfig("myPosts");
     this.state = { loading: false, error: "", editPost: -1, posts: [] };
   }
 

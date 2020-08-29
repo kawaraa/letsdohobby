@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import { getConfig } from "../../../config/config";
 import { AppContext } from "../../../store/app-store";
-import { ProfileContext } from "../../../store/profile-store";
 import "./full-name-field.css";
 
 const EditFullName = (props) => {
   const config = getConfig("updateFullName");
-  const { Request, setUser, updateProgress } = useContext(AppContext);
-  const { profile, setProfile, setEditingField } = useContext(ProfileContext);
+  const { Request, setUser, updateProgress, profile, setProfile, setEditingField } = useContext(AppContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

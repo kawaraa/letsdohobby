@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { ProfileContext } from "../../../store/profile-store";
+import { AppContext } from "../../../store/app-store";
 import "./full-name-field.css";
 
 export default function (props) {
-  const { profile, setEditingField } = useContext(ProfileContext);
+  const { profile, setEditingField } = useContext(AppContext);
 
   return (
     <div className="profile full-name">

@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { getConfig } from "../../../config/config";
 import { AppContext } from "../../../store/app-store";
 import Post from "./post/post";
-import UpdatePostForm from "./update-post/update-post-form";
 import CustomMessage from "../../../layout/custom-message";
 import "./news-feed.css";
 
 const NewsFeed = (props) => {
   const config = getConfig("newsFeed");
-  const { Request, updateProgress, user, posts, setPosts, editingPost } = useContext(AppContext);
+  const { Request, updateProgress, user, posts, setPosts } = useContext(AppContext);
   const [{ limit, offset }, setLimit] = useState({ limit: 20, offset: 0 });
   const [topBtn, setTopBtn] = useState(false);
 
@@ -46,8 +45,6 @@ const NewsFeed = (props) => {
       {posts.map((post, i) => (
         <Post post={post} key={i} index={i} isOwner={user.id === post.owner.id} />
       ))}
-
-      {editingPost && <UpdatePostForm post={posts.find((post) => post.id === editingPost)} />}
 
       {topBtn && (
         <button

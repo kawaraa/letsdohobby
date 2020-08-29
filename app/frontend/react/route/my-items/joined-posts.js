@@ -9,7 +9,7 @@ import CustomMessage from "../../layout/custom-message";
 class JoinedPosts extends React.Component {
   constructor(props) {
     super(props);
-    this.config = config("joinedPosts");
+    this.config = getConfig("joinedPosts");
     this.state = { loading: false, error: "", editPost: -1, posts: [] };
   }
 

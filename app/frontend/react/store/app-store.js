@@ -16,6 +16,9 @@ export default (props) => {
   const [unseenNotifications, setUnseenNotifications] = useState([]);
   const [unseenChats, setUnseenChats] = useState([]);
 
+  const [profile, setProfile] = useState({});
+  const [editingField, setEditingField] = useState("");
+
   const updateProgress = (state) => setProgress({ ...progress, ...state });
 
   const addPost = (post) => setPosts([post, ...posts]);
@@ -86,6 +89,10 @@ export default (props) => {
     setUnseenChats,
     addUnseenChat,
     removeUnseenChat,
+    editingField,
+    setEditingField,
+    profile,
+    setProfile,
   };
 
   return <AppContext.Provider value={state}>{props.children}</AppContext.Provider>;

@@ -1,18 +1,13 @@
 import React, { useContext, useState } from "react";
 import { getConfig } from "../../../config/config";
-import Request from "../../../utility/request";
-import { ProfileContext } from "../../../store/profile-store";
-import { ActivityList, FilteredActivities } from "./activities";
-import CustomMessage from "../../../layout/custom-message";
-import LoadingScreen from "../../../layout/icon/loading-screen";
-import "./activities.css";
 import { AppContext } from "../../../store/app-store";
+import { ActivityList, FilteredActivities } from "./activities";
+import "./activities.css";
 
 const EditActivities = (props) => {
   const availableActivities = getConfig("activities");
   const config = getConfig("updateActivities");
-  const { Request, updateProgress } = useContext(AppContext);
-  const { profile, setProfile, setEditingField } = useContext(ProfileContext);
+  const { Request, updateProgress, profile, setProfile, setEditingField } = useContext(AppContext);
   const [activities, setActivities] = useState(profile.activities);
   const [filter, setFilter] = useState([]);
 

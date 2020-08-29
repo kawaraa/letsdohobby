@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Request from "../../utility/request";
 import { getConfig } from "../../config/config";
-import { ProfileContext } from "../../store/profile-store";
+import { AppContext } from "../../store/app-store";
 import Avatar from "./avatar/avatar";
 import EditAvatar from "./avatar/edit-avatar";
 import FullNameField from "./name/full-name-field";
@@ -16,7 +16,7 @@ import "./profile.css";
 
 const Profile = (props) => {
   const config = getConfig("getProfile");
-  const { profile, setProfile, editingField, setEditingField } = useContext(ProfileContext);
+  const { profile, setProfile, editingField, setEditingField } = useContext(AppContext);
   const [{ loading, error }, setState] = useState({ loading: true, error: "" });
   const setMode = (fieldName) => setEditingField(fieldName);
 

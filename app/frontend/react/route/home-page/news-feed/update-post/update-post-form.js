@@ -3,7 +3,6 @@ import { getConfig } from "../../../../config/config";
 import { AppContext } from "../../../../store/app-store";
 import CustomDate from "../../../../utility/custom-date";
 import DateAndTimeField from "../../create-post-form/date-and-time-field";
-import CustomMessage from "../../../../layout/custom-message";
 import "./update-post-form.css";
 
 const UpdatePostForm = ({ post: { id, owner, activity, participants, startAt, description, createdAt } }) => {
@@ -25,7 +24,7 @@ const UpdatePostForm = ({ post: { id, owner, activity, participants, startAt, de
       updateProgress({ loading: true });
       const post = await Request.send(data, config.url, config.method);
       updatePost(post);
-      setEditingPost("");
+      setEditingPost(null);
       updateProgress({ loading: false, error: "" });
     } catch (error) {
       updateProgress({ loading: false, error: error.message });
@@ -34,7 +33,7 @@ const UpdatePostForm = ({ post: { id, owner, activity, participants, startAt, de
 
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      if (/update-post x-icon|update-post-container/gm.test(e.target.className)) setEditingPost("");
+      if (/update-post x-icon|update-post-container/gm.test(e.target.className)) setEditingPost(null);
     });
   }, []);
 

@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import { getConfig } from "../../config/config";
 import { AppContext } from "../../store/app-store";
-import { ProfileContext } from "../../store/profile-store";
 import LoadingIcon from "../../layout/icon/loading-icon";
 
 const EditPSW = (props) => {
   const config = getConfig("updatePsw");
-  const { Request, updateProgress } = useContext(AppContext);
-  const { setEditingField } = useContext(ProfileContext);
+  const { Request, updateProgress, setEditingField } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {

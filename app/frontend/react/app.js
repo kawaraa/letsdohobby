@@ -4,9 +4,10 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { getConfig, setEventsListeners } from "./config/config";
 import Socket from "./utility/websocket";
 import AppStore, { AppContext } from "./store/app-store";
+import Navbar from "./layout/navbar";
 import LoadingScreen from "./layout/icon/loading-screen";
 import CustomMessage from "./layout/custom-message";
-import Navbar from "./layout/navbar";
+import UpdatePostForm from "./route/home-page/news-feed/update-post/update-post-form";
 import Conversations from "./layout/conversation/conversations";
 import HomePage from "./route/home-page/home-page";
 import Profile from "./route/profile/profile";
@@ -15,7 +16,6 @@ import PostDetail from "./route/post-detail/post-detail";
 import MyItems from "./route/my-items/my-items";
 import Member from "./route/member/member";
 import "./app.css";
-import ProfileStore from "./store/profile-store";
 
 const App = (props) => {
   const config = getConfig("app");
@@ -72,20 +72,19 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Navbar />
-      {progress.loading && <LoadingScreen text={percentComplete + "%"} />}
-      {progress.error && <CustomMessage text={progress.error} name="progress-error" listener={closeError} />}
-      {showMessage && <p className="screen-message">{showMessage}</p>}
       <Switch>
         <Route exact path="/" render={() => <HomePage />} />
-        <ProfileStore>
-          <Route exact path="/profile" render={(props) => <Profile {...props} />} />
-          <Route exact path="/settings" render={(props) => <Settings {...props} />} />
-        </ProfileStore>
+        <Route exact path="/profile" render={(props) => <Profile {...props} />} />
+        <Route exact path="/settings" render={(props) => <Settings {...props} />} />
         <Route exact path="/posts/:id" render={(props) => <PostDetail {...props} />} />
         <Route exact path="/my-posts" render={(props) => <MyItems {...props} />} />
         <Route exact path="/member/:id" render={(props) => <Member {...props} />} />
       </Switch>
       {conversations[0] && <Conversations conversations={conversations} />}
+      {store.editingPost && <UpdatePostForm post={store.editingPost} />}
+      {showMessage && <p className="screen-message">{showMessage}</p>}
+      {progress.error && <CustomMessage text={progress.error} name="progress-error" listener={closeError} />}
+      {progress.loading && <LoadingScreen text={percentComplete + "%"} />}
     </BrowserRouter>
   );
 };
