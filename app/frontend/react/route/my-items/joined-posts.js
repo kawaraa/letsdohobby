@@ -1,68 +1,40 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { getConfig } from "../../config/config";
-import Request from "../../utility/request";
+import { AppContext } from "../../store/app-store";
 import Post from "../home-page/news-feed/post/post";
-import UpdatePostForm from "../home-page/news-feed/update-post/update-post-form";
 import LoadingScreen from "../../layout/icon/loading-screen";
 import CustomMessage from "../../layout/custom-message";
 
-class JoinedPosts extends React.Component {
-  constructor(props) {
-    super(props);
-    this.config = getConfig("joinedPosts");
-    this.state = { loading: false, error: "", editPost: -1, posts: [] };
-  }
+const JoinedPosts = (props) => {
+  const config = getConfig("joinedPosts");
+  const { Request, user, posts, setPosts } = useContext(AppContext);
+  const [{ loading, error }, setState] = useState({ loading: true, error: "" });
 
-  showHideUpdatePost({ detail } = e) {
-    if (typeof detail === "number") return this.setState({ editPost: detail });
-    if (/update-post x-icon|update-post container/gm.test(detail)) this.setState({ editPost: -1 });
-  }
-  addNewPost({ detail } = e) {
-    const { posts } = this.state;
-    posts.splice(0, 0, detail);
-    this.setState({ posts });
-  }
-  updatePost({ detail } = e) {
-    const { posts } = this.state;
-    const index = posts.findIndex((post) => post.id === detail.id);
-    Object.keys(posts[index]).forEach((k) => (posts[index][k] = detail[k]));
-    this.setState({ posts });
-  }
-  removePost({ detail } = e) {
-    const { posts } = this.state;
-    posts.splice(detail, 1);
-    this.setState({ posts });
-  }
-
-  async componentDidMount() {
+  const fetchJoinedPost = async () => {
     try {
-      this.setState({ loading: true });
-      const posts = await Request.fetch(this.config.url, this.config.method);
-      this.setState({ posts, loading: false });
+      const posts = await Request.fetch(config.url, config.method);
+      setPosts(posts);
+      setState({ loading: false, error: "" });
     } catch (error) {
-      this.setState({ loading: false, error: error.message });
+      setState({ loading: false, error: error.message });
     }
-    window.addEventListener("SHOW_HIDE_UPDATE_POST_FORM", this.showHideUpdatePost.bind(this));
-    window.addEventListener("ADD_NEW_POST", this.addNewPost.bind(this));
-    window.addEventListener("UPDATE_POST", this.updatePost.bind(this));
-    window.addEventListener("REMOVE_POST", this.removePost.bind(this));
-  }
+  };
 
-  render() {
-    const { loading, error, posts, editPost } = this.state;
-    if (loading) return <LoadingScreen />;
-    if (error) return <CustomMessage text={error} name="error" />;
-    if (!posts || !posts[0]) return <CustomMessage text={this.config.message} name="no-items" />;
+  useEffect(() => {
+    fetchJoinedPost();
+  }, []);
 
-    return (
-      <main className="joined-posts wrapper no-line" title="Posts you joined" tabindex="0">
-        {editPost >= 0 && <UpdatePostForm post={posts[editPost]} />}
-        {this.state.posts.map((post, i) => (
-          <Post post={post} key={i} i={i} />
-        ))}
-      </main>
-    );
-  }
-}
+  if (loading) return <LoadingScreen />;
+  if (error) return <CustomMessage text={error} name="error" />;
+  if (!posts || !posts[0]) return <CustomMessage text={config.message} name="no-items" />;
+
+  return (
+    <main className="joined-posts wrapper no-line" title="Posts you joined" tabindex="0">
+      {posts.map((post, i) => (
+        <Post post={post} key={i} isOwner={user.id === post.owner.id} />
+      ))}
+    </main>
+  );
+};
 
 export default JoinedPosts;

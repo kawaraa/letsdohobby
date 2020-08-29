@@ -6,7 +6,7 @@ import MemberOptions from "./member-options";
 import Media from "./media";
 import "./post.css";
 
-const Post = ({ post, index, isOwner }) => {
+const Post = ({ post, isOwner }) => {
   return (
     <article className="post card no-line" title="Post card" tabindex="0">
       <header className="post header no-line" title="Post Header owner info" tabindex="0">

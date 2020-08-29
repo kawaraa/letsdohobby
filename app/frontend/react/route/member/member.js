@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { getConfig } from "../../config/config";
 import Request from "../../utility/request";
 import { ActivityList } from "../profile/activities/activities";
@@ -6,59 +6,60 @@ import LoadingScreen from "../../layout/icon/loading-screen";
 import CustomMessage from "../../layout/custom-message";
 import "./member.css";
 
-class Member extends React.Component {
-  constructor() {
-    super();
-    this.config = getConfig("memberProfile");
-    this.state = { loading: true, error: "" };
-  }
+const Member = (props) => {
+  const config = getConfig("memberProfile");
+  const [{ loading, error }, setState] = useState({ loading: true, error: "" });
+  const [member, setMember] = useState({});
 
-  async componentDidMount() {
+  const componentDidMount = async () => {
     try {
-      this.setState({ loading: true });
-      const member = await Request.fetch(this.config.url + this.props.match.params.id);
-      this.setState({ ...member, loading: false });
+      const member = await Request.fetch(config.url + props.match.params.id);
+      setMember(member);
+      setState({ loading: false, error: "" });
     } catch (error) {
-      this.setState({ error: error.message, loading: false });
+      setState({ loading: false, error: error.message });
     }
-  }
-  render() {
-    const { loading, error, displayName, avatarUrl, gender, birthday, about, activities } = this.state;
-    if (loading) return <LoadingScreen />;
-    if (error) return <CustomMessage text={error} name="error" />;
-    const initials = <span className="avatar initials">{displayName[0]}</span>;
-    const avatar = <img src={avatarUrl} alt="Profile Avatar" className="member avatar-img" />;
+  };
 
-    return (
-      <div className="outer-container">
-        <div className="profile container">
-          <div className="profile avatar wrapper"> {avatarUrl ? avatar : initials}</div>
+  useEffect(() => {
+    componentDidMount();
+  }, []);
 
-          <h1 className="member full-name">{displayName}</h1>
+  if (loading) return <LoadingScreen />;
+  if (error) return <CustomMessage text={error} name="error" />;
 
-          <div className="profile custom-field">
-            <h4 className="title">About</h4>
-            <p className="content">{about}</p>
-          </div>
+  const initials = <span className="avatar initials">{member.displayName[0]}</span>;
+  const avatar = <img src={member.avatarUrl} alt="Profile Avatar" className="member avatar-img" />;
 
-          <div className="profile custom-field">
-            <h4 className="title">Gender</h4>
-            <p className="content">{gender}</p>
-          </div>
+  return (
+    <div className="outer-container">
+      <div className="profile container">
+        <div className="profile avatar wrapper"> {member.avatarUrl ? avatar : initials}</div>
 
-          <div className="profile custom-field">
-            <h4 className="title">Birthday</h4>
-            <p className="content">{birthday}</p>
-          </div>
+        <h1 className="member full-name">{member.displayName}</h1>
 
-          <div className="profile activities custom-field">
-            <h4 className="title">Activities</h4>
-            {activities[0] && <ActivityList activities={activities} />}
-          </div>
+        <div className="profile custom-field">
+          <h4 className="title">About</h4>
+          <p className="content">{member.about}</p>
+        </div>
+
+        <div className="profile custom-field">
+          <h4 className="title">Gender</h4>
+          <p className="content">{member.gender}</p>
+        </div>
+
+        <div className="profile custom-field">
+          <h4 className="title">Birthday</h4>
+          <p className="content">{member.birthday}</p>
+        </div>
+
+        <div className="profile activities custom-field">
+          <h4 className="title">Activities</h4>
+          {member.activities[0] && <ActivityList activities={member.activities} />}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Member;
