@@ -237,12 +237,12 @@
     "createMessage": {
       "url": "/api/chat",
       "method": "POST",
-      "error": "Something went wrong, couldn't send the message, please close the chat and try again"
+      "error": "Something went wrong, couldn't send the message, please close the chat and try again(!)"
     },
     "getMessages": {
       "url": "/api/chat/",
       "method": "GET",
-      "error": "Something went wrong, couldn't get the messages, please try to open the chat again"
+      "error": "Something went wrong, couldn't get the messages, please try to open the chat again(!)"
     }
   },
   "postDetail": {

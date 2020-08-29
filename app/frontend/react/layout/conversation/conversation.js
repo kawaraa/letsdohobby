@@ -9,7 +9,9 @@ import Message from "./message";
 const config = getConfig("conversation");
 
 const Conversation = ({ conversation }) => {
-  const { user, Request, closeConversation, updateConversationMessages } = useContext(AppContext);
+  const { user, Request, updateProgress, closeConversation, updateConversationMessages } = useContext(
+    AppContext
+  );
   const { id, activity, startAt, messages, receiver, type } = conversation;
 
   const [{ loading, error }, setState] = useState({ loading: true, error: "" });
@@ -46,7 +48,7 @@ const Conversation = ({ conversation }) => {
       updateConversationMessages({ ...conversation, messages });
       setState({ loading: false, error: "" });
     } catch (error) {
-      setState({ loading: true, error: error.message });
+      setState({ loading: false, error: error.message });
     }
   };
 
@@ -76,8 +78,8 @@ const Conversation = ({ conversation }) => {
         />
       </div>
 
-      <ul className="conversations messages">
-        {loading && <LoadingIcon />}
+      <ul className="conversation messages">
+        {loading && <LoadingIcon name="conversation" />}
         {error && <CustomMessage text={config.getMessages.error} name="error" />}
         {messages[0] &&
           messages.map((msg, i) => <Message {...msg} key={i} isOwner={msg.owner.id === user.id} />)}

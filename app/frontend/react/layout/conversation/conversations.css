@@ -69,8 +69,12 @@
   cursor: pointer;
   border-radius: 50%;
 }
-
-.conversations.messages {
+.conversation.loading-spinner-icon.svg {
+  width: 100px;
+  height: 100px;
+  margin: 40% auto;
+}
+.conversation.messages {
   overflow: auto;
   display: flex;
   flex-flow: column-reverse;
@@ -139,7 +143,7 @@
   .conversation.date {
     font-size: 14px;
   }
-  .conversations.messages {
+  .conversation.messages {
     height: 350px;
   }
   .conversation.form {
