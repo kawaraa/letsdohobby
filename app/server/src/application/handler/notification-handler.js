@@ -53,7 +53,6 @@ class NotificationHandler {
     await this.notificationRepository.deleteBySubjectIdAndObjectId(requesterId, group.id);
 
     members.forEach((member) => {
-      this.socket.dispatchEvent("NEW_UNSEEN_CHAT", { receiver: member.id, payload: { id } });
       this.socket.dispatchEvent("NEW_MESSAGE", { receiver: member.id, payload: message });
       const removeNotification = { receiver: member.id, payload: { id: notificationId } };
       this.socket.dispatchEvent("REMOVE_NOTIFICATION", removeNotification);
@@ -69,7 +68,6 @@ class NotificationHandler {
     await this.notificationRepository.deleteBySubjectIdAndObjectId(newMemberId, group.id);
 
     members.forEach((member) => {
-      this.socket.dispatchEvent("NEW_UNSEEN_CHAT", { receiver: member.id, payload: { id } });
       this.socket.dispatchEvent("NEW_MESSAGE", { receiver: member.id, payload: message });
       const removeNotification = { receiver: member.id, payload: { id: notificationId } };
       this.socket.dispatchEvent("REMOVE_NOTIFICATION", removeNotification);
@@ -79,7 +77,6 @@ class NotificationHandler {
   handleNewMessage(group, message) {
     group.members.forEach((member) => {
       if (member.id === message.owner.id) return;
-      this.socket.dispatchEvent("NEW_UNSEEN_CHAT", { receiver: member.id, payload: { id: group.id } });
       this.socket.dispatchEvent("NEW_MESSAGE", { receiver: member.id, payload: message });
     });
   }

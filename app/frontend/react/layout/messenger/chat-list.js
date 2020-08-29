@@ -1,35 +1,35 @@
-import React from "react";
-import { config } from "../../config/config";
-import Request from "../../utility/request";
+import React, { useEffect, useState, useContext } from "react";
+import { getConfig } from "../../config/config";
+import { AppContext } from "../../store/app-store";
 import Chat from "./chat";
 import LoadingIcon from "../icon/loading-icon";
 import "./chat-list.css";
 
-class ChatList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.config = config("chatList");
-    this.state = { loading: true, error: "", chats: [] };
-  }
+const ChatList = (props) => {
+  const config = getConfig("chatList");
+  const { Request, openConversation } = useContext(AppContext);
+  const [{ loading, error, chats }, setState] = useState({ chats: [], loading: true, error: "" });
 
-  async componentDidMount() {
-    try {
-      const chats = await Request.fetch(this.config.url);
-      this.setState({ chats, error: "", loading: false });
-    } catch (error) {
-      this.setState({ error: error.message, loading: false });
-    }
-  }
+  useEffect(() => {
+    (async () => {
+      try {
+        const chats = await Request.fetch(config.url);
+        setState({ chats, loading: false, error: "" });
+      } catch (error) {
+        setState({ error: error.message, loading: false, chats: [] });
+      }
+    })();
+  }, []);
 
-  render() {
-    const { loading, error, chats } = this.state;
-    let content = chats.map((chat, i) => <Chat chat={chat} key={i} />);
+  let content = chats[0] ? (
+    chats.map((chat, i) => <Chat chat={chat} key={i} openChat={openConversation} />)
+  ) : (
+    <li className="chat no-items">No notifications</li>
+  );
 
-    if (!chats[0]) content = <li className="chat no-items">No notifications</li>;
-    if (error) content = <li className="chat error">{error}</li>;
-    if (loading) content = <LoadingIcon name="chat" color="#7b95e0" />;
+  if (error) content = <li className="chat error">{error}</li>;
+  if (loading) content = <LoadingIcon name="chat" color="#7b95e0" />;
 
-    return <ul className="chat list">{content}</ul>;
-  }
-}
+  return <ul className="chat list">{content}</ul>;
+};
 export default ChatList;

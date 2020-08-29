@@ -1,59 +1,53 @@
-import React from "react";
-import { config } from "../../config/config";
-import Request from "../../utility/request";
+import React, { useContext, useState } from "react";
+import { getConfig } from "../../config/config";
+import { AppContext } from "../../store/app-store";
 import LoadingIcon from "../../layout/icon/loading-icon";
-import CustomMessage from "../../layout/custom-message";
 
-class EditPSW extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.handleSubmit.bind(this);
-    this.config = config("updatePsw");
-    this.state = { loading: false, error: "" };
-  }
+const EditPSW = (props) => {
+  const config = getConfig("updatePsw");
+  const { Request, updateProgress, setEditingField } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
 
-  async handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { psw, newPsw, confirmNewPsw } = e.target;
     try {
       if (newPsw.value !== confirmNewPsw.value) throw new Error("Password doesn't match");
-      this.setState({ loading: true });
-      await Request.send({ psw: psw.value, newPsw: newPsw.value }, this.config.url);
-      this.props.changeMode({ editField: "" });
+      setLoading(true);
+      await Request.send({ psw: psw.value, newPsw: newPsw.value }, config.url);
+      updateProgress({ error: "" });
+      setLoading(false);
+      setEditingField("");
     } catch (error) {
-      this.setState({ loading: false, error: error.message });
+      setLoading(false);
+      updateProgress({ error: error.message });
     }
-  }
+  };
 
-  render() {
-    const { loading, error } = this.state;
+  return (
+    <form onSubmit={handleSubmit} className="account psw edit-form">
+      <img
+        src="/image/x-icon.svg"
+        alt="Close edit password form button"
+        className="account x-icon img"
+        onClick={() => setEditingField("")}
+      />
 
-    return (
-      <form onSubmit={this.onSubmit} className="account psw edit-form">
-        <img
-          src="/image/x-icon.svg"
-          alt="Close edit password form button"
-          className="account x-icon img"
-          onClick={() => this.props.changeMode({ editField: "" })}
-        />
-
-        <input type="password" name="psw" placeholder="Password" required className="f no-line" />
-        <input type="password" name="newPsw" placeholder="New Password" required className="no-line" />
-        <input
-          type="password"
-          name="confirmNewPsw"
-          placeholder="Confirm New Password"
-          required
-          className="l no-line"
-        />
-        <button type="submit" className="no-line">
-          {loading && <LoadingIcon />}
-          Save
-        </button>
-        {error && <CustomMessage text={error} name="error" />}
-      </form>
-    );
-  }
-}
+      <input type="password" name="psw" placeholder="Password" required className="f no-line" />
+      <input type="password" name="newPsw" placeholder="New Password" required className="no-line" />
+      <input
+        type="password"
+        name="confirmNewPsw"
+        placeholder="Confirm New Password"
+        required
+        className="l no-line"
+      />
+      <button type="submit" className="no-line">
+        {loading && <LoadingIcon />}
+        Save
+      </button>
+    </form>
+  );
+};
 
 export default EditPSW;

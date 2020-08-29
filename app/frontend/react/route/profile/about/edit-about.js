@@ -1,50 +1,37 @@
-import React from "react";
-import { config } from "../../../config/config";
-import Request from "../../../utility/request";
-import LoadingScreen from "../../../layout/icon/loading-screen";
-import CustomMessage from "../../../layout/custom-message";
+import React, { useContext, useState } from "react";
+import { getConfig } from "../../../config/config";
+import { AppContext } from "../../../store/app-store";
 import "./about.css";
 
-class EditAbout extends React.Component {
-  constructor(props) {
-    super(props);
-    this.submit = this.handleSubmit.bind(this);
-    this.config = config("updateAbout");
-    this.state = { loading: false, error: "" };
-  }
+const EditAbout = (props) => {
+  const config = getConfig("updateAbout");
+  const { Request, updateProgress, profile, setProfile, setEditingField } = useContext(AppContext);
 
-  async handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const p = { about: e.target.about.value };
-      this.setState({ loading: true });
-      const profile = await Request.send(p, this.config.url);
-      this.props.changeMode({ editField: "", profile });
+      updateProgress({ loading: true });
+      const profile = await Request.send({ about: e.target.about.value }, config.url);
+      setProfile(profile);
+      setEditingField("");
+      updateProgress({ loading: false, error: "" });
     } catch (error) {
-      this.setState({ loading: false, error: error.message });
+      updateProgress({ loading: false, error: error.message });
     }
-  }
+  };
 
-  render() {
-    const { loading, error } = this.state;
-    if (loading) return <LoadingScreen />;
-    const { profile, changeMode } = this.props;
+  return (
+    <form className="profile edit-about" onSubmit={handleSubmit}>
+      <textarea name="about" defaultValue={profile.about} placeholder="About me" className="no-line" />
 
-    return (
-      <form className="profile edit-about" onSubmit={this.submit}>
-        <textarea name="about" defaultValue={profile.about} placeholder="About me" className="no-line" />
-
-        <div className="edit-about btns">
-          <button type="submit">Save</button>
-          <button type="button" onClick={() => changeMode({ editField: "" })}>
-            Cancel
-          </button>
-        </div>
-
-        {error && <CustomMessage text={error} name="error" />}
-      </form>
-    );
-  }
-}
+      <div className="edit-about btns">
+        <button type="submit">Save</button>
+        <button type="button" onClick={() => setEditingField("")}>
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default EditAbout;

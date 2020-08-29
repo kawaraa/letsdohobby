@@ -1,123 +1,96 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { config, setEventsListeners } from "./config/config";
-import Request from "./utility/request";
+import { getConfig, setEventsListeners } from "./config/config";
 import Socket from "./utility/websocket";
+import AppStore, { AppContext } from "./store/app-store";
+import Navbar from "./layout/navbar";
 import LoadingScreen from "./layout/icon/loading-screen";
 import CustomMessage from "./layout/custom-message";
-import Navbar from "./layout/navbar";
+import UpdatePostForm from "./route/home-page/news-feed/update-post/update-post-form";
+import Conversations from "./layout/conversation/conversations";
 import HomePage from "./route/home-page/home-page";
 import Profile from "./route/profile/profile";
 import Settings from "./route/settings/settings";
 import PostDetail from "./route/post-detail/post-detail";
 import MyItems from "./route/my-items/my-items";
-import Conversations from "./layout/conversation/conversations";
-import "./app.css";
 import Member from "./route/member/member";
+import "./app.css";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onGetLocation = this.handleGetLocation.bind(this);
-    this.config = config("app");
-    this.state = {
-      loading: true,
-      error: "",
-      geolocation: { latitude: 0, longitude: 0, error: "" },
-      conversations: [],
-      showMessage: "",
-    };
-  }
+const App = (props) => {
+  const config = getConfig("app");
+  const store = useContext(AppContext);
+  const [{ loading, error }, setState] = useState({ loading: true, error: "" });
+  const { Request, progress, updateProgress, conversations, showMessage, percentComplete } = store;
 
-  updateState(state) {
-    if (state.user) window.user = state.user;
-    this.setState(state);
-  }
+  const getUser = async () => {
+    try {
+      const user = await Request.fetch(config.checkState.url);
+      store.setUser(user);
+      setState({ loading: false, error: "" });
+    } catch (error) {
+      setState({ loading: false, error: error.message });
+    }
+  };
 
-  async handleGetLocation(position) {
-    const { url, method } = this.config.updateSettings;
+  const getLocation = async (position) => {
+    const { url, method } = config.updateSettings;
     try {
       if (!position.coords) throw new Error("Couldn't get the location");
       const { latitude, longitude } = position.coords;
       await Request.send({ currentLat: latitude, currentLng: longitude }, url, method);
-      this.setState({ geolocation: { latitude, longitude, error: "" } });
+      store.setLocation({ latitude, longitude, error: "" });
     } catch (error) {
-      this.setState({ geolocation: { ...this.state.geolocation, error: error.message } });
+      store.setLocation({ latitude: 0, longitude: 0, error: error.message });
     }
-  }
-  onOpenConversation({ detail } = e) {
-    const { conversations } = this.state;
-    const index = conversations.findIndex((conversation) => conversation.id === detail.id);
-    if (index < 0) conversations.push(detail);
-    this.setState({ conversations });
-  }
-  onCloseConversation({ detail } = e) {
-    const { conversations } = this.state;
-    const state = { conversations: conversations.filter((conversation) => conversation.id !== detail) };
-    this.setState(state);
-  }
-  dispatch(event, { detail } = data) {
-    window.dispatchEvent(new CustomEvent(event, { detail }));
-  }
+  };
 
-  async componentDidMount() {
+  const closeError = () => updateProgress({ error: "" });
+
+  useEffect(() => {
     setEventsListeners();
-    window.addEventListener("UPDATE_APP", (e) => this.updateState(e.detail));
-    window.addEventListener("OPEN_CONVERSATION", this.onOpenConversation.bind(this));
-    window.addEventListener("CLOSE_CONVERSATION", this.onCloseConversation.bind(this));
-    window.addEventListener("SHOW_MESSAGE", ({ detail } = e) => {
-      this.setState({ showMessage: detail });
-      setTimeout(() => this.setState({ showMessage: "" }), 2000);
-    });
-    const location = () => navigator.geolocation.getCurrentPosition(this.onGetLocation, this.onGetLocation);
-    location();
-    setInterval(location, 3600000);
+    getUser();
+    navigator.geolocation.getCurrentPosition(getLocation, getLocation);
+    setInterval(() => navigator.geolocation.getCurrentPosition(getLocation, getLocation), 3600000);
 
-    window.socket = new Socket(this.config.socketUrl);
-    window.socket.onclose = () => this.setState({ connected: false });
-    window.socket.onerror = () => this.setState({ connected: false });
-    window.socket.on("ADD_NOTIFICATION", (e) => this.dispatch("ADD_NOTIFICATION", e));
-    window.socket.on("REMOVE_NOTIFICATION", (e) => this.dispatch("REMOVE_NOTIFICATION", e));
-    window.socket.on("NEW_UNSEEN_CHAT", (e) => this.dispatch("NEW_UNSEEN_CHAT", e));
-    window.socket.on("NEW_MESSAGE", (e) => this.dispatch("NEW_MESSAGE", e));
+    window.socket = new Socket(config.socketUrl);
+    window.socket.onclose = () => store.setConnected(false);
+    window.socket.onerror = () => store.setConnected(false);
+    window.socket.on("ADD_NOTIFICATION", (e) => store.addNotification(e.detail));
+    window.socket.on("REMOVE_NOTIFICATION", (e) => store.removeNotification(e.detail));
+    window.socket.on("NEW_MESSAGE", (e) => store.setReceivedMessage(e.detail));
+    window.socket.onopen = () => store.setConnected(true);
+    setInterval(() => window.socket.readyState === 1 && socket.emit("PING", {}), 60000);
+    return () => window.socket.close(); // this act exactly like componentWillUnmount
+  }, []);
 
-    window.socket.onopen = () => this.setState({ connected: true });
-    setInterval(() => window.socket.readyState === 1 && window.socket.emit("PING", {}), 60000);
-    try {
-      const user = await Request.fetch(this.config.checkState.url);
-      window.user = user;
-      this.setState({ loading: false });
-    } catch (error) {
-      this.setState({ error: error.message, loading: false });
-    }
-  }
-  componentWillUnmount() {
-    window.socket.close();
-  }
+  if (loading) return <LoadingScreen />;
+  if (error) return <CustomMessage text={error} name="error" />;
+  if (!store.user || !store.user.id) return window.location.reload();
 
-  render() {
-    const { loading, error, connected, geolocation, conversations, showMessage } = this.state;
-    if (loading) return <LoadingScreen />;
-    if (error) return <CustomMessage text={error} name="error" />;
-    if (!window.user || !window.user.id) return window.location.reload();
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" render={() => <HomePage />} />
+        <Route exact path="/profile" render={(props) => <Profile {...props} />} />
+        <Route exact path="/settings" render={(props) => <Settings {...props} />} />
+        <Route exact path="/posts/:id" render={(props) => <PostDetail {...props} />} />
+        <Route exact path="/my-posts" render={(props) => <MyItems {...props} />} />
+        <Route exact path="/member/:id" render={(props) => <Member {...props} />} />
+      </Switch>
+      {conversations[0] && <Conversations conversations={conversations} />}
+      {store.editingPost && <UpdatePostForm post={store.editingPost} />}
+      {showMessage && <p className="screen-message">{showMessage}</p>}
+      {progress.error && <CustomMessage text={progress.error} name="progress-error" listener={closeError} />}
+      {progress.loading && <LoadingScreen text={percentComplete + "%"} />}
+    </BrowserRouter>
+  );
+};
 
-    return (
-      <BrowserRouter>
-        <Navbar connected={connected} />
-        <Switch>
-          <Route exact path="/" render={(props) => <HomePage {...props} geolocation={geolocation} />} />
-          <Route exact path="/profile" render={(props) => <Profile {...props} />} />
-          <Route exact path="/settings" render={(props) => <Settings {...props} />} />
-          <Route exact path="/posts/:id" render={(props) => <PostDetail {...props} />} />
-          <Route exact path="/my-posts" render={(props) => <MyItems {...props} />} />
-          <Route exact path="/member/:id" render={(props) => <Member {...props} />} />
-        </Switch>
-        {showMessage && <p className="screen-message">{showMessage}</p>}
-        <Conversations conversations={conversations} />
-      </BrowserRouter>
-    );
-  }
-}
-
-ReactDOM.render(<App Request={Request} />, document.getElementById("root"));
+ReactDOM.render(
+  <AppStore>
+    <App />
+  </AppStore>,
+  document.getElementById("root")
+);

@@ -83,6 +83,9 @@ label[for="upload-avatar"] {
   border: none;
   border-radius: 5px;
 }
+.edit-avatar.disabled {
+  background: var(--font-color);
+}
 .edit-avatar.loader {
   position: absolute;
   top: 0;

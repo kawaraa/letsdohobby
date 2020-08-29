@@ -43,17 +43,13 @@
   color: var(--black-color);
   text-decoration: none;
 }
-.conversation.arrow-svg {
+.conversation.triangle-right-arrow {
   display: inline-block;
   width: 11px;
   margin: 0 8px;
   padding: 0;
 }
-.conversation.arrow.svg-stroke {
-  fill: var(--pink-color);
-  stroke: var(--black-color);
-  stroke-width: 5px;
-}
+
 .conversation.date {
   display: inline-block;
   margin: 0;
@@ -73,8 +69,12 @@
   cursor: pointer;
   border-radius: 50%;
 }
-
-.conversations.messages {
+.conversation.loading-spinner-icon.svg {
+  width: 100px;
+  height: 100px;
+  margin: 40% auto;
+}
+.conversation.messages {
   overflow: auto;
   display: flex;
   flex-flow: column-reverse;
@@ -136,14 +136,14 @@
   .conversation.activity {
     font-size: 18px;
   }
-  .conversation.arrow-svg {
+  .conversation.triangle-right-arrow {
     width: 9px;
     margin: 0 4px;
   }
   .conversation.date {
     font-size: 14px;
   }
-  .conversations.messages {
+  .conversation.messages {
     height: 350px;
   }
   .conversation.form {

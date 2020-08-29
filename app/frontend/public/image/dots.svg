@@ -1,0 +1,8 @@
+<svg viewBox="0 0 500 190" class="dots svg" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <title>Layer 1</title>
+ <g class="dots svg-stroke" stroke="#000000" stroke-width="30" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="round" >
+  <circle cx="90.5" cy="95.5" fill="#000000" id="svg_1" r="37.54942" />
+  <circle cx="250.5" cy="95.5" fill="#000000" id="svg_3" r="37.54942" />
+  <circle cx="409.5" cy="95.5" fill="#000000" id="svg_4" r="37.54942" />
+ </g>
+</svg>

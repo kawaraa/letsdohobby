@@ -88,7 +88,6 @@ class CreateAvatarHandler {
 
   async cropAvatar(localPath, { width, height, x, y, sameSize } = dimensions, size = 350) {
     const avatarName = "avatar-" + path.basename(localPath);
-    console.log("object");
     if (sameSize && width !== height) {
       size = width > height ? height : width;
       if (width > height) x = (width - height) / 2;

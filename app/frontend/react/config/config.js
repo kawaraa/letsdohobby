@@ -19,7 +19,7 @@ import configs from "./config.json";
   }
 })();
 
-export const config = (key) => {
+export const getConfig = (key) => {
   if (configs[key]) return configs[key];
   for (let kk in configs) {
     const config = configs[kk];
@@ -29,7 +29,7 @@ export const config = (key) => {
 };
 
 export const setEventsListeners = () => {
-  const events = config("events");
+  const events = getConfig("events");
   window.addEventListener("click", (e) => {
     const className = e.className || e.target.className.baseVal || e.target.className;
     events.forEach((event) => window.dispatchEvent(new CustomEvent(event, { detail: className })));

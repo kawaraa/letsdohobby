@@ -1,49 +1,33 @@
-import React from "react";
-import { config } from "../../../config/config";
-import Request from "../../../utility/request";
+import React, { useState, useContext } from "react";
+import { getConfig } from "../../../config/config";
+import { AppContext } from "../../../store/app-store";
 import CustomDate from "../../../utility/custom-date";
 import DateAndTimeField from "./date-and-time-field";
 import FilePreview from "./file-preview";
-import LoadingScreen from "../../../layout/icon/loading-screen";
-import CustomMessage from "../../../layout/custom-message";
 import "./create-post-form.css";
 
-class CreatePostForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onChange = this.handleChange.bind(this);
-    this.onSubmit = this.handleSubmit.bind(this);
-    this.removeFile = this.handleRemoveFile.bind(this);
-    this.close = this.closeErrorMessage.bind(this);
-    this.config = config("createPostForm");
-    this.state = {
-      loading: false,
-      error: "",
-      percentComplete: 0,
-      files: [],
-      description: "",
-      activity: "activity",
-    };
-  }
+const CreatePostForm = (props) => {
+  const config = getConfig("createPostForm");
+  const { Request, user, updateProgress, setPercentComplete, addPost } = useContext(AppContext);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [state, setState] = useState({ activity: "activity", description: "" });
+  const selectedActivity = new RegExp(state.activity, "gi");
 
-  handleChange({ target } = e) {
-    if (!target.files || !target.files[0]) return this.setState({ [target.name]: target.value });
-    this.setState({ files: this.state.files.concat([target.files[0]]) });
-    target.value = "";
-  }
+  const handleChange = ({ target: { files, name, value } }) => {
+    if (!files || !files[0]) return setState({ ...state, [name]: value });
+    setUploadedFiles(uploadedFiles.concat([files[0]]));
+  };
 
-  handleRemoveFile(name) {
-    this.setState({ files: this.state.files.filter((file) => file.name !== name) });
-  }
-  handleSubmit(e) {
+  const handleRemoveFile = (name) => {
+    setUploadedFiles(uploadedFiles.filter((file) => file.name !== name));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const xhr = new Request.MultipartRequest();
     const form = new FormData(e.nativeEvent.target);
-    const select = new RegExp(e.target.activity.value, "gi");
     const startAt = new Date();
 
-    if (!this.config.activities.find((act) => select.test(act))) {
-      return this.setState({ error: "Please select activity" });
-    }
     startAt.setMonth(form.get("month") - 1);
     startAt.setDate(form.get("day"));
     startAt.setHours(form.get("hour"));
@@ -51,140 +35,121 @@ class CreatePostForm extends React.Component {
 
     form.append("createdAt", CustomDate.toString(new Date()));
     form.set("startAt", CustomDate.toString(startAt));
-    this.state.files.forEach((file, i) => form.set("media" + i, file));
+    uploadedFiles.forEach((file, i) => form.set("media" + i, file));
     form.delete("month") || form.delete("day") || form.delete("hour") || form.delete("minute");
     form.delete("photoVideo") || form.delete("audio");
 
-    const xhr = new Request.MultipartRequest();
-    xhr.on("progress", (percentComplete) => this.setState({ percentComplete }));
-    xhr.on("end", (e) => {
-      window.dispatchEvent(new CustomEvent("ADD_NEW_POST", { detail: e.detail }));
-      this.props.closeForm();
+    xhr.on("progress", (percentComplete) => setPercentComplete(percentComplete.toFixed()));
+    xhr.on("end", ({ detail }) => {
+      addPost(detail);
+      props.closeForm();
+      updateProgress({ loading: false, error: "" });
     });
-    xhr.on("error", (e) => this.setState({ loading: false, error: e.detail.message }));
-    xhr.uploadForm(form, this.config.url);
-    this.setState({ loading: true });
-  }
-  closeErrorMessage() {
-    this.setState({ error: "" });
-  }
+    xhr.on("error", (e) => updateProgress({ loading: false, error: e.detail.message }));
+    xhr.uploadForm(form, config.url);
+    updateProgress({ loading: true });
+  };
 
-  getSelectOptionsForParticipants() {
-    const option = [];
-    for (let i = 1; i < this.config.participants; i += 1) {
-      option.push(<option value={i}>{i}</option>);
-    }
+  const getSelectOptionsForParticipants = (option = []) => {
+    for (let i = 1; i < config.participants; i += 1) option.push(<option value={i}>{i}</option>);
     return option;
-  }
+  };
 
-  render() {
-    const { loading, error, percentComplete, files } = this.state;
-    const selectedActivity = new RegExp(this.state.activity, "gi");
-    const isActivity = this.config.activities.find((act) => selectedActivity.test(act));
-    const isDisabled = this.state.description.length > 30 && isActivity ? " " : "disabled";
-    const active = isDisabled.length > 5 ? true : false;
-    if (loading) return <LoadingScreen text={percentComplete.toFixed() + "%"} />;
+  const isActivity = config.activities.find((act) => selectedActivity.test(act));
+  const cssClass = state.description.length > 30 && isActivity ? "" : "disabled";
+  const activityOptions = config.activities.map((activity) => <option value={activity}>{activity}</option>);
 
-    return (
-      <div className="create-post-container">
-        <div className="create-post-inner">
-          <form
-            onChange={this.onChange}
-            onSubmit={this.onSubmit}
-            className="create-post form no-line"
-            title="Create post"
-            tabindex="0"
-          >
-            <h3 className="create-post title no-line" tabindex="0">
-              Create Post
-            </h3>
+  return (
+    <div className="create-post-container">
+      <div className="create-post-inner">
+        <form
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          className="create-post form no-line"
+          title="Create post"
+          tabindex="0">
+          <h3 className="create-post title no-line" tabindex="0">
+            Create Post
+          </h3>
 
+          <img
+            src="/image/x-icon.svg"
+            alt="Close create post form button"
+            className="create-post x-icon img"
+          />
+
+          <div className="create-post user-info">
             <img
-              src="/image/x-icon.svg"
-              alt="Close create post form button"
-              className="create-post x-icon img"
+              src={user.avatarUrl || "/image/avatar.svg"}
+              alt="My Avatar"
+              className="create-post avatar img no-line"
             />
 
-            <div className="create-post user-info">
-              <img
-                src={window.user.avatarUrl || "/image/avatar.svg"}
-                alt="My Avatar"
-                className="create-post avatar img no-line"
-              />
+            <span className="create-post user-name no-line" title="User name" tabindex="0">
+              {user.displayName}
+            </span>
+          </div>
 
-              <span className="create-post user-name no-line" title="User name" tabindex="0">
-                {window.user.displayName}
-              </span>
+          <div className="create-post selects">
+            <select name="activity" required className="no-line" title="Activity">
+              <option value="activity" selected>
+                Activity
+              </option>
+              {activityOptions}
+            </select>
+
+            <select name="participants" required className="no-line" title="Number of participants">
+              <option value="0" selected>
+                Participants
+              </option>
+              {getSelectOptionsForParticipants()}
+            </select>
+            <DateAndTimeField date={new Date(Date.now() + 1000 * 60 * 60)} />
+          </div>
+
+          <div className="create-post inputs">
+            <div className="create-post description">
+              <textarea
+                name="description"
+                minlength="30"
+                maxlength="1500"
+                placeholder="Describe how your plan will look like"
+                required
+                className="create-post textarea no-line"
+                title="Description"></textarea>
             </div>
-
-            {error && <CustomMessage text={error} name="create-post error" listener={this.close} />}
-
-            <div className="create-post selects">
-              <select name="activity" required className="no-line" title="Activity">
-                <option value="activity" selected>
-                  Activity
-                </option>
-                {this.config.activities.map((a) => (
-                  <option value={a}>{a}</option>
+            {uploadedFiles[0] && (
+              <div className="create-post uploaded">
+                {uploadedFiles.map((file) => (
+                  <FilePreview file={file} remove={handleRemoveFile} />
                 ))}
-              </select>
-
-              <select name="participants" required className="no-line" title="Number of participants">
-                <option value="0" selected>
-                  Participants
-                </option>
-                {this.getSelectOptionsForParticipants()}
-              </select>
-              <DateAndTimeField />
-            </div>
-
-            <div className="create-post inputs">
-              <div className="create-post description">
-                <textarea
-                  name="description"
-                  minlength="30"
-                  maxlength="1500"
-                  placeholder="Describe how your plan will look like"
-                  required
-                  className="create-post textarea no-line"
-                  title="Description"
-                ></textarea>
               </div>
-              {files[0] && (
-                <div className="create-post uploaded">
-                  {files.map((file) => (
-                    <FilePreview file={file} close={this.removeFile} />
-                  ))}
-                </div>
-              )}
-            </div>
+            )}
+          </div>
 
-            <div className="create-post media no-line" title="Media inputs" tabindex="0">
-              <p className="create-post media-title">Add to your post</p>
-              <label
-                for="photo"
-                className="create-post media-label no-line"
-                title="Upload photo/video"
-                tabindex="0"
-              >
-                <img src="/image/media-image-icon.png" className="create-post media-img" />
-                <input type="file" name="photoVideo" accept="image/*, video/*" id="photo" />
-              </label>
-            </div>
+          <div className="create-post media no-line" title="Media inputs" tabindex="0">
+            <p className="create-post media-title">Add to your post</p>
+            <label
+              for="photo"
+              className="create-post media-label no-line"
+              title="Upload photo/video"
+              tabindex="0">
+              <img src="/image/media-image-icon.png" className="create-post media-img" />
+              <input type="file" name="photoVideo" accept="image/*, video/*" id="photo" />
+            </label>
+          </div>
 
-            <button
-              type="submit"
-              disabled={active}
-              className={"create-post submit no-line " + isDisabled}
-              title="Create post"
-            >
-              Post
-            </button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            disabled={cssClass === "disabled"}
+            className={"create-post submit no-line " + cssClass}
+            title="Create post">
+            Post
+          </button>
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default CreatePostForm;

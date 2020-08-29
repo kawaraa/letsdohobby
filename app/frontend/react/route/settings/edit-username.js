@@ -1,55 +1,53 @@
-import React from "react";
-import { config } from "../../config/config";
-import Request from "../../utility/request";
+import React, { useContext, useState } from "react";
+import { getConfig } from "../../config/config";
+import { AppContext } from "../../store/app-store";
 import LoadingIcon from "../../layout/icon/loading-icon";
-import CustomMessage from "../../layout/custom-message";
 
-class EditEmail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.handleSubmit.bind(this);
-    this.config = config("updateUsername");
-    this.state = { error: "" };
-  }
+const EditEmail = (props) => {
+  const config = getConfig("updateUsername");
+  const { Request, user, setUser, updateProgress, setEditingField } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
 
-  async handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, psw } = e.target;
     try {
-      this.setState({ loading: true });
-      await Request.send({ username: username.value, psw: psw.value }, this.config.url);
-      window.user.username = username.value;
-      window.dispatchEvent(new CustomEvent("UPDATE_APP", { detail: { user: window.user } }));
-      console.log(this.props);
-      this.props.changeMode({ editField: "" });
+      setLoading(true);
+      await Request.send({ username: username.value, psw: psw.value }, config.url);
+      user.username = username.value;
+      updateProgress({ error: "" });
+      setUser(user);
+      setLoading(false);
+      setEditingField("");
     } catch (error) {
-      this.setState({ loading: false, error: error.message });
+      setLoading(false);
+      updateProgress({ error: error.message });
     }
-  }
+  };
 
-  render() {
-    const { loading, error } = this.state;
-    const n = window.user.username;
+  return (
+    <form onSubmit={handleSubmit} className="account edit-form">
+      <img
+        src="/image/x-icon.svg"
+        alt="Close edit username form button"
+        className="account x-icon img"
+        onClick={() => setEditingField("")}
+      />
+      <input
+        type="text"
+        name="username"
+        defaultValue={user.username}
+        placeholder="Email/Phone"
+        className="f no-line"
+      />
+      <input type="password" name="psw" placeholder="Confirm Password" required className="l no-line" />
 
-    return (
-      <form onSubmit={this.onSubmit} className="account edit-form">
-        <img
-          src="/image/x-icon.svg"
-          alt="Close edit username form button"
-          className="account x-icon img"
-          onClick={() => this.props.changeMode({ editField: "" })}
-        />
-        <input type="text" name="username" defaultValue={n} placeholder="Email/Phone" className="f no-line" />
-        <input type="password" name="psw" placeholder="Confirm Password" required className="l no-line" />
-
-        <button type="submit" className="no-line">
-          {loading && <LoadingIcon />}
-          Save
-        </button>
-        {error && <CustomMessage text={error} name="error" />}
-      </form>
-    );
-  }
-}
+      <button type="submit" className="no-line">
+        {loading && <LoadingIcon />}
+        Save
+      </button>
+    </form>
+  );
+};
 
 export default EditEmail;

@@ -4,11 +4,13 @@
   width: 70px;
   height: 45px;
 }
-.post.dots-icon-wrapper {
+.post.dots-icon {
+  position: absolute;
   top: 0;
   right: 0;
   width: 40px;
-  height: 15px;
+  height: 16px;
+  cursor: pointer;
 }
 .post.options-list {
   position: absolute;

@@ -7,6 +7,8 @@ class EditAvatarPosition extends React.Component {
     this.onZoomIn = this.handleZoomIn.bind(this);
     this.onZoomOut = this.handleZoomOut.bind(this);
     this.onMouseMove = this.handleMouseMove.bind(this);
+    this.parent = null;
+    this.img = null;
     this.state = { mouseX: 0, mouseY: 0 };
   }
 
@@ -23,11 +25,13 @@ class EditAvatarPosition extends React.Component {
   }
 
   handleZoomIn() {
+    if (!this.img) return;
     this.img.style.width = this.img.width + 15 + "px";
     const { offsetTop, height, offsetLeft, width } = this.img;
     this.props.setDimensions({ y: offsetTop, height, x: offsetLeft, width, sameSize: false });
   }
   handleZoomOut() {
+    if (!this.img) return;
     this.img.style.top = "0";
     this.img.style.left = "0";
 

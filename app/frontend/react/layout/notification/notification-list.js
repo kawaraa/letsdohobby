@@ -1,43 +1,42 @@
-import React from "react";
-import { config } from "../../config/config";
-import Request from "../../utility/request";
+import React, { useContext, useState, useEffect } from "react";
+import { getConfig } from "../../config/config";
+import { AppContext } from "../../store/app-store";
 import NotificationItem from "./notification-item";
 import LoadingIcon from "../icon/loading-icon";
 import "./notification-list.css";
 
-class NotificationList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.config = config("notification");
-    this.onRemoveNotification = this.handleRemoveNotification.bind(this);
-    this.state = { loading: true, error: "", notifications: [] };
-  }
+const NotificationList = (props) => {
+  const config = getConfig("notification");
+  const [notifications, setNotifications] = useState([]);
+  const [{ loading, error }, setState] = useState({ loading: true, error: "" });
+  const { Request, setUnseenNotifications } = useContext(AppContext);
 
-  handleRemoveNotification(id) {
-    const { notifications } = this.state;
-    this.setState({ notifications: notifications.filter((not) => not.id !== id) });
-  }
-  async componentDidMount() {
+  const remove = (id) => setNotifications(notifications.filter((not) => not.id !== id));
+
+  const componentDidMount = async () => {
     try {
-      const notifications = await Request.fetch(this.config.list.url);
-      this.setState({ notifications, error: "", loading: false });
-      this.props.markAsSeen();
+      const notifications = await Request.fetch(config.list.url);
+      setNotifications(notifications);
+      setState({ error: "", loading: false });
+      setUnseenNotifications([]);
     } catch (error) {
-      this.setState({ error: error.message, loading: false });
+      setState({ error: error.message, loading: false });
     }
-  }
+  };
 
-  render() {
-    const { notifications, loading, error } = this.state;
-    let content = notifications.map((not, i) => (
-      <NotificationItem notification={not} key={i} removeNotification={this.onRemoveNotification} />
-    ));
+  useEffect(() => {
+    componentDidMount();
+  }, []);
 
-    if (!notifications[0]) content = <li className="notification no-items">No notifications</li>;
-    if (error) content = <li className="notification error">{error}</li>;
-    if (loading) content = <LoadingIcon name="notification" color="#7b95e0" />;
+  let content = notifications[0] ? (
+    notifications.map((not, i) => <NotificationItem {...not} key={i} removeNotification={remove} />)
+  ) : (
+    <li className="notification no-items">No notifications</li>
+  );
 
-    return <ul className="notification list">{content}</ul>;
-  }
-}
+  if (error) content = <li className="notification error">{error}</li>;
+  if (loading) content = <LoadingIcon name="notification" color="#7b95e0" />;
+
+  return <ul className="notification list">{content}</ul>;
+};
 export default NotificationList;
