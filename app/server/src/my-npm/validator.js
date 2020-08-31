@@ -39,15 +39,12 @@ class Validator {
   }
   static areActivities(activities, result = { valid: false, valid: [], invalid: [] }) {
     if (!activities || typeof activities !== "array") return result;
-    for (let hobby in hobbies) {
+    hobbies.forEach((hobby) => {
       const activity = activities.find((act) => act.toLowerCase() === hobby.toLowerCase());
       if (activity) valid.push(activity);
-      if (valid.length === activities.length) {
-        result.valid = true;
-        return result;
-      }
-    }
-    result.invalid = activities.filer((a) => valid.find((v) => v.toLowerCase() !== a.toLowerCase()));
+      if (!activity) invalid.push(activity);
+      if (invalid.length === 0) result.valid = true;
+    });
     return result;
   }
 }
