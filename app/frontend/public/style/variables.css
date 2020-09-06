@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap&family=Roboto&family=Comic+Neue");
+@import url("https://fonts.googleapis.com/css2?display=swap&family=Lato&family=Roboto&family=Mulish&family=Spartan&family=Quicksand&family=Sora:wght@100&family=Comic+Neue");
 
 /* 
 Facebook
@@ -50,7 +50,8 @@ body * {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  font-family: "Lato", "Comic", "Roboto", sans-serif, Verdana, Arial, "Helvetica", "Helvetica Neue";
+  font-family: "Lato", "Comic", "Roboto", "Sora", "Mulish", "Spartan", "Quicksand", sans-serif, Arial, Verdana,
+    "Helvetica", "Helvetica Neue";
 }
 .outer-container {
   margin: 60px 0 0 0;
