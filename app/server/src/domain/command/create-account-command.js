@@ -1,4 +1,5 @@
 const CustomError = require("../model/custom-error");
+const pswError = "Min 8 symbols, minimum 1 special characters, minimum 1 number, minimum 1 capital letter";
 
 class CreateAccountCommand {
   constructor(account) {
@@ -16,9 +17,11 @@ class CreateAccountCommand {
     this.username = value.toLowerCase();
   }
   set _hashedPsw(value) {
+    const pswValidator = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     if (!value) throw new CustomError("Password is required field");
-    if (typeof value !== "string") value += "";
-    if (value.length < 10) throw new CustomError("Password must be at least 10 Characters / Numbers");
+    else if (typeof value !== "string") value += "";
+    else if (value.length < 8) throw new CustomError("Password must be at least 8 Characters / Numbers");
+    // else if (pswValidator.test(value)) throw new CustomError(pswError);
     this.hashedPsw = value;
   }
 }
