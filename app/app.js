@@ -30,6 +30,10 @@ const getWebRouter = require("./frontend/ssr/index.js");
 
     const apiRouter = getApiRouter(server, express.Router(), firewall, mySqlProvider, storageProvider);
     const webRouter = getWebRouter(express.Router(), firewall, mySqlProvider);
+    const ServeLoggedInUserWithReact = (request, response, next) => {
+      if (!firewall.isAuthenticated(request)) return next();
+      response.sendFile(__dirname + "/frontend/public/template/react.html");
+    };
 
     const PORT = process.env.PORT || config.port;
 
@@ -39,10 +43,11 @@ const getWebRouter = require("./frontend/ssr/index.js");
     app.use("/api", apiRouter);
     app.use("/web", webRouter);
 
-    app.get("*", (request, response) => {
-      if (firewall.isAuthenticated(request)) {
-        return response.sendFile(__dirname + "/frontend/public/template/react.html");
-      }
+    app.get("/posts/:id", ServeLoggedInUserWithReact, (request, response) => {
+      response.redirect("/web" + request.url.replace("posts", "post"));
+    });
+
+    app.get("*", ServeLoggedInUserWithReact, (request, response) => {
       response.sendFile(__dirname + "/frontend/public/template/home.html");
     });
 
