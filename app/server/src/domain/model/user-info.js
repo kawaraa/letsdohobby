@@ -8,6 +8,7 @@ class UserInfo {
     this.currentLng = user.currentLng;
     this.locationRange = user.locationRange;
     this.unit = user.unit;
+    this.notifications = user.notifications;
     this.language = user.language;
     this.accountStatus = user.accountStatus;
   }

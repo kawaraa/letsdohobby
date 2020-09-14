@@ -39,7 +39,7 @@ const getWebRouter = require("./frontend/ssr/index.js");
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use("/", express.static(__dirname + "/frontend/public"));
+    app.use(express.static(__dirname + "/frontend/public"));
     app.use("/api", apiRouter);
     app.use("/web", webRouter);
 

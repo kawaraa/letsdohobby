@@ -29,6 +29,7 @@ CREATE TABLE `settings` (
   `currentLng` DECIMAL(11, 8) NOT NULL,
   `locationRange` SMALLINT NOT NULL,
   `unit` ENUM('km', 'mi') NOT NULL,
+  `notifications` ENUM('off', 'on') NOT NULL,
   `language` ENUM('en', 'ar') NOT NULL,
   `accountStatus` TINYINT NOT NULL,
   PRIMARY KEY(owner)

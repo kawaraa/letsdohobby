@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { getConfig, setEventsListeners } from "./config/config";
-import Socket from "./utility/websocket";
+import getServiceWorkerRegistration from "./utility/register-service-worker";
 import AppStore, { AppContext } from "./store/app-store";
 import Navbar from "./layout/navbar";
 import LoadingScreen from "./layout/icon/loading-screen";
@@ -19,15 +19,27 @@ import "./app.css";
 
 const App = (props) => {
   const config = getConfig("app");
+  const settingsConfig = getConfig("settings");
+
   const store = useContext(AppContext);
   const [{ loading, error }, setState] = useState({ loading: true, error: "" });
   const { Request, progress, updateProgress, conversations, showMessage, percentComplete } = store;
 
-  const getUser = async () => {
+  const getUserAndRegisterWebWorkers = async () => {
     try {
       const user = await Request.fetch(config.checkState.url);
+      const worker = await getServiceWorkerRegistration(config.socketUrl);
+      if (!worker) return updateProgress({ error: config.error });
+      worker.on("ADD_NOTIFICATION", ({ data, detail }) => store.addNotification(data || detail));
+      worker.on("REMOVE_NOTIFICATION", ({ data, detail }) => store.removeNotification(data || detail));
+      worker.on("NEW_MESSAGE", ({ data, detail }) => store.setReceivedMessage(data || detail));
+      worker.on("CONNECT", () => store.setConnected(true));
+      worker.on("DISCONNECT", () => store.setConnected(false));
       store.setUser(user);
+      store.setWorker(worker);
       setState({ loading: false, error: "" });
+      syncNotificationPermission();
+      worker.emit("SET_NOTIFICATIONS_PERMISSION", { mode: user.notifications });
     } catch (error) {
       setState({ loading: false, error: error.message });
     }
@@ -47,21 +59,28 @@ const App = (props) => {
 
   const closeError = () => updateProgress({ error: "" });
 
+  const syncNotificationPermission = async () => {
+    try {
+      if (Notification.permission !== "granted" && store.worker) {
+        await Request.send({ notifications: "off" }, settingsConfig.url, settingsConfig.method);
+        store.setUser({ ...store.user, notifications: "off" });
+        store.worker.emit("SET_NOTIFICATIONS_PERMISSION", { mode: "off" });
+        console.log("object", store.worker);
+      }
+    } catch (error) {
+      console.log("syncNotificationPermission > ", error);
+    }
+  };
+
   useEffect(() => {
     setEventsListeners();
-    getUser();
-    navigator.geolocation.getCurrentPosition(getLocation, getLocation);
-    setInterval(() => navigator.geolocation.getCurrentPosition(getLocation, getLocation), 3600000);
+    getUserAndRegisterWebWorkers();
 
-    window.socket = new Socket(config.socketUrl);
-    window.socket.onclose = () => store.setConnected(false);
-    window.socket.onerror = () => store.setConnected(false);
-    window.socket.on("ADD_NOTIFICATION", (e) => store.addNotification(e.detail));
-    window.socket.on("REMOVE_NOTIFICATION", (e) => store.removeNotification(e.detail));
-    window.socket.on("NEW_MESSAGE", (e) => store.setReceivedMessage(e.detail));
-    window.socket.onopen = () => store.setConnected(true);
-    setInterval(() => window.socket.readyState === 1 && socket.emit("PING", {}), 60000);
-    return () => window.socket.close(); // this act exactly like componentWillUnmount
+    navigator.geolocation.getCurrentPosition(getLocation, getLocation);
+    setInterval(() => {
+      navigator.geolocation.getCurrentPosition(getLocation, getLocation);
+      syncNotificationPermission();
+    }, 3600000);
   }, []);
 
   if (loading) return <LoadingScreen />;

@@ -29,11 +29,7 @@ export const getConfig = (key) => {
 };
 
 export const setEventsListeners = () => {
-  const events = getConfig("events");
   window.addEventListener("click", (e) => {
-    const className = e.className || e.target.className.baseVal || e.target.className;
-    events.forEach((event) => window.dispatchEvent(new CustomEvent(event, { detail: className })));
-
     if (document.querySelector(".no-line")) return;
     document.querySelectorAll(".focus").forEach((el) => {
       el.className = el.className.replace("focus", "no-line");
@@ -48,4 +44,10 @@ export const setEventsListeners = () => {
       el.className = el.className.replace("no-line", "focus");
     });
   });
+
+  // document.addEventListener("visibilitychange", () => {
+  //   if (document.visibilityState === "visible") {
+  //     // The tab has become visible so clear the now-stale Notification.
+  //   }
+  // });
 };

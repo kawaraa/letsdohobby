@@ -36,7 +36,7 @@ class AuthResolver {
       const token = this.firewall.createToken({ id: user.id });
       if (!token) return response.status(500).end(CustomError.toJson());
 
-      const result = await this.mailHandler.sendConfirmationLink(user, token);
+      // const result = await this.mailHandler.sendConfirmationLink(user, token);
       response.json({ success: true });
     } catch (error) {
       response.clearCookie("userToken");

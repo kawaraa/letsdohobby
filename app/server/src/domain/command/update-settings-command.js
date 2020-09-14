@@ -10,6 +10,7 @@ class UpdateSettingsCommand {
     this.setUnit(settings.unit);
     this.setLanguage(settings.language);
     this.setAccountStatus(settings.accountStatus);
+    this.setNotifications(settings.notifications);
   }
   setCurrentLat(value) {
     if (Validator.isNumber(value, -90, 90)) this.currentLat = Validator.parseLatitude(value);
@@ -21,7 +22,10 @@ class UpdateSettingsCommand {
     if (Validator.isNumber(value, 5, 161)) this.locationRange = Number.parseInt(value);
   }
   setUnit(value) {
-    if (Validator.isString(value, 1, 2) && /km|mi/gim.test(value)) this.unit = value;
+    if (Validator.isString(value, 2, 2) && /km|mi/gim.test(value)) this.unit = value;
+  }
+  setNotifications(value) {
+    if (Validator.isString(value, 2, 3) && /on|off/gim.test(value)) this.notifications = value;
   }
   setLanguage(value) {
     if (Validator.isString(value, 2, 2) && /en|ar/gim.test(value)) this.language = value;

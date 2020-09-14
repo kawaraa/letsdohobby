@@ -25,7 +25,7 @@ class AccountRepository {
   }
 
   async checkAccount(username, psw) {
-    let query = `SELECT t1.id, t1.username, t1.confirmed, t2.displayName, t2.avatarUrl, t3.currentLat, t3.currentLng, t3.locationRange, t3.unit, t3.language, t3.accountStatus FROM user.account t1 JOIN user.profile t2 ON t1.id = t2.owner JOIN user.settings t3 ON t1.id = t3.owner WHERE t1.username = ?`;
+    let query = `SELECT t1.id, t1.username, t1.confirmed, t2.displayName, t2.avatarUrl, t3.currentLat, t3.currentLng, t3.locationRange, t3.unit, t3.notifications, t3.language, t3.accountStatus FROM user.account t1 JOIN user.profile t2 ON t1.id = t2.owner JOIN user.settings t3 ON t1.id = t3.owner WHERE t1.username = ?`;
 
     if (psw) query += " AND t1.hashedPsw = ?";
     const result = await this.mySqlProvider.query(query, psw ? [username, psw] : [username]);

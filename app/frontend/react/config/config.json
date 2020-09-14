@@ -16,7 +16,8 @@
       "url": "/api/user/settings",
       "method": "PUT"
     },
-    "socketUrl": "/api"
+    "socketUrl": "/api",
+    "error": "Couldn't connect to the chat server, please refresh the page and try again(!)"
   },
   "updateUsername": {
     "url": "/api/user/username",
@@ -200,6 +201,7 @@
   "settings": {
     "url": "/api/user/settings",
     "method": "PUT",
+    "error": "The notifications in your browser are blocked, Please allow notifications first(!)",
     "languages": [
       "en",
       "ar"
@@ -248,8 +250,5 @@
   "postDetail": {
     "url": "/api/post/",
     "method": "GET"
-  },
-  "events": [
-    "SHOW_HIDE_UPDATE_POST_FORM"
-  ]
+  }
 }

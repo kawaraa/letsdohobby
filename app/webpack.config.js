@@ -1,5 +1,5 @@
 module.exports = {
-  entry: ["babel-polyfill", "./frontend/react/app.js"],
+  entry: ["babel-polyfill", __dirname + "/frontend/react/app.js"],
   mode: "production",
   module: {
     rules: [

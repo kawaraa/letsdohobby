@@ -8,6 +8,7 @@ export default (props) => {
   const [percentComplete, setPercentComplete] = useState(0);
   const [user, setUser] = useState({});
   const [location, setLocation] = useState({ latitude: 0, longitude: 0, error: "" });
+  const [worker, setWorker] = useState(null);
   const [showMessage, setShowMessage] = useState("");
   const [posts, setPosts] = useState([]);
   const [editingPost, setEditingPost] = useState("");
@@ -71,6 +72,20 @@ export default (props) => {
   };
   const removeUnseenChat = (id) => setUnseenChats(unseenChats.filter((chat) => chat.id !== id));
 
+  const requestNotificationPermission = () => {
+    const error = "Notifications are not supported";
+    return new Promise((resolve, reject) => {
+      if (!Notification || typeof Notification.requestPermission !== "function") reject(error);
+      if (Notification.permission === "granted") return resolve(Notification.permission);
+      try {
+        Notification.requestPermission().then(resolve).catch(reject);
+      } catch (error) {
+        // Safari doesn't return a promise for requestPermissions and it throws a Error. instead it takes a callback.
+        Notification.requestPermission((res) => (res ? resolve(res) : reject(res)));
+      }
+    });
+  };
+
   const state = {
     Request,
     progress,
@@ -81,6 +96,9 @@ export default (props) => {
     setUser,
     location,
     setLocation,
+    worker,
+    setWorker,
+    requestNotificationPermission,
     showMessage,
     popMessage,
     posts,
