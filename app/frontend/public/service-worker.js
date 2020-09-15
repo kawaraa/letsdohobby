@@ -95,9 +95,15 @@ const getFocusedClients = async () => {
   }
 };
 
-const establishSocketConnection = () => {
+const establishSocketConnection = async () => {
+  const focusedClients = await getFocusedClients();
+  focusedClients.forEach((client) => client.postMessage({ type: "DISCONNECT" }));
+
   if (!navigator.onLine) return setTimeout(() => establishSocketConnection(), 15000);
-  if (self.socket && self.socket.readyState === 1) return;
+
+  if (self.socket && self.socket.readyState === 1) {
+    return focusedClients.forEach((client) => client.postMessage({ type: "CONNECT" }));
+  }
   self.socket = new WebSocket(self.socketUrl);
   self.socket.onmessage = handleMessages;
 

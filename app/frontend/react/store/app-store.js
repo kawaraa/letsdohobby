@@ -15,7 +15,7 @@ export default (props) => {
   const [editingPost, setEditingPost] = useState("");
   const [conversations, setConversations] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState({});
-  const [connected, setConnected] = useState(false);
+  const [connected, setConnected] = useState(true);
   const [unseenNotifications, setUnseenNotifications] = useState([]);
   const [unseenChats, setUnseenChats] = useState([]);
 
