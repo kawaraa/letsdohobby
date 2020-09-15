@@ -110,6 +110,7 @@ const establishSocketConnection = async () => {
   self.socket.onclose = (e) => setTimeout(() => establishSocketConnection(), 2000);
   self.socket.onerror = (e) => console.log("Socket Connection Error: ", e);
   self.socket.onopen = (e) => {
+    focusedClients.forEach((client) => client.postMessage({ type: "CONNECT" }));
     clearInterval(self.socketTimer);
     self.socketTimer = setInterval(
       () => self.socket.readyState === 1 && self.socket.send(toJSON({ type: "PING", message: {} })),
