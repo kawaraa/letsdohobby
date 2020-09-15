@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { withRouter } from "react-router-dom";
 import { getConfig } from "../../config/config";
 import { AppContext } from "../../store/app-store";
 import ChatList from "./chat-list";
@@ -7,7 +8,7 @@ import "./messenger.css";
 const Messenger = (props) => {
   const config = getConfig("messenger");
   const [showChatList, setShowChatList] = useState(false);
-  const { Request, unseenChats, setUnseenChats } = useContext(AppContext);
+  const { Request, Validator, unseenChats, setUnseenChats } = useContext(AppContext);
 
   useEffect(() => {
     window.addEventListener("click", ({ target: { className } }) => {
@@ -16,6 +17,9 @@ const Messenger = (props) => {
     Request.fetch(config.url)
       .then((unseenChats) => setUnseenChats(unseenChats))
       .catch((err) => setUnseenChats([]));
+
+    const data = Validator.parseUREncoded(props.location.search);
+    if (data.group) setShowChatList(true);
   }, []);
 
   return (
@@ -26,9 +30,8 @@ const Messenger = (props) => {
       <button
         type="button"
         className="messenger-button no-line"
-        onClick={() => setShowChatList(!showChatList)}
-      ></button>
+        onClick={() => setShowChatList(!showChatList)}></button>
     </div>
   );
 };
-export default Messenger;
+export default withRouter(Messenger);

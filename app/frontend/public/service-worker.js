@@ -66,7 +66,7 @@ self.addEventListener("message", (evt) => {
 
 self.addEventListener("notificationclick", (evt) => {
   console.log(evt.notification);
-  if (clients.openWindow) clients.openWindow("/");
+  if (clients.openWindow) clients.openWindow("/" + evt.notification.data.url);
   evt.notification.close();
   // clients.focus();
 });
@@ -87,10 +87,9 @@ const toJSON = (data) => {
 };
 const getFocusedClients = async () => {
   try {
-    const clients = await clients.matchAll({ includeUncontrolled: true, type: "window" }).then((clients) => {
+    return clients.matchAll({ includeUncontrolled: true, type: "window" }).then((clients) => {
       return clients.filter((client) => client.visibilityState === "visible");
     });
-    return clients;
   } catch (error) {
     return [];
   }
@@ -98,6 +97,7 @@ const getFocusedClients = async () => {
 
 const establishSocketConnection = () => {
   if (!navigator.onLine) return setTimeout(() => establishSocketConnection(), 15000);
+  if (self.socket && self.socket.readyState === 1) return;
   self.socket = new WebSocket(self.socketUrl);
   self.socket.onmessage = handleMessages;
 
@@ -115,51 +115,77 @@ const establishSocketConnection = () => {
 const handleMessages = async (evt) => {
   const data = parseJSON(evt.data);
   const focusedClients = await getFocusedClients();
+
   focusedClients.forEach((client) => client.postMessage(data));
   if (!pushNotificationEvents.find((evt) => evt === data.type)) return;
 
   if (Notification.permission === "granted" && self.notifications === "on" && !focusedClients[0]) {
     const notification = getNotifications(data);
-    self.registration.showNotification(notification.title, notification.body);
+    if (notification) self.registration.showNotification(notification.title, notification.body);
   }
 };
 
 const getNotifications = (evt) => {
-  console.log(evt);
-  let title, iconUrl;
+  console.log("Preparing the notification: ", evt);
+
+  let title = "",
+    text = "",
+    icon = "/image/favicon/android-chrome-512x512.png",
+    tag = Math.random() + "",
+    url = "";
   switch (evt.type) {
     case "ADD_NOTIFICATION":
       title = "Join request";
+      text = evt.message.text.replace("]", "");
+      url = `?notification=show`;
+      tag = evt.message.id;
       break;
     case "NEW_MESSAGE":
       title = "New message";
+      text = `There are new messages in ${evt.message.activity} group`;
+      url = `?group=${evt.message.chatId}`;
+      tag = evt.message.chatId;
       break;
     default:
       console.log("Unknown message: ", data);
+      return undefined;
   }
 
-  const notification = {
-    title,
-    body: {
-      tag: "",
-      body: "Success Message",
-      iconUrl: "img/avatar-male.png",
-      icon: "img/avatar-male.png",
-    },
-  };
-  return notification;
+  return { title, body: { tag, body: text, icon, data: { url } } };
 };
+
 /**
  * clients object:
- * {focused: false, frameType: "top-level", id: "7653ddbc-df52-4f18-8ebc-81a383998472", type: "window", url: "http://localhost:8080/settings", visibilityState: "visible"}
- */
-// switch (data.type) {
-//   case "ADD_NOTIFICATION":
-//     notification = getNotifications(data);
-//     break;
-//   case "NEW_MESSAGE":
-//     notification = getNotifications(data);
-//     break;
-//   default:
-//     console.log("Unknown message: ", data);
-// }
+ const clientObject = {
+  focused: false,
+  frameType: "top-level",
+  id: "7653ddbc-df52-4f18-8ebc-81a383998472",
+  type: "window",
+  url: "http://localhost:8080/settings",
+  visibilityState: "visible",
+};
+ * 
+ * 
+ * Possible values of Notification Option:
+ const options = {
+   "//": "Visual Options",
+   body: "<String>",
+   icon: "<URL String>",
+   image: "<URL String>",
+   badge: "<URL String>",
+   vibrate: "<Array of Integers>",
+   sound: "<URL String>",
+   dir: "<String of 'auto' | 'ltr' | 'rtl'>",
+   "//": "Behavioural Options",
+   tag: "<String>",
+   data: "<Anything>",
+   requireInteraction: "<boolean>",
+   renotify: "<Boolean>",
+   silent: "<Boolean>",
+   "//": "Both Visual & Behavioural Options",
+   actions: "<Array of Strings>",
+   "//": "Information Option. No visual affect.",
+   timestamp: "<Long>",
+  };
+  
+  */

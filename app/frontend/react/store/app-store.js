@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import Request from "../utility/request";
+import { Validator } from "k-utilities";
 
 export const AppContext = createContext();
 
@@ -67,8 +68,8 @@ export default (props) => {
     const index = unseenNotifications.findIndex((note) => note.id === notification.id);
     if (index < 0) setUnseenNotifications([...unseenNotifications, notification]);
   };
-  const removeNotification = (id) => {
-    setUnseenNotifications(unseenNotifications.filter((notification) => notification.id !== id));
+  const removeNotification = (notification) => {
+    setUnseenNotifications(unseenNotifications.filter((not) => not.id !== notification.id));
   };
   const removeUnseenChat = (id) => setUnseenChats(unseenChats.filter((chat) => chat.id !== id));
 
@@ -88,6 +89,7 @@ export default (props) => {
 
   const state = {
     Request,
+    Validator,
     progress,
     updateProgress,
     percentComplete,

@@ -20,8 +20,9 @@ class NotificationHandler {
         await notifications.map(async (notification) => {
           notification.id = (23456789 * Math.random()).toString();
           await this.notificationRepository.create(notification);
-          notification.payload = { id: notification.id };
-          this.socket.dispatchEvent("ADD_NOTIFICATION", notification);
+          const { id, receiver, subjectId, objectId, type, text, unseen, createdAt } = notification;
+          const not = { receiver, payload: { id, type, text, createdAt } };
+          this.socket.dispatchEvent("ADD_NOTIFICATION", not);
         })
       );
       return true;
@@ -30,6 +31,7 @@ class NotificationHandler {
       return false;
     }
   }
+
   async handleCancelJoinRequest(user, group) {
     const notifications = await this.notificationRepository.getBySubjectIdAndObjectId(user.id, group.id);
     notifications.map((notification) => {
@@ -75,6 +77,7 @@ class NotificationHandler {
   }
 
   handleNewMessage(group, message) {
+    message.activity = group.activity;
     group.members.forEach((member) => {
       if (member.id === message.owner.id) return;
       this.socket.dispatchEvent("NEW_MESSAGE", { receiver: member.id, payload: message });

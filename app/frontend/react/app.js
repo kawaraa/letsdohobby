@@ -75,7 +75,6 @@ const App = (props) => {
   useEffect(() => {
     setEventsListeners();
     getUserAndRegisterWebWorkers();
-
     navigator.geolocation.getCurrentPosition(getLocation, getLocation);
     setInterval(() => {
       navigator.geolocation.getCurrentPosition(getLocation, getLocation);

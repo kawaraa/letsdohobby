@@ -34,7 +34,6 @@ class CustomServiceWorker {
     this.serviceWorker.addEventListener(eventType, listener, false);
   }
   dispatch(event) {
-    console.log("Received a message from the Worker: ", event);
     const { type, message } = event.data;
     if (!this._events.has(type)) throw new Error(`"${type}" event has no listener.`);
     this.serviceWorker.dispatchEvent(new CustomEvent(type, { detail: message }));
