@@ -54,8 +54,6 @@ CREATE TABLE `post` (
   PRIMARY KEY(id)
 );
 
-alter table `post` modify column `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
-
 CREATE TABLE `request` (
   `receiver` VARCHAR(150),
   `sender` INT NOT NULL,
@@ -96,6 +94,9 @@ CREATE TABLE `view` (
   `viewer` INT NOT NULL,
   PRIMARY KEY(owner, viewer)
 );
+
+ALTER TABLE `post` MODIFY column `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+ALTER TABLE `message` MODIFY COLUMN `content` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
 
 CREATE DATABASE IF NOT EXISTS `archive`;
 USE `archive`;

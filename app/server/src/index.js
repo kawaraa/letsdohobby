@@ -31,10 +31,11 @@ const MailHandler = require("./application/handler/mail-handler");
 const MemberResolver = require("./infrastructure/resolver/member-resolver");
 
 module.exports = (server, router, firewall, mySqlProvider, storageProvider) => {
-  // if(process.env.NODE_ENV !== "production")
+  const { NODE_ENV, NODEMAILER, TWILIO } = process.env;
+  // if(NODE_ENV !== "production")
   const mailConfig = {
-    mailer: process.env.NODEMAILER ? JSON.parse(process.env.NODEMAILER) : config.nodemailer,
-    twilio: process.env.TWILIO ? JSON.parse(process.env.TWILIO) : config.twilio,
+    mailer: NODEMAILER ? JSON.parse(NODEMAILER) : config.nodemailer,
+    twilio: TWILIO ? JSON.parse(TWILIO) : config.twilio,
   };
 
   // Repositories
