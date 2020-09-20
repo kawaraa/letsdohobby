@@ -20,6 +20,14 @@ const getWebRouter = require("./frontend/ssr/index.js");
   try {
     const app = express();
     const server = http.createServer(app);
+    const { NODE_ENV, DB_HOST, DB_PORT, DB_USER, DB_PASS, NODEMAILER, TWILIO } = process.env;
+    // if(NODE_ENV !== "production")
+    config.mysql.host = DB_HOST || config.mysql.host;
+    config.mysql.port = DB_PORT || config.mysql.port;
+    config.mysql.user = DB_USER || config.mysql.user;
+    config.mysql.password = DB_PASS || config.mysql.password;
+    config.nodemailer = NODEMAILER ? JSON.parse(NODEMAILER) : config.nodemailer;
+    config.twilio = TWILIO ? JSON.parse(TWILIO) : config.twilio;
 
     // Providers
     const mySqlProvider = new MysqlDatabaseProvider(mysql, promisify, config.mysql);
@@ -28,8 +36,15 @@ const getWebRouter = require("./frontend/ssr/index.js");
     // console.log(await redisProvider.get("name"));
     const firewall = new Firewall(cookie, jwt, config.firewall);
 
-    const apiRouter = getApiRouter(server, express.Router(), firewall, mySqlProvider, storageProvider);
-    const webRouter = getWebRouter(express.Router(), firewall, mySqlProvider);
+    const apiRouter = getApiRouter(
+      server,
+      express.Router(),
+      firewall,
+      mySqlProvider,
+      storageProvider,
+      config
+    );
+    const webRouter = getWebRouter(express.Router(), firewall, mySqlProvider, config);
     const ServeLoggedInUserWithReact = (request, response, next) => {
       if (!firewall.isAuthenticated(request)) return next();
       response.sendFile(__dirname + "/frontend/public/template/react.html");

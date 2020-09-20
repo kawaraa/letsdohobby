@@ -1,9 +1,8 @@
-// const config = require("../config/config.json");
 const templateEngine = require("./utility/template-engine");
 const CustomError = require("../../server/src/domain/model/custom-error");
 const Validator = require("../../server/src/my-npm/validator");
 
-module.exports = (router, firewall, MysqlDatabaseProvider) => {
+module.exports = (router, firewall, MysqlDatabaseProvider, config) => {
   const navbar = templateEngine.compile("layout/navbar.html");
   const indexHtml = templateEngine.compile("index.html");
   const errorMessage = templateEngine.compile("layout/error.html");

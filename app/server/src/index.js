@@ -1,4 +1,3 @@
-const config = require("../config/config.json");
 const WebSocket = require("ws");
 const formidable = require("formidable");
 const nodemailer = require("nodemailer");
@@ -30,13 +29,8 @@ const DeletePostHandler = require("./application/handler/delete-post-handler");
 const MailHandler = require("./application/handler/mail-handler");
 const MemberResolver = require("./infrastructure/resolver/member-resolver");
 
-module.exports = (server, router, firewall, mySqlProvider, storageProvider) => {
-  const { NODE_ENV, NODEMAILER, TWILIO } = process.env;
-  // if(NODE_ENV !== "production")
-  const mailConfig = {
-    mailer: NODEMAILER ? JSON.parse(NODEMAILER) : config.nodemailer,
-    twilio: TWILIO ? JSON.parse(TWILIO) : config.twilio,
-  };
+module.exports = (server, router, firewall, mySqlProvider, storageProvider, config) => {
+  const mailConfig = { mailer: config.nodemailer, twilio: config.twilio };
 
   // Repositories
   const accountRepository = new AccountRepository(mySqlProvider, config.accountRepository);
