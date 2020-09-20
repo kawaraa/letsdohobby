@@ -1,5 +1,5 @@
 {
-  "port": 8080,
+  "port": 3001,
   "redis": {
     "host": "redis",
     "port": 6379
@@ -11,9 +11,9 @@
     "password": "root-psw"
   },
   "gCloud": {
-    "projectId": "projects-121",
+    "projectId": "database-04",
     "keyFileName": "/server/config/google-bucket.json",
-    "bucketName": "letsdohobby-111"
+    "bucketName": "media-storage-04"
   },
   "firewall": {
     "secretKey": "my-secret",
@@ -30,11 +30,11 @@
     }
   },
   "createPostHandler": {
-    "domain": "https://storage.googleapis.com/letsdohobby-111/",
+    "domain": "/",
     "fileError": "Not supported file type"
   },
   "nodemailer": {
-    "service": "gmail",
+    "service": "",
     "auth": {
       "user": "",
       "pass": ""
