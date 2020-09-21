@@ -18,7 +18,7 @@ const pushNotificationEvents = ["ADD_NOTIFICATION", "NEW_MESSAGE"];
 
 self.addEventListener("install", (evt) => {
   evt.waitUntil(caches.open(staticFileCacheName).then((cache) => cache.addAll(staticFileCachePaths)));
-  // self.skipWaiting();
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", async (evt) => {
