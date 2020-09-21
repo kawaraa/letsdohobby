@@ -41,6 +41,7 @@ const App = (props) => {
       syncNotificationPermission();
       worker.emit("SET_NOTIFICATIONS_PERMISSION", { mode: user.notifications });
     } catch (error) {
+      if (/Unauthorized request/.test(error.message)) return;
       setState({ loading: false, error: error.message });
     }
   };
@@ -84,7 +85,9 @@ const App = (props) => {
 
   if (loading) return <LoadingScreen />;
   if (error) return <CustomMessage text={error} name="error" />;
-  if (!store.user || !store.user.id) return window.location.reload();
+  if (!store.user || !store.user.id) {
+    return (window.location.href = window.location.origin + "/log-me-in-out");
+  }
 
   return (
     <BrowserRouter>
