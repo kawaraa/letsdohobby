@@ -133,7 +133,7 @@ const handleMessages = async (evt) => {
 };
 
 const getNotifications = (evt) => {
-  console.log("Preparing the notification: ", evt);
+  // console.log("Preparing the notification: ", evt);
 
   let title = "",
     text = "",
@@ -154,7 +154,7 @@ const getNotifications = (evt) => {
       tag = evt.message.chatId;
       break;
     default:
-      console.log("Unknown message: ", data);
+      // console.log("Unknown message: ", data);
       return undefined;
   }
 

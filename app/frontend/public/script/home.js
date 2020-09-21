@@ -43,7 +43,7 @@ async function onSignup(form) {
     form.reset();
     signupError.style.display = "none";
     messageScreen.style.display = "block";
-    //  location.reload()
+    //  location.reload() // Or    window.location.href = "http://hobby.kawaraa.com/";
   } catch (error) {
     signupError.style.display = "block";
     signupError.innerHTML = error.message;
@@ -55,7 +55,7 @@ async function onLogin({ username, psw } = form) {
   const userCredentials = { username: username.value, psw: psw.value };
   try {
     await Http.post(window.location.origin + "/api/login", userCredentials);
-    location.reload();
+    window.location.href = "http://hobby.kawaraa.com/";
   } catch (error) {
     loginError.innerHTML = error.message;
   }
