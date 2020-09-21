@@ -90,12 +90,12 @@ const App = (props) => {
     <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route exact path="/" render={() => <HomePage />} />
         <Route exact path="/profile" render={(props) => <Profile {...props} />} />
         <Route exact path="/settings" render={(props) => <Settings {...props} />} />
         <Route exact path="/posts/:id" render={(props) => <PostDetail {...props} />} />
         <Route exact path="/my-posts" render={(props) => <MyItems {...props} />} />
         <Route exact path="/member/:id" render={(props) => <Member {...props} />} />
+        <Route path="/" render={() => <HomePage />} />
       </Switch>
       {conversations[0] && <Conversations conversations={conversations} />}
       {store.editingPost && <UpdatePostForm post={store.editingPost} />}
