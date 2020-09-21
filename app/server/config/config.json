@@ -1,5 +1,6 @@
 {
   "port": 3001,
+  "publicDir": "/frontend/public",
   "redis": {
     "host": "redis",
     "port": 6379
@@ -11,9 +12,9 @@
     "password": "root-psw"
   },
   "gCloud": {
-    "projectId": "database-04",
-    "keyFileName": "/server/config/google-bucket.json",
-    "bucketName": "media-storage-04"
+    "projectId": "files-storage-04",
+    "keyFileName": "/server/config/google-storage.json",
+    "bucketName": "media-bucket-04"
   },
   "firewall": {
     "secretKey": "my-secret",
@@ -30,11 +31,11 @@
     }
   },
   "createPostHandler": {
-    "domain": "/",
+    "domain": "https://storage.googleapis.com/media-bucket-04/",
     "fileError": "Not supported file type"
   },
   "nodemailer": {
-    "service": "",
+    "service": "gmail",
     "auth": {
       "user": "",
       "pass": ""

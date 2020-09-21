@@ -1,6 +1,6 @@
 "use strict";
 
-const config = require("./server/config/config.json");
+const getConfig = require("./server/config/get-config");
 const { promisify } = require("util");
 const http = require("http");
 const express = require("express");
@@ -18,16 +18,9 @@ const getWebRouter = require("./frontend/ssr/index.js");
 
 (async () => {
   try {
+    const config = getConfig();
     const app = express();
     const server = http.createServer(app);
-    const { NODE_ENV, DB_HOST, DB_PORT, DB_USER, DB_PASS, NODEMAILER, TWILIO } = process.env;
-    // if(NODE_ENV !== "production")
-    config.mysql.host = DB_HOST || config.mysql.host;
-    config.mysql.port = DB_PORT || config.mysql.port;
-    config.mysql.user = DB_USER || config.mysql.user;
-    config.mysql.password = DB_PASS || config.mysql.password;
-    config.nodemailer = NODEMAILER ? JSON.parse(NODEMAILER) : config.nodemailer;
-    config.twilio = TWILIO ? JSON.parse(TWILIO) : config.twilio;
 
     // Providers
     const mySqlProvider = new MysqlDatabaseProvider(mysql, promisify, config.mysql);
@@ -47,14 +40,12 @@ const getWebRouter = require("./frontend/ssr/index.js");
     const webRouter = getWebRouter(express.Router(), firewall, mySqlProvider, config);
     const ServeLoggedInUserWithReact = (request, response, next) => {
       if (!firewall.isAuthenticated(request)) return next();
-      response.sendFile(__dirname + "/frontend/public/template/react.html");
+      response.sendFile(config.publicDir + "/template/react.html");
     };
-
-    const PORT = process.env.PORT || config.port;
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use(express.static(__dirname + "/frontend/public"));
+    app.use(express.static(config.publicDir));
     app.use("/api", apiRouter);
     app.use("/web", webRouter);
 
@@ -63,12 +54,12 @@ const getWebRouter = require("./frontend/ssr/index.js");
     });
 
     app.get("*", ServeLoggedInUserWithReact, (request, response) => {
-      response.sendFile(__dirname + "/frontend/public/template/home.html");
+      response.sendFile(config.publicDir + "/template/home.html");
     });
 
     app.use("*", (request, response) => response.status(404).end("Not Found page"));
 
-    server.listen(PORT, () => console.log("Running on: http://localhost:" + PORT));
+    server.listen(config.port, () => console.log("Running on: http://localhost:" + config.port));
   } catch (error) {
     console.error("ServerError: ", error);
   }
