@@ -30,23 +30,33 @@ self.addEventListener("activate", async (evt) => {
 });
 
 self.addEventListener("fetch", (evt) => {
-  if (evt.request.url.indexOf("http") < 0 || evt.request.url.indexOf("/api/") > -1) {
-    return evt.respondWith(fetch(evt.request));
-  }
-  evt.respondWith(
-    caches.match(evt.request).then((cachedResponse) => {
-      return (
-        cachedResponse ||
-        fetch(evt.request).then((response) => {
+  const isApi = evt.request.url.indexOf("/api/") > -1 && evt.request.url.indexOf("log-me-out") < 0;
+  if (evt.request.url.indexOf("http") < 0 || isApi) {
+    evt.respondWith(fetch(evt.request));
+  } else if (/log-me-in|log-me-out/.test(evt.request.url)) {
+    evt.respondWith(
+      caches.open(staticFileCacheName).then((cache) => {
+        cache.delete("/");
+        return fetch(evt.request).then((response) => {
+          cache.put("/", response.clone());
+          return response;
+        });
+      })
+    );
+  } else {
+    evt.respondWith(
+      caches.match(evt.request).then((cachedResponse) => {
+        if (cachedResponse) return cachedResponse;
+        return fetch(evt.request).then((response) => {
           return caches.open(staticFileCacheName).then((cache) => {
             cache.put(evt.request, response.clone());
             return response;
           });
-        })
-      );
-    })
-    // .catch((error) => caches.match(staticFileCachePaths[0])) // offline fallback page
-  );
+        });
+      })
+      // .catch((error) => caches.match(staticFileCachePaths[0])) // offline fallback page
+    );
+  }
 });
 
 self.addEventListener("message", (evt) => {
@@ -65,7 +75,6 @@ self.addEventListener("message", (evt) => {
 });
 
 self.addEventListener("notificationclick", (evt) => {
-  console.log(evt.notification);
   if (clients.openWindow) clients.openWindow("/" + evt.notification.data.url);
   evt.notification.close();
   // clients.focus();

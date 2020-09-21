@@ -14,12 +14,14 @@ class Http {
     });
   }
 
-  static post(url, data, method = "POST", type = "application/json") {
+  static post(url, data, method = "POST", header = { "Content-Type": "application/json" }) {
     // "application/json", "x-www-form-urlencoded", "text/plain", text/html
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url, true);
-      xhr.setRequestHeader("Content-Type", type);
+      for (let key in header) {
+        xhr.setRequestHeader(key, header[key]);
+      }
       xhr.onload = () => {
         const response = Http.parseJSON(xhr.response || xhr.responseText);
         return xhr.status >= 200 && xhr.status < 300 ? resolve(response) : reject(response);

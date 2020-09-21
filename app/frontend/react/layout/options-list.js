@@ -20,7 +20,7 @@ export default ({ username, displayName }) => {
         </Link>
       </li>
       <li className="nav-options item">
-        <a href="/api/logout" className="nav-option link hover-shadow">
+        <a href="/api/log-me-out" className="nav-option link hover-shadow">
           Logout
         </a>
       </li>

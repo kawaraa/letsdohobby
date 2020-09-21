@@ -18,7 +18,7 @@ class AuthResolver {
   resolve() {
     this.server.post("/signup", this.onSignup.bind(this));
     this.server.post("/login", this.onLogin.bind(this));
-    this.server.use("/logout", this.onLogout.bind(this));
+    this.server.use("/log-me-out", this.onLogout.bind(this));
   }
   async onSignup(request, response) {
     try {
