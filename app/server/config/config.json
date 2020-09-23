@@ -136,5 +136,9 @@
     "Shooting",
     "Slacklining",
     "Travel"
-  ]
+  ],
+  "mysqlDatabaseBackupCron": {
+    "days": 1,
+    "backupFileName": "databases-backup.sql"
+  }
 }

@@ -25,5 +25,8 @@ module.exports = () => {
   // Google Storage
   const keyFileName = process.cwd() + config.gCloud.keyFileName;
   config.gCloud.credentials = JSON.parse(BUCKET_KEY ? BUCKET_KEY : fs.readFileSync(keyFileName, "utf8"));
+
+  config.mysqlDatabaseBackupCron.dbUser = config.mysql.user;
+  config.mysqlDatabaseBackupCron.dbPass = config.mysql.password;
   return config;
 };

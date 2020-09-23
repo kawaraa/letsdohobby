@@ -15,6 +15,7 @@ const GCloudStorageProvider = require("./server/src/infrastructure/provider/gclo
 const Firewall = require("./server/src/infrastructure/firewall/firewall");
 const getApiRouter = require("./server/src/index.js");
 const getWebRouter = require("./frontend/ssr/index.js");
+const MysqlDatabaseBackupCron = require("./server/src/infrastructure/factory/mysql-database-backup-cron");
 
 (async () => {
   try {
@@ -60,6 +61,8 @@ const getWebRouter = require("./frontend/ssr/index.js");
     app.use("*", (request, response) => response.status(404).end("Not Found page"));
 
     server.listen(config.port, () => console.log("Running on: http://localhost:" + config.port));
+
+    new MysqlDatabaseBackupCron(storageProvider, config.mysqlDatabaseBackupCron).schedule();
   } catch (error) {
     console.error("ServerError: ", error);
   }
