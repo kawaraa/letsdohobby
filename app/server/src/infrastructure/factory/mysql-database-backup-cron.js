@@ -16,7 +16,11 @@ class MysqlDatabaseBackupCron {
       const dbStream = this.spawn("mysqldump", [
         `-u${this.config.dbUser}`,
         `-p${this.config.dbPass}`,
-        "--all-databases",
+        "--databases",
+        "user",
+        "feeds",
+        "archive",
+        "portfolio",
       ]);
 
       // dbStream.stdout
