@@ -26,7 +26,7 @@ class MysqlDatabaseBackupCron {
         .on("finish", () => console.log("Finished backing up database successfully."))
         .on("error", (error) => console.error("Failed backing up database: ", error));
 
-      setTimeout(() => mysqlDatabaseBackupCron(this.period), this.period);
+      setTimeout(() => mysqlDatabaseBackupCron(), this.period);
     } catch (error) {
       console.error("Error: ", error);
     }
