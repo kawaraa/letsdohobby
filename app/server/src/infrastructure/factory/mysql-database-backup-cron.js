@@ -7,8 +7,6 @@ class MysqlDatabaseBackupCron {
   }
   async schedule() {
     try {
-      console.log("Started backing up");
-
       const storageStream = this.storageProvider.storage
         .file(this.config.backupFileName)
         .createWriteStream({ resumable: false });
@@ -16,24 +14,15 @@ class MysqlDatabaseBackupCron {
       const dbStream = this.spawn("mysqldump", [
         `-u${this.config.dbUser}`,
         `-p${this.config.dbPass}`,
-        "--databases",
-        "user",
-        "feeds",
-        "archive",
-        "portfolio",
+        "--all-databases",
       ]);
 
-      // dbStream.stdout
-      //   .on("data", (buffer) => console.log(buffer))
-      //   // .on("close", () => console.log("Finished backing up database successfully."))
-      //   .on("finish", () => console.log("Finished backing up database successfully."))
-      //   .on("error", (error) => console.error("Failed backing up database: ", error));
       dbStream.stdout
         .pipe(storageStream)
         .on("finish", () => console.log("Finished backing up database successfully."))
         .on("error", (error) => console.error("Failed backing up database: ", error));
 
-      // setTimeout(() => mysqlDatabaseBackupCron(this.period), this.period);
+      setTimeout(() => mysqlDatabaseBackupCron(this.period), this.period);
     } catch (error) {
       console.error("Error: ", error);
     }
