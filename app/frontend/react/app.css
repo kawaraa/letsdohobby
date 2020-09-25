@@ -220,7 +220,7 @@ button {
     height: 100px;
   }
   .outer-container {
-    margin: 65px 0 0 0;
+    padding: 65px 0 0 0;
   }
   .container {
     margin: 0;
