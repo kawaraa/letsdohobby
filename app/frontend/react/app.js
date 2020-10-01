@@ -86,8 +86,8 @@ const App = (props) => {
   if (loading) return <LoadingScreen />;
   if (error) return <CustomMessage text={error} name="error" />;
   if (!store.user || !store.user.id) {
-    return (window.location.href = window.location.origin + "/log-me-in-out");
-  }
+    return (window.location.href = "/log-me-in-out");
+  } else if (/log-me-in-out/gim.test(window.location.pathname)) window.location.href = "/";
 
   return (
     <BrowserRouter>
