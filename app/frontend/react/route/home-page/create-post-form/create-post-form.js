@@ -67,8 +67,8 @@ const CreatePostForm = (props) => {
           onSubmit={handleSubmit}
           className="create-post form no-line"
           title="Create post"
-          tabindex="0">
-          <h3 className="create-post title no-line" tabindex="0">
+          tabIndex="0">
+          <h3 className="create-post title no-line" tabIndex="0">
             Create Post
           </h3>
 
@@ -76,6 +76,7 @@ const CreatePostForm = (props) => {
             src="/image/x-icon.svg"
             alt="Close create post form button"
             className="create-post x-icon img"
+            tabIndex="0"
           />
 
           <div className="create-post user-info">
@@ -85,7 +86,7 @@ const CreatePostForm = (props) => {
               className="create-post avatar img no-line"
             />
 
-            <span className="create-post user-name no-line" title="User name" tabindex="0">
+            <span className="create-post user-name no-line" title="User name" tabIndex="0">
               {user.displayName}
             </span>
           </div>
@@ -127,13 +128,13 @@ const CreatePostForm = (props) => {
             )}
           </div>
 
-          <div className="create-post media no-line" title="Media inputs" tabindex="0">
+          <div className="create-post media no-line" title="Media inputs" tabIndex="0">
             <p className="create-post media-title">Add to your post</p>
             <label
               for="photo"
               className="create-post media-label no-line"
               title="Upload photo/video"
-              tabindex="0">
+              tabIndex="0">
               <img src="/image/media-image-icon.png" className="create-post media-img" />
               <input type="file" name="photoVideo" accept="image/*, video/*" id="photo" />
             </label>

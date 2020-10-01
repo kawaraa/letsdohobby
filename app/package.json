@@ -1,8 +1,8 @@
 {
   "name": "letsdohobby",
   "version": "1.0.0",
-  "description": "letsdohobby is a platform where people find the right partner for their hobbies.",
-  "main": "index.js",
+  "description": "LetsDoHobby is a platform where people find the right partner for their hobbies.",
+  "main": "app.js",
   "keywords": [],
   "author": "",
   "license": "ISC",

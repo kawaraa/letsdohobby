@@ -1,10 +1,7 @@
 // self.importScripts('foo.js', 'bar.js');
 
-// what is the scope of this process? Ninja said that it has scope of the web-worker file
-// console.log("self: ", self); // Explore
-// console.log("navigator: ", navigator); // Explore
 const filesMustCache = /(googleapis|gstatic)|\.(JS|CSS|SVG|PNG|JPG|jPEG|GIF|ICO|JSON)$/gim;
-const staticFileCacheName = "static-files-v0";
+const staticFileCacheName = "static-files-v1";
 const staticFileCachePaths = [
   "/",
   "/home.html",
