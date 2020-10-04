@@ -17,7 +17,7 @@ const Navbar = (props) => {
   }, []);
 
   return (
-    <div className="navbar-container">
+    <div className="navbar-outer">
       <nav className="navbar container no-line" title="Navbar">
         <Link to="/" class="logo wrapper no-line">
           <span class="logo item l">L</span>

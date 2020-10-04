@@ -46,7 +46,7 @@
 }
 
 /* Navbar styles */
-.navbar-container {
+.navbar-outer {
   position: fixed;
   width: 100%;
   top: 0;
@@ -59,19 +59,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 5px;
+  padding: 5px;
 }
 /* Brand Logo styles */
 .logo-link {
   text-decoration: none;
   margin: 0;
   padding: 0;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: bold;
   color: white;
 }
 .logo {
-  font-size: 34px;
+  font-size: 30px;
   font-weight: bolder;
 }
 .logo.l {
@@ -100,10 +100,8 @@
 }
 .login-form > input[name="username"],
 .login-form > input[name="psw"] {
-  display: inline-block;
   margin: 0 10px 0 0;
-  padding: 3px 6px;
-  width: 150px;
+  padding: 3px 5px;
   font-size: 16px;
   border: none;
 }
@@ -127,7 +125,7 @@
   margin: 0;
 }
 .intro.first-heading {
-  font-size: 30px;
+  font-size: 28px;
   margin: 10vh 0 0 0;
   padding: 0;
   text-align: center;
@@ -148,14 +146,14 @@
 .intro.heading {
   margin: 0;
   padding: 0;
-  font-size: 30px;
+  font-size: 28px;
   text-align: center;
   font-weight: bold;
 }
 .intro-learn-more {
   display: flex;
   margin: 20px 0 0 0;
-  font-size: 25px;
+  font-size: 20px;
   justify-content: center;
   align-items: center;
 }
@@ -165,9 +163,9 @@
 }
 .intro.arrow-down-link {
   overflow: hidden;
-  width: 40px;
-  height: 40px;
-  margin: 0 0 0 10px;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 6px;
   padding: 0;
   border-radius: 50%;
 }
@@ -260,15 +258,15 @@ label[for="birthday"] {
   display: flex;
   margin: 0;
   padding: 0;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
   justify-content: center;
   align-items: center;
 }
 .welcoming-smile {
   overflow: hidden;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   margin: 0 0 0 10px;
 }
 .smile {
@@ -283,27 +281,27 @@ label[for="birthday"] {
 .heading {
   margin: 30px 0 10px 0;
   padding: 0;
-  font-size: 25px;
+  font-size: 24px;
 }
 .questions-list {
   margin: 0;
-  padding: 0 0 0 40px;
-  font-size: 18px;
+  padding: 0 0 0 35px;
+  font-size: 17px;
 }
 .question {
-  margin: 10px 0;
+  margin: 7px 0;
   padding: 0;
 }
 .learn-more-conclusion {
   margin: 10px 0 0 0;
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .define-ldh {
   margin: 0 0 0 20px;
   padding: 0;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 17px;
+  line-height: 23px;
 }
 .ldh {
   font-weight: bold;
@@ -312,8 +310,8 @@ label[for="birthday"] {
 }
 .features-list {
   margin: 0 0 100px 0;
-  padding: 0 0 0 40px;
-  font-size: 18px;
+  padding: 0 0 0 35px;
+  font-size: 17px;
 }
 .feature {
   margin: 10px 0;
@@ -336,104 +334,25 @@ label[for="birthday"] {
   margin: 0 0 0 35px;
 }
 .preview.heading {
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
 }
 .preview.para {
-  font-size: 24px;
+  font-size: 20px;
   color: var(--font-color);
   text-align: center;
 }
 .preview.img {
   width: 350px;
-  height: 600px;
+  height: 550px;
   margin: 0;
   padding: 0;
   box-shadow: 0 0 5px 0 var(--font-color);
   border-radius: 10px;
 }
-/* =============== Tablet styles =============== */
-@media screen and (max-width: 1170px) {
-  .outer-container {
-    padding: 50px 0 0 0;
-  }
-  .navbar.container {
-    padding: 8px 5px;
-  }
-  /* === Brand Logo styles === */
-  .logo-link {
-    font-size: 24px;
-  }
-  .logo {
-    font-size: 28px;
-  }
-  /* === Login Form styles === */
-  .nav.login-form > input[name="username"],
-  .nav.login-form > input[name="psw"] {
-    padding: 3px 5px;
-    width: 150px;
-    font-size: 14px;
-  }
 
-  /* ========== Intro ==========*/
-  .intro.heading {
-    font-size: 28px;
-  }
-  .intro.first-heading {
-    font-size: 28px;
-  }
-  .intro-learn-more {
-    font-size: 20px;
-  }
-  .intro.arrow-down-link {
-    width: 30px;
-    height: 30px;
-    margin: 0 0 0 6px;
-  }
-  .welcoming {
-    font-size: 50px;
-  }
-  .welcoming-smile {
-    width: 60px;
-    height: 60px;
-  }
-  .heading {
-    font-size: 24px;
-  }
-  .questions-list {
-    padding: 0 0 0 35px;
-    font-size: 17px;
-  }
-  .question {
-    margin: 7px 0;
-  }
-  .learn-more-conclusion {
-    font-size: 19px;
-  }
-  .define-ldh {
-    font-size: 17px;
-    line-height: 23px;
-  }
-  .features-list {
-    padding: 0 0 0 35px;
-    font-size: 17px;
-  }
-
-  .preview.heading {
-    font-size: 30px;
-  }
-  .preview.para {
-    font-size: 20px;
-  }
-  .preview.img {
-    width: 300px;
-    height: 550px;
-  }
-}
-
-/* =============== Mobile styles =============== */
-
-@media screen and (max-width: 800px) {
+/* =============== Mobile & Tablet styles =============== */
+@media screen and (max-width: 850px) {
   #loading-screen-svg {
     width: 100px;
     height: 100px;
@@ -446,7 +365,7 @@ label[for="birthday"] {
   }
   /* Navbar styles */
   .navbar.container {
-    padding: 6px 10px;
+    padding: 8px 5px;
   }
 
   .logo-link {

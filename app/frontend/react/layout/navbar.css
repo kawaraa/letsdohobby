@@ -1,5 +1,5 @@
 /* =============== Desktop styles =============== */
-.navbar-container {
+.navbar-outer {
   position: fixed;
   width: 100%;
   top: 0;
@@ -11,6 +11,8 @@
 }
 .navbar.container {
   display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 10px 5px;
 }
 /* === Brand Logo styles === */
@@ -90,12 +92,8 @@
   border-radius: 50%;
 }
 
-/* =============== Tablet styles =============== */
-/* @media screen and (max-width: 1170px) {
-} */
-
-/* =============== Mobile styles =============== */
-@media screen and (max-width: 800px) {
+/* =============== Mobile & Tablet styles =============== */
+@media screen and (max-width: 850px) {
   .navbar.container {
     padding: 0 10px;
     /* align-items: center; */

@@ -79,7 +79,7 @@ function hideMe(element) {
 
 let prevScroll = window.pageYOffset;
 window.onscroll = (_, currentScroll = window.pageYOffset) => {
-  const navbar = document.querySelector(".navbar.outer-container");
+  const navbar = document.querySelector(".navbar-outer");
   if (prevScroll > currentScroll) navbar.style.top = "0";
   else navbar.style.top = `-${navbar.offsetHeight}px`;
   prevScroll = currentScroll;
