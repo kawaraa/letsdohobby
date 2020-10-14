@@ -5,8 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-      content="Lets Do Hobby is a free app for meeting like-minded local people who have the same interests as you." />
-    <meta name="keywords" content="Hobby, Activity, Meeting people, Making new friends, lets do hobby" />
+      content="LetsDoHobby is a free website / web app for meeting like-minded local people who have the same interests as you to practice your favourite hobby." />
+    <meta name="keywords"
+      content="Hobby, Activity, Meeting people, Making new friends, Practicing hobby lets do hobby" />
     <link rel="stylesheet" type="text/css" href="/style/variables.css" />
     <link rel="stylesheet" type="text/css" href="/style/homepage.css" />
     <meta name="author" content="Armando Kawara" />
@@ -21,7 +22,7 @@
     <link rel="apple-touch-icon" type="image/png" sizes="16x16" href="/image/favicon/favicon-16x16.png" />
     <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
     <meta name="theme-color" content="#ffffff">
-    <title>LetsDoHobby</title>
+    <title>LetsDoHobby | practice your hobby anywhere anytime</title>
   </head>
 
   <body>
@@ -83,7 +84,7 @@
           <div class="intro-learn-more">
             <p class="learn-more-para">Let's find out and get to know LetsDoHobby</p>
             <a href="#learn-more" title="Find out what Lets Do Hobby is" class="intro arrow-down-link">
-              <img src="/image/arrow-down.png" alt="arrow-down" class="arrow-down">
+              <img src="/image/arrow-down.png" alt="arrow down" class="arrow-down">
             </a>
           </div>
         </article>
@@ -130,7 +131,7 @@
     </div>
     <div class="outer-container about">
       <section id="learn-more" class="container no-line" title="" tabindex="0">
-        <p class="welcoming">Here you are <i class="welcoming-smile"><img src="/image/smile.svg" alt="smile"
+        <p class="welcoming">Here you are <i class="welcoming-smile"><img src="/image/smile.svg" alt="smile face"
               class="smile"></i>
         </p>
         <h2 class="heading">Do I need to LetsDoHobby app!</h2>
@@ -172,7 +173,7 @@
               you can join as much activities as you want. Create your own activity or join on existing
               Activity</p>
           </div>
-          <img src="/image/home-page.jpeg" class="preview img" alt="">
+          <img src="/image/home-page.jpeg" class="preview img" alt="App home page preview">
         </div>
         <div class="preview box">
           <div class="preview info">
@@ -181,7 +182,7 @@
               suits you. you can event use this to teach some people your own activity that you are good at
             </p>
           </div>
-          <img src="/image/create-post.jpeg" class="preview img" alt="">
+          <img src="/image/create-post.jpeg" class="preview img" alt="create post app page preview">
         </div>
         <div class="preview box left">
           <div class="preview info">
@@ -189,7 +190,7 @@
             <p class="preview para">You can edit description, update time or event delete the whole post. You
               can also share it with friends on other social network.</p>
           </div>
-          <img src="/image/post-options.jpeg" class="preview img" alt="">
+          <img src="/image/post-options.jpeg" class="preview img" alt="post option app page preview">
         </div>
         <div class="preview box">
           <div class="preview info">
@@ -197,7 +198,7 @@
             <p class="preview para">See who request to join the activity you create or the activity you are
               member in. </p>
           </div>
-          <img src="/image/notifications.jpeg" class="preview img" alt="">
+          <img src="/image/notifications.jpeg" class="preview img" alt="Notifications app page preview">
         </div>
         <div class="preview box left">
           <div class="preview info">
@@ -205,7 +206,7 @@
             <p class="preview para">See all the chats you you are member in and see how many new messages you
               have on every chat.</p>
           </div>
-          <img src="/image/chat-list.jpeg" class="preview img" alt="">
+          <img src="/image/chat-list.jpeg" class="preview img" alt="Chat list app page preview">
         </div>
         <div class="preview box">
           <div class="preview info">
@@ -213,14 +214,14 @@
             <p class="preview para">Connect with all the activity's members and arrange the location and other
               thing, and see who accepts who and who rejects who</p>
           </div>
-          <img src="/image/chat.jpeg" class="preview img" alt="">
+          <img src="/image/chat.jpeg" class="preview img" alt="Chat app page preview">
         </div>
         <div class="preview box left">
           <div class="preview info">
             <h5 class="preview heading">My items</h5>
             <p class="preview para">See all your posts and all the posts you have joined in one place, </p>
           </div>
-          <img src="/image/my-posts.jpeg" class="preview img" alt="">
+          <img src="/image/my-posts.jpeg" class="preview img" alt="My posts app page preview">
         </div>
       </section>
     </div>
@@ -231,11 +232,59 @@
       <span onclick="hideMe(this.parentElement)" class="message error-x">X</span> Account has been created
       successfully, you will receive and confirmation link within 20 seconds, Please confirm the account so
       you can login</p>
-    <script src="/script/utility.js"></script>
-    <script src="/script/date-options.js"></script>
-    <script src="/script/home.js"></script>
-    <script src="/script/register-service-worker.js"></script>
+    <script>
+      "use strict";
+      const minDay = 2,
+        maxDay = 31,
+        minYear = 1840,
+        maxYear = 2001,
+        months = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
+      function createOptionElement(value, text) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.innerText = text;
+        return option;
+      }
+
+      function renderDays(min, max, parent) {
+        for (let day = min; day <= max; day += 1) {
+          if (day < 10) parent.appendChild(createOptionElement("0" + day, "0" + day));
+          else parent.appendChild(createOptionElement(day, day));
+        }
+      }
+      function renderYears(min, max, parent) {
+        for (let year = max; year >= min; year -= 1) {
+          parent.appendChild(createOptionElement(year, year));
+        }
+      }
+
+      function renderDateOptions() {
+        const birthdayDay = document.querySelector("select[name=birthdayDay]");
+        const birthdayMonth = document.querySelector("select[name=birthdayMonth]");
+        const birthdayYear = document.querySelector("select[name=birthdayYear]");
+        renderDays(minDay, maxDay, birthdayDay);
+        months.forEach((month) => birthdayMonth.appendChild(createOptionElement(month, month)));
+        renderYears(minYear, maxYear, birthdayYear);
+      }
+      renderDateOptions();
+
+      (async () => {
+        if (!("serviceWorker" in navigator)) return;
+
+        try {
+          const registration = await navigator.serviceWorker.register("service-worker.js");
+          // console.log("Registration: ", registration);
+          // console.log("Scope: ", registration.scope); // what does this mean? Ninja said that it has scope of the web-worker file
+        } catch (error) {
+          console.log("Web Worker Registration Error: ", error);
+        }
+      })();
+
+    </script>
+
+    <script src="/script/utility.js"></script>
+    <script src="/script/home.js"></script>
   </body>
 
 </html>
