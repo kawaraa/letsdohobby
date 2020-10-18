@@ -6,6 +6,14 @@ const loginError = document.querySelector(".login-error");
 const messageScreen = document.getElementById("screen-message");
 
 (() => {
+  let prevScroll = window.pageYOffset;
+  window.onscroll = (_, currentScroll = window.pageYOffset) => {
+    const navbar = document.querySelector(".navbar-outer");
+    if (prevScroll > currentScroll) navbar.style.top = "0";
+    else navbar.style.top = `-${navbar.offsetHeight}px`;
+    prevScroll = currentScroll;
+  };
+
   window.addEventListener("load", () => (loadingScreen.style.display = "none"));
   window.addEventListener("click", (e) => {
     if (document.querySelector(".no-line")) return;
@@ -76,11 +84,3 @@ window.addEventListener("click", (e) => {
 function hideMe(element) {
   element.style.display = "none";
 }
-
-let prevScroll = window.pageYOffset;
-window.onscroll = (_, currentScroll = window.pageYOffset) => {
-  const navbar = document.querySelector(".navbar-outer");
-  if (prevScroll > currentScroll) navbar.style.top = "0";
-  else navbar.style.top = `-${navbar.offsetHeight}px`;
-  prevScroll = currentScroll;
-};
