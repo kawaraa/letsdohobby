@@ -42,13 +42,14 @@ typings/
 # dotenv environment variables file
 .env
 google-storage.json
-# next.js build output
-.next
-# other files
+variable.json
 .DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 # client/public/bundle.js
+# next.js build output
+.next
+
 

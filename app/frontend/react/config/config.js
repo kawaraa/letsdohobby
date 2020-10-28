@@ -1,23 +1,7 @@
 import configs from "./config.json";
 
-((host = window.location.origin) => {
-  configs.app.socketUrl = host.replace("https", "wss").replace("http", "ws") + configs.app.socketUrl;
-  for (let k in configs) {
-    if (k === "url") configs[k] = host + configs[k];
-    else if (typeof configs[k] === "object") {
-      const config = configs[k];
-      for (let kk in config) {
-        if (kk === "url") config[kk] = host + config[kk];
-        else if (typeof config[kk] === "object") {
-          const config1 = config[kk];
-          for (let key in config1) {
-            if (key === "url") config1[key] = host + config1[key];
-          }
-        }
-      }
-    }
-  }
-})();
+const host = window.location.origin;
+configs.app.socketUrl = host.replace("https", "wss").replace("http", "ws") + configs.app.socketUrl;
 
 export const getConfig = (key) => {
   if (configs[key]) return configs[key];
