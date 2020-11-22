@@ -2,9 +2,8 @@ const CustomError = require("../../domain/model/custom-error");
 const Settings = require("../../domain/model/settings");
 
 class SettingsRepository {
-  constructor(mySqlProvider, config) {
+  constructor(mySqlProvider) {
     this.mySqlProvider = mySqlProvider;
-    this.config = config;
   }
 
   async createSettings(settings) {

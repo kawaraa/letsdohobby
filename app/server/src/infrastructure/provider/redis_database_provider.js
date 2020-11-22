@@ -1,9 +1,9 @@
 "use strict";
 class RedisDatabaseProvider {
-  constructor(redis, promisify, config) {
+  constructor(redis, promisify) {
     this.redis = redis;
     this.promisify = promisify;
-    this.config = config;
+    this.config = env.redis;
     this.initialize();
   }
 

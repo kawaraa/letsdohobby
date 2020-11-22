@@ -1,10 +1,11 @@
 const UserInfo = require("../../domain/model/user-info");
 const CustomError = require("../../domain/model/custom-error");
+
 class Firewall {
-  constructor(cookie, jwt, config) {
+  constructor(cookie, jwt) {
     this.cookie = cookie;
     this.jwt = jwt;
-    this.config = config;
+    this.config = env.firewall;
     this.authRequired = this.checkAuthentication.bind(this);
   }
 

@@ -1,8 +1,8 @@
 class MailHandler {
-  constructor(mailer, twilio, config) {
-    this.mailTransporter = mailer.createTransport(config.mailer);
-    this.smsTransporter = twilio(config.twilio.accountSID, config.twilio.authToken);
-    this.phoneNumber = config.twilio.phoneNumber;
+  constructor(mailer, twilio) {
+    this.mailTransporter = mailer.createTransport(env.NODEMAILER);
+    this.smsTransporter = twilio(env.TWILIO.accountSID, env.TWILIO.authToken);
+    this.phoneNumber = env.TWILIO.phoneNumber;
   }
 
   sendConfirmationLink(user, token) {
@@ -11,16 +11,13 @@ class MailHandler {
   }
 
   sendConfirmationByEmail(user, token) {
-    console.log("User: ", user);
+    const url = env.ORIGIN + "/api/confirm/" + token;
     const mailOptions = {
       from: '"LetsDoHobby" <contact@kawaraa.com>', // sender address
-      to: "", // list of receivers
+      to: user.username, // list of receivers
       subject: "LetsDoHobby account confirmation", // Subject line
-      html: "", // html body
+      html: `<a href="${url}" id="k-logo">Click here to confirm your LetsDoHobby account</a>`, // html body
     };
-    const url = (process.env.ORIGIN || "http://localhost:8080") + "/api/confirm/" + token;
-    mailOptions.html = `<a href="${url}" id="k-logo">Click here to confirm your LetsDoHobby account</a>`;
-    mailOptions.to = user.username;
 
     return new Promise((resolve, reject) => {
       const cb = (error, info) => (error ? reject(error) : resolve(info));
@@ -29,7 +26,7 @@ class MailHandler {
   }
 
   async sendConfirmationBySMS(user, token) {
-    const url = (process.env.ORIGIN || "http://localhost:8080") + "/api/confirm/" + token;
+    const url = env.ORIGIN + "/api/confirm/" + token;
     const message = {
       body: `To confirm your LetsDoHobby account please use this link: ${url}`,
       from: this.phoneNumber,

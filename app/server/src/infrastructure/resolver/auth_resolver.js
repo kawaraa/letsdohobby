@@ -5,14 +5,14 @@ const CreateProfileCommand = require("../../domain/command/create-profile-comman
 const CreateSettingsCommand = require("../../domain/command/create-settings-command");
 
 class AuthResolver {
-  constructor(server, firewall, accountRepo, profileRepo, settingsRepo, mailHandler, config) {
+  constructor(server, firewall, accountRepo, profileRepo, settingsRepo, mailHandler) {
     this.server = server;
     this.firewall = firewall;
     this.accountRepository = accountRepo;
     this.profileRepository = profileRepo;
     this.settingsRepository = settingsRepo;
     this.mailHandler = mailHandler;
-    this.config = config;
+    this.config = env.authResolver;
   }
 
   resolve() {

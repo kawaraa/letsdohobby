@@ -1,9 +1,9 @@
 class MysqlDatabaseBackupCron {
-  constructor(storageProvider, config) {
+  constructor(storageProvider) {
     this.spawn = require("child_process").spawn;
     this.storageProvider = storageProvider;
-    this.config = config;
-    this.period = config.days * 24 * 60 * 60 * 1000;
+    this.config = { ...env.mysqlDatabaseBackupCron, ...env.MYSQL };
+    this.period = this.config.days * 24 * 60 * 60 * 1000;
   }
   async schedule() {
     try {
@@ -12,8 +12,8 @@ class MysqlDatabaseBackupCron {
         .createWriteStream({ resumable: false });
 
       const dbStream = this.spawn("mysqldump", [
-        `-u${this.config.dbUser}`,
-        `-p${this.config.dbPass}`,
+        `-u${this.config.user}`,
+        `-p${this.config.password}`,
         "--databases",
         "user",
         "feeds",
@@ -26,7 +26,7 @@ class MysqlDatabaseBackupCron {
         .on("finish", () => console.log("Finished backing up database successfully."))
         .on("error", (error) => console.error("Failed backing up database: ", error));
 
-      setTimeout(() => mysqlDatabaseBackupCron(), this.period);
+      setTimeout(this.schedule, this.period);
     } catch (error) {
       console.error("Error: ", error);
     }

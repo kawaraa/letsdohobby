@@ -1,7 +1,6 @@
 class ChatRepository {
-  constructor(mySqlProvider, config) {
+  constructor(mySqlProvider) {
     this.mySqlProvider = mySqlProvider;
-    this.config = config;
   }
 
   async createMessage(userInfo, message) {

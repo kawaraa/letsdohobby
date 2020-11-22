@@ -1,18 +1,17 @@
 "use strict";
 
 class GCloudStorageProvider {
-  constructor(gCloud, promisify, config) {
+  constructor(gCloud, promisify) {
     this.storage = null;
     this.promisify = promisify;
-    this.config = config;
+    this.config = env.GCLOUD;
     this.initialize(gCloud);
   }
 
   initialize(gCloud) {
-    const { projectId, credentials, bucketName } = this.config;
-    const cloudStorage = new gCloud.Storage({ projectId, credentials });
+    const cloudStorage = new gCloud.Storage(this.config);
     // cloud.getBuckets().then(console.log).catch(console.log); // testing the connection by getting the all buckets
-    this.storage = cloudStorage.bucket(bucketName);
+    this.storage = cloudStorage.bucket(this.config.bucketName);
   }
 }
 

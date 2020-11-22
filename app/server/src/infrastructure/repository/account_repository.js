@@ -2,9 +2,8 @@ const CustomError = require("../../domain/model/custom-error");
 const UserInfo = require("../../domain/model/user-info");
 
 class AccountRepository {
-  constructor(mySqlProvider, config) {
+  constructor(mySqlProvider) {
     this.mySqlProvider = mySqlProvider;
-    this.config = config;
   }
 
   async createAccount(account) {

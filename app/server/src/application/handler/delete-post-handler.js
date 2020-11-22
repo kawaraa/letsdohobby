@@ -1,8 +1,8 @@
 class DeletePostHandler {
-  constructor(postRepository, storageProvider, config) {
+  constructor(postRepository, storageProvider) {
     this.postRepository = postRepository;
     this.storageProvider = storageProvider;
-    this.config = config;
+    this.config = env.createPostHandler;
   }
 
   async handle(command) {

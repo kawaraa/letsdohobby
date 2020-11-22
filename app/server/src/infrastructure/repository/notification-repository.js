@@ -1,8 +1,7 @@
 class NotificationRepository {
-  constructor(mySqlProvider, idGenerator, config) {
+  constructor(mySqlProvider, idGenerator) {
     this.mySqlProvider = mySqlProvider;
     this.idGenerator = idGenerator;
-    this.config = config;
   }
 
   create(notification) {

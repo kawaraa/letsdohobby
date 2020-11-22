@@ -1,9 +1,9 @@
 "use strict";
 class MysqlDatabaseProvider {
-  constructor(mysql, promisify, config) {
+  constructor(mysql, promisify) {
     this.mysql = mysql;
     this.promisify = promisify;
-    this.config = config;
+    this.config = env.MYSQL;
     this.initialize();
   }
 

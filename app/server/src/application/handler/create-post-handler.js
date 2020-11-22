@@ -1,16 +1,16 @@
 const path = require("path");
-const fs = require("fs");
+
 const CustomError = require("../../domain/model/custom-error");
 const CreatePostCommand = require("../../domain/command/create-post-command");
 
 class CreatePostHandler {
-  constructor(formidable, postRepository, storageProvider, idGenerator, config) {
+  constructor(formidable, postRepository, storageProvider, idGenerator) {
     this.formidable = formidable;
     this.postRepository = postRepository;
     this.storageProvider = storageProvider;
     this.idGenerator = idGenerator;
     this.onFile = this.handelFile.bind(this);
-    this.config = config;
+    this.config = env.createPostHandler;
     this.post = {};
     this.command = {};
     this.filesInProcess = 0;

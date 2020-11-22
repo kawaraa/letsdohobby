@@ -5,10 +5,9 @@ const Post = require("../../domain/model/post");
 const Distance = require("../../domain/model/distance");
 
 class PostRepository {
-  constructor(mySqlProvider, idGenerator, config) {
+  constructor(mySqlProvider, idGenerator) {
     this.mySqlProvider = mySqlProvider;
     this.idGenerator = idGenerator;
-    this.config = config;
   }
 
   async createPost(userInfo, post) {

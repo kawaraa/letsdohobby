@@ -1,6 +1,6 @@
 "use strict";
 
-const getConfig = require("./server/config/get-config");
+require("./server/config/load-config")();
 const { promisify } = require("util");
 const http = require("http");
 const express = require("express");
@@ -19,34 +19,27 @@ const MysqlDatabaseBackupCron = require("./server/src/infrastructure/factory/mys
 
 (async () => {
   try {
-    const config = getConfig();
     const app = express();
     const server = http.createServer(app);
 
     // Providers
-    const mySqlProvider = new MysqlDatabaseProvider(mysql, promisify, config.mysql);
-    const storageProvider = new GCloudStorageProvider(gCloud, promisify, config.gCloud);
-    // const redisProvider = new RedisDatabaseProvider(redis, promisify, config.redis);
+    const mySqlProvider = new MysqlDatabaseProvider(mysql, promisify);
+    const storageProvider = new GCloudStorageProvider(gCloud, promisify);
+    // const redisProvider = new RedisDatabaseProvider(redis, promisify);
     // console.log(await redisProvider.get("name"));
-    const firewall = new Firewall(cookie, jwt, config.firewall);
+    const firewall = new Firewall(cookie, jwt);
 
-    const apiRouter = getApiRouter(
-      server,
-      express.Router(),
-      firewall,
-      mySqlProvider,
-      storageProvider,
-      config
-    );
-    const webRouter = getWebRouter(express.Router(), firewall, mySqlProvider, config);
+    const apiRouter = getApiRouter(server, express.Router(), firewall, mySqlProvider, storageProvider);
+    const webRouter = getWebRouter(express.Router(), firewall, mySqlProvider);
+
     const ServeLoggedInUserWithReact = (request, response, next) => {
       if (!firewall.isAuthenticated(request)) return next();
-      response.sendFile(config.publicDir + "/template/react.html");
+      response.sendFile(env.publicDir + "/template/react.html");
     };
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use(express.static(config.publicDir));
+    app.use(express.static(env.publicDir));
     app.use("/api", apiRouter);
     app.use("/web", webRouter);
 
@@ -55,14 +48,14 @@ const MysqlDatabaseBackupCron = require("./server/src/infrastructure/factory/mys
     });
 
     app.get("*", ServeLoggedInUserWithReact, (request, response) => {
-      response.sendFile(config.publicDir + "/template/home.html");
+      response.sendFile(env.publicDir + "/template/home.html");
     });
 
     app.use("*", (request, response) => response.status(404).end("Not Found page"));
 
-    server.listen(config.port, () => console.log("Running on: http://localhost:" + config.port));
+    server.listen(env.PORT, () => console.log("Running on: http://localhost:" + env.PORT));
 
-    new MysqlDatabaseBackupCron(storageProvider, config.mysqlDatabaseBackupCron).schedule();
+    new MysqlDatabaseBackupCron(storageProvider).schedule();
   } catch (error) {
     console.error("ServerError: ", error);
   }

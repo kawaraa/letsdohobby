@@ -2,10 +2,9 @@ const CustomError = require("../../domain/model/custom-error");
 const Profile = require("../../domain/model/profile");
 
 class ProfileRepository {
-  constructor(mySqlProvider, idGenerator, config) {
+  constructor(mySqlProvider, idGenerator) {
     this.mySqlProvider = mySqlProvider;
     this.idGenerator = idGenerator;
-    this.config = config;
   }
 
   async createProfile(profile) {

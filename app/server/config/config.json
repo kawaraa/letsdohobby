@@ -1,20 +1,8 @@
 {
-  "port": 3001,
   "publicDir": "/frontend/public",
   "redis": {
     "host": "redis",
     "port": 6379
-  },
-  "mysql": {
-    "host": "database",
-    "port": 3306,
-    "user": "root",
-    "password": "root-psw"
-  },
-  "gCloud": {
-    "projectId": "files-storage-04",
-    "keyFileName": "/server/config/google-storage.json",
-    "bucketName": "media-bucket-04"
   },
   "firewall": {
     "secretKey": "my-secret",
@@ -34,19 +22,6 @@
     "domain": "https://storage.googleapis.com/media-bucket-04/",
     "fileError": "Not supported file type"
   },
-  "nodemailer": {
-    "service": "gmail",
-    "auth": {
-      "user": "",
-      "pass": ""
-    }
-  },
-  "twilio": {
-    "accountSID": "",
-    "authToken": "",
-    "phoneNumber": ""
-  },
-  "memberRepository": {},
   "hobbies": [
     "Gym",
     "Exercise",

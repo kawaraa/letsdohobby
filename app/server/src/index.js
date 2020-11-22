@@ -29,35 +29,23 @@ const DeletePostHandler = require("./application/handler/delete-post-handler");
 const MailHandler = require("./application/handler/mail-handler");
 const MemberResolver = require("./infrastructure/resolver/member-resolver");
 
-module.exports = (server, router, firewall, mySqlProvider, storageProvider, config) => {
-  const mailConfig = { mailer: config.nodemailer, twilio: config.twilio };
-
+module.exports = (server, router, firewall, mySqlProvider, storageProvider) => {
   // Repositories
-  const accountRepository = new AccountRepository(mySqlProvider, config.accountRepository);
-  const profileRepository = new ProfileRepository(mySqlProvider, uuid, config.profileRepository);
-  const settingsRepository = new SettingsRepository(mySqlProvider, config.settingsRepository);
-  const postRepository = new PostRepository(mySqlProvider, uuid, config.postRepository);
-  const groupRepository = new GroupRepository(mySqlProvider, config.postRepository);
-  const chatRepository = new ChatRepository(mySqlProvider, config.postRepository);
+  const accountRepository = new AccountRepository(mySqlProvider);
+  const profileRepository = new ProfileRepository(mySqlProvider, uuid);
+  const settingsRepository = new SettingsRepository(mySqlProvider);
+  const postRepository = new PostRepository(mySqlProvider, uuid);
+  const groupRepository = new GroupRepository(mySqlProvider);
+  const chatRepository = new ChatRepository(mySqlProvider);
   const notificationRepository = new NotificationRepository(mySqlProvider);
   const memberRepository = new MemberRepository(mySqlProvider);
 
   // Handlers
-  const createAvatarHandler = new CreateAvatarHandler(
-    formidable,
-    storageProvider,
-    uuid,
-    config.createPostHandler
-  );
+  const createAvatarHandler = new CreateAvatarHandler(formidable, storageProvider, uuid);
 
-  const deletePostHandler = new DeletePostHandler(postRepository, storageProvider, config.createPostHandler);
-  const deleteAccountHandler = new DeleteAccountHandler(
-    mySqlProvider,
-    storageProvider,
-    uuid,
-    config.createPostHandler
-  );
-  const mailHandler = new MailHandler(nodemailer, twilio, mailConfig);
+  const deletePostHandler = new DeletePostHandler(postRepository, storageProvider);
+  const deleteAccountHandler = new DeleteAccountHandler(mySqlProvider, storageProvider, uuid);
+  const mailHandler = new MailHandler(nodemailer, twilio);
 
   // Resolvers
   const socketResolver = new SocketResolver(server, WebSocket.Server, firewall, profileRepository);
@@ -70,18 +58,11 @@ module.exports = (server, router, firewall, mySqlProvider, storageProvider, conf
     accountRepository,
     profileRepository,
     settingsRepository,
-    mailHandler,
-    config.authResolver
+    mailHandler
   );
   const avatarResolver = new AvatarResolver(router, firewall, profileRepository, createAvatarHandler);
 
-  const creatPostHandler = new CreatPostHandler(
-    formidable,
-    postRepository,
-    storageProvider,
-    uuid,
-    config.createPostHandler
-  );
+  const creatPostHandler = new CreatPostHandler(formidable, postRepository, storageProvider, uuid);
   const userResolver = new UserResolver(
     router,
     firewall,

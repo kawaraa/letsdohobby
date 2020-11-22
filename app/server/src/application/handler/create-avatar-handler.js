@@ -5,14 +5,14 @@ const CustomError = require("../../domain/model/custom-error");
 const Dimensions = require("../../domain/model/dimensions");
 
 class CreateAvatarHandler {
-  constructor(formidable, storageProvider, idGenerator, config) {
+  constructor(formidable, storageProvider, idGenerator) {
     this.storageProvider = storageProvider;
     this.idGenerator = idGenerator;
     this.formidable = formidable;
     this.validateFile = this.handleFileValidation.bind(this);
     this.onFile = this.handelFile.bind(this);
     this.onField = this.handleField.bind(this);
-    this.config = config;
+    this.config = env.createPostHandler;
     this.dimensions = {};
     this.avatarUrl = "";
     this.storedFile = false;

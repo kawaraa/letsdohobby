@@ -2,11 +2,11 @@ const CustomError = require("../../domain/model/custom-error");
 const Validator = require("../../my-npm/validator");
 
 class DeleteAccountHandler {
-  constructor(mySqlProvider, storageProvider, idGenerator, config) {
+  constructor(mySqlProvider, storageProvider, idGenerator) {
     this.mySqlProvider = mySqlProvider;
     this.storageProvider = storageProvider;
     this.idGenerator = idGenerator;
-    this.config = config;
+    this.config = env.createPostHandler;
   }
   async handle({ username, hashedPsw } = command) {
     let query = `SELECT * FROM user.account WHERE username=? AND hashedPsw=?`;
