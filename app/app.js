@@ -55,7 +55,7 @@ const MysqlDatabaseBackupCron = require("./server/src/infrastructure/factory/mys
 
     server.listen(env.PORT, () => console.log("Running on: http://localhost:" + env.PORT));
 
-    new MysqlDatabaseBackupCron(storageProvider).schedule();
+    // new MysqlDatabaseBackupCron(storageProvider).schedule();
   } catch (error) {
     console.error("ServerError: ", error);
   }

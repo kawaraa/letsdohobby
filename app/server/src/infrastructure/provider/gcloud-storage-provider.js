@@ -10,7 +10,7 @@ class GCloudStorageProvider {
 
   initialize(gCloud) {
     const cloudStorage = new gCloud.Storage(this.config);
-    // cloud.getBuckets().then(console.log).catch(console.log); // testing the connection by getting the all buckets
+    // cloudStorage.getBuckets().then(console.log).catch(console.log); // testing the connection by getting the all buckets
     this.storage = cloudStorage.bucket(this.config.bucketName);
   }
 }

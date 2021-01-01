@@ -8,9 +8,6 @@
     "secretKey": "my-secret",
     "tokenOptions": {
       "expiresIn": "1h"
-    },
-    "cookieOption": {
-      "httpOnly": true
     }
   },
   "authResolver": {
@@ -19,7 +16,7 @@
     }
   },
   "createPostHandler": {
-    "domain": "https://storage.googleapis.com/media-bucket-04/",
+    "domain": "https://storage.googleapis.com/media-bucket-0/",
     "fileError": "Not supported file type"
   },
   "hobbies": [
