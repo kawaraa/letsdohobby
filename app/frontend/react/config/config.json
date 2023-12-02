@@ -202,10 +202,7 @@
     "url": "/api/user/settings",
     "method": "PUT",
     "error": "The notifications in your browser are blocked, Please allow notifications first(!)",
-    "languages": [
-      "en",
-      "ar"
-    ]
+    "languages": ["en", "ar"]
   },
   "notification": {
     "unseen": {
