@@ -4,7 +4,7 @@ class ChatRepository {
   }
 
   async createMessage(userInfo, message) {
-    message.id = (Math.random() * 65445678 * Math.random()).toString();
+    message.id = crypto.randomUUID();
     message.owner = userInfo.id;
     await this.mySqlProvider.query("INSERT INTO feeds.message SET ?", message);
     this.updateUnseenMessages(null, message.chatId);

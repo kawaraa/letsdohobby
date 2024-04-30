@@ -18,7 +18,7 @@ class NotificationHandler {
 
       await Promise.all(
         await notifications.map(async (notification) => {
-          notification.id = (23456789 * Math.random()).toString();
+          notification.id = crypto.randomUUID();
           await this.notificationRepository.create(notification);
           const { id, receiver, subjectId, objectId, type, text, unseen, createdAt } = notification;
           const not = { receiver, payload: { id, type, text, createdAt } };

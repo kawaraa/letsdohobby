@@ -19,7 +19,7 @@ class ChatResolver {
 
   async createMessage(request, response) {
     try {
-      const msg = { ...request.body, id: "id-" + Math.random() * 652, type: "normal" };
+      const msg = { ...request.body, id: "id-" + crypto.randomUUID(), type: "normal" };
       const message = await this.chatRepository.createMessage(request.user, msg);
       const group = await this.groupRepository.getGroupById(msg.chatId);
       await this.notificationHandler.handleNewMessage(group, msg);
