@@ -60,6 +60,3 @@ const MysqlDatabaseBackupCron = require("./server/src/infrastructure/factory/mys
     console.error("ServerError: ", error);
   }
 })();
-
-// console.log(new Date().toLocaleString("default", { timeZone: "Europe/Amsterdam" }));
-// npm i geo-tz
